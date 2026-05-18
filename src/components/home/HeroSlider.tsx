@@ -171,14 +171,14 @@ function GroupsSlide({ isAr }: { isAr: boolean }) {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(16,185,129,0.15),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(6,182,212,0.1),transparent_50%)]" />
 
-      <div className="relative container mx-auto px-4 lg:px-8 pt-28 pb-16">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative container mx-auto px-4 lg:px-8 pt-24 pb-10">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
           <motion.div
             initial={{ opacity: 0, x: isAr ? 60 : -60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-sm font-semibold">
+            <span className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-sm font-semibold">
               <Users className="w-4 h-4" /> {isAr ? "تدريب الجروبات" : "Group Training"}
             </span>
             <h2 className="text-4xl lg:text-6xl font-black text-white mb-5 leading-tight">
@@ -190,7 +190,7 @@ function GroupsSlide({ isAr }: { isAr: boolean }) {
             </h2>
             <p className="text-slate-300 text-lg mb-8 leading-relaxed max-w-lg">
               {isAr
-                ? "من تدريباتنا المتخصصة في Excel وPower BI وSQL وPython. متدربون من مصر والعالم العربي حققوا نتائج حقيقية في مسيرتهم المهنية."
+                ? <>من تدريباتنا المتخصصة في <span dir="ltr">Excel</span> و<span dir="ltr">Power BI</span> و<span dir="ltr">SQL</span> و<span dir="ltr">Python</span>. متدربون من مصر والعالم العربي حققوا نتائج حقيقية في مسيرتهم المهنية.</>
                 : "From our specialized training sessions in Excel, Power BI, SQL and Python. Trainees from Egypt and the Arab world who achieved real career results."}
             </p>
             <div className="flex flex-wrap gap-4 mb-8">
@@ -219,6 +219,7 @@ function GroupsSlide({ isAr }: { isAr: boolean }) {
             </p>
           </motion.div>
 
+          {/* Desktop grid */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -245,6 +246,24 @@ function GroupsSlide({ isAr }: { isAr: boolean }) {
               </div>
             ))}
           </motion.div>
+
+          {/* Mobile horizontal scroll */}
+          <div className="flex lg:hidden gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
+            {groups.map((src, i) => (
+              <div key={i} className="flex-shrink-0 w-40 h-28 rounded-xl overflow-hidden bg-slate-800 border border-white/10">
+                <img
+                  src={src}
+                  alt={`Group training ${i + 1}`}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const el = e.currentTarget;
+                    el.style.display = "none";
+                    el.parentElement!.style.background = `linear-gradient(135deg, ${["#1e3a5f","#1a3a2a","#2d1b4e","#1a2e4a","#2a1a0a","#1a2a3a"][i]} 0%, #0f172a 100%)`;
+                  }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
