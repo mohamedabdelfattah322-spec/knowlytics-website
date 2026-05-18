@@ -8,7 +8,7 @@ const TABLE_NAME = "Reviews";
 
 export async function GET() {
   try {
-    const filterFormula = encodeURIComponent(`{status} = "Published"`);
+    const filterFormula = encodeURIComponent(`{Status} = "Published"`);
     const res = await fetch(
       `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${TABLE_NAME}?filterByFormula=${filterFormula}&sort[0][field]=Date&sort[0][direction]=desc`,
       {

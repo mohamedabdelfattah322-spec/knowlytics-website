@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
             "Course Name": courseName || "",
             Linkedin: linkedin || "",
             Date: new Date().toISOString().split("T")[0],
-            status: "Pending",
+            Status: "Pending",
           },
         }),
       }
