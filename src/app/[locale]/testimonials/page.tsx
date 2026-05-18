@@ -6,6 +6,7 @@ import { Star, Send, Linkedin } from "lucide-react";
 import TestimonialCard from "@/components/shared/TestimonialCard";
 import testimonials from "@/data/testimonials.json";
 import { useState } from "react";
+import { toast } from "sonner";
 
 function ReviewForm({ isAr }: { isAr: boolean }) {
   const [name, setName] = useState("");
@@ -15,18 +16,27 @@ function ReviewForm({ isAr }: { isAr: boolean }) {
   const [review, setReview] = useState("");
   const [sent, setSent] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await fetch("/api/testimonial", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, title: job, content: review, courseName: course, linkedin, rating: 5 }),
       });
-      if (res.ok) setSent(true);
+      if (res.ok) {
+        setSent(true);
+      } else {
+        const err = await res.json();
+        toast.error(isAr ? "حدث خطأ: " + (err.error || "حاول مرة أخرى") : "Error: " + (err.error || "Please try again"));
+      }
     } catch {
-      setSent(true);
+      toast.error(isAr ? "تعذر الإرسال. تحقق من الاتصال." : "Failed to send. Check your connection.");
     }
+    setLoading(false);
   };
 
   return (
@@ -106,9 +116,9 @@ function ReviewForm({ isAr }: { isAr: boolean }) {
               {isAr ? "سيتم نشر رأيك قريبًا ✨" : "Your review will be published soon ✨"}
             </p>
 
-            <button type="submit" className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold hover:from-yellow-400 hover:to-orange-400 transition-all shadow-lg">
-              <Send className="w-5 h-5" />
-              {isAr ? "إرسال رأيي" : "Submit My Review"}
+            <button type="submit" disabled={loading} className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold hover:from-yellow-400 hover:to-orange-400 transition-all shadow-lg disabled:opacity-60">
+              {loading ? <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <Send className="w-5 h-5" />}
+              {loading ? (isAr ? "جاري الإرسال..." : "Sending...") : (isAr ? "إرسال رأيي" : "Submit My Review")}
             </button>
           </motion.form>
         )}
