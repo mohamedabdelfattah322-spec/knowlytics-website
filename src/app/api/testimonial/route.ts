@@ -42,8 +42,8 @@ export async function POST(req: NextRequest) {
 
     if (!airtableRes.ok) {
       const err = await airtableRes.json();
-      console.error("Airtable error:", err);
-      return NextResponse.json({ error: "Failed to save review" }, { status: 500 });
+      console.error("Airtable error:", JSON.stringify(err));
+      return NextResponse.json({ error: err?.error?.message || JSON.stringify(err) }, { status: 500 });
     }
 
     // Send email notification
