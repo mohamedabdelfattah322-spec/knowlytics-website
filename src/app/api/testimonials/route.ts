@@ -27,12 +27,12 @@ export async function GET() {
 
     const reviews = data.records.map((record: any) => ({
       id: record.id,
-      name: record.fields.name || "",
+      name: record.fields["Full Name"] || "",
       title: record.fields.title || "Knowlytics Hub Student",
-      content: record.fields.Feedback || "",
+      content: record.fields["Your Review"] || "",
       rating: record.fields.rating || 5,
-      courseName: record.fields["Course Name"] || "",
-      linkedin: record.fields.Linkedin || "",
+      courseName: record.fields["Course You Completed"] || "",
+      linkedin: record.fields["LinkedIn Profile"] || "",
       date: record.fields.Date || "",
     }));
 

@@ -27,12 +27,12 @@ export async function POST(req: NextRequest) {
         },
         body: JSON.stringify({
           fields: {
-            name,
+            "Full Name": name,
             title: title || "Knowlytics Hub Student",
             rating: Number(rating),
-            Feedback: content,
-            "Course Name": courseName || "",
-            Linkedin: linkedin || "",
+            "Your Review": content,
+            "Course You Completed": courseName || "",
+            "LinkedIn Profile": linkedin || "",
             Date: new Date().toISOString().split("T")[0],
             Status: "Pending",
           },
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
     await resend.emails.send({
       from: "Knowlytics Hub <onboarding@resend.dev>",
       to: ["Sales@knowlyticshub.com"],
-      subject: `⭐ رأي جديد من ${name} - بانتظار الموافقة`,
+      subject: `⭐ رأي جديد من ${name} – بانتظار الموافقة`,
       html: `
         <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
           <h2 style="color: #f59e0b; border-bottom: 2px solid #f59e0b; padding-bottom: 10px;">⭐ رأي جديد بانتظار موافقتك</h2>
