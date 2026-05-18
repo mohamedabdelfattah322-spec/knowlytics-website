@@ -13,7 +13,7 @@ interface HeroSliderProps {
 function CourseSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
   const whatsappUrl = "https://wa.me/201226929392?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%20%D9%81%D9%8A%20%D9%83%D9%88%D8%B1%D8%B3%20Excel%20%2B%20Power%20BI%20%2B%20AI%20%2B%20Freelance";
   return (
-    <div className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-blue-950 via-slate-900 to-indigo-950">
+    <div className="relative min-h-fit lg:min-h-screen flex items-start lg:items-center overflow-hidden bg-gradient-to-br from-blue-950 via-slate-900 to-indigo-950">
       <div className="absolute inset-0 opacity-10"
         style={{
           backgroundImage: "linear-gradient(rgba(99,102,241,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.3) 1px, transparent 1px)",
@@ -23,7 +23,7 @@ function CourseSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
       <div className="absolute top-20 end-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
       <div className="absolute bottom-20 start-10 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
 
-      <div className="relative container mx-auto px-4 lg:px-8 pt-20 pb-24 lg:pt-28 lg:pb-16">
+      <div className="relative container mx-auto px-4 lg:px-8 pt-16 pb-16 lg:pt-28 lg:pb-16">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <motion.div
             initial={{ opacity: 0, x: isAr ? 60 : -60 }}
@@ -167,11 +167,11 @@ function CourseSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
 function GroupsSlide({ isAr }: { isAr: boolean }) {
   const groups = ["/groups/g1.jpeg", "/groups/g2.jpeg", "/groups/g3.jpeg", "/groups/g4.jpeg", "/groups/g5.jpeg", "/groups/g6.jpeg"];
   return (
-    <div className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-emerald-950 via-slate-900 to-teal-950">
+    <div className="relative min-h-fit lg:min-h-screen flex items-start lg:items-center overflow-hidden bg-gradient-to-br from-emerald-950 via-slate-900 to-teal-950">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(16,185,129,0.15),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(6,182,212,0.1),transparent_50%)]" />
 
-      <div className="relative container mx-auto px-4 lg:px-8 pt-20 pb-24 lg:pt-24 lg:pb-10">
+      <div className="relative container mx-auto px-4 lg:px-8 pt-16 pb-16 lg:pt-24 lg:pb-10">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           <motion.div
             initial={{ opacity: 0, x: isAr ? 60 : -60 }}
@@ -280,10 +280,10 @@ function ServicesSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
   ];
 
   return (
-    <div className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-purple-950 via-slate-900 to-violet-950">
+    <div className="relative min-h-fit lg:min-h-screen flex items-start lg:items-center overflow-hidden bg-gradient-to-br from-purple-950 via-slate-900 to-violet-950">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.15),transparent_60%)]" />
 
-      <div className="relative container mx-auto px-4 lg:px-8 pt-20 pb-24 lg:pt-28 lg:pb-16 text-center">
+      <div className="relative container mx-auto px-4 lg:px-8 pt-16 pb-16 lg:pt-28 lg:pb-16 text-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -388,12 +388,12 @@ function HRCourseSlide({ isAr }: { isAr: boolean }) {
   ];
 
   return (
-    <div className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-rose-950 via-slate-900 to-pink-950">
+    <div className="relative min-h-fit lg:min-h-screen flex items-start lg:items-center overflow-hidden bg-gradient-to-br from-rose-950 via-slate-900 to-pink-950">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(244,63,94,0.2),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(168,85,247,0.1),transparent_50%)]" />
       <div className="absolute top-20 start-10 w-80 h-80 bg-rose-500/10 rounded-full blur-3xl" />
 
-      <div className="relative container mx-auto px-4 lg:px-8 pt-20 pb-24 lg:pt-24 lg:pb-10">
+      <div className="relative container mx-auto px-4 lg:px-8 pt-16 pb-16 lg:pt-24 lg:pb-10">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           {/* Header */}
           <div className="text-center mb-6">
@@ -510,10 +510,10 @@ function ConsultationSlide({ isAr, onFormFocus, onFormBlur }: ConsultationSlideP
   };
 
   return (
-    <div className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-orange-950 via-slate-900 to-rose-950">
+    <div className="relative min-h-fit lg:min-h-screen flex items-start lg:items-center overflow-hidden bg-gradient-to-br from-orange-950 via-slate-900 to-rose-950">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(251,146,60,0.15),transparent_50%)]" />
 
-      <div className="relative container mx-auto px-4 lg:px-8 pt-20 pb-24 lg:pt-28 lg:pb-16">
+      <div className="relative container mx-auto px-4 lg:px-8 pt-16 pb-16 lg:pt-28 lg:pb-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: isAr ? 60 : -60 }}
