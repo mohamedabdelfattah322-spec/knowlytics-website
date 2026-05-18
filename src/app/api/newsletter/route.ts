@@ -1,5 +1,6 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,14 +11,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Valid email is required" }, { status: 400 });
     }
 
-    // Check for existing subscription
-    const existing = await prisma.newsletter.findUnique({ where: { email } });
-    if (existing) {
-      return NextResponse.json({ message: "Already subscribed" }, { status: 200 });
-    }
-
-    await prisma.newsletter.create({ data: { email } });
-
+    // TODO: Send to Laravel API
     return NextResponse.json({ success: true, message: "Subscribed successfully" });
   } catch (error) {
     console.error("Newsletter error:", error);
