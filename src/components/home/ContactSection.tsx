@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 
 interface ContactSectionProps {
@@ -12,16 +12,45 @@ interface ContactSectionProps {
 
 export default function ContactSection({ locale }: ContactSectionProps) {
   const t = useTranslations("contact");
-  const [loading, setLoading] = useState(false);
   const isAr = locale === "ar";
+
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    toast.success(t("form.success"));
-    (e.target as HTMLFormElement).reset();
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fullName: name, email, phone, message }),
+      });
+
+      if (res.ok) {
+        toast.success(t("form.success"));
+        setName(""); setEmail(""); setPhone(""); setMessage("");
+      } else {
+        toast.error(isAr ? "حدث خطأ. حاول مرة أخرى." : "Something went wrong. Please try again.");
+      }
+    } catch {
+      toast.error(isAr ? "حدث خطأ. حاول مرة أخرى." : "Something went wrong. Please try again.");
+    }
+
     setLoading(false);
+  };
+
+  const handleWhatsApp = () => {
+    const text = encodeURIComponent(
+      isAr
+        ? `مرحباً، اسمي ${name || "..."} وأريد الاستفسار عن خدماتكم.`
+        : `Hello, my name is ${name || "..."} and I'd like to inquire about your services.`
+    );
+    window.open(`https://wa.me/201226929392?text=${text}`, "_blank");
   };
 
   return (
@@ -53,36 +82,57 @@ export default function ContactSection({ locale }: ContactSectionProps) {
             initial={{ opacity: 0, x: isAr ? 40 : -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-2 space-y-6"
+            className="lg:col-span-2 space-y-4"
           >
-            {[
-              { icon: Mail, label: t("info.email"), href: `mailto:${t("info.email")}`, color: "text-blue-400" },
-              { icon: Phone, label: t("info.whatsapp"), href: "https://wa.me/201226929392", color: "text-green-400" },
-              { icon: MapPin, label: t("info.location"), href: "#", color: "text-red-400" },
-            ].map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-4 p-4 rounded-2xl glass border border-white/10 hover:border-blue-500/30 transition-all group"
-              >
-                <div className={`w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0 ${item.color}`}>
-                  <item.icon className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-slate-900 dark:text-white font-medium text-sm">{item.label}</p>
-                </div>
-              </a>
-            ))}
+            {/* Email */}
+            <a
+              href={`mailto:${t("info.email")}`}
+              className="flex items-center gap-4 p-4 rounded-2xl glass border border-white/10 hover:border-blue-500/30 transition-all group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                <Mail className="w-5 h-5 text-blue-400" />
+              </div>
+              <div>
+                <p className="text-xs text-slate-400 mb-0.5">{isAr ? "البريد الإلكتروني" : "Email"}</p>
+                <p className="text-slate-900 dark:text-white font-medium text-sm">{t("info.email")}</p>
+              </div>
+            </a>
 
-            {/* Map placeholder */}
-            <div className="rounded-2xl overflow-hidden border border-white/10 h-48 bg-slate-800 flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="w-8 h-8 text-red-400 mx-auto mb-2" />
-                <p className="text-slate-400 text-sm">{isAr ? "القاهرة، مصر" : "Cairo, Egypt"}</p>
+            {/* WhatsApp */}
+            <a
+              href="https://wa.me/201226929392"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 p-4 rounded-2xl glass border border-white/10 hover:border-green-500/30 transition-all group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                <MessageCircle className="w-5 h-5 text-green-400" />
+              </div>
+              <div>
+                <p className="text-xs text-slate-400 mb-0.5">WhatsApp</p>
+                <p className="text-slate-900 dark:text-white font-medium text-sm">{t("info.whatsapp")}</p>
+              </div>
+            </a>
+
+            {/* Location */}
+            <div className="flex items-center gap-4 p-4 rounded-2xl glass border border-white/10">
+              <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                <MapPin className="w-5 h-5 text-red-400" />
+              </div>
+              <div>
+                <p className="text-xs text-slate-400 mb-0.5">{isAr ? "الموقع" : "Location"}</p>
+                <p className="text-slate-900 dark:text-white font-medium text-sm">{t("info.location")}</p>
               </div>
             </div>
+
+            {/* Quick WhatsApp CTA */}
+            <button
+              onClick={handleWhatsApp}
+              className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-green-500 hover:bg-green-600 text-white font-bold transition-all shadow-lg hover:shadow-green-500/30"
+            >
+              <MessageCircle className="w-5 h-5" />
+              {isAr ? "تواصل عبر واتساب مباشرة" : "Chat on WhatsApp"}
+            </button>
           </motion.div>
 
           {/* Contact Form */}
@@ -98,24 +148,32 @@ export default function ContactSection({ locale }: ContactSectionProps) {
                   type="text"
                   placeholder={t("form.name")}
                   required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/20 bg-white dark:bg-white/5 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors text-sm"
                 />
                 <input
                   type="email"
                   placeholder={t("form.email")}
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/20 bg-white dark:bg-white/5 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors text-sm"
                 />
               </div>
               <input
                 type="tel"
                 placeholder={t("form.phone")}
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/20 bg-white dark:bg-white/5 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors text-sm"
               />
               <textarea
                 placeholder={t("form.message")}
                 required
                 rows={5}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-white/20 bg-white dark:bg-white/5 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors text-sm resize-none"
               />
               <button
@@ -129,6 +187,21 @@ export default function ContactSection({ locale }: ContactSectionProps) {
                   <Send className="w-5 h-5" />
                 )}
                 {loading ? (isAr ? "جاري الإرسال..." : "Sending...") : t("form.submit")}
+              </button>
+
+              <div className="flex items-center gap-3 my-2">
+                <div className="flex-1 h-px bg-white/10" />
+                <span className="text-slate-400 text-xs">{isAr ? "أو" : "or"}</span>
+                <div className="flex-1 h-px bg-white/10" />
+              </div>
+
+              <button
+                type="button"
+                onClick={handleWhatsApp}
+                className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl border-2 border-green-500/40 text-green-400 font-bold hover:bg-green-500/10 transition-all"
+              >
+                <MessageCircle className="w-5 h-5" />
+                {isAr ? "أو راسلنا على واتساب" : "Or message us on WhatsApp"}
               </button>
             </form>
           </motion.div>
