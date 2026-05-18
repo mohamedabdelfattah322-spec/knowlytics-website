@@ -271,6 +271,9 @@
     "recommendations": "الدورات الموصى بها",
     "retake": "إعادة الاختبار",
     "downloadCert": "تنزيل الشهادة",
+    "questions": "سؤال",
+    "duration": "المدة",
+    "minutes": "دقيقة",
     "categories": {
       "formulas": "الصيغ والدوال",
       "lookup": "دوال البحث",
