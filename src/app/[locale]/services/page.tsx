@@ -69,21 +69,30 @@ export default function ServicesPage({ params: { locale } }: ServicesPageProps) 
     e.preventDefault();
     setLoading(true);
 
-    const waText = encodeURIComponent(
-      `🔔 طلب خدمة جديد من الموقع\n\n👤 الاسم: ${name}\n🏢 الشركة: ${company || "—"}\n📧 الإيميل: ${email}\n📱 الهاتف: ${phone || "—"}\n\n🛠️ الخدمة: ${serviceType}\n⏱️ الجدول الزمني: ${timeline || "—"}\n\n📝 التفاصيل:\n${description}`
-    );
-    const emailBody = encodeURIComponent(
-      `طلب خدمة جديد من الموقع\n\nالاسم: ${name}\nالشركة: ${company || "—"}\nالإيميل: ${email}\nالهاتف: ${phone || "—"}\nالخدمة: ${serviceType}\nالجدول الزمني: ${timeline || "—"}\n\nالتفاصيل:\n${description}`
-    );
+    try {
+      // Send email via API
+      const res = await fetch("/api/service-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, company, email, phone, serviceType, description, timeline }),
+      });
 
-    window.open(`https://wa.me/201226929392?text=${waText}`, "_blank");
-    setTimeout(() => {
-      window.open(`mailto:hello@knowlyticshub.com?subject=${encodeURIComponent("طلب خدمة جديد — " + serviceType)}&body=${emailBody}`, "_blank");
-    }, 400);
+      // Also open WhatsApp
+      const waText = encodeURIComponent(
+        `🔔 طلب خدمة جديد من الموقع\n\n👤 الاسم: ${name}\n🏢 الشركة: ${company || "—"}\n📧 الإيميل: ${email}\n📱 الهاتف: ${phone || "—"}\n\n🛠️ الخدمة: ${serviceType}\n⏱️ الجدول الزمني: ${timeline || "—"}\n\n📝 التفاصيل:\n${description}`
+      );
+      window.open(`https://wa.me/201226929392?text=${waText}`, "_blank");
 
-    await new Promise((r) => setTimeout(r, 800));
-    toast.success(isAr ? "تم إرسال طلبك عبر واتساب والإيميل ✅" : "Request sent via WhatsApp & Email ✅");
-    setName(""); setCompany(""); setEmail(""); setPhone(""); setServiceType(""); setDescription(""); setTimeline("");
+      if (res.ok) {
+        toast.success(isAr ? "تم إرسال طلبك بنجاح! سنتواصل معك قريبًا ✅" : "Request sent! We'll contact you soon ✅");
+        setName(""); setCompany(""); setEmail(""); setPhone(""); setServiceType(""); setDescription(""); setTimeline("");
+      } else {
+        toast.error(isAr ? "حدث خطأ. حاول مرة أخرى." : "Something went wrong. Please try again.");
+      }
+    } catch {
+      toast.error(isAr ? "حدث خطأ. حاول مرة أخرى." : "Something went wrong. Please try again.");
+    }
+
     setLoading(false);
   };
 
