@@ -8,3 +8,8 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "/"
+  to = "/ar"
+  status = 302
