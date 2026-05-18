@@ -23,14 +23,14 @@ function CourseSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
       <div className="absolute top-20 end-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
       <div className="absolute bottom-20 start-10 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
 
-      <div className="relative container mx-auto px-4 lg:px-8 pt-28 pb-16">
+      <div className="relative container mx-auto px-4 lg:px-8 pt-20 pb-24 lg:pt-28 lg:pb-16">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <motion.div
             initial={{ opacity: 0, x: isAr ? 60 : -60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <div className="flex flex-wrap gap-2 mb-5">
+            <div className="flex flex-wrap gap-2 mb-3">
               <span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-500/20 border border-blue-500/40 text-blue-300 uppercase tracking-wider">
                 &#128308; {isAr ? "لايف" : "LIVE"}
               </span>
@@ -39,7 +39,7 @@ function CourseSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-black mb-4 leading-tight text-white">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-black mb-3 leading-tight text-white">
               {isAr ? (
                 <>تحليل البيانات<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Excel + Power BI</span><br />+ AI + فريلانس</>
               ) : (
@@ -47,21 +47,21 @@ function CourseSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
               )}
             </h1>
 
-            <p className="text-slate-300 text-base lg:text-lg mb-6 leading-relaxed max-w-lg">
+            <p className="text-slate-300 text-base lg:text-lg mb-3 leading-relaxed max-w-lg">
               {isAr
                 ? <>الكورس الأكثر شمولًا في تحليل البيانات. تعلم <span dir="ltr">Excel & Power BI & AI</span> وكيف تشتغل فريلانسر من الصفر.</>
 
                 : "The most comprehensive data analysis course. Learn Excel, Power BI, AI, and how to freelance as a data analyst."}
             </p>
 
-            <div className="flex items-center gap-3 bg-yellow-500/10 border border-yellow-500/30 rounded-xl px-4 py-3 mb-4 w-fit">
+            <div className="flex items-center gap-3 bg-yellow-500/10 border border-yellow-500/30 rounded-xl px-4 py-3 mb-3 w-fit">
               <Gift className="w-5 h-5 text-yellow-400 flex-shrink-0" />
               <span className="text-yellow-300 text-sm font-semibold">
-                {isAr ? "&#127873; هدية مجانية: كورس Tableau + Looker Studio" : "&#127873; Free Gift: Tableau + Looker Studio course"}
+                {isAr ? <>🎁 هدية مجانية: <span dir="ltr">Tableau + Looker Studio</span></> : <>🎁 Free Gift: Tableau + Looker Studio course</>}
               </span>
             </div>
 
-            <div className="flex items-center gap-3 bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 mb-6 w-fit animate-pulse-slow">
+            <div className="flex items-center gap-3 bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 mb-4 w-fit animate-pulse-slow">
               <span className="text-xl">📅</span>
               <div>
                 <p className="text-red-300 text-xs font-semibold uppercase tracking-wide">{isAr ? "موعد الجروب القادم" : "Next Group Date"}</p>
@@ -72,8 +72,8 @@ function CourseSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
               </span>
             </div>
 
-            <div className="flex items-center gap-4 mb-7">
-              <span className="text-4xl font-black text-white">2,500 <span className="text-xl text-slate-400">ج.م</span></span>
+            <div className="flex items-center gap-4 mb-4">
+              <span className="text-3xl lg:text-4xl font-black text-white">2,500 <span className="text-xl text-slate-400">ج.م</span></span>
               <span className="text-xl text-slate-500 line-through">4,000 ج.م</span>
               <span className="px-2 py-1 rounded-lg bg-green-500/20 border border-green-500/30 text-green-400 text-sm font-bold">37% {isAr ? "خصم" : "OFF"}</span>
             </div>
@@ -83,14 +83,14 @@ function CourseSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold text-lg hover:from-green-500 hover:to-emerald-500 transition-all shadow-xl shadow-green-500/30 hover:-translate-y-1"
+                className="flex items-center gap-2 px-5 py-3 text-base lg:px-7 lg:py-3.5 lg:text-lg rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold hover:from-green-500 hover:to-emerald-500 transition-all shadow-xl shadow-green-500/30 hover:-translate-y-1"
               >
                 <MessageCircle className="w-5 h-5" />
                 {isAr ? "احجز الآن عبر واتساب" : "Book via WhatsApp"}
               </a>
               <Link
                 href={`/${locale}/courses/excel-powerbi-ai-freelance`}
-                className="flex items-center gap-2 px-7 py-3.5 rounded-2xl border-2 border-white/25 text-white font-semibold text-lg hover:bg-white/10 transition-all"
+                className="flex items-center gap-2 px-5 py-3 text-base lg:px-7 lg:py-3.5 lg:text-lg rounded-2xl border-2 border-white/25 text-white font-semibold hover:bg-white/10 transition-all"
               >
                 {isAr ? "تفاصيل الكورس" : "Course Details"}
                 <ArrowRight className={`w-5 h-5 ${isAr ? "rotate-180" : ""}`} />
@@ -171,29 +171,29 @@ function GroupsSlide({ isAr }: { isAr: boolean }) {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(16,185,129,0.15),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(6,182,212,0.1),transparent_50%)]" />
 
-      <div className="relative container mx-auto px-4 lg:px-8 pt-24 pb-10">
+      <div className="relative container mx-auto px-4 lg:px-8 pt-20 pb-24 lg:pt-24 lg:pb-10">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           <motion.div
             initial={{ opacity: 0, x: isAr ? 60 : -60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-sm font-semibold">
+            <span className="inline-flex items-center gap-2 mb-3 px-4 py-2 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-sm font-semibold">
               <Users className="w-4 h-4" /> {isAr ? "تدريب الجروبات" : "Group Training"}
             </span>
-            <h2 className="text-4xl lg:text-6xl font-black text-white mb-5 leading-tight">
+            <h2 className="text-3xl lg:text-6xl font-black text-white mb-3 leading-tight">
               {isAr ? (
                 <><span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">+7,000 متدرب</span><br />تدربوا معنا</>
               ) : (
                 <><span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">7,000+ Trainees</span><br />Trained with Us</>
               )}
             </h2>
-            <p className="text-slate-300 text-lg mb-8 leading-relaxed max-w-lg">
+            <p className="text-slate-300 text-lg mb-5 leading-relaxed max-w-lg">
               {isAr
                 ? <>من تدريباتنا المتخصصة في <span dir="ltr">Excel</span> و<span dir="ltr">Power BI</span> و<span dir="ltr">SQL</span> و<span dir="ltr">Python</span>. متدربون من مصر والعالم العربي حققوا نتائج حقيقية في مسيرتهم المهنية.</>
                 : "From our specialized training sessions in Excel, Power BI, SQL and Python. Trainees from Egypt and the Arab world who achieved real career results."}
             </p>
-            <div className="flex flex-wrap gap-4 mb-8">
+            <div className="flex flex-wrap gap-4 mb-5">
               {[
                 { icon: "&#127891;", labelAr: "+7,000 متدرب", labelEn: "7,000+ Trained" },
                 { icon: "&#127970;", labelAr: "+8 شركات", labelEn: "8+ Companies" },
@@ -283,7 +283,7 @@ function ServicesSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
     <div className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-purple-950 via-slate-900 to-violet-950">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.15),transparent_60%)]" />
 
-      <div className="relative container mx-auto px-4 lg:px-8 pt-28 pb-16 text-center">
+      <div className="relative container mx-auto px-4 lg:px-8 pt-20 pb-24 lg:pt-28 lg:pb-16 text-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -393,7 +393,7 @@ function HRCourseSlide({ isAr }: { isAr: boolean }) {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(168,85,247,0.1),transparent_50%)]" />
       <div className="absolute top-20 start-10 w-80 h-80 bg-rose-500/10 rounded-full blur-3xl" />
 
-      <div className="relative container mx-auto px-4 lg:px-8 pt-24 pb-10">
+      <div className="relative container mx-auto px-4 lg:px-8 pt-20 pb-24 lg:pt-24 lg:pb-10">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           {/* Header */}
           <div className="text-center mb-6">
@@ -413,7 +413,7 @@ function HRCourseSlide({ isAr }: { isAr: boolean }) {
           </div>
 
           {/* Content Grid */}
-          <div className="grid lg:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Left: Curriculum Sections */}
             <div>
               <p className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-3">{isAr ? "محتوى الكورس — 4 أقسام" : "Course Content — 4 Sections"}</p>
@@ -442,7 +442,7 @@ function HRCourseSlide({ isAr }: { isAr: boolean }) {
             </div>
 
             {/* Right: Dashboards */}
-            <div>
+            <div className="hidden lg:block">
               <p className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-3">📊 {isAr ? "داشبوردات هنبنيها في الكورس" : "Dashboards We'll Build"}</p>
               <div className="space-y-1.5">
                 {dashboards.map((dash, i) => (
@@ -513,7 +513,7 @@ function ConsultationSlide({ isAr, onFormFocus, onFormBlur }: ConsultationSlideP
     <div className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-orange-950 via-slate-900 to-rose-950">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(251,146,60,0.15),transparent_50%)]" />
 
-      <div className="relative container mx-auto px-4 lg:px-8 pt-28 pb-16">
+      <div className="relative container mx-auto px-4 lg:px-8 pt-20 pb-24 lg:pt-28 lg:pb-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: isAr ? 60 : -60 }}
@@ -521,7 +521,7 @@ function ConsultationSlide({ isAr, onFormFocus, onFormBlur }: ConsultationSlideP
             transition={{ duration: 0.7 }}
             className="text-center lg:text-start"
           >
-            <div className="relative inline-block mb-6">
+            <div className="relative inline-block mb-3">
               <div className="w-36 h-36 lg:w-48 lg:h-48 rounded-3xl overflow-hidden border-4 border-orange-500/40 shadow-2xl shadow-orange-500/20 mx-auto lg:mx-0">
                 <img
                   src="/profile.JPG"
@@ -537,7 +537,7 @@ function ConsultationSlide({ isAr, onFormFocus, onFormBlur }: ConsultationSlideP
               </div>
             </div>
 
-            <h2 className="text-4xl lg:text-5xl font-black text-white mb-3 leading-tight">
+            <h2 className="text-3xl lg:text-5xl font-black text-white mb-3 leading-tight">
               {isAr ? (
                 <><span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-400">احجز استشارتك</span><br />الآن</>
               ) : (
@@ -712,21 +712,36 @@ export default function HeroSlider({ locale }: HeroSliderProps) {
         <ChevronRight className={`w-5 h-5 ${isAr ? "rotate-180" : ""}`} />
       </button>
 
-      <div className="absolute bottom-6 start-0 end-0 z-20 flex items-center justify-center gap-2 flex-wrap px-4">
-        {SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-300 text-xs font-semibold ${
-              i === current
-                ? "bg-white text-slate-900 shadow-lg"
-                : "bg-white/15 text-white hover:bg-white/25 border border-white/20"
-            }`}
-          >
-            <span className={`w-1.5 h-1.5 rounded-full ${i === current ? "bg-blue-600" : "bg-white/60"}`} />
-            {(isAr ? labels.ar : labels.en)[i]}
-          </button>
-        ))}
+      <div className="absolute bottom-4 start-0 end-0 z-20 flex items-center justify-center gap-2 px-4">
+        {/* Mobile: dots only */}
+        <div className="flex lg:hidden gap-2">
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              className={`rounded-full transition-all duration-300 ${
+                i === current ? "w-6 h-2 bg-white" : "w-2 h-2 bg-white/40"
+              }`}
+            />
+          ))}
+        </div>
+        {/* Desktop: labeled pills */}
+        <div className="hidden lg:flex gap-2 flex-wrap justify-center">
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-300 text-xs font-semibold ${
+                i === current
+                  ? "bg-white text-slate-900 shadow-lg"
+                  : "bg-white/15 text-white hover:bg-white/25 border border-white/20"
+              }`}
+            >
+              <span className={`w-1.5 h-1.5 rounded-full ${i === current ? "bg-blue-600" : "bg-white/60"}`} />
+              {(isAr ? labels.ar : labels.en)[i]}
+            </button>
+          ))}
+        </div>
       </div>
     </section>
   );
