@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     await resend.emails.send({
-      from: "Knowlytics Hub <onboarding@resend.dev>",
+      from: "Knowlytics Hub <noreply@knowlyticshub.com>",
       to: ["Sales@knowlyticshub.com"],
       subject: `🛠️ طلب خدمة جديد: ${serviceType} — ${name}`,
       html: `
