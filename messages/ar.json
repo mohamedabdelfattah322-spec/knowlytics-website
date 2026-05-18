@@ -274,6 +274,8 @@
     "questions": "سؤال",
     "duration": "المدة",
     "minutes": "دقيقة",
+    "instant": "نتائج فورية",
+    "certificate": "شهادة متاحة",
     "categories": {
       "formulas": "الصيغ والدوال",
       "lookup": "دوال البحث",
