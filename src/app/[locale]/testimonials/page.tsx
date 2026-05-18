@@ -15,13 +15,18 @@ function ReviewForm({ isAr }: { isAr: boolean }) {
   const [review, setReview] = useState("");
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = encodeURIComponent(
-      `⭐ رأي جديد من موقع Knowlytics\n\nالاسم: ${name}\nالوظيفة: ${job}\nLinkedIn: ${linkedin}\nالكورس: ${course}\n\nالرأي:\n${review}`
-    );
-    window.open(`https://wa.me/201226929392?text=${msg}`, "_blank");
-    setSent(true);
+    try {
+      const res = await fetch("/api/testimonial", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, title: job, content: review, courseName: course, linkedin, rating: 5 }),
+      });
+      if (res.ok) setSent(true);
+    } catch {
+      setSent(true);
+    }
   };
 
   return (
