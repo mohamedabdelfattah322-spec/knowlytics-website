@@ -1,0 +1,53 @@
+[
+  {
+    "id": "1",
+    "slug": "power-bi-tips-2025",
+    "titleEn": "10 Power BI Tips Every Analyst Should Know in 2025",
+    "titleAr": "10 نصائح في Power BI يجب أن يعرفها كل محلل في 2025",
+    "excerptEn": "Discover the most powerful and time-saving Power BI techniques that top analysts use.",
+    "excerptAr": "اكتشف أقوى تقنيات Power BI الموفرة للوقت التي يستخدمها كبار المحللين.",
+    "contentEn": "Power BI continues to evolve rapidly...",
+    "contentAr": "يستمر Power BI في التطور بسرعة...",
+    "author": "Mohamed Abdelfattah",
+    "authorAvatar": "https://randomuser.me/api/portraits/men/32.jpg",
+    "publishedAt": "2025-01-15",
+    "category": "Power BI",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600",
+    "readingTime": 8,
+    "tags": ["Power BI", "Dashboard", "DAX", "Tips"]
+  },
+  {
+    "id": "2",
+    "slug": "sql-window-functions",
+    "titleEn": "Mastering SQL Window Functions: A Complete Guide",
+    "titleAr": "إتقان دوال النافذة في SQL: دليل شامل",
+    "excerptEn": "Window functions are game-changers for data analysis.",
+    "excerptAr": "دوال النافذة تُغيّر قواعد اللعبة في تحليل البيانات.",
+    "contentEn": "SQL window functions allow you to perform calculations...",
+    "contentAr": "تتيح لك دوال النافذة في SQL إجراء حسابات...",
+    "author": "Mohamed Abdelfattah",
+    "authorAvatar": "https://randomuser.me/api/portraits/men/32.jpg",
+    "publishedAt": "2025-01-08",
+    "category": "SQL",
+    "image": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600",
+    "readingTime": 12,
+    "tags": ["SQL", "Window Functions", "Analytics"]
+  },
+  {
+    "id": "3",
+    "slug": "python-pandas-tricks",
+    "titleEn": "15 Pandas Tricks to Speed Up Your Data Analysis",
+    "titleAr": "15 خدعة في Pandas لتسريع تحليل البيانات",
+    "excerptEn": "Stop writing slow Pandas code. These 15 tricks will make your transformations 10x faster.",
+    "excerptAr": "توقف عن كتابة كود Pandas بطيء. ستجعل هذه الخدع تحويلاتك أسرع بـ 10 مرات.",
+    "contentEn": "Pandas is the backbone of Python data analysis...",
+    "contentAr": "Pandas هو العمود الفقري لتحليل بيانات Python...",
+    "author": "Mohamed Abdelfattah",
+    "authorAvatar": "https://randomuser.me/api/portraits/men/32.jpg",
+    "publishedAt": "2024-12-20",
+    "category": "Python",
+    "image": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600",
+    "readingTime": 10,
+    "tags": ["Python", "Pandas", "Performance"]
+  }
+]

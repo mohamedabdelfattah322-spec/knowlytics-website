@@ -1,0 +1,282 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ====================== USER & AUTH ======================
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  role          UserRole  @default(STUDENT)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  enrollments   Enrollment[]
+  assessments   AssessmentResult[]
+  contactForms  ContactSubmission[]
+  newsletter    Newsletter?
+
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  INSTRUCTOR
+  STUDENT
+  COMPANY
+}
+
+// ====================== COURSES ======================
+model Course {
+  id            String      @id @default(cuid())
+  slug          String      @unique
+  titleEn       String
+  titleAr       String
+  descriptionEn String      @db.Text
+  descriptionAr String      @db.Text
+  duration      String
+  level         CourseLevel
+  price         Float
+  originalPrice Float?
+  image         String
+  category      String
+  featured      Boolean     @default(false)
+  published     Boolean     @default(true)
+  enrollUrl     String?
+  sortOrder     Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  enrollments   Enrollment[]
+
+  @@map("courses")
+}
+
+enum CourseLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+model Enrollment {
+  id        String   @id @default(cuid())
+  userId    String
+  courseId  String
+  status    EnrollmentStatus @default(PENDING)
+  paidAt    DateTime?
+  amount    Float?
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id])
+  course  Course  @relation(fields: [courseId], references: [id])
+
+  @@unique([userId, courseId])
+  @@map("enrollments")
+}
+
+enum EnrollmentStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+// ====================== TESTIMONIALS ======================
+model Testimonial {
+  id         String   @id @default(cuid())
+  nameEn     String
+  nameAr     String
+  titleEn    String
+  titleAr    String
+  contentEn  String   @db.Text
+  contentAr  String   @db.Text
+  rating     Int      @default(5)
+  avatar     String?
+  videoUrl   String?
+  company    String?
+  featured   Boolean  @default(false)
+  published  Boolean  @default(true)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  @@map("testimonials")
+}
+
+// ====================== PROJECTS ======================
+model Project {
+  id            String      @id @default(cuid())
+  titleEn       String
+  titleAr       String
+  descriptionEn String      @db.Text
+  descriptionAr String      @db.Text
+  student       String
+  category      ProjectCategory
+  image         String
+  demoUrl       String?
+  githubUrl     String?
+  tools         String[]
+  featured      Boolean     @default(false)
+  published     Boolean     @default(true)
+  sortOrder     Int         @default(0)
+  createdAt     DateTime    @default(now())
+
+  @@map("projects")
+}
+
+enum ProjectCategory {
+  POWER_BI
+  SQL
+  PYTHON
+  EXCEL
+}
+
+// ====================== COMPANIES ======================
+model Company {
+  id        String   @id @default(cuid())
+  name      String
+  logo      String
+  industry  String?
+  sortOrder Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@map("companies")
+}
+
+// ====================== BLOG ======================
+model BlogPost {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  titleEn      String
+  titleAr      String
+  excerptEn    String   @db.Text
+  excerptAr    String   @db.Text
+  contentEn    String   @db.Text
+  contentAr    String   @db.Text
+  author       String
+  authorAvatar String?
+  image        String
+  category     String
+  tags         String[]
+  readingTime  Int      @default(5)
+  published    Boolean  @default(false)
+  views        Int      @default(0)
+  publishedAt  DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("blog_posts")
+}
+
+// ====================== FAQ ======================
+model FAQ {
+  id          String   @id @default(cuid())
+  questionEn  String
+  questionAr  String
+  answerEn    String   @db.Text
+  answerAr    String   @db.Text
+  category    String?
+  sortOrder   Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@map("faqs")
+}
+
+// ====================== ASSESSMENTS ======================
+model AssessmentQuestion {
+  id            String   @id @default(cuid())
+  assessmentType AssessmentType
+  category      String
+  questionEn    String   @db.Text
+  questionAr    String   @db.Text
+  optionsEn     String[]
+  optionsAr     String[]
+  correctAnswer Int
+  explanation   String?  @db.Text
+  difficulty    String   @default("medium")
+  sortOrder     Int      @default(0)
+  published     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+
+  @@map("assessment_questions")
+}
+
+enum AssessmentType {
+  EXCEL
+  INTERVIEW
+}
+
+model AssessmentResult {
+  id             String   @id @default(cuid())
+  userId         String?
+  sessionId      String
+  assessmentType AssessmentType
+  score          Int
+  totalQuestions Int
+  timeSpent      Int      @default(0) // seconds
+  breakdown      Json?
+  createdAt      DateTime @default(now())
+
+  user  User? @relation(fields: [userId], references: [id])
+
+  @@map("assessment_results")
+}
+
+// ====================== CONTACT & NEWSLETTER ======================
+model ContactSubmission {
+  id            String   @id @default(cuid())
+  userId        String?
+  fullName      String
+  companyName   String?
+  email         String
+  phone         String?
+  serviceType   String?
+  description   String?  @db.Text
+  budget        String?
+  timeline      String?
+  status        String   @default("new")
+  createdAt     DateTime @default(now())
+
+  user  User? @relation(fields: [userId], references: [id])
+
+  @@map("contact_submissions")
+}
+
+model Newsletter {
+  id        String   @id @default(cuid())
+  userId    String?  @unique
+  email     String   @unique
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  user  User? @relation(fields: [userId], references: [id])
+
+  @@map("newsletter")
+}
+
+// ====================== OFFERS ======================
+model Offer {
+  id           String   @id @default(cuid())
+  titleEn      String
+  titleAr      String
+  descriptionEn String?
+  descriptionAr String?
+  discount      Int?
+  image         String?
+  ctaUrlEn      String?
+  ctaUrlAr      String?
+  validUntil    DateTime?
+  published     Boolean  @default(true)
+  sortOrder     Int      @default(0)
+  createdAt     DateTime @default(now())
+
+  @@map("offers")
+}

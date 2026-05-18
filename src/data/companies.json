@@ -1,0 +1,10 @@
+[
+  { "id": "1", "name": "Saint-Gobain", "logo": "/company logo/Saint-Gobain.png", "industry": "Manufacturing", "country": "France / Egypt" },
+  { "id": "2", "name": "AFRAS", "logo": "/company logo/AFRAS KSA.jfif", "industry": "Consulting", "country": "KSA" },
+  { "id": "3", "name": "Alyoum", "logo": "/company logo/Alyoum.png", "industry": "Media", "country": "KSA" },
+  { "id": "4", "name": "Cinnabon", "logo": "/company logo/Cinnabon.png", "industry": "F&B", "country": "Egypt" },
+  { "id": "5", "name": "EFS", "logo": "/company logo/EFS.jfif", "industry": "Facilities", "country": "Egypt" },
+  { "id": "6", "name": "Asfour", "logo": "/company logo/Asfour.jfif", "industry": "Crystal", "country": "Egypt" },
+  { "id": "7", "name": "Apleona", "logo": "/company logo/Apleona.png", "industry": "Real Estate", "country": "Egypt" },
+  { "id": "8", "name": "Symphony Development", "logo": "/company logo/Symphony Development.webp", "industry": "Real Estate", "country": "Egypt" }
+]

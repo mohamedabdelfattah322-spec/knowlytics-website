@@ -1,0 +1,114 @@
+[
+  {
+    "id": "1",
+    "questionEn": "Do I need prior experience to enroll in the courses?",
+    "questionAr": "هل أحتاج إلى خبرة مسبقة للتسجيل في الدورات؟",
+    "answerEn": "No! Most of our courses start from absolute zero. We have beginner-friendly paths designed for anyone who wants to break into data analytics, regardless of background.",
+    "answerAr": "لا! معظم دوراتنا تبدأ من الصفر تمامًا. لدينا مسارات مناسبة للمبتدئين مصممة لأي شخص يريد الدخول إلى مجال تحليل البيانات، بغض النظر عن خلفيته.",
+    "category": "Courses"
+  },
+  {
+    "id": "2",
+    "questionEn": "Are the courses available in both Arabic and English?",
+    "questionAr": "هل الدورات متاحة باللغتين العربية والإنجليزية؟",
+    "answerEn": "Yes! All our courses are delivered in Arabic with English terminology. Course materials, slides, and support are available in both languages.",
+    "answerAr": "نعم! يتم تقديم جميع دوراتنا باللغة العربية مع المصطلحات الإنجليزية. المواد والشرائح والدعم متاحة بكلتا اللغتين.",
+    "category": "Courses"
+  },
+  {
+    "id": "3",
+    "questionEn": "Will I receive a certificate upon completion?",
+    "questionAr": "هل سأحصل على شهادة عند الانتهاء؟",
+    "answerEn": "Absolutely! All course completions are rewarded with a verified digital certificate from Knowlytics Hub. These certificates are recognized by leading companies in the region.",
+    "answerAr": "بالتأكيد! يُكافأ إتمام جميع الدورات بشهادة رقمية معتمدة من Knowlytics Hub. تحظى هذه الشهادات بالاعتراف من قِبل كبرى الشركات في المنطقة.",
+    "category": "Certificates"
+  },
+  {
+    "id": "4",
+    "questionEn": "Can companies book corporate training sessions?",
+    "questionAr": "هل يمكن للشركات حجز جلسات تدريب مؤسسي؟",
+    "answerEn": "Yes! We offer customized corporate training programs tailored to your team's needs. Contact us through the Services page to discuss your requirements and get a custom proposal.",
+    "answerAr": "نعم! نقدم برامج تدريب مؤسسي مخصصة تناسب احتياجات فريقك. تواصل معنا عبر صفحة الخدمات لمناقشة متطلباتك والحصول على عرض مخصص.",
+    "category": "Corporate"
+  },
+  {
+    "id": "5",
+    "questionEn": "What payment methods are accepted?",
+    "questionAr": "ما طرق الدفع المقبولة؟",
+    "answerEn": "We accept InstaPay and Vodafone Cash. After payment, simply send your receipt screenshot via WhatsApp to +201226929392 and we'll confirm your enrollment within minutes.",
+    "answerAr": "نقبل الدفع عبر InstaPay وVodafone Cash. بعد الدفع، أرسل صورة الإيصال عبر واتساب على الرقم 201226929392+ وسنؤكد تسجيلك خلال دقائق.",
+    "category": "Payments"
+  },
+  {
+    "id": "6",
+    "questionEn": "How long do I have access to the course materials?",
+    "questionAr": "إلى متى يمكنني الوصول إلى مواد الدورة؟",
+    "answerEn": "You get lifetime access to all course materials! Once enrolled, you can revisit lessons, download resources, and access future updates at no extra cost.",
+    "answerAr": "ستحصل على وصول مدى الحياة إلى جميع مواد الدورة! بمجرد التسجيل، يمكنك مراجعة الدروس وتنزيل الموارد والوصول إلى التحديثات المستقبلية دون أي تكلفة إضافية.",
+    "category": "Access"
+  },
+  {
+    "id": "7",
+    "questionEn": "Is there a money-back guarantee?",
+    "questionAr": "هل هناك ضمان استرداد المال؟",
+    "answerEn": "Yes! We offer a 14-day money-back guarantee. If you're not satisfied within the first 14 days, we'll issue a full refund – no questions asked.",
+    "answerAr": "نعم! نقدم ضمان استرداد المال خلال 14 يومًا. إذا لم تكن راضيًا خلال أول 14 يومًا، سنقوم بالاسترداد الكامل – دون أي أسئلة.",
+    "category": "Payments"
+  },
+  {
+    "id": "8",
+    "questionEn": "Can I get a custom dashboard developed for my business?",
+    "questionAr": "هل يمكنني الحصول على لوحة معلومات مخصصة لأعمالي؟",
+    "answerEn": "Absolutely! Our Dashboard Development service offers fully custom Power BI, Excel, and Python dashboards built to your exact business needs. Request a quote through our Services page.",
+    "answerAr": "بالتأكيد! تقدم خدمة تطوير لوحات المعلومات لدينا لوحات معلومات مخصصة بالكامل باستخدام Power BI وExcel وPython، مبنية وفقًا لاحتياجات عملك. اطلب عرض أسعار عبر صفحة الخدمات.",
+    "category": "Services"
+  },
+  {
+    "id": "9",
+    "questionEn": "What is data analysis?",
+    "questionAr": "يعني إيه تحليل البيانات؟",
+    "answerEn": "Data analysis is the process of inspecting, cleaning, transforming, and modeling data to discover useful information, draw conclusions, and support decision-making. A data analyst turns raw numbers into actionable insights that help businesses grow and make smarter decisions.",
+    "answerAr": "تحليل البيانات هو عملية فحص البيانات وتنظيفها ونمذجتها للوصول إلى معلومات مفيدة تدعم اتخاذ القرارات. باختصار، المحلل بيحوّل الأرقام الخام لقرارات حقيقية تساعد الشركات على النمو.",
+    "category": "Career"
+  },
+  {
+    "id": "10",
+    "questionEn": "Is the data analytics market saturated?",
+    "questionAr": "هل السوق محتاج محللين بيانات ولا اتشبع؟",
+    "answerEn": "Far from saturated! Every company — from startups to multinationals — needs data analysts. Demand is growing every year as AI and digital transformation expand. There's actually a big shortage of qualified, skilled analysts in the Arab market.",
+    "answerAr": "السوق بعيد جداً عن التشبع! كل شركة — من الناشئة للعملاقة — محتاجة محلل بيانات. الطلب بيزيد سنة بعد سنة مع انتشار الـ AI والتحول الرقمي. بالعكس، في نقص كبير في المتخصصين المؤهلين في السوق العربي.",
+    "category": "Career"
+  },
+  {
+    "id": "11",
+    "questionEn": "Are data analyst salaries high?",
+    "questionAr": "مرتبات محللي البيانات كبيرة؟",
+    "answerEn": "Yes! Data analysts are among the highest-paid professionals in Egypt and the Arab world. Beginners earn 8,000–15,000 EGP, mid-level analysts earn 15,000–30,000 EGP, and senior analysts earn 30,000–60,000+ EGP. Freelance rates range from $50–150/hour internationally.",
+    "answerAr": "نعم! محللو البيانات من أعلى التخصصات أجراً في مصر والعالم العربي. المبتدئ: 8,000–15,000 ج.م، المتوسط: 15,000–30,000 ج.م، الخبير: 30,000–60,000+ ج.م. أما فريلانس دولياً فمن 50–150 دولار/ساعة.",
+    "category": "Career"
+  },
+  {
+    "id": "12",
+    "questionEn": "What is the best data analytics roadmap?",
+    "questionAr": "إيه أفضل رود ماب لتحليل البيانات؟",
+    "answerEn": "The best path: 1) Understand the field and its importance, 2) Excel + Power BI (foundation), 3) SQL + Python (advanced analysis), 4) Tableau + Looker Studio (visualization), 5) Statistics basics + report writing, 6) Soft skills and communication. Master each tool in depth before moving to the next.",
+    "answerAr": "أفضل مسار: 1) افهم المجال وأهميته أولاً، 2) Excel + Power BI (الأساس)، 3) SQL + Python (التحليل المتقدم)، 4) Tableau + Looker Studio (التصور)، 5) إحصاء أساسي + كتابة تقارير، 6) مهارات شخصية وتواصل. أتقن كل أداة بعمق قبل الانتقال للتالية.",
+    "category": "Career"
+  },
+  {
+    "id": "13",
+    "questionEn": "Will AI replace data analysts?",
+    "questionAr": "هل AI هيلغي محللي البيانات؟",
+    "answerEn": "No! AI is transforming the role, not eliminating it. Instead of doing manual calculations, analysts will focus on interpretation, storytelling, and strategic decisions. The analyst who uses AI will be 10x more powerful than one who doesn't. AI is your tool, not your replacement.",
+    "answerAr": "لا! AI بيحوّل الدور مش بيلغيه. بدل ما المحلل يعمل حسابات يدوية، هيركز على تفسير النتائج واتخاذ قرارات استراتيجية. المحلل اللي بيستخدم AI هيكون أقوى بـ10 أضعاف من اللي مش بيستخدمه. AI أداتك مش منافسك.",
+    "category": "Career"
+  },
+  {
+    "id": "14",
+    "questionEn": "How do I find a job as a data analyst?",
+    "questionAr": "ازاي ألاقي شغل كمحلل بيانات؟",
+    "answerEn": "To land a data analyst job: 1) Master the tools (Excel, Power BI, SQL, Python), 2) Build real projects and a strong portfolio, 3) Build a personal brand on LinkedIn, 4) Get practical market experience in any industry, 5) Work on many varied projects to build credibility. We help you build a real portfolio at Knowlytics!",
+    "answerAr": "لتلاقي شغل كمحلل بيانات: 1) اتقن الأدوات (Excel, Power BI, SQL, Python)، 2) اعمل مشاريع حقيقية وبوّر تفوليو قوي، 3) ابني Personal Brand على LinkedIn، 4) احتك بالسوق في أي مجال، 5) اشتغل على مشاريع متنوعة كتير. في Knowlytics بنساعدك تبني Portfolio حقيقي من اليوم الأول!",
+    "category": "Career"
+  }
+]
