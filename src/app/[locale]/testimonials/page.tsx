@@ -14,6 +14,8 @@ function ReviewForm({ isAr }: { isAr: boolean }) {
   const [course, setCourse] = useState("");
   const [review, setReview] = useState("");
   const [sent, setSent] = useState(false);
+  const [rating, setRating] = useState(5);
+  const [hovered, setHovered] = useState(0);
 
   const [loading, setLoading] = useState(false);
 
@@ -24,7 +26,7 @@ function ReviewForm({ isAr }: { isAr: boolean }) {
       const res = await fetch("/api/testimonial", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, title: job, content: review, courseName: course, linkedin, rating: 5 }),
+        body: JSON.stringify({ name, title: job, content: review, courseName: course, linkedin, rating }),
       });
       if (res.ok) {
         setSent(true);
@@ -63,6 +65,27 @@ function ReviewForm({ isAr }: { isAr: boolean }) {
           </motion.div>
         ) : (
           <motion.form initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} onSubmit={handleSubmit} className="glass border border-white/10 rounded-2xl p-8 space-y-5">
+
+            {/* Star Rating */}
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-slate-400 text-sm">{isAr ? "تقييمك *" : "Your Rating *"}</p>
+              <div className="flex gap-2">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    type="button"
+                    onClick={() => setRating(star)}
+                    onMouseEnter={() => setHovered(star)}
+                    onMouseLeave={() => setHovered(0)}
+                    className="transition-transform hover:scale-110"
+                  >
+                    <Star className={`w-9 h-9 transition-colors ${star <= (hovered || rating) ? "fill-yellow-400 text-yellow-400" : "text-slate-600"}`} />
+                  </button>
+                ))}
+              </div>
+              <p className="text-xs text-slate-500">{rating} {isAr ? "من 5" : "out of 5"}</p>
+            </div>
+
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-slate-300 mb-1.5">{isAr ? "الاسم الكامل *" : "Full Name *"}</label>
