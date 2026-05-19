@@ -25,16 +25,27 @@ export async function GET() {
 
     const data = await res.json();
 
-    const reviews = data.records.map((record: any) => ({
-      id: record.id,
-      name: record.fields["Full Name"] || "",
-      title: record.fields.title || "Knowlytics Hub Student",
-      content: record.fields["Your Review"] || "",
-      rating: record.fields.rating || 5,
-      courseName: record.fields["Course You Completed"] || "",
-      linkedin: record.fields["LinkedIn Profile"] || "",
-      date: record.fields.Date || "",
-    }));
+    const reviews = data.records.map((record: any) => {
+      const name = record.fields["Full Name"] || "";
+      const title = record.fields.title || "Knowlytics Hub Student";
+      const content = record.fields["Your Review"] || "";
+      return {
+        id: record.id,
+        name,
+        nameAr: name,
+        nameEn: name,
+        title,
+        titleAr: title,
+        titleEn: title,
+        content,
+        contentAr: content,
+        contentEn: content,
+        rating: record.fields.rating || 5,
+        courseName: record.fields["Course You Completed"] || "",
+        linkedin: record.fields["LinkedIn Profile"] || "",
+        date: record.fields.Date || "",
+      };
+    });
 
     return NextResponse.json({ reviews });
   } catch (error) {
