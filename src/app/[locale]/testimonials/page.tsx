@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Star, Send, Linkedin } from "lucide-react";
 import TestimonialCard from "@/components/shared/TestimonialCard";
-import testimonials from "@/data/testimonials.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
 function ReviewForm({ isAr }: { isAr: boolean }) {
@@ -135,7 +134,22 @@ export default function TestimonialsPage({ params: { locale } }: TestimonialsPag
   const t = useTranslations("testimonials");
   const isAr = locale === "ar";
 
-  const avgRating = (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1);
+  const [reviews, setReviews] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/testimonials")
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data.reviews || []);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  const avgRating = reviews.length
+    ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
+    : "5.0";
 
   return (
     <>
@@ -159,7 +173,7 @@ export default function TestimonialsPage({ params: { locale } }: TestimonialsPag
                     <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <p className="text-slate-400 text-sm">{testimonials.length} {isAr ? "تقييم" : "reviews"}</p>
+                <p className="text-slate-400 text-sm">{reviews.length} {isAr ? "تقييم" : "reviews"}</p>
               </div>
             </div>
           </motion.div>
@@ -169,11 +183,21 @@ export default function TestimonialsPage({ params: { locale } }: TestimonialsPag
       {/* Testimonials Grid */}
       <section className="py-16 bg-slate-950">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {(testimonials as any[]).map((t, i) => (
-              <TestimonialCard key={t.id} testimonial={t} locale={locale} index={i} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="flex justify-center py-20">
+              <span className="w-10 h-10 border-4 border-yellow-500/30 border-t-yellow-500 rounded-full animate-spin" />
+            </div>
+          ) : reviews.length === 0 ? (
+            <div className="text-center py-20 text-slate-400">
+              {isAr ? "لا توجد تقييمات بعد" : "No reviews yet"}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {reviews.map((r, i) => (
+                <TestimonialCard key={r.id} testimonial={r} locale={locale} index={i} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
