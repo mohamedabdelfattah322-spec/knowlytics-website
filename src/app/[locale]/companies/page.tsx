@@ -31,10 +31,9 @@ export default function CompaniesPage({ params: { locale } }: CompaniesPageProps
       {/* Stats */}
       <section className="py-12 bg-slate-900 border-y border-white/10">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-6 text-center max-w-md mx-auto">
+          <div className="grid grid-cols-1 gap-6 text-center max-w-xs mx-auto">
             {[
               { value: "15+", labelEn: "Companies Trained", labelAr: "شركة دُرِّبت" },
-              { value: "15+", labelEn: "Industries", labelAr: "قطاع" },
             ].map((s, i) => (
               <motion.div
                 key={s.labelEn}
