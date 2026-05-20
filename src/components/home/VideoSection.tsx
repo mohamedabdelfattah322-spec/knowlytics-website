@@ -36,22 +36,31 @@ export default function VideoSection({ locale }: VideoSectionProps) {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto relative"
+          className="max-w-xs mx-auto relative"
         >
-          <div className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-blue-500/10">
+          {/* Phone frame wrapper */}
+          <div className="relative aspect-[9/16] rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-blue-500/10">
             {playing ? (
               <iframe
-                src="https://www.youtube.com/embed?listType=user_uploads&list=MohamedAbdelfattahYallaNet3alemM&autoplay=1"
-                title="Knowlytics Hub Introduction"
+                src="https://www.youtube.com/embed/eLipHE8rIKQ?autoplay=1&rel=0"
+                title="Knowlytics Hub Short"
                 className="w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
             ) : (
-              <div className="relative w-full h-full bg-gradient-to-br from-blue-900 via-slate-900 to-purple-900 flex items-center justify-center cursor-pointer group"
-                onClick={() => setPlaying(true)}>
+              <div
+                className="relative w-full h-full bg-gradient-to-br from-blue-900 via-slate-900 to-purple-900 flex items-center justify-center cursor-pointer group"
+                onClick={() => setPlaying(true)}
+              >
                 {/* Thumbnail overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-900/90 via-slate-900/80 to-purple-900/90" />
+                <img
+                  src={`https://i.ytimg.com/vi/eLipHE8rIKQ/maxresdefault.jpg`}
+                  alt="Video thumbnail"
+                  className="absolute inset-0 w-full h-full object-cover opacity-60"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/40 to-slate-900/80" />
 
                 {/* Play button */}
                 <motion.button
@@ -68,9 +77,9 @@ export default function VideoSection({ locale }: VideoSectionProps) {
                 <div className="absolute w-36 h-36 rounded-full bg-white/5 animate-ping" style={{ animationDelay: "0.5s" }} />
 
                 {/* Text */}
-                <div className="absolute bottom-8 text-center">
-                  <p className="text-white font-bold text-xl mb-1">Knowlytics Hub</p>
-                  <p className="text-slate-300 text-sm">Introduction Video • 3:45</p>
+                <div className="absolute bottom-8 text-center px-4">
+                  <p className="text-white font-bold text-lg mb-1">Knowlytics Hub</p>
+                  <p className="text-slate-300 text-xs">اضغط لمشاهدة الفيديو ▶</p>
                 </div>
               </div>
             )}
