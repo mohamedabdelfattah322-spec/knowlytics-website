@@ -37,8 +37,8 @@ export default function AssessmentSection({ locale }: AssessmentSectionProps) {
       bg: "bg-blue-500/10",
       border: "border-blue-500/20 hover:border-blue-500/50",
       glow: "bg-blue-500",
-      questions: 40,
-      duration: 60,
+      questions: 108,
+      duration: 90,
     },
   ];
 
