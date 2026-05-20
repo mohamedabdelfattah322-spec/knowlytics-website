@@ -33,7 +33,7 @@ export default function CompaniesPage({ params: { locale } }: CompaniesPageProps
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 gap-6 text-center max-w-xs mx-auto">
             {[
-              { value: "15+", labelEn: "Companies Trained", labelAr: "شركة دُرِّبت" },
+              { value: "8+", labelEn: "Companies Trained", labelAr: "شركة دُرِّبت" },
             ].map((s, i) => (
               <motion.div
                 key={s.labelEn}
