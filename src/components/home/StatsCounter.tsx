@@ -12,8 +12,8 @@ interface StatsCounterProps {
 
 const stats = [
   { icon: Users, value: 7000, suffix: "+", key: "students", color: "from-blue-500 to-cyan-500", bg: "bg-blue-500/10" },
-  { icon: Building2, value: 8, suffix: "+", key: "companies", color: "from-purple-500 to-pink-500", bg: "bg-purple-500/10" },
-  { icon: Youtube, value: 100, suffix: "K+", key: "views", color: "from-red-500 to-rose-500", bg: "bg-red-500/10" },
+  { icon: Building2, value: 15, suffix: "+", key: "companies", color: "from-purple-500 to-pink-500", bg: "bg-purple-500/10" },
+  { icon: Youtube, value: 105, suffix: "K+", key: "views", color: "from-red-500 to-rose-500", bg: "bg-red-500/10" },
   { icon: LayoutDashboard, value: 300, suffix: "+", key: "dashboards", color: "from-orange-500 to-yellow-500", bg: "bg-orange-500/10" },
 ];
 
