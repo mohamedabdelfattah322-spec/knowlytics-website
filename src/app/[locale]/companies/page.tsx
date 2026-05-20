@@ -63,13 +63,23 @@ export default function CompaniesPage({ params: { locale } }: CompaniesPageProps
                 transition={{ delay: i * 0.05 }}
                 className="glass border border-white/10 rounded-2xl p-6 flex flex-col items-center justify-center hover:border-blue-500/30 transition-all hover:-translate-y-1 group"
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <span className="text-white font-black text-xl">{company.name.charAt(0)}</span>
+                <div className="w-20 h-16 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                  {company.logo ? (
+                    <img
+                      src={company.logo}
+                      alt={company.name}
+                      className="max-h-14 max-w-[100px] object-contain filter brightness-90 group-hover:brightness-110 transition-all duration-300"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).style.display = "none";
+                        (e.currentTarget.nextSibling as HTMLElement).style.display = "flex";
+                      }}
+                    />
+                  ) : null}
+                  <div className="hidden w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 items-center justify-center">
+                    <span className="text-white font-black text-xl">{company.name.charAt(0)}</span>
+                  </div>
                 </div>
                 <span className="text-slate-300 text-sm font-semibold text-center">{company.name}</span>
-                {company.industry && (
-                  <span className="text-slate-500 text-xs mt-1">{company.industry}</span>
-                )}
               </motion.div>
             ))}
           </div>
