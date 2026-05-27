@@ -27,14 +27,14 @@ const ARTICLE_CONTENT: Record<string, { en: string[]; ar: string[] }> = {
   "become-data-analyst-2025": {
     en: [
       "Data analytics is one of the fastest-growing professions in the Arab world. Companies across Saudi Arabia, UAE, and Egypt are actively hiring — and most roles don't require a computer science degree. What they require is the right skill set, built in the right order.",
-      "[IMG:https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900|Data analytics dashboard showing business insights]",
+      "[IMG:https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=900|Data analytics dashboard showing business insights]",
       "## Why Now Is the Best Time to Enter the Field",
       "According to LinkedIn's 2025 Jobs Report, data analyst roles in MENA grew by 38% year-over-year. Saudi Vision 2030 alone has created thousands of data positions across healthcare, finance, government, and tourism. The tools are cheaper than ever, the learning resources are abundant — and competition is still manageable for well-prepared candidates.",
       "## The 6-Month Learning Roadmap",
       "**Months 1–2: Excel**\nStart with Microsoft Excel — the universal language of data. Focus on: Pivot Tables, VLOOKUP & XLOOKUP, SUMIF/COUNTIF, Power Query for data cleaning, and basic charting. Excel alone will get you through the door at most companies in the Arab market.",
       "**Month 3: SQL**\nSQL is the second most requested skill on every data job posting. Learn SELECT, WHERE, GROUP BY, JOIN, and aggregate functions. Practice on free platforms like SQLZoo and Mode Analytics. Write 50 real queries and SQL becomes natural.",
       "**Months 4–5: Power BI or Tableau**\nPower BI dominates the Arab corporate market. Learn to connect data sources, build relationships, write basic DAX, and design interactive dashboards. Aim to complete 3 full projects by the end of month 5.",
-      "[IMG:https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900|Learning progression from Excel to advanced analytics tools]",
+      "[IMG:https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900|Learning progression from Excel to advanced analytics tools]",
       "**Month 6: Python Basics**\nPandas and Matplotlib are enough to start. Python is most valuable for automating repetitive tasks and cleaning messy data that would take hours in Excel. You don't need to become a programmer — you need to be effective.",
       "## Building a Portfolio That Actually Gets You Hired",
       "Certificates alone won't land you a job. Employers want to see real work. Build three portfolio projects:\n1. A sales performance dashboard in Excel with slicers and dynamic charts\n2. A SQL analysis answering a real business question on a public dataset\n3. A Power BI report connected to a live data source",
@@ -114,7 +114,7 @@ const ARTICLE_CONTENT: Record<string, { en: string[]; ar: string[] }> = {
       "Combines rows from two tables where a key matches in both. This is the most common join in practice. Always specify which table each column belongs to using aliases to avoid ambiguity — especially when column names repeat across tables.",
       "## 4. LEFT JOIN",
       "Returns all rows from the left table and matching rows from the right. When there's no match, right-side columns return NULL. Invaluable for finding customers with no orders, products with no sales, or employees with no manager assigned.",
-      "[IMG:https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=900|Visual diagram showing JOIN types in SQL]",
+      "[IMG:https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900|Visual diagram showing JOIN types in SQL]",
       "## 5. CASE WHEN",
       "SQL's conditional logic, equivalent to IF/ELSE. Used to create custom categories, labels, or calculated columns:\n`CASE WHEN revenue > 100000 THEN 'High' WHEN revenue > 50000 THEN 'Medium' ELSE 'Low' END AS tier`\n\nUse inside aggregate functions to count or sum by condition without filtering rows out.",
       "## 6. COALESCE",
@@ -208,7 +208,7 @@ const ARTICLE_CONTENT: Record<string, { en: string[]; ar: string[] }> = {
       "Before touching any dataset, run:\n`df.info()` — data types, non-null counts, memory usage\n`df.describe()` — statistical summary of numeric columns\n`df.isnull().sum()` — count of missing values per column\n\nThese three commands reveal 90% of data quality issues in under 30 seconds.",
       "## Handling Missing Values",
       "Missing values are the most common data quality issue. Your strategy depends on the context:\n`df.dropna(subset=['critical_column'])` — drop rows where a key column is null\n`df.fillna(0)` — replace NULLs with zero (for numeric columns where 0 is meaningful)\n`df.fillna(df['column'].median())` — fill with median (better than mean for skewed data)\n`df.fillna(method='ffill')` — forward fill (useful for time series data)",
-      "[IMG:https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900|Data quality visualization showing missing values heatmap]",
+      "[IMG:https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=900|Data quality visualization showing missing values heatmap]",
       "## Fixing Data Types",
       "Wrong data types cause silent errors — calculations that return NaN instead of numbers, date comparisons that fail silently. Always fix types early:\n`df['date'] = pd.to_datetime(df['date'], errors='coerce')`\n`df['revenue'] = pd.to_numeric(df['revenue'], errors='coerce')`\n`df['category'] = df['category'].astype('category')`\n\nThe `errors='coerce'` argument converts unparseable values to NaN instead of crashing.",
       "## Standardizing Text",
@@ -285,7 +285,7 @@ const ARTICLE_CONTENT: Record<string, { en: string[]; ar: string[] }> = {
   "statistics-for-data-analysts": {
     en: [
       "You don't need a statistics degree to be a great data analyst. But you do need specific statistical concepts — the ones that appear in real analytical work, stakeholder presentations, and job interviews every week. This article covers exactly those concepts, with practical examples you can use immediately.",
-      "[IMG:https://images.unsplash.com/photo-1509228468518-180dd4864904?w=900|Statistical charts and distribution curves visualization]",
+      "[IMG:https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?w=900|Statistical charts and distribution curves visualization]",
       "## Mean, Median, and Mode — and When to Use Each",
       "**Mean (average):** Sum divided by count. Useful when data is symmetric with no extreme outliers.\n**Median:** Middle value when sorted. Use this when data is skewed or contains outliers. A dataset of 10 employee salaries plus one CEO salary of 10M will produce a misleading mean — the median tells the true story.\n**Mode:** Most frequent value. Most useful for categorical data.",
       "The rule: default to median for salary, house prices, time-based metrics, and any dataset where extreme values exist. Use mean only when the distribution is roughly symmetric.",
@@ -323,7 +323,7 @@ const ARTICLE_CONTENT: Record<string, { en: string[]; ar: string[] }> = {
   "tableau-vs-looker-studio": {
     en: [
       "Most data analysts in the Arab market choose Power BI as their primary visualization tool — and for good reason. But Tableau and Looker Studio fill important gaps that Power BI doesn't address well. Understanding when to use each tool makes you significantly more versatile and valuable as an analyst.",
-      "[IMG:https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900|Data visualization tool comparison on laptop screens]",
+      "[IMG:https://images.unsplash.com/photo-1543286386-713bdd548da4?w=900|Data visualization tool comparison on laptop screens]",
       "## Tableau: The Global Standard for Visual Analytics",
       "Tableau is widely considered the most capable visualization tool in the world for exploring and presenting data. Its advantages are significant:\n\n**Visual flexibility:** Tableau can build virtually any chart type imaginable — from basic bar charts to advanced geospatial maps, network diagrams, statistical visualizations, and custom SVG-based graphics. Power BI and Looker Studio are more constrained.\n\n**Drag-and-drop exploration:** Tableau's interface is built for analytical exploration. You can pivot, filter, drill, and reconfigure visualizations in seconds — making it ideal for discovering insights you didn't know to look for.\n\n**Tableau Public:** Completely free for published dashboards. The Tableau Public gallery is the world's largest repository of data visualization portfolios. For anyone building a career in analytics, a strong Tableau Public profile is a significant differentiator.",
       "[IMG:https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900|Tableau dashboard showing geospatial and advanced analytics]",

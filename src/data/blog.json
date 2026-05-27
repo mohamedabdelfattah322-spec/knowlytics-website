@@ -12,7 +12,7 @@
     "authorAvatar": "/my-pic.jpg",
     "publishedAt": "2026-05-21",
     "category": "Career",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+    "image": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800",
     "readingTime": 4,
     "tags": ["Career", "Data Analytics", "Roadmap", "Beginners"]
   },
@@ -29,7 +29,7 @@
     "authorAvatar": "/my-pic.jpg",
     "publishedAt": "2026-05-15",
     "category": "Tools",
-    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
     "readingTime": 3,
     "tags": ["Excel", "Power BI", "Tools", "Comparison"]
   },
@@ -46,7 +46,7 @@
     "authorAvatar": "/my-pic.jpg",
     "publishedAt": "2026-05-10",
     "category": "SQL",
-    "image": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800",
     "readingTime": 4,
     "tags": ["SQL", "Functions", "Data Analysis", "Beginners"]
   },
@@ -63,7 +63,7 @@
     "authorAvatar": "/my-pic.jpg",
     "publishedAt": "2026-05-08",
     "category": "Power BI",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
     "readingTime": 4,
     "tags": ["Power BI", "DAX", "Dashboard", "Intermediate"]
   },
@@ -80,7 +80,7 @@
     "authorAvatar": "/my-pic.jpg",
     "publishedAt": "2026-05-05",
     "category": "Python",
-    "image": "https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?w=800",
+    "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800",
     "readingTime": 4,
     "tags": ["Python", "Pandas", "Data Cleaning", "Intermediate"]
   },
@@ -97,7 +97,7 @@
     "authorAvatar": "/my-pic.jpg",
     "publishedAt": "2026-05-01",
     "category": "Design",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+    "image": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800",
     "readingTime": 4,
     "tags": ["Dashboard", "Design", "Power BI", "Data Visualization"]
   },
@@ -114,7 +114,7 @@
     "authorAvatar": "/my-pic.jpg",
     "publishedAt": "2026-04-25",
     "category": "Statistics",
-    "image": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800",
+    "image": "https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?w=800",
     "readingTime": 4,
     "tags": ["Statistics", "Data Analysis", "Fundamentals", "Career"]
   },
@@ -131,7 +131,7 @@
     "authorAvatar": "/my-pic.jpg",
     "publishedAt": "2026-04-18",
     "category": "Tools",
-    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+    "image": "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800",
     "readingTime": 4,
     "tags": ["Tableau", "Looker Studio", "Data Visualization", "Tools"]
   }
