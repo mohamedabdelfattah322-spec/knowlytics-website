@@ -66,6 +66,12 @@ function buildCertificateEmail(data: {
   recommendation: string;
 }): string {
   // Category table with correct/incorrect counts
+  const totalCorrect = Object.values(data.categoryBreakdown).reduce((s, v) => s + v.correct, 0);
+  const totalQuestions = Object.values(data.categoryBreakdown).reduce((s, v) => s + v.total, 0);
+  const totalWrong = totalQuestions - totalCorrect;
+  const totalPct = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
+  const totalColor = totalPct >= 85 ? '#10b981' : totalPct >= 65 ? '#3b82f6' : totalPct >= 40 ? '#f97316' : '#ef4444';
+
   const categoryRows = Object.entries(data.categoryBreakdown)
     .map(([cat, val]) => {
       const pct = val.total > 0 ? Math.round((val.correct / val.total) * 100) : 0;
@@ -80,7 +86,14 @@ function buildCertificateEmail(data: {
         '</tr>'
       );
     })
-    .join('');
+    .join('') +
+    // Total row
+    '<tr style="background:#1e293b;">' +
+    '<td style="padding:10px 12px; color:#f59e0b; font-size:13px; font-weight:900; border-top:2px solid #334155;">الإجمالي / Total</td>' +
+    '<td style="padding:10px 12px; color:#10b981; font-size:14px; font-weight:900; text-align:center; border-top:2px solid #334155;">✅ ' + totalCorrect + '</td>' +
+    '<td style="padding:10px 12px; color:#ef4444; font-size:14px; font-weight:900; text-align:center; border-top:2px solid #334155;">❌ ' + totalWrong + '</td>' +
+    '<td style="padding:10px 12px; color:' + totalColor + '; font-size:15px; font-weight:900; text-align:right; border-top:2px solid #334155;">' + totalPct + '%</td>' +
+    '</tr>';
 
   const weakAreasHtml = data.weakAreas.length > 0
     ? data.weakAreas.map(a => '<span style="display:inline-block; background:#fef3c7; color:#92400e; padding:4px 10px; border-radius:20px; font-size:12px; margin:3px;">' + a + '</span>').join('')
@@ -173,6 +186,11 @@ function buildSalesNotificationEmail(data: {
   interests: string;
   questionDetails: QuestionDetail[];
 }): string {
+  const salesTotalCorrect = Object.values(data.categoryBreakdown).reduce((s, v) => s + v.correct, 0);
+  const salesTotalQ = Object.values(data.categoryBreakdown).reduce((s, v) => s + v.total, 0);
+  const salesTotalWrong = salesTotalQ - salesTotalCorrect;
+  const salesTotalPct = salesTotalQ > 0 ? Math.round((salesTotalCorrect / salesTotalQ) * 100) : 0;
+
   const catRows = Object.entries(data.categoryBreakdown).map(([cat, val]) => {
     const pct = val.total > 0 ? Math.round((val.correct / val.total) * 100) : 0;
     const incorrect = val.total - val.correct;
@@ -182,7 +200,13 @@ function buildSalesNotificationEmail(data: {
       <td style="padding:8px 12px;border:1px solid #e5e7eb;color:#ef4444;font-weight:bold;">❌ ${incorrect}</td>
       <td style="padding:8px 12px;border:1px solid #e5e7eb;font-weight:bold;">${pct}%</td>
     </tr>`;
-  }).join('');
+  }).join('') +
+  `<tr style="background:#1e293b;color:#fff;">
+    <td style="padding:10px 12px;border:1px solid #334155;font-weight:900;color:#f59e0b;">الإجمالي / Total</td>
+    <td style="padding:10px 12px;border:1px solid #334155;color:#10b981;font-weight:900;">✅ ${salesTotalCorrect}</td>
+    <td style="padding:10px 12px;border:1px solid #334155;color:#ef4444;font-weight:900;">❌ ${salesTotalWrong}</td>
+    <td style="padding:10px 12px;border:1px solid #334155;font-weight:900;color:#fff;">${salesTotalPct}%</td>
+  </tr>`;
 
   const qDetailsHtml = data.questionDetails.length > 0
     ? '<h3 style="color:#f59e0b;margin-top:24px;">تفاصيل الأسئلة / Question Details</h3>' +
