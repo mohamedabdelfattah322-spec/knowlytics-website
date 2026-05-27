@@ -5,27 +5,22 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Clock, ArrowRight, Tag } from "lucide-react";
+import { Search, Clock, ArrowRight } from "lucide-react";
+import blogData from "@/data/blog.json";
 
 interface BlogPageProps {
   params: { locale: string };
 }
 
-const posts = [
-  { id: "1", slug: "power-bi-tips-2025", titleEn: "10 Power BI Tips Every Analyst Should Know in 2025", titleAr: "10 نصائح في Power BI يجب أن يعرفها كل محلل في 2025", excerptEn: "Discover the most powerful and time-saving Power BI techniques that top analysts use to build stunning dashboards in half the time.", excerptAr: "اكتشف أقوى تقنيات Power BI الموفرة للوقت التي يستخدمها كبار المحللين لبناء لوحات معلومات مذهلة في نصف الوقت.", category: "Power BI", readingTime: 8, publishedAt: "2025-01-15", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600", author: "Mohamed Abdelfattah", authorAvatar: "https://randomuser.me/api/portraits/men/32.jpg" },
-  { id: "2", slug: "sql-window-functions", titleEn: "Mastering SQL Window Functions: A Complete Guide", titleAr: "إتقان دوال النافذة في SQL: دليل شامل", excerptEn: "Window functions are game-changers for data analysis. Learn ROW_NUMBER, RANK, LAG, LEAD, and more with practical examples.", excerptAr: "دوال النافذة تُغيّر قواعد اللعبة في تحليل البيانات. تعلّم ROW_NUMBER وRANK وLAG وLEAD والمزيد مع أمثلة عملية.", category: "SQL", readingTime: 12, publishedAt: "2025-01-08", image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600", author: "Mohamed Abdelfattah", authorAvatar: "https://randomuser.me/api/portraits/men/32.jpg" },
-  { id: "3", slug: "python-pandas-tricks", titleEn: "15 Pandas Tricks to Speed Up Your Data Analysis", titleAr: "15 خدعة في Pandas لتسريع تحليل البيانات", excerptEn: "Stop writing slow Pandas code. These 15 advanced tricks will make your data transformations 10x faster and cleaner.", excerptAr: "توقف عن كتابة كود Pandas بطيء. ستجعل هذه الخدع الـ 15 المتقدمة تحويلات البيانات أسرع بـ 10 مرات وأنظف.", category: "Python", readingTime: 10, publishedAt: "2024-12-20", image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600", author: "Mohamed Abdelfattah", authorAvatar: "https://randomuser.me/api/portraits/men/32.jpg" },
-  { id: "4", slug: "data-analyst-career-guide", titleEn: "The Complete Data Analyst Career Guide for 2025", titleAr: "الدليل الشامل للمسار المهني لمحلل البيانات 2025", excerptEn: "Everything you need to know to launch and grow your data analytics career – from skills to salary negotiation.", excerptAr: "كل ما تحتاج معرفته لإطلاق مسيرتك في تحليل البيانات وتنميتها – من المهارات إلى التفاوض على الراتب.", category: "Career", readingTime: 15, publishedAt: "2024-12-10", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600", author: "Mohamed Abdelfattah", authorAvatar: "https://randomuser.me/api/portraits/men/32.jpg" },
-  { id: "5", slug: "excel-power-query-guide", titleEn: "Power Query: The Ultimate Excel Superpower", titleAr: "Power Query: القوة الخارقة في Excel", excerptEn: "Power Query will revolutionize how you handle data in Excel. Learn how to connect, clean, and transform data like a pro.", excerptAr: "سيُحدث Power Query ثورة في طريقة تعاملك مع البيانات في Excel. تعلّم كيفية الاتصال والتنظيف والتحويل كالمحترفين.", category: "Excel", readingTime: 9, publishedAt: "2024-11-25", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600", author: "Mohamed Abdelfattah", authorAvatar: "https://randomuser.me/api/portraits/men/32.jpg" },
-  { id: "6", slug: "ai-tools-data-analysts", titleEn: "Top 10 AI Tools Every Data Analyst Must Use in 2025", titleAr: "أفضل 10 أدوات ذكاء اصطناعي يجب على كل محلل بيانات استخدامها في 2025", excerptEn: "AI is transforming data analytics. Here are the tools that will make you 3x more productive as an analyst.", excerptAr: "الذكاء الاصطناعي يُحوّل تحليل البيانات. إليك الأدوات التي ستجعلك أكثر إنتاجية بـ 3 مرات كمحلل.", category: "AI", readingTime: 7, publishedAt: "2024-11-15", image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600", author: "Mohamed Abdelfattah", authorAvatar: "https://randomuser.me/api/portraits/men/32.jpg" },
-];
-
-const categories = ["All", "Power BI", "SQL", "Python", "Excel", "AI", "Career"];
-
 const categoryColors: Record<string, string> = {
-  "Power BI": "bg-yellow-500/10 text-yellow-400", SQL: "bg-blue-500/10 text-blue-400",
-  Python: "bg-green-500/10 text-green-400", Excel: "bg-teal-500/10 text-teal-400",
-  AI: "bg-purple-500/10 text-purple-400", Career: "bg-pink-500/10 text-pink-400",
+  "Power BI": "bg-yellow-500/10 text-yellow-400",
+  SQL: "bg-blue-500/10 text-blue-400",
+  Python: "bg-green-500/10 text-green-400",
+  Excel: "bg-teal-500/10 text-teal-400",
+  Statistics: "bg-purple-500/10 text-purple-400",
+  Career: "bg-pink-500/10 text-pink-400",
+  Tools: "bg-orange-500/10 text-orange-400",
+  Design: "bg-cyan-500/10 text-cyan-400",
 };
 
 export default function BlogPage({ params: { locale } }: BlogPageProps) {
@@ -34,7 +29,9 @@ export default function BlogPage({ params: { locale } }: BlogPageProps) {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const filtered = posts.filter((p) => {
+  const categories = ["All", ...Array.from(new Set(blogData.map((p) => p.category)))];
+
+  const filtered = blogData.filter((p) => {
     const title = isAr ? p.titleAr : p.titleEn;
     const matchSearch = title.toLowerCase().includes(search.toLowerCase());
     const matchCat = activeCategory === "All" || p.category === activeCategory;
@@ -100,7 +97,7 @@ export default function BlogPage({ params: { locale } }: BlogPageProps) {
                   </div>
                   <div className="p-5">
                     <div className="flex items-center gap-3 mb-3">
-                      <Image src={post.authorAvatar} alt={post.author} width={24} height={24} className="rounded-full" />
+                      <Image src="/my-pic.jpg" alt={post.author} width={28} height={28} className="rounded-full object-cover w-7 h-7" />
                       <span className="text-xs text-slate-400">{post.author}</span>
                       <span className="text-slate-600">•</span>
                       <span className="flex items-center gap-1 text-xs text-slate-400">
