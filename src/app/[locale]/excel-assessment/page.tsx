@@ -140,6 +140,19 @@ export default function ExcelAssessmentPage({ params: { locale } }: ExcelAssessm
 
     const levelInfo = determineLevel(finalPct, catBreakdown);
 
+    // Build question details array
+    const questionDetails = questions.map((q, i) => ({
+      questionEn: q.questionEn,
+      questionAr: q.questionAr,
+      category: q.category,
+      difficulty: q.difficulty,
+      userAnswer: finalAnswers[i] ?? -1,
+      correctAnswer: q.correctAnswer,
+      isCorrect: finalAnswers[i] === q.correctAnswer,
+      userAnswerText: q.options.en[finalAnswers[i]] ?? "Not answered",
+      correctAnswerText: q.options.en[q.correctAnswer],
+    }));
+
     // Submit to API
     try {
       await fetch("/api/assessment-result", {
@@ -156,6 +169,7 @@ export default function ExcelAssessmentPage({ params: { locale } }: ExcelAssessm
           level: levelInfo.level,
           weakAreas,
           categoryBreakdown: catBreakdown,
+          questionDetails,
         }),
       });
       setSubmitted(true);

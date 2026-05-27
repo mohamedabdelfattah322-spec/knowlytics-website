@@ -279,6 +279,18 @@ export default function InterviewAssessmentPage({ params: { locale } }: Intervie
       const finalPct = Math.round((finalScore / selectedPart.questions.length) * 100);
       const levelInfo = determineLevelForPart(finalPct);
 
+      // Build question details for this part
+      const questionDetails = selectedPart.questions.map((q, i) => ({
+        questionEn: q.questionEn,
+        questionAr: q.questionAr,
+        category: selectedPart.key,
+        userAnswer: newAnswers[i] ?? -1,
+        correctAnswer: q.correctAnswer,
+        isCorrect: newAnswers[i] === q.correctAnswer,
+        userAnswerText: q.options.en[newAnswers[i]] ?? "Not answered",
+        correctAnswerText: q.options.en[q.correctAnswer],
+      }));
+
       try {
         await fetch("/api/assessment-result", {
           method: "POST",
@@ -294,6 +306,7 @@ export default function InterviewAssessmentPage({ params: { locale } }: Intervie
             level: levelInfo.level,
             weakAreas: [],
             categoryBreakdown: { [selectedPart.key]: { correct: finalScore, total: selectedPart.questions.length } },
+            questionDetails,
           }),
         });
         setSubmitted(true);
