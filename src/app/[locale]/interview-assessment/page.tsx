@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { CheckCircle, XCircle, ChevronRight, RotateCcw, Award, TrendingUp, Briefcase } from "lucide-react";
+import { CheckCircle, XCircle, ChevronRight, RotateCcw, Briefcase, User, Mail, Phone } from "lucide-react";
 
 interface InterviewAssessmentPageProps {
   params: { locale: string };
@@ -218,38 +218,92 @@ const parts: Part[] = [
   },
 ];
 
+function determineLevelForPart(percentage: number) {
+  if (percentage >= 85) return { level: 'Advanced', levelAr: 'متقدم', color: '#10b981' };
+  if (percentage >= 65) return { level: 'Intermediate', levelAr: 'متوسط', color: '#3b82f6' };
+  if (percentage >= 40) return { level: 'Beginner – Needs Practice', levelAr: 'مبتدئ – يحتاج تدريب', color: '#f97316' };
+  return { level: 'Needs Full Training', levelAr: 'يحتاج تدريب شامل', color: '#ef4444' };
+}
+
 export default function InterviewAssessmentPage({ params: { locale } }: InterviewAssessmentPageProps) {
   const t = useTranslations("interviewAssessment");
   const isAr = locale === "ar";
 
-  // screen: "parts" | "quiz" | "result"
-  const [screen, setScreen] = useState<"parts" | "quiz" | "result">("parts");
+  // screen: "register" | "parts" | "quiz" | "result"
+  const [screen, setScreen] = useState<"register" | "parts" | "quiz" | "result">("register");
+  const [regName, setRegName] = useState("");
+  const [regEmail, setRegEmail] = useState("");
+  const [regPhone, setRegPhone] = useState("");
+  const [regError, setRegError] = useState("");
+
   const [selectedPart, setSelectedPart] = useState<Part | null>(null);
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [selected, setSelected] = useState<number | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleRegSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!regName.trim() || !regEmail.trim()) {
+      setRegError(isAr ? "الاسم والبريد الإلكتروني مطلوبان" : "Name and email are required");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(regEmail)) {
+      setRegError(isAr ? "يرجى إدخال بريد إلكتروني صحيح" : "Please enter a valid email");
+      return;
+    }
+    setRegError("");
+    setScreen("parts");
+  };
 
   const startPart = (part: Part) => {
     setSelectedPart(part);
     setCurrent(0);
     setAnswers([]);
     setSelected(null);
+    setSubmitted(false);
     setScreen("quiz");
   };
 
   const handleAnswer = (idx: number) => setSelected(idx);
 
-  const handleNext = () => {
+  const handleNext = useCallback(async () => {
     if (selected === null || !selectedPart) return;
     const newAnswers = [...answers, selected];
     setAnswers(newAnswers);
     setSelected(null);
     if (current + 1 >= selectedPart.questions.length) {
       setScreen("result");
+      // Submit results
+      const finalScore = newAnswers.filter((a, i) => a === selectedPart.questions[i]?.correctAnswer).length;
+      const finalPct = Math.round((finalScore / selectedPart.questions.length) * 100);
+      const levelInfo = determineLevelForPart(finalPct);
+
+      try {
+        await fetch("/api/assessment-result", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: regName,
+            email: regEmail,
+            phone: regPhone,
+            assessmentType: `Interview Assessment – ${isAr ? selectedPart.nameAr : selectedPart.nameEn}`,
+            score: finalScore,
+            total: selectedPart.questions.length,
+            percentage: finalPct,
+            level: levelInfo.level,
+            weakAreas: [],
+            categoryBreakdown: { [selectedPart.key]: { correct: finalScore, total: selectedPart.questions.length } },
+          }),
+        });
+        setSubmitted(true);
+      } catch {
+        // continue silently
+      }
     } else {
       setCurrent(current + 1);
     }
-  };
+  }, [selected, answers, current, selectedPart, regName, regEmail, regPhone, isAr]);
 
   const backToParts = () => {
     setScreen("parts");
@@ -257,16 +311,95 @@ export default function InterviewAssessmentPage({ params: { locale } }: Intervie
     setCurrent(0);
     setAnswers([]);
     setSelected(null);
+    setSubmitted(false);
   };
 
   const retryPart = () => {
     setCurrent(0);
     setAnswers([]);
     setSelected(null);
+    setSubmitted(false);
     setScreen("quiz");
   };
 
-  // Parts selection screen
+  // ── Registration Screen ──
+  if (screen === "register") {
+    return (
+      <section className="min-h-screen pt-28 pb-16 bg-gradient-to-br from-slate-950 via-blue-950/30 to-slate-950 relative overflow-hidden flex items-center">
+        <div className="absolute inset-0 dots-bg opacity-20" />
+        <div className="relative container mx-auto px-4 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="max-w-lg mx-auto">
+            <div className="text-center mb-8">
+              <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-blue-500/30">
+                <Briefcase className="w-10 h-10 text-white" />
+              </div>
+              <h1 className="text-3xl lg:text-4xl font-black text-white mb-3">{t("title")}</h1>
+              <p className="text-slate-400">{isAr ? "أدخل بياناتك للبدء في الاختبار وستصلك نتيجتك على بريدك الإلكتروني" : "Enter your details to start. Your results will be sent to your email."}</p>
+            </div>
+
+            <div className="glass border border-white/10 rounded-3xl p-8">
+              <h2 className="text-white font-bold text-lg mb-6 text-center">{isAr ? "التسجيل للاختبار" : "Register for the Assessment"}</h2>
+              <form onSubmit={handleRegSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-slate-400 text-sm mb-2">{isAr ? "الاسم الكامل *" : "Full Name *"}</label>
+                  <div className="relative">
+                    <User className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                    <input
+                      type="text"
+                      value={regName}
+                      onChange={e => setRegName(e.target.value)}
+                      placeholder={isAr ? "أدخل اسمك الكامل" : "Enter your full name"}
+                      className="w-full ps-10 pe-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-slate-400 text-sm mb-2">{isAr ? "البريد الإلكتروني *" : "Email Address *"}</label>
+                  <div className="relative">
+                    <Mail className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                    <input
+                      type="email"
+                      value={regEmail}
+                      onChange={e => setRegEmail(e.target.value)}
+                      placeholder="example@email.com"
+                      className="w-full ps-10 pe-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                      dir="ltr"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-slate-400 text-sm mb-2">{isAr ? "رقم الهاتف (اختياري)" : "Phone Number (optional)"}</label>
+                  <div className="relative">
+                    <Phone className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                    <input
+                      type="tel"
+                      value={regPhone}
+                      onChange={e => setRegPhone(e.target.value)}
+                      placeholder="+966 5X XXX XXXX"
+                      className="w-full ps-10 pe-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                      dir="ltr"
+                    />
+                  </div>
+                </div>
+
+                {regError && (
+                  <p className="text-red-400 text-sm text-center">{regError}</p>
+                )}
+
+                <button type="submit" className="w-full py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-lg hover:from-blue-500 hover:to-purple-500 transition-all shadow-xl hover:shadow-blue-500/30 mt-2">
+                  {isAr ? "تابع إلى الاختبار ←" : "Continue to Assessment →"}
+                </button>
+              </form>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
+
+  // ── Parts Selection Screen ──
   if (screen === "parts") {
     return (
       <section className="min-h-screen pt-28 pb-16 bg-gradient-to-br from-slate-950 via-blue-950/30 to-slate-950 relative overflow-hidden">
@@ -278,6 +411,7 @@ export default function InterviewAssessmentPage({ params: { locale } }: Intervie
             </div>
             <h1 className="text-3xl lg:text-5xl font-black text-white mb-4">{t("title")}</h1>
             <p className="text-slate-400 text-lg">{isAr ? "اختر القسم الذي تريد تقييمه" : "Choose a section to assess"}</p>
+            {regName && <p className="text-blue-400 text-sm mt-2">{isAr ? `مرحبًا ${regName}` : `Welcome, ${regName}`}</p>}
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
@@ -311,15 +445,11 @@ export default function InterviewAssessmentPage({ params: { locale } }: Intervie
     );
   }
 
-  // Result screen
+  // ── Result Screen ──
   if (screen === "result" && selectedPart) {
     const score = answers.filter((a, i) => a === selectedPart.questions[i]?.correctAnswer).length;
     const pct = Math.round((score / selectedPart.questions.length) * 100);
-    const readinessLevel = pct >= 80
-      ? (isAr ? "جاهز! 🎯" : "Ready! 🎯")
-      : pct >= 60
-        ? (isAr ? "قريب جدًا! 💪" : "Almost There! 💪")
-        : (isAr ? "يحتاج مزيد من التدريب 📚" : "Needs More Practice 📚");
+    const levelInfo = determineLevelForPart(pct);
 
     return (
       <section className="min-h-screen pt-28 pb-16 bg-slate-950 relative overflow-hidden">
@@ -327,11 +457,34 @@ export default function InterviewAssessmentPage({ params: { locale } }: Intervie
         <div className="relative container mx-auto px-4 lg:px-8">
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="max-w-2xl mx-auto">
             <div className="text-center mb-10">
-              <p className="text-slate-400 text-sm mb-1">{isAr ? selectedPart.nameAr : selectedPart.nameEn}</p>
-              <div className={`text-8xl font-black mb-3 ${pct >= 80 ? "text-green-400" : pct >= 60 ? "text-yellow-400" : "text-red-400"}`}>{pct}%</div>
-              <p className="text-2xl text-white font-bold">{readinessLevel}</p>
-              <p className="text-slate-400 mt-2">{score}/{selectedPart.questions.length} {isAr ? "إجابات صحيحة" : "correct answers"}</p>
+              <p className="text-slate-400 text-sm mb-3">{isAr ? selectedPart.nameAr : selectedPart.nameEn}</p>
+
+              <motion.div
+                initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 0.2 }}
+                className="w-36 h-36 rounded-full border-4 flex flex-col items-center justify-center mx-auto mb-5"
+                style={{ borderColor: levelInfo.color, boxShadow: `0 0 40px ${levelInfo.color}44` }}
+              >
+                <div className="text-4xl font-black" style={{ color: levelInfo.color }}>{pct}%</div>
+                <div className="text-xs text-slate-400">{score}/{selectedPart.questions.length}</div>
+              </motion.div>
+
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-bold mb-3" style={{ borderColor: levelInfo.color, color: levelInfo.color, background: levelInfo.color + '22' }}>
+                {isAr ? levelInfo.levelAr : levelInfo.level}
+              </div>
+
+              <p className="text-xl text-white font-bold mb-1">{isAr ? `مرحبًا ${regName}` : `Hello, ${regName}`}</p>
+              <p className="text-slate-400">{score}/{selectedPart.questions.length} {isAr ? "إجابات صحيحة" : "correct answers"}</p>
             </div>
+
+            {/* Email confirmation */}
+            {submitted && (
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3 p-4 rounded-2xl bg-blue-500/10 border border-blue-500/20 mb-5">
+                <CheckCircle className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                <p className="text-blue-300 text-sm font-medium">
+                  {isAr ? `نتيجتك على إيميلك ✅ تم إرسال شهادتك إلى ${regEmail}` : `✅ Your certificate has been sent to ${regEmail}`}
+                </p>
+              </motion.div>
+            )}
 
             <div className="flex flex-col sm:flex-row gap-4">
               <button onClick={retryPart} className="flex-1 flex items-center justify-center gap-2 py-4 rounded-2xl border border-white/20 text-slate-300 hover:bg-white/10 transition-all font-semibold">
@@ -347,7 +500,7 @@ export default function InterviewAssessmentPage({ params: { locale } }: Intervie
     );
   }
 
-  // Quiz screen
+  // ── Quiz Screen ──
   if (screen === "quiz" && selectedPart) {
     const q = selectedPart.questions[current];
     const opts = isAr ? q.options.ar : q.options.en;
