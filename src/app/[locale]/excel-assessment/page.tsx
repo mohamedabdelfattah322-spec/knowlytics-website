@@ -355,6 +355,43 @@ export default function ExcelAssessmentPage({ params: { locale } }: ExcelAssessm
               </div>
             )}
 
+            {/* Wrong questions */}
+            <div className="glass border border-red-500/20 rounded-2xl p-6 mb-5">
+              <h3 className="text-red-400 font-bold text-base mb-4 flex items-center gap-2">
+                <XCircle className="w-5 h-5" />
+                {isAr ? "الأسئلة التي أخطأت فيها" : "Questions You Got Wrong"}
+                <span className="ms-auto text-sm font-normal text-slate-400">{answers.filter((a, i) => a !== questions[i]?.correctAnswer).length} {isAr ? "سؤال" : "questions"}</span>
+              </h3>
+              {answers.filter((a, i) => a !== questions[i]?.correctAnswer).length === 0 ? (
+                <p className="text-green-400 text-sm font-medium text-center py-2">🎉 {isAr ? "أجبت على كل الأسئلة بشكل صحيح!" : "You answered all questions correctly!"}</p>
+              ) : (
+                <div className="space-y-4">
+                  {questions.map((q, i) => {
+                    if (answers[i] === q.correctAnswer) return null;
+                    const opts = isAr ? q.options.ar : q.options.en;
+                    return (
+                      <div key={q.id} className="border border-white/10 rounded-xl p-4 bg-red-500/5">
+                        <p className="text-white text-sm font-medium mb-3">
+                          <span className="text-slate-500 me-2">#{i + 1}</span>
+                          {isAr ? q.questionAr : q.questionEn}
+                        </p>
+                        <div className="space-y-1.5">
+                          <div className="flex items-center gap-2 text-xs">
+                            <XCircle className="w-3.5 h-3.5 text-red-400 flex-shrink-0" />
+                            <span className="text-red-300">{isAr ? "إجابتك:" : "Your answer:"} <span className="line-through opacity-70">{opts[answers[i]] ?? "—"}</span></span>
+                          </div>
+                          <div className="flex items-center gap-2 text-xs">
+                            <CheckCircle className="w-3.5 h-3.5 text-green-400 flex-shrink-0" />
+                            <span className="text-green-300">{isAr ? "الإجابة الصحيحة:" : "Correct answer:"} <strong>{opts[q.correctAnswer]}</strong></span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
             {/* Email confirmation */}
             {submitted && (
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-3 p-4 rounded-2xl bg-teal-500/10 border border-teal-500/20 mb-5">

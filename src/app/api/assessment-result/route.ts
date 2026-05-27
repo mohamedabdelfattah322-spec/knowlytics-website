@@ -94,8 +94,7 @@ function buildCertificateEmail(data: {
 
     // Header
     '<div style="background:linear-gradient(135deg,#1e293b 0%,#0f172a 50%,#1a1a2e 100%);padding:40px 40px 30px;border-bottom:3px solid #f59e0b;text-align:center;">' +
-    '<div style="font-size:28px;font-weight:900;color:#f59e0b;letter-spacing:1px;margin-bottom:4px;">Knowlytics Hub</div>' +
-    '<div style="font-size:13px;color:#94a3b8;margin-bottom:20px;">knowlyticshub.com</div>' +
+    '<img src="https://www.knowlyticshub.com/logo.png" alt="Knowlytics Hub" style="height:60px;width:auto;margin-bottom:16px;display:block;margin-left:auto;margin-right:auto;" />' +
     '<div style="width:2px;height:30px;background:linear-gradient(to bottom,#f59e0b,transparent);margin:0 auto 20px;"></div>' +
     '<h1 style="font-size:22px;color:#f1f5f9;font-weight:900;margin:0 0 6px;">شهادة نتيجة اختبار</h1>' +
     '<h2 style="font-size:14px;color:#94a3b8;font-weight:400;margin:0;">Assessment Result Certificate</h2>' +
