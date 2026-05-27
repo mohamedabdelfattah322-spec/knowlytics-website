@@ -293,7 +293,7 @@ export async function POST(req: NextRequest) {
     if (!airtableRes.ok) {
       const err = await airtableRes.json();
       console.error("Airtable error:", JSON.stringify(err));
-      // Don't block email sending if Airtable fails
+      return NextResponse.json({ error: "Airtable error: " + (err?.error?.message || JSON.stringify(err)) }, { status: 500 });
     }
 
     // Send certificate + notification emails

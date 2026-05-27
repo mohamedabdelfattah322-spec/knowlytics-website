@@ -155,7 +155,7 @@ export default function ExcelAssessmentPage({ params: { locale } }: ExcelAssessm
 
     // Submit to API
     try {
-      await fetch("/api/assessment-result", {
+      const res = await fetch("/api/assessment-result", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -172,9 +172,15 @@ export default function ExcelAssessmentPage({ params: { locale } }: ExcelAssessm
           questionDetails,
         }),
       });
-      setSubmitted(true);
-    } catch {
-      // silently continue
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        const err = await res.json();
+        console.error("Assessment API error:", err);
+        setSubmitted(false);
+      }
+    } catch (e) {
+      console.error("Assessment submit failed:", e);
     }
   }, [regName, regEmail, regPhone, isAr]);
 
