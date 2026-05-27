@@ -177,7 +177,6 @@ export default function ExcelAssessmentPage({ params: { locale } }: ExcelAssessm
       } else {
         const err = await res.json();
         console.error("Assessment API error:", JSON.stringify(err));
-        alert("Error: " + JSON.stringify(err));
         setSubmitted(false);
       }
     } catch (e) {
