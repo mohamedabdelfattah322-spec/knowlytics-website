@@ -513,6 +513,18 @@ function getDefaultOutcomes(titleEn: string) {
   ];
 }
 
+// Course-specific highlights (unique selling points shown as feature cards)
+const COURSE_HIGHLIGHTS: Record<string, { icon: string; en: string; ar: string }[]> = {
+  "excel-powerbi-ai-freelance": [
+    { icon: "🤖", en: "AI Integration", ar: "استخدام الذكاء الاصطناعي في التحليل" },
+    { icon: "💼", en: "Freelancing Skills", ar: "كيف تشتغل فريلانسر كمحلل بيانات" },
+    { icon: "🛠️", en: "Hands-On During Every Lecture", ar: "ممارسة عملية أثناء كل محاضرة" },
+    { icon: "📁", en: "Real-World Projects", ar: "بنشتغل على مشاريع حقيقية فعلية" },
+    { icon: "📊", en: "Multiple Projects", ar: "بنشتغل على أكتر من مشروع خلال الكورس" },
+    { icon: "🏆", en: "Final Capstone Project", ar: "مشروع نهائي شامل في نهاية الكورس" },
+  ],
+};
+
 const LEVEL_LABELS: Record<string, { en: string; ar: string; color: string }> = {
   Beginner: { en: "Beginner", ar: "مبتدئ", color: "text-green-400 bg-green-400/10" },
   Intermediate: { en: "Intermediate", ar: "متوسط", color: "text-yellow-400 bg-yellow-400/10" },
@@ -558,6 +570,7 @@ export default function CourseDetailPage() {
       : 0;
 
   const totalLessons = curriculum.reduce((acc, s) => acc + s.lessons.length, 0);
+  const highlights = COURSE_HIGHLIGHTS[course.slug] || null;
 
   const relatedCourses = coursesData.filter((c) => c.slug !== course.slug && c.category === course.category).slice(0, 3);
 
@@ -673,6 +686,35 @@ export default function CourseDetailPage() {
                 ))}
               </div>
             </div>
+
+            {/* Course Highlights */}
+            {highlights && (
+              <div className="glass rounded-2xl p-6 border border-violet-500/20">
+                <h2 className="text-xl font-bold text-white mb-2">
+                  {isAr ? "مميزات هذا الكورس" : "What Makes This Course Special"}
+                </h2>
+                <p className="text-slate-400 text-sm mb-5">
+                  {isAr
+                    ? "خواص بيفرق فيها الكورس ده عن غيره"
+                    : "Features that set this course apart"}
+                </p>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {highlights.map((h, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.07 }}
+                      className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3 hover:border-violet-500/30 transition-colors"
+                    >
+                      <span className="text-2xl flex-shrink-0">{h.icon}</span>
+                      <span className="text-sm font-medium text-white">{isAr ? h.ar : h.en}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Course Curriculum */}
             <div>
