@@ -67,18 +67,22 @@ export default function LMSSection({ locale }: LMSSectionProps) {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Link
-                href={`/${locale}/lms`}
+              <a
+                href="https://learn.knowlyticshub.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:shadow-blue-500/30"
               >
                 {t("cta")}
-              </Link>
-              <Link
-                href={`/${locale}/lms#login`}
+              </a>
+              <a
+                href="https://learn.knowlyticshub.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-6 py-3 rounded-xl border border-blue-500/30 text-blue-400 font-semibold hover:bg-blue-500/10 transition-all"
               >
                 {t("login")}
-              </Link>
+              </a>
             </div>
           </motion.div>
 
@@ -96,7 +100,7 @@ export default function LMSSection({ locale }: LMSSectionProps) {
                 <div className="w-3 h-3 rounded-full bg-red-500" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500" />
                 <div className="w-3 h-3 rounded-full bg-green-500" />
-                <span className="ms-3 text-xs text-slate-500">lms.knowlyticshub.com</span>
+                <span className="ms-3 text-xs text-slate-500">learn.knowlyticshub.com</span>
               </div>
 
               {/* Dashboard content */}
