@@ -27,9 +27,29 @@ export async function generateMetadata({
 }: {
   params: { locale: string };
 }): Promise<Metadata> {
+  const isAr = locale === "ar";
   return {
-    title: "Knowlytics Hub – تحليل البيانات والذكاء الاصطناعي",
-    description: "أكبر منصة تدريبية لتحليل البيانات في العالم العربي. دورات Excel وSQL وPower BI وPython والذكاء الاصطناعي.",
+    title: isAr
+      ? "Knowlytics Hub | كورسات تحليل البيانات Excel Power BI SQL Python AI"
+      : "Knowlytics Hub | Data Analytics Courses Excel Power BI SQL Python AI",
+    description: isAr
+      ? "تعلم تحليل البيانات من الصفر مع محمد عبدالفتاح. كورسات لايف في Excel, Power BI, SQL, Python, AI وفريلانس. أكثر من 7,000 متدرب. سجّل الآن!"
+      : "Learn Data Analytics with Mohamed Abdelfattah. Live courses in Excel, Power BI, SQL, Python, AI and Freelancing. 7,000+ trainees. Enroll now!",
+    alternates: {
+      canonical: isAr ? "https://knowlyticshub.com" : "https://knowlyticshub.com/en",
+      languages: {
+        ar: "https://knowlyticshub.com",
+        en: "https://knowlyticshub.com/en",
+      },
+    },
+    openGraph: {
+      title: isAr ? "Knowlytics Hub | كورسات تحليل البيانات" : "Knowlytics Hub | Data Analytics Courses",
+      description: isAr
+        ? "تعلم تحليل البيانات من الصفر — Excel, Power BI, SQL, Python, AI. أكثر من 7,000 متدرب في مصر والعالم العربي."
+        : "Learn Data Analytics — Excel, Power BI, SQL, Python, AI. 7,000+ trainees across Egypt and the Arab World.",
+      url: isAr ? "https://knowlyticshub.com" : "https://knowlyticshub.com/en",
+      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Knowlytics Hub" }],
+    },
   };
 }
 
