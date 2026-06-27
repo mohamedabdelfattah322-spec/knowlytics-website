@@ -967,13 +967,14 @@ export default function CourseDetailPage() {
                 <div className="grid grid-cols-4 gap-4">
                   {[
                     { name: "Saint-Gobain", logo: "/company-logo/Saint-Gobain.png" },
-                    { name: "AFRAS", logo: "/company-logo/AFRAS KSA.jfif" },
+                    { name: "AFRAS KSA", logo: "/company-logo/AFRAS KSA.jfif" },
                     { name: "Alyoum", logo: "/company-logo/Alyoum.png" },
                     { name: "Cinnabon", logo: "/company-logo/Cinnabon.png" },
                     { name: "EFS", logo: "/company-logo/EFS.jfif" },
-                    { name: "Asfour Crystal", logo: "/company-logo/Asfour.jfif" },
+                    { name: "Asfour Crystal", logo: "/company-logo/ASFOUR.png" },
                     { name: "Apleona", logo: "/company-logo/Apleona.png" },
                     { name: "Symphony Development", logo: "/company-logo/Symphony Development.webp" },
+                    { name: "Elsewedy Watanya", logo: "/company-logo/Elsewedy Watanya.png" },
                   ].map((company, i) => (
                     <motion.div
                       key={i}
