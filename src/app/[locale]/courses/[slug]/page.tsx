@@ -512,7 +512,7 @@ function getDefaultOutcomes(titleEn: string) {
     { en: "Apply skills to real-world business problems", ar: "تطبيق المهارات على مشاكل الأعمال الواقعية" },
     { en: "Build a portfolio-ready final project", ar: "بناء مشروع نهائي جاهز للحافظة" },
     { en: "Earn an industry-recognized certificate", ar: "الحصول على شهادة معترف بها في الصناعة" },
-    { en: "Join a community of 2,000+ graduates", ar: "الانضمام إلى مجتمع من أكثر من 2000 خريج" },
+    { en: "Join a community of 7,000+ graduates", ar: "الانضمام إلى مجتمع من أكثر من 7000 متدرب" },
     { en: "Get lifetime access to all materials", ar: "الوصول مدى الحياة إلى جميع المواد" },
   ];
 }
@@ -921,7 +921,7 @@ export default function CourseDetailPage() {
                   </p>
                   <div className="flex flex-wrap gap-4 text-sm text-slate-400 mb-4">
                     <span className="flex items-center gap-1"><Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" /> 4.9</span>
-                    <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5 text-blue-400" /> 2,000+</span>
+                    <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5 text-blue-400" /> 7,000+</span>
                     <span className="flex items-center gap-1"><PlayCircle className="w-3.5 h-3.5 text-purple-400" /> 9 {isAr ? "دورات" : "Courses"}</span>
                     <span className="flex items-center gap-1"><Award className="w-3.5 h-3.5 text-yellow-400" /> 17+ {isAr ? "سنة خبرة" : "Years Exp."}</span>
                   </div>
@@ -935,7 +935,7 @@ export default function CourseDetailPage() {
                       { num: "17+", labelAr: "سنة خبرة", labelEn: "Years Exp." },
                       { num: "8+", labelAr: "شركة دربها", labelEn: "Companies" },
                       { num: "2016", labelAr: "بداية التدريب", labelEn: "Training Since" },
-                      { num: "2,000+", labelAr: "متدرب", labelEn: "Students" },
+                      { num: "7,000+", labelAr: "متدرب", labelEn: "Students" },
                     ].map((s, i) => (
                       <div key={i} className="bg-white/5 rounded-xl p-2.5">
                         <p className="text-white font-bold text-lg">{s.num}</p>
@@ -1085,6 +1085,48 @@ export default function CourseDetailPage() {
           </div>
         )}
 
+        {/* More Courses You Might Like */}
+        {course.slug === "excel-powerbi-ai-freelance" && (
+          <div className="mt-16">
+            <h2 className="text-2xl font-bold text-white mb-2">
+              {isAr ? "كورسات ممكن تهمك كمان" : "You Might Also Like"}
+            </h2>
+            <p className="text-slate-400 text-sm mb-8">
+              {isAr ? "كمّل مسيرتك في تحليل البيانات بالكورسات دي" : "Continue your data analytics journey with these courses"}
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { slug: "python-data-analysis", icon: "🐍", labelAr: "Python لتحليل البيانات", labelEn: "Python for Data Analysis", color: "from-yellow-600/20 to-orange-600/20", border: "border-yellow-500/30" },
+                { slug: "sql-data-analysis", icon: "🗄️", labelAr: "SQL Server للتحليل", labelEn: "SQL Server Analysis", color: "from-blue-600/20 to-cyan-600/20", border: "border-blue-500/30" },
+                { slug: "tableau-beginners", icon: "📊", labelAr: "Tableau للمبتدئين", labelEn: "Tableau for Beginners", color: "from-indigo-600/20 to-purple-600/20", border: "border-indigo-500/30" },
+                { slug: "looker-studio-beginners", icon: "📈", labelAr: "Looker Studio", labelEn: "Looker Studio", color: "from-green-600/20 to-teal-600/20", border: "border-green-500/30" },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                >
+                  <Link
+                    href={`/${locale}/courses/${item.slug}`}
+                    className={`flex flex-col items-center gap-3 p-5 rounded-2xl bg-gradient-to-br ${item.color} border ${item.border} hover:scale-105 transition-all duration-300 text-center`}
+                  >
+                    <span className="text-4xl">{item.icon}</span>
+                    <span className="text-white font-semibold text-sm leading-snug">
+                      {isAr ? item.labelAr : item.labelEn}
+                    </span>
+                    <span className="text-xs text-slate-400 flex items-center gap-1">
+                      {isAr ? "عرض الكورس" : "View Course"}
+                      <ChevronRight className="w-3 h-3 rtl:rotate-180" />
+                    </span>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Back to Courses */}
         <div className="mt-12 text-center">
           <Link
@@ -1217,21 +1259,36 @@ function EnrollmentCard({
               <span>Vodafone Cash</span>
               <span className="ms-auto text-xs font-mono" dir="ltr">01020945719</span>
             </div>
+            <a
+              href="https://www.easykash.net/Knowlytics%20Hub%20/pay"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg bg-blue-600/15 border border-blue-500/30 text-blue-300 hover:bg-blue-600/25 transition-colors text-sm font-medium"
+            >
+              <span className="text-base">💳</span>
+              <div>
+                <p>{isAr ? "طرق دفع أخرى" : "Other Payment Methods"}</p>
+                <p className="text-xs text-blue-400 opacity-70">EasyKash</p>
+              </div>
+              <span className="ms-auto text-xs text-blue-400 opacity-70">&#128279;</span>
+            </a>
           </div>
-          <p className="text-xs text-slate-400 mt-3 text-center leading-relaxed">
-            {isAr
-              ? "&#128247; بعد الدفع، أرسل صورة الإيصال على واتساب"
-              : "&#128247; After payment, send your receipt screenshot on WhatsApp"}
-          </p>
-          <a
-            href="https://wa.me/201226929392"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 flex items-center justify-center gap-2 w-full py-2 rounded-lg bg-green-600/20 border border-green-500/30 text-green-400 hover:bg-green-600/30 transition-colors text-xs font-medium"
-          >
-            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a9.864 9.864 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" /></svg>
-            <span dir="ltr">00201226929392</span>
-          </a>
+          <div className="mt-3 p-3 rounded-lg bg-green-900/20 border border-green-500/20">
+            <p className="text-xs text-green-300 text-center leading-relaxed">
+              📸 {isAr
+                ? "بعد الدفع، أرسل صورة التحويل على واتساب وهيتأكد تسجيلك فوراً"
+                : "After payment, send your transfer screenshot on WhatsApp to confirm enrollment immediately"}
+            </p>
+            <a
+              href="https://wa.me/201226929392"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 flex items-center justify-center gap-2 w-full py-2 rounded-lg bg-green-600/20 border border-green-500/30 text-green-400 hover:bg-green-600/30 transition-colors text-xs font-medium"
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a9.864 9.864 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" /></svg>
+              <span dir="ltr">00201226929392</span>
+            </a>
+          </div>
         </div>
 
         <p className="text-xs text-center text-slate-500 mt-3">
