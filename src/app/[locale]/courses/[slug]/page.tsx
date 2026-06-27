@@ -966,15 +966,15 @@ export default function CourseDetailPage() {
                 </p>
                 <div className="grid grid-cols-4 gap-4">
                   {[
-                    { name: "Saint-Gobain", logo: "/company-logo/Saint-Gobain.png" },
-                    { name: "AFRAS KSA", logo: "/company-logo/AFRAS KSA.jfif" },
-                    { name: "Alyoum", logo: "/company-logo/Alyoum.png" },
-                    { name: "Cinnabon", logo: "/company-logo/Cinnabon.png" },
-                    { name: "EFS", logo: "/company-logo/EFS.jfif" },
-                    { name: "Asfour Crystal", logo: "/company-logo/ASFOUR.png" },
-                    { name: "Apleona", logo: "/company-logo/Apleona.png" },
-                    { name: "Symphony Development", logo: "/company-logo/Symphony Development.webp" },
-                    { name: "Elsewedy Watanya", logo: "/company-logo/Elsewedy Watanya.png" },
+                    { name: "Saint-Gobain", logo: "/company-logo/Saint-Gobain.png", dark: false },
+                    { name: "AFRAS KSA", logo: "/company-logo/AFRAS KSA.jpg", dark: false },
+                    { name: "Alyoum", logo: "/company-logo/Alyoum.png", dark: false },
+                    { name: "Cinnabon", logo: "/company-logo/Cinnabon.png", dark: false },
+                    { name: "EFS", logo: "/company-logo/EFS.jpg", dark: false },
+                    { name: "Asfour Crystal", logo: "/company-logo/ASFOUR.png", dark: false },
+                    { name: "Apleona", logo: "/company-logo/Apleona.png", dark: false },
+                    { name: "Symphony Development", logo: "/company-logo/Symphony Development.webp", dark: true },
+                    { name: "Elsewedy Watanya", logo: "/company-logo/Elsewedy Watanya.png", dark: false },
                   ].map((company, i) => (
                     <motion.div
                       key={i}
@@ -984,7 +984,7 @@ export default function CourseDetailPage() {
                       transition={{ delay: i * 0.06 }}
                       className="flex flex-col items-center gap-2 border border-white/10 rounded-xl p-3 transition-colors hover:border-white/20 bg-slate-800/50"
                     >
-                      <div className="w-full h-14 relative bg-white rounded-lg p-1.5">
+                      <div className={`w-full h-14 relative rounded-lg p-1.5 ${company.dark ? "bg-slate-700" : "bg-white"}`}>
                         <Image
                           src={company.logo}
                           alt={company.name}
