@@ -65,7 +65,7 @@ function CourseSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
               <span className="text-xl">📅</span>
               <div>
                 <p className="text-red-300 text-xs font-semibold uppercase tracking-wide">{isAr ? "موعد الجروب القادم" : "Next Group Date"}</p>
-                <p className="text-white font-black text-base">{isAr ? "7 يونيو 2026" : "June 7, 2026"}</p>
+                <p className="text-white font-black text-base">{isAr ? "8 يوليو 2026" : "July 8, 2026"}</p>
               </div>
               <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-red-500/30 border border-red-400/40 text-red-300 whitespace-nowrap">
                 {isAr ? "⚡ سارع بالتسجيل!" : "⚡ Limited Seats!"}
@@ -73,9 +73,9 @@ function CourseSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
             </div>
 
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-3xl lg:text-4xl font-black text-white">2,500 <span className="text-xl text-slate-400">ج.م</span></span>
+              <span className="text-3xl lg:text-4xl font-black text-white">3,000 <span className="text-xl text-slate-400">ج.م</span></span>
               <span className="text-xl text-slate-500 line-through">4,000 ج.م</span>
-              <span className="px-2 py-1 rounded-lg bg-green-500/20 border border-green-500/30 text-green-400 text-sm font-bold">37% {isAr ? "خصم" : "OFF"}</span>
+              <span className="px-2 py-1 rounded-lg bg-green-500/20 border border-green-500/30 text-green-400 text-sm font-bold">25% {isAr ? "خصم" : "OFF"}</span>
             </div>
 
             <div className="flex flex-wrap gap-3">
