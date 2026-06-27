@@ -1197,15 +1197,15 @@ function EnrollmentCard({
   return (
     <div className="glass rounded-2xl border border-slate-700/50 overflow-hidden shadow-2xl shadow-blue-900/20">
       {/* Course Image */}
-      <div className="relative h-48">
+      <div className="relative bg-slate-900">
         <Image
           src={course.image}
           alt={title}
-          fill
-          className="object-cover"
+          width={800}
+          height={800}
+          className="w-full h-auto object-contain"
           sizes="(max-width: 1024px) 100vw, 400px"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
       </div>
 
       {/* Price & CTA */}
