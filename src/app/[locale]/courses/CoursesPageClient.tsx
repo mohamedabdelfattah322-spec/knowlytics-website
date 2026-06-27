@@ -154,6 +154,8 @@ interface CoursesPageClientProps {
   locale: string;
 }
 
+type CourseType = "live" | "recorded";
+
 const levels = ["All Levels", "Beginner", "Intermediate", "Advanced"];
 const levelLabelsAr: Record<string, string> = {
   "All Levels": "\u0627\u0644\u0643\u0644",
@@ -166,6 +168,7 @@ const categories = ["All", "Excel", "SQL", "Power BI", "Python", "AI", "Business
 export default function CoursesPageClient({ courses, locale }: CoursesPageClientProps) {
   const t = useTranslations("courses");
   const isAr = locale === "ar";
+  const [courseType, setCourseType] = useState<CourseType>("live");
   const [search, setSearch] = useState("");
   const [level, setLevel] = useState("All Levels");
   const [category, setCategory] = useState("All");
@@ -196,8 +199,73 @@ export default function CoursesPageClient({ courses, locale }: CoursesPageClient
         </div>
       </section>
 
-      {/* Filters */}
-      <section className="py-8 bg-slate-950 border-b border-white/10 sticky top-20 z-30 backdrop-blur-sm">
+      {/* Live / Recorded Toggle */}
+      <section className="py-6 bg-slate-950 border-b border-white/10">
+        <div className="container mx-auto px-4 lg:px-8 flex justify-center">
+          <div className="flex gap-2 bg-white/5 border border-white/10 rounded-2xl p-1.5">
+            <button
+              onClick={() => setCourseType("live")}
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                courseType === "live"
+                  ? "bg-blue-600 text-white shadow-lg shadow-blue-900/40"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              <span>🎙️</span>
+              {isAr ? "دورات لايف" : "Live Courses"}
+            </button>
+            <button
+              onClick={() => setCourseType("recorded")}
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                courseType === "recorded"
+                  ? "bg-purple-600 text-white shadow-lg shadow-purple-900/40"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              <span>🎬</span>
+              {isAr ? "دورات مسجلة" : "Recorded Courses"}
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Recorded Courses Section */}
+      {courseType === "recorded" && (
+        <section className="py-20 bg-slate-950 min-h-[60vh] flex items-center">
+          <div className="container mx-auto px-4 lg:px-8 text-center">
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="max-w-2xl mx-auto">
+              <div className="text-6xl mb-6">🎬</div>
+              <h2 className="text-3xl lg:text-4xl font-black text-white mb-4">
+                {isAr ? "الدورات المسجلة" : "Recorded Courses"}
+              </h2>
+              <p className="text-xl text-slate-300 mb-3">
+                {isAr
+                  ? "كل الدورات المسجلة متاحة على منصة التعلم الخاصة بينا"
+                  : "All recorded courses are available on our learning platform"}
+              </p>
+              <p className="text-slate-400 mb-10 leading-relaxed">
+                {isAr
+                  ? "المنصة منظّمة ومقسّمة بشكل كويس — هتلاقي كل الكورسات والتسجيلات مرتبة بسهولة وبتسهّل عليك المراجعة متى ما تحب"
+                  : "The platform is well-organized — find all courses and recordings neatly structured for easy review anytime"}
+              </p>
+              <a
+                href="https://learn.knowlyticshub.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold px-10 py-4 rounded-2xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-xl shadow-purple-900/40 text-lg"
+              >
+                <span>🖥️</span>
+                {isAr ? "ادخل على منصة التعلم" : "Go to Learning Platform"}
+                <span>←</span>
+              </a>
+              <p className="text-slate-500 text-sm mt-4">learn.knowlyticshub.com</p>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
+      {/* Filters + Grid — only show for live courses */}
+      {courseType === "live" && (<><section className="py-8 bg-slate-950 border-b border-white/10 sticky top-20 z-30 backdrop-blur-sm">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-wrap gap-4 items-center">
             <div className="relative flex-1 min-w-[200px]">
@@ -331,6 +399,7 @@ export default function CoursesPageClient({ courses, locale }: CoursesPageClient
           </div>
         </div>
       </section>
+      </>)}
     </>
   );
 }

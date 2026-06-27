@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-
+// Root handled by next-intl middleware — routes to [locale]/page.tsx automatically
 export default function RootPage() {
-  redirect("/ar");
+  return null;
 }

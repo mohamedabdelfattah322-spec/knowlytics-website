@@ -111,8 +111,12 @@ const CURRICULA: Record<
       titleEn: "AI in Data Analysis",
       titleAr: "القسم الرابع: AI in Data Analysis",
       lessons: [
-        { en: "Using AI in Analysis", ar: "استخدام الذكاء الاصطناعي في التحليل", duration: "30 min" },
-        { en: "Practical Applications in Daily Projects", ar: "تطبيقات عملية في المشاريع اليومية", duration: "25 min" },
+        { en: "ChatGPT for Data Analysis", ar: "ChatGPT في تحليل البيانات", duration: "25 min" },
+        { en: "Google Gemini for Analytics", ar: "Google Gemini للتحليل", duration: "20 min" },
+        { en: "Claude AI for Data Work", ar: "Claude AI في العمل التحليلي", duration: "20 min" },
+        { en: "Gamma — AI Presentations", ar: "Gamma — إنشاء عروض بالذكاء الاصطناعي", duration: "15 min" },
+        { en: "Notebook LM for Research", ar: "Notebook LM للبحث وتلخيص البيانات", duration: "15 min" },
+        { en: "Google App Script Automation", ar: "Google App Script لأتمتة المهام", duration: "25 min" },
       ],
     },
     {
@@ -513,6 +517,70 @@ function getDefaultOutcomes(titleEn: string) {
   ];
 }
 
+const COURSE_SCHEDULE: Record<string, { ar: string; en: string; startAr: string; startEn: string }> = {
+  "excel-powerbi-ai-freelance": {
+    ar: "الاثنين والأربعاء | 8:30 م",
+    en: "Mon & Wed | 8:30 PM",
+    startAr: "يبدأ 8 يوليو 2026",
+    startEn: "Starts July 8, 2026",
+  },
+  "hr-data-analysis": {
+    ar: "سيُعلَن قريباً",
+    en: "To be announced",
+    startAr: "الراوند القادم: أغسطس 2026",
+    startEn: "Next Round: August 2026",
+  },
+};
+
+const COURSE_REQUIREMENTS: Record<string, { ar: string; en: string }[]> = {
+  "excel-powerbi-ai-freelance": [
+    { ar: "خلفية أساسية عن Excel (شرط ضروري)", en: "Basic Excel background required" },
+    { ar: "جهاز كمبيوتر (Windows أو Mac)", en: "A computer (Windows or Mac)" },
+    { ar: "الرغبة في التعلم والتطبيق العملي", en: "Willingness to learn and practice" },
+  ],
+};
+
+const COURSE_FAQ: Record<string, { qAr: string; qEn: string; aAr: string; aEn: string }[]> = {
+  "excel-powerbi-ai-freelance": [
+    {
+      qAr: "هل محتاج خبرة قبل الكورس؟",
+      qEn: "Do I need prior experience?",
+      aAr: "لازم يكون عندك خلفية أساسية عن Excel قبل الكورس. لو مش متأكد مستواك، تواصل معنا على واتساب وهنساعدك.",
+      aEn: "Basic Excel knowledge is required. Contact us on WhatsApp if you're unsure about your level.",
+    },
+    {
+      qAr: "إيه الفرق بين الكورس ده وكورس Excel العادي؟",
+      qEn: "How is this different from a basic Excel course?",
+      aAr: "الكورس ده بيجمع Excel + Power BI + AI + فريلانس في باقة واحدة. مش بنتعلم أدوات بس — بنشتغل على مشاريع حقيقية ونتعلم إزاي نكسب منها.",
+      aEn: "This course combines Excel + Power BI + AI + Freelancing in one package, with real projects and income-generating skills.",
+    },
+    {
+      qAr: "هل التسجيلات بتتبعت بعد كل محاضرة؟",
+      qEn: "Do I get recordings after each session?",
+      aAr: "أيوه! بعد كل محاضرة بتاخد التسجيل على واتساب مباشرة + بيكون متاح على منصة التعلم الخاصة بينا منظّم بشكل كويس.",
+      aEn: "Yes! After each session you receive the recording on WhatsApp + access to our organized learning platform.",
+    },
+    {
+      qAr: "إيه الكورسات اللي بتيجي مجاناً هدية؟",
+      qEn: "What's included as a bonus?",
+      aAr: "هدية مجانية مع الكورس: كورس Tableau + Looker Studio كاملين!",
+      aEn: "Free bonus: Full Tableau + Looker Studio course included!",
+    },
+    {
+      qAr: "الكورس أونلاين ولا حضوري؟",
+      qEn: "Is the course online or in-person?",
+      aAr: "الكورس أونلاين لايف على Zoom. بتحضر المحاضرات مباشرة وبتقدر تسأل وتتفاعل في الوقت الفعلي.",
+      aEn: "The course is online live on Zoom. You attend sessions directly and can ask questions in real time.",
+    },
+    {
+      qAr: "هل بحصل على شهادة؟",
+      qEn: "Do I get a certificate?",
+      aAr: "أيوه! عند إتمام الكورس بتحصل على شهادة معتمدة من Knowlytics Hub.",
+      aEn: "Yes! Upon completion you receive a verified certificate from Knowlytics Hub.",
+    },
+  ],
+};
+
 // Course-specific highlights (unique selling points shown as feature cards)
 const COURSE_HIGHLIGHTS: Record<string, { icon: string; en: string; ar: string }[]> = {
   "excel-powerbi-ai-freelance": [
@@ -570,7 +638,11 @@ export default function CourseDetailPage() {
       : 0;
 
   const totalLessons = curriculum.reduce((acc, s) => acc + s.lessons.length, 0);
+  const sessionCount = course.sessions || totalLessons;
   const highlights = COURSE_HIGHLIGHTS[course.slug] || null;
+  const schedule = COURSE_SCHEDULE[course.slug] || null;
+  const courseRequirements = COURSE_REQUIREMENTS[course.slug] || null;
+  const courseFaq = COURSE_FAQ[course.slug] || null;
 
   const relatedCourses = coursesData.filter((c) => c.slug !== course.slug && c.category === course.category).slice(0, 3);
 
@@ -635,7 +707,7 @@ export default function CourseDetailPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <BookOpen className="w-4 h-4 text-green-400" />
-                  <span>{totalLessons} {isAr ? "درس" : "lessons"}</span>
+                  <span>{sessionCount} {isAr ? "محاضرة" : "sessions"}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Globe className="w-4 h-4 text-cyan-400" />
@@ -652,6 +724,26 @@ export default function CourseDetailPage() {
                 </div>
               </div>
             </div>
+
+            {/* Schedule Banner */}
+            {schedule && (
+              <div className="flex flex-wrap gap-3">
+                <div className="flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 rounded-xl px-4 py-2.5">
+                  <span className="text-lg">📅</span>
+                  <div>
+                    <p className="text-xs text-slate-400">{isAr ? "موعد الجلسات" : "Schedule"}</p>
+                    <p className="text-white font-semibold text-sm">{isAr ? schedule.ar : schedule.en}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-xl px-4 py-2.5">
+                  <span className="text-lg">🚀</span>
+                  <div>
+                    <p className="text-xs text-slate-400">{isAr ? "بداية الكورس" : "Start Date"}</p>
+                    <p className="text-white font-semibold text-sm">{isAr ? schedule.startAr : schedule.startEn}</p>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Mobile Enrollment Card */}
             <div className="lg:hidden">
@@ -722,7 +814,7 @@ export default function CourseDetailPage() {
                 {isAr ? "محتوى الدورة" : "Course Curriculum"}
               </h2>
               <p className="text-slate-400 text-sm mb-4">
-                {curriculum.length} {isAr ? "أقسام" : "sections"} • {totalLessons} {isAr ? "درس" : "lessons"} • {course.duration.replace("hours", isAr ? "ساعة" : "hours")} {isAr ? "إجمالي" : "total"}
+                {curriculum.length} {isAr ? "أقسام" : "sections"} • {sessionCount} {isAr ? "محاضرة" : "sessions"} • {course.duration.replace("hours", isAr ? "ساعة" : "hours")} {isAr ? "إجمالي" : "total"}
               </p>
               <div className="space-y-3">
                 {curriculum.map((section, sIdx) => (
@@ -776,17 +868,37 @@ export default function CourseDetailPage() {
                 {isAr ? "المتطلبات" : "Requirements"}
               </h2>
               <ul className="space-y-2">
-                {[
-                  isAr ? "لا توجد متطلبات مسبقة — الدورة تبدأ من الصفر" : "No prior experience required — starts from scratch",
-                  isAr ? "جهاز كمبيوتر (Windows أو Mac)" : "A computer (Windows or Mac)",
-                  isAr ? "الرغبة في التعلم والتطبيق" : "Willingness to learn and practice",
-                ].map((req, i) => (
+                {(courseRequirements || [
+                  { ar: "لا توجد متطلبات مسبقة — الدورة تبدأ من الصفر", en: "No prior experience required — starts from scratch" },
+                  { ar: "جهاز كمبيوتر (Windows أو Mac)", en: "A computer (Windows or Mac)" },
+                  { ar: "الرغبة في التعلم والتطبيق", en: "Willingness to learn and practice" },
+                ]).map((req, i) => (
                   <li key={i} className="flex items-start gap-3 text-slate-300 text-sm">
                     <span className="w-2 h-2 rounded-full bg-blue-400 mt-1.5 flex-shrink-0" />
-                    {req}
+                    {isAr ? req.ar : req.en}
                   </li>
                 ))}
               </ul>
+            </div>
+
+            {/* Course Format */}
+            <div className="glass rounded-2xl p-6 border border-cyan-500/20">
+              <h2 className="text-xl font-bold text-white mb-4">
+                {isAr ? "طريقة تقديم الكورس" : "How This Course Works"}
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {[
+                  { icon: "🎥", ar: "أونلاين لايف على Zoom مباشرة مع المدرب", en: "Online live on Zoom directly with the instructor" },
+                  { icon: "📹", ar: "التسجيل بيتبعتلك على واتساب بعد كل محاضرة", en: "Recording sent to you on WhatsApp after each session" },
+                  { icon: "🖥️", ar: "أكسيس على منصة تعليمية — التسجيلات منظّمة ومقسّمة بشكل احترافي", en: "Access to a learning platform with organized, well-structured recordings" },
+                  { icon: "💬", ar: "دعم مباشر من المدرب على واتساب", en: "Direct instructor support on WhatsApp" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3 bg-white/5 rounded-xl p-3">
+                    <span className="text-xl flex-shrink-0">{item.icon}</span>
+                    <span className="text-sm text-slate-300">{isAr ? item.ar : item.en}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Instructor */}
@@ -795,28 +907,122 @@ export default function CourseDetailPage() {
                 {isAr ? "عن المدرب" : "About the Instructor"}
               </h2>
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
-                  MA
-                </div>
+                <Image
+                  src="/profile.JPG"
+                  alt="Mohamed Abdelfattah"
+                  width={64}
+                  height={64}
+                  className="w-16 h-16 rounded-2xl object-cover flex-shrink-0"
+                />
                 <div>
                   <h3 className="text-lg font-bold text-white mb-1">Mohamed Abdelfattah</h3>
                   <p className="text-blue-400 text-sm mb-3">
                     {isAr ? "مؤسس Knowlytics Hub | خبير تحليل البيانات" : "Founder of Knowlytics Hub | Data Analytics Expert"}
                   </p>
-                  <div className="flex flex-wrap gap-4 text-sm text-slate-400 mb-3">
+                  <div className="flex flex-wrap gap-4 text-sm text-slate-400 mb-4">
                     <span className="flex items-center gap-1"><Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" /> 4.9</span>
                     <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5 text-blue-400" /> 2,000+</span>
                     <span className="flex items-center gap-1"><PlayCircle className="w-3.5 h-3.5 text-purple-400" /> 9 {isAr ? "دورات" : "Courses"}</span>
-                    <span className="flex items-center gap-1"><Award className="w-3.5 h-3.5 text-yellow-400" /> 7+ {isAr ? "سنوات" : "Years"}</span>
+                    <span className="flex items-center gap-1"><Award className="w-3.5 h-3.5 text-yellow-400" /> 17+ {isAr ? "سنة خبرة" : "Years Exp."}</span>
                   </div>
-                  <p className="text-slate-300 text-sm leading-relaxed">
+                  <p className="text-slate-300 text-sm leading-relaxed mb-3">
                     {isAr
-                      ? "خبير تحليل بيانات بخبرة 7+ سنوات، عمل مع شركات Fortune 500 وقدّم التدريب لأكثر من 50 شركة في مصر والخليج."
-                      : "Data analytics expert with 7+ years of experience, trained 50+ organizations across Egypt and the Gulf."}
+                      ? "خبير تحليل بيانات بخبرة أكثر من 17 سنة مع شركات مالتي ناشيونال كبرى. بيدرّب من 2016 ودرّب أكتر من 8 شركات في مجالات مختلفة. مؤسس Knowlytics Hub وبيساعد المتدربين يدخلوا مجال تحليل البيانات باحتراف."
+                      : "Data analytics expert with 17+ years of experience at multinational companies. Training since 2016, trained 8+ companies across various industries. Founder of Knowlytics Hub, helping trainees break into data analytics professionally."}
                   </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                    {[
+                      { num: "17+", labelAr: "سنة خبرة", labelEn: "Years Exp." },
+                      { num: "8+", labelAr: "شركة دربها", labelEn: "Companies" },
+                      { num: "2016", labelAr: "بداية التدريب", labelEn: "Training Since" },
+                      { num: "2,000+", labelAr: "متدرب", labelEn: "Students" },
+                    ].map((s, i) => (
+                      <div key={i} className="bg-white/5 rounded-xl p-2.5">
+                        <p className="text-white font-bold text-lg">{s.num}</p>
+                        <p className="text-slate-400 text-xs">{isAr ? s.labelAr : s.labelEn}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* Group Training Photos */}
+            {course.slug === "excel-powerbi-ai-freelance" && (
+              <div className="glass rounded-2xl p-6 border border-slate-700/50">
+                <h2 className="text-xl font-bold text-white mb-2">
+                  {isAr ? "من جروباتنا السابقة" : "Our Previous Training Groups"}
+                </h2>
+                <p className="text-slate-400 text-sm mb-5">
+                  {isAr ? "صور من الجروبات اللي اتدربت على هذا الكورس" : "Photos from groups who completed this course"}
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {[1,2,3,4,5,6,7,8].map((n) => (
+                    <motion.div
+                      key={n}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: n * 0.06 }}
+                      className="relative aspect-square rounded-xl overflow-hidden"
+                    >
+                      <Image
+                        src={`/groups/g${n}.jpeg`}
+                        alt={`Training group ${n}`}
+                        fill
+                        className="object-cover hover:scale-105 transition-transform duration-300"
+                        sizes="(max-width: 640px) 50vw, 25vw"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Trainee Reviews */}
+            <div className="glass rounded-2xl p-6 border border-yellow-500/20">
+              <h2 className="text-xl font-bold text-white mb-2">
+                {isAr ? "آراء المتدربين" : "Trainee Reviews"}
+              </h2>
+              <p className="text-slate-400 text-sm mb-5">
+                {isAr ? "شوف إيه اللي بيقوله المتدربين عن الكورس" : "See what our students say about this course"}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {["/feedback/f1.jpeg", "/feedback/f2.jpeg", "/feedback/f3.jpeg", "/feedback/f4.jpeg", "/feedback/f5.png"].map((src, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="relative rounded-xl overflow-hidden border border-slate-700/50"
+                  >
+                    <Image
+                      src={src}
+                      alt={`Trainee review ${i + 1}`}
+                      width={400}
+                      height={300}
+                      className="w-full h-auto object-contain bg-white"
+                      sizes="(max-width: 640px) 100vw, 33vw"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* FAQ */}
+            {courseFaq && (
+              <div className="glass rounded-2xl p-6 border border-slate-700/50">
+                <h2 className="text-xl font-bold text-white mb-5">
+                  {isAr ? "أسئلة متكررة" : "Frequently Asked Questions"}
+                </h2>
+                <div className="space-y-3">
+                  {courseFaq.map((item, i) => (
+                    <CourseFaqItem key={i} item={item} isAr={isAr} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* ── RIGHT: Sticky Enrollment Card (desktop only) ── */}
@@ -891,6 +1097,27 @@ export default function CourseDetailPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+// ── Course FAQ Item ──────────────────────────────────────────────────────
+function CourseFaqItem({ item, isAr }: { item: { qAr: string; qEn: string; aAr: string; aEn: string }; isAr: boolean }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-slate-700/50 rounded-xl overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-4 text-start hover:bg-white/5 transition-colors"
+      >
+        <span className="text-white font-medium text-sm">{isAr ? item.qAr : item.qEn}</span>
+        <ChevronDown className={`w-4 h-4 text-slate-400 flex-shrink-0 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <div className="px-4 pb-4 text-slate-300 text-sm leading-relaxed border-t border-slate-700/50 pt-3">
+          {isAr ? item.aAr : item.aEn}
+        </div>
+      )}
+    </div>
   );
 }
 
