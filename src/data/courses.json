@@ -36,7 +36,7 @@
     "level": "Beginner",
     "price": 3000,
     "originalPrice": 4000,
-    "image": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&fit=crop",
+    "image": "/course-excel-powerbi.png",
     "category": "Power BI",
     "featured": true,
     "type": "live",
