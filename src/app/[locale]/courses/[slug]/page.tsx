@@ -953,6 +953,52 @@ export default function CourseDetailPage() {
               </div>
             </div>
 
+            {/* Trained Companies */}
+            {course.slug === "excel-powerbi-ai-freelance" && (
+              <div className="glass rounded-2xl p-6 border border-slate-700/50">
+                <h2 className="text-xl font-bold text-white mb-2">
+                  {isAr ? "شركات تم تدريبها" : "Companies We've Trained"}
+                </h2>
+                <p className="text-slate-400 text-sm mb-6">
+                  {isAr
+                    ? "من أبرز الشركات اللي استفادت من برامج تدريبنا"
+                    : "Some of the top companies that benefited from our training programs"}
+                </p>
+                <div className="grid grid-cols-4 gap-4">
+                  {[
+                    { name: "Saint-Gobain", logo: "/company-logo/Saint-Gobain.png" },
+                    { name: "AFRAS", logo: "/company-logo/AFRAS KSA.jfif" },
+                    { name: "Alyoum", logo: "/company-logo/Alyoum.png" },
+                    { name: "Cinnabon", logo: "/company-logo/Cinnabon.png" },
+                    { name: "EFS", logo: "/company-logo/EFS.jfif" },
+                    { name: "Asfour Crystal", logo: "/company-logo/Asfour.jfif" },
+                    { name: "Apleona", logo: "/company-logo/Apleona.png" },
+                    { name: "Symphony Development", logo: "/company-logo/Symphony Development.webp" },
+                  ].map((company, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.06 }}
+                      className="flex flex-col items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-3 transition-colors"
+                    >
+                      <div className="w-full h-12 relative">
+                        <Image
+                          src={company.logo}
+                          alt={company.name}
+                          fill
+                          className="object-contain"
+                          sizes="120px"
+                        />
+                      </div>
+                      <p className="text-xs text-slate-400 text-center leading-tight">{company.name}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Group Training Photos */}
             {course.slug === "excel-powerbi-ai-freelance" && (
               <div className="glass rounded-2xl p-6 border border-slate-700/50">
