@@ -982,14 +982,14 @@ export default function CourseDetailPage() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.06 }}
-                      className="flex flex-col items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl p-3 transition-colors"
+                      className="flex flex-col items-center gap-2 border border-white/10 rounded-xl p-3 transition-colors hover:border-white/20 bg-slate-800/50"
                     >
-                      <div className="w-full h-12 relative">
+                      <div className="w-full h-14 relative bg-white rounded-lg p-1.5">
                         <Image
                           src={company.logo}
                           alt={company.name}
                           fill
-                          className="object-contain"
+                          className="object-contain p-1"
                           sizes="120px"
                         />
                       </div>
