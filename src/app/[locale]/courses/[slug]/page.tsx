@@ -578,6 +578,12 @@ const COURSE_FAQ: Record<string, { qAr: string; qEn: string; aAr: string; aEn: s
       aAr: "أيوه! عند إتمام الكورس بتحصل على شهادة معتمدة من Knowlytics Hub.",
       aEn: "Yes! Upon completion you receive a verified certificate from Knowlytics Hub.",
     },
+    {
+      qAr: "ليه مفيش Python في الكورس؟ هل لازم أتعلمه؟",
+      qEn: "Why isn't Python included? Do I need to learn it?",
+      aAr: "قرار مقصود! احنا فصلنا لغات البرمجة (Python) عن Excel وPower BI عشان سببين: الأول — متبقاش في معلومات كتير ومربكة في كورس واحد، والتاني — مش كل المتدربين محتاجين Python. في كتير من الشركات المحلل بيشتغل بـ Excel وPower BI بس وده كافي جداً. لو محتاج Python بعدين، عندنا كورس Python مستقل خصيصاً لتحليل البيانات.",
+      aEn: "It's a deliberate decision! We separated programming languages (Python) from Excel & Power BI for two reasons: first, to avoid information overload in one course; second, not every trainee needs Python. Many analysts work effectively with Excel & Power BI alone. If you need Python later, we have a dedicated Python for Data Analysis course.",
+    },
   ],
 };
 
