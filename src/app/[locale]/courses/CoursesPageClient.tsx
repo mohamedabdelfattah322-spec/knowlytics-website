@@ -249,7 +249,7 @@ export default function CoursesPageClient({ courses, locale }: CoursesPageClient
                   : "The platform is well-organized — find all courses and recordings neatly structured for easy review anytime"}
               </p>
               <a
-                href="https://learn.knowlyticshub.com"
+                href="https://learn.knowlyticshub.com/courses"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold px-10 py-4 rounded-2xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-xl shadow-purple-900/40 text-lg"
@@ -258,7 +258,7 @@ export default function CoursesPageClient({ courses, locale }: CoursesPageClient
                 {isAr ? "ادخل على منصة التعلم" : "Go to Learning Platform"}
                 <span>←</span>
               </a>
-              <p className="text-slate-500 text-sm mt-4">learn.knowlyticshub.com</p>
+              <p className="text-slate-500 text-sm mt-4">learn.knowlyticshub.com/courses</p>
             </motion.div>
           </div>
         </section>
