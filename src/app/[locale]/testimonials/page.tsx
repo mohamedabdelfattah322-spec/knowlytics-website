@@ -116,6 +116,7 @@ function ReviewForm({ isAr }: { isAr: boolean }) {
                   className="w-full px-4 py-3 rounded-xl border border-white/20 bg-slate-900 text-white focus:outline-none focus:border-yellow-500 transition-colors text-sm">
                   <option value="">{isAr ? "اختر الكورس" : "Select course"}</option>
                   <option>Excel + Power BI + AI + Freelance</option>
+                  <option>{isAr ? "HR Data Analysis" : "HR Data Analysis"}</option>
                   <option>SQL Server for Data Analysis</option>
                   <option>Python for Data Analysis</option>
                   <option>AI Tools &amp; Prompt Engineering</option>
