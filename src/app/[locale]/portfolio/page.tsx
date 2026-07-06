@@ -115,6 +115,16 @@ const SOCIAL_LINKS = [
     color: "text-orange-400",
     icon: <Mail className="w-6 h-6" />,
   },
+  {
+    label: "Learning Platform",
+    handle: "learn.knowlyticshub.com",
+    sub: { ar: "منصة الكورسات المسجّلة", en: "Recorded Courses Platform" },
+    href: "https://learn.knowlyticshub.com/",
+    bg: "from-purple-600/20 to-indigo-800/20",
+    border: "border-purple-500/30",
+    color: "text-purple-400",
+    icon: <BookOpen className="w-6 h-6" />,
+  },
 ];
 
 // ── Companies ─────────────────────────────────────────────────
@@ -132,15 +142,19 @@ const COMPANIES = [
 
 // ── Courses ───────────────────────────────────────────────────
 const COURSES = [
-  { icon: "📊", titleAr: "Excel + Power BI + AI + Freelance", titleEn: "Excel + Power BI + AI + Freelance", price: "3,000", slug: "excel-powerbi-ai-freelance", featured: true },
-  { icon: "🗄️", titleAr: "SQL Server لتحليل البيانات", titleEn: "SQL Server for Data Analysis", price: "2,000", slug: "sql-data-analysis" },
-  { icon: "🐍", titleAr: "Python لتحليل البيانات", titleEn: "Python for Data Analysis", price: "2,000", slug: "python-data-analysis" },
-  { icon: "📈", titleAr: "Tableau للمبتدئين", titleEn: "Tableau for Beginners", price: "1,000", slug: "tableau-beginners" },
-  { icon: "🔵", titleAr: "Looker Studio للمبتدئين", titleEn: "Looker Studio for Beginners", price: "1,000", slug: "looker-studio-beginners" },
-  { icon: "📝", titleAr: "كتابة التقارير الاحترافية", titleEn: "Professional Report Writing", price: "3,000", slug: "report-writing" },
-  { icon: "🤖", titleAr: "أدوات AI وهندسة البرومبت", titleEn: "AI Tools & Prompt Engineering", price: "1,500", slug: "ai-tools-prompt-engineering" },
-  { icon: "🎓", titleAr: "HR Data Analysis", titleEn: "HR Data Analysis", price: "", slug: "" },
-  { icon: "📦", titleAr: "الباقة الكاملة", titleEn: "Full Data Analytics Bundle", price: "6,000", slug: "full-data-analysis-bundle" },
+  { icon: "📊", titleAr: "Excel + Power BI + AI + Freelance", titleEn: "Excel + Power BI + AI + Freelance", slug: "excel-powerbi-ai-freelance", featured: true },
+  { icon: "🟢", titleAr: "Excel للمبتدئين", titleEn: "Excel for Beginners", slug: "excel-zero-to-hero" },
+  { icon: "⚡", titleAr: "Excel المتقدم", titleEn: "Advanced Excel", slug: "" },
+  { icon: "📉", titleAr: "Excel تحليل البيانات", titleEn: "Excel Data Analysis", slug: "" },
+  { icon: "📊", titleAr: "Power BI", titleEn: "Power BI", slug: "" },
+  { icon: "🗄️", titleAr: "SQL Server لتحليل البيانات", titleEn: "SQL Server for Data Analysis", slug: "sql-data-analysis" },
+  { icon: "🐍", titleAr: "Python لتحليل البيانات", titleEn: "Python for Data Analysis", slug: "python-data-analysis" },
+  { icon: "📈", titleAr: "Tableau للمبتدئين", titleEn: "Tableau for Beginners", slug: "tableau-beginners" },
+  { icon: "🔵", titleAr: "Looker Studio للمبتدئين", titleEn: "Looker Studio for Beginners", slug: "looker-studio-beginners" },
+  { icon: "📝", titleAr: "كتابة التقارير الاحترافية", titleEn: "Professional Report Writing", slug: "report-writing" },
+  { icon: "🤖", titleAr: "أدوات AI وهندسة البرومبت", titleEn: "AI Tools & Prompt Engineering", slug: "ai-tools-prompt-engineering" },
+  { icon: "🎓", titleAr: "HR Data Analysis", titleEn: "HR Data Analysis", slug: "" },
+  { icon: "📦", titleAr: "الباقة الكاملة", titleEn: "Full Data Analytics Bundle", slug: "full-data-analysis-bundle" },
 ];
 
 // ── What We Offer ─────────────────────────────────────────────
@@ -261,8 +275,8 @@ export default function PortfolioPage() {
               <h2 className="text-2xl font-black text-white mb-3">محمد عبدالفتاح</h2>
               <p className="text-slate-300 leading-relaxed mb-4">
                 {isAr
-                  ? "خبير تحليل البيانات مع أكثر من 17 سنة خبرة في شركات Multinational كبرى. بيدرّب من 2016 وكوّن أكثر من 7,000 متدرب في مجال تحليل البيانات."
-                  : "Data analytics expert with 17+ years of experience in major multinational companies. Training since 2016, with 7,000+ trainees in data analytics."}
+                  ? "خبير تحليل البيانات مع أكثر من 17 سنة خبرة في شركات Multinational كبرى. بيدرّب من 2016 وكوّن أكثر من 7,000 متدرب."
+                  : "Data analytics expert with 17+ years of experience in major multinational companies. Training since 2016, with 7,000+ trainees."}
               </p>
               <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                 {["Excel", "Power BI", "SQL", "Python", "AI", "Tableau", "Looker Studio"].map(t => (
@@ -373,7 +387,6 @@ export default function PortfolioPage() {
                       <span className="text-3xl">{c.icon}</span>
                       <div className="flex-1">
                         <p className="text-white font-semibold text-sm leading-snug">{isAr ? c.titleAr : c.titleEn}</p>
-                        {c.price && <p className="text-blue-400 text-xs mt-1">{c.price} ج.م</p>}
                       </div>
                       {c.featured && <span className="text-xs bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 px-2 py-0.5 rounded-full">⭐</span>}
                     </Link>
@@ -382,7 +395,6 @@ export default function PortfolioPage() {
                       <span className="text-3xl">{c.icon}</span>
                       <div className="flex-1">
                         <p className="text-white font-semibold text-sm leading-snug">{isAr ? c.titleAr : c.titleEn}</p>
-                        <p className="text-slate-500 text-xs mt-1">{isAr ? "قريباً" : "Coming Soon"}</p>
                       </div>
                     </div>
                   )}
