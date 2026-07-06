@@ -240,7 +240,7 @@ export default function PortfolioPage() {
             {/* Stats */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
               {[
-                { num: "7,000+", labelAr: "متدرب", labelEn: "Trainees" },
+                { num: "7,000+", labelAr: "متدرب أفراد وشركات", labelEn: "Individuals & Companies" },
                 { num: "9+", labelAr: "كورس", labelEn: "Courses" },
                 { num: "8+", labelAr: "شركة كبرى", labelEn: "Companies" },
                 { num: "17+", labelAr: "سنة خبرة", labelEn: "Years Exp." },
