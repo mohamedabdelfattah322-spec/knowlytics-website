@@ -65,7 +65,7 @@ function CourseSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
               <span className="text-xl">📅</span>
               <div>
                 <p className="text-red-300 text-xs font-semibold uppercase tracking-wide">{isAr ? "موعد الجروب القادم" : "Next Group Date"}</p>
-                <p className="text-white font-black text-base">{isAr ? "8 يوليو 2026" : "July 8, 2026"}</p>
+                <p className="text-white font-black text-base">{isAr ? "9 أغسطس 2026" : "August 9, 2026"}</p>
               </div>
               <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-red-500/30 border border-red-400/40 text-red-300 whitespace-nowrap">
                 {isAr ? "⚡ سارع بالتسجيل!" : "⚡ Limited Seats!"}
@@ -215,7 +215,7 @@ function GroupsSlide({ isAr }: { isAr: boolean }) {
             </a>
             <p className="text-emerald-300/70 text-sm mt-3 flex items-center gap-1.5">
               <span>📅</span>
-              {isAr ? "موعد الجروب القادم: 7 يونيو 2026" : "Next group: June 7, 2026"}
+              {isAr ? "موعد الجروب القادم: 9 أغسطس 2026" : "Next group: August 9, 2026"}
             </p>
           </motion.div>
 

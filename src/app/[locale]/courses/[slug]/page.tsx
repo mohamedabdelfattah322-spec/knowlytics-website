@@ -519,10 +519,10 @@ function getDefaultOutcomes(titleEn: string) {
 
 const COURSE_SCHEDULE: Record<string, { ar: string; en: string; startAr: string; startEn: string }> = {
   "excel-powerbi-ai-freelance": {
-    ar: "الاثنين والأربعاء | 8:30 م",
-    en: "Mon & Wed | 8:30 PM",
-    startAr: "يبدأ 8 يوليو 2026",
-    startEn: "Starts July 8, 2026",
+    ar: "الأحد والثلاثاء | 8:30 م",
+    en: "Sun & Tue | 8:30 PM",
+    startAr: "يبدأ 9 أغسطس 2026",
+    startEn: "Starts August 9, 2026",
   },
   "hr-data-analysis": {
     ar: "سيُعلَن قريباً",
