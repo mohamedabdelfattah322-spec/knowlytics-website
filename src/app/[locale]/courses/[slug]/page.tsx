@@ -521,8 +521,8 @@ const COURSE_SCHEDULE: Record<string, { ar: string; en: string; startAr: string;
   "excel-powerbi-ai-freelance": {
     ar: "الأحد والثلاثاء | 8:30 م",
     en: "Sun & Tue | 8:30 PM",
-    startAr: "يبدأ 9 أغسطس 2026",
-    startEn: "Starts August 9, 2026",
+    startAr: "يبدأ 11 أكتوبر 2026",
+    startEn: "Starts October 11, 2026",
   },
   "hr-data-analysis": {
     ar: "سيُعلَن قريباً",
