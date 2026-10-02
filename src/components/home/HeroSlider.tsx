@@ -645,8 +645,107 @@ function ConsultationSlide({ isAr, onFormFocus, onFormBlur }: ConsultationSlideP
   );
 }
 
+// ─── Slide 6: AI for Business ────────────────────────────────────────────────
+function AIForBusinessSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
+  const whatsappUrl = "https://wa.me/201226929392?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%20%D9%81%D9%8A%20%D9%83%D9%88%D8%B1%D8%B3%20AI%20for%20Business";
+  const tools = ["ChatGPT", "Gemini", "Claude", "Copilot", "Make", "n8n", "NotebookLM", "Gamma"];
+  const modules = [
+    { icon: "🧠", ar: "AI Prompt Engineering", en: "AI Prompt Engineering", sub: isAr ? "اكتب Prompts احترافية تحصل على نتائج أفضل" : "Write professional prompts for better results" },
+    { icon: "🤖", ar: "AI Agents", en: "AI Agents", sub: isAr ? "ابن وكلاء ذكيين يعملون معك" : "Build smart agents that work for you" },
+    { icon: "⚙️", ar: "Automation — Make & n8n", en: "Automation — Make & n8n", sub: isAr ? "أتمتة المهام المتكررة بين التطبيقات" : "Automate repetitive tasks between apps" },
+    { icon: "🛠️", ar: "AI Tools المتقدمة", en: "Advanced AI Tools", sub: isAr ? "ChatGPT • Gemini • Claude • Copilot • وأكتر" : "ChatGPT • Gemini • Claude • Copilot • and more" },
+  ];
+  const sectors = isAr
+    ? ["HR", "Finance", "Sales", "Operations", "Management", "IT", "Customer Service"]
+    : ["HR", "Finance", "Sales", "Operations", "Management", "IT", "Customer Service"];
+
+  return (
+    <div className="relative min-h-fit lg:min-h-screen flex items-start lg:items-center overflow-hidden bg-gradient-to-br from-cyan-950 via-slate-900 to-blue-950">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(6,182,212,0.15),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(99,102,241,0.1),transparent_50%)]" />
+      <div className="absolute top-20 end-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
+
+      <div className="relative container mx-auto px-4 lg:px-8 pt-16 pb-16 lg:pt-28 lg:pb-16">
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
+          {/* Left: Info */}
+          <motion.div initial={{ opacity: 0, x: isAr ? 60 : -60 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+            <div className="flex flex-wrap gap-2 mb-3">
+              <span className="px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 uppercase tracking-wider">
+                🚀 {isAr ? "راوند جديد" : "New Round"}
+              </span>
+              <span className="px-3 py-1 rounded-full text-xs font-bold bg-yellow-500/20 border border-yellow-500/40 text-yellow-300">
+                ⭐ {isAr ? "8 محاضرات × 3 ساعات" : "8 Lectures × 3 Hours"}
+              </span>
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-black mb-2 leading-tight text-white">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">AI for Business</span>
+            </h1>
+            <p className="text-slate-300 text-base lg:text-lg mb-4 leading-relaxed max-w-lg">
+              {isAr
+                ? "اعمل برنامجك الخاص باستخدام الذكاء الاصطناعي. أتمتة المهام — توفير الوقت والجهد."
+                : "Build your own AI solution for your business. Automate tasks — save time and effort."}
+            </p>
+
+            {/* AI Tools pills */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {tools.map((t) => (
+                <span key={t} className="px-2.5 py-1 rounded-lg bg-white/10 border border-white/15 text-white text-xs font-semibold" dir="ltr">{t}</span>
+              ))}
+            </div>
+
+            {/* Sectors */}
+            <div className="flex items-center gap-2 mb-4 flex-wrap">
+              <span className="text-slate-400 text-xs">{isAr ? "مناسب لـ:" : "For:"}</span>
+              {sectors.map((s) => (
+                <span key={s} className="px-2 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-500/25 text-cyan-300 text-xs font-medium">{s}</span>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 py-3 text-base lg:px-7 lg:py-3.5 lg:text-lg rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold hover:from-green-500 hover:to-emerald-500 transition-all shadow-xl shadow-green-500/30 hover:-translate-y-1">
+                <MessageCircle className="w-5 h-5" />
+                {isAr ? "احجز مكانك الآن" : "Book Your Seat Now"}
+              </a>
+              <Link href={`/${locale}/courses/ai-for-business`}
+                className="flex items-center gap-2 px-5 py-3 text-base lg:px-7 lg:py-3.5 lg:text-lg rounded-2xl border-2 border-white/25 text-white font-semibold hover:bg-white/10 transition-all">
+                {isAr ? "تفاصيل الكورس" : "Course Details"}
+                <ArrowRight className={`w-5 h-5 ${isAr ? "rotate-180" : ""}`} />
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Right: modules + image */}
+          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}
+            className="hidden lg:flex flex-col gap-4">
+            {/* Course image */}
+            <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+              <img src="/course-ai-for-business.png" alt="AI for Business"
+                className="w-full object-contain"
+                onError={(e) => { e.currentTarget.style.display = "none"; }} />
+            </div>
+            {/* Module pills */}
+            <div className="grid grid-cols-2 gap-2">
+              {modules.map((m, i) => (
+                <div key={i} className="bg-slate-800/60 border border-white/10 rounded-xl p-3 backdrop-blur-sm hover:border-cyan-500/30 transition-colors">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-lg">{m.icon}</span>
+                    <span className="text-white font-semibold text-xs">{isAr ? m.ar : m.en}</span>
+                  </div>
+                  <p className="text-slate-400 text-xs leading-relaxed">{m.sub}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Slider ─────────────────────────────────────────────────────────────────────────────
-const SLIDES = ["course", "groups", "services", "hr", "consultation"] as const;
+const SLIDES = ["course", "groups", "services", "hr", "consultation", "ai-business"] as const;
 
 export default function HeroSlider({ locale }: HeroSliderProps) {
   const [current, setCurrent] = useState(0);
@@ -675,8 +774,8 @@ export default function HeroSlider({ locale }: HeroSliderProps) {
   const next = () => goTo(current + 1);
 
   const labels = {
-    ar: ["كورس مميز", "تدريب الجروبات", "خدماتنا", "HR Data Analysis", "استشارتك"],
-    en: ["Featured Course", "Group Training", "Our Services", "HR Data Analysis", "Consultation"],
+    ar: ["كورس مميز", "تدريب الجروبات", "خدماتنا", "HR Data Analysis", "استشارتك", "AI for Business"],
+    en: ["Featured Course", "Group Training", "Our Services", "HR Data Analysis", "Consultation", "AI for Business"],
   };
 
   return (
@@ -694,6 +793,7 @@ export default function HeroSlider({ locale }: HeroSliderProps) {
           {current === 2 && <ServicesSlide isAr={isAr} locale={locale} />}
           {current === 3 && <HRCourseSlide isAr={isAr} />}
           {current === 4 && <ConsultationSlide isAr={isAr} onFormFocus={pauseSlider} onFormBlur={resumeSlider} />}
+          {current === 5 && <AIForBusinessSlide isAr={isAr} locale={locale} />}
         </motion.div>
       </AnimatePresence>
 

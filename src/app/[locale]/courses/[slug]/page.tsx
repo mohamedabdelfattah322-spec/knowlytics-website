@@ -32,6 +32,53 @@ const CURRICULA: Record<
   string,
   { titleEn: string; titleAr: string; lessons: { en: string; ar: string; duration: string; free?: boolean }[] }[]
 > = {
+  "ai-for-business": [
+    {
+      titleEn: "AI Prompt Engineering",
+      titleAr: "AI Prompt Engineering",
+      lessons: [
+        { en: "What is a Prompt and why it matters", ar: "ما هو الـ Prompt ولماذا مهم", duration: "45 min", free: true },
+        { en: "Writing professional prompts — R-T-C Framework", ar: "كتابة Prompts احترافية بإطار الدور والمهمة والسياق", duration: "60 min", free: true },
+        { en: "Advanced prompting techniques & real examples", ar: "تقنيات Prompting متقدمة وأمثلة حقيقية", duration: "55 min" },
+      ],
+    },
+    {
+      titleEn: "AI Agents — Build Your Own",
+      titleAr: "AI Agents — ابني وكيلك الذكي",
+      lessons: [
+        { en: "What is an AI Agent and how it works", ar: "ما هو الـ AI Agent وكيف يعمل", duration: "40 min" },
+        { en: "Building AI Agents with ChatGPT & Gemini", ar: "بناء AI Agents بـ ChatGPT وGemini", duration: "70 min" },
+        { en: "Real-world Agent project for your work", ar: "مشروع Agent حقيقي لتطبيقه في شغلك", duration: "50 min" },
+      ],
+    },
+    {
+      titleEn: "Automation — Make & n8n",
+      titleAr: "الأتمتة — Make & n8n",
+      lessons: [
+        { en: "Introduction to Make (Integromat) & n8n", ar: "مقدمة لـ Make وn8n", duration: "45 min" },
+        { en: "Connecting apps & building automated workflows", ar: "ربط التطبيقات وبناء Workflows أوتوماتيكية", duration: "80 min" },
+        { en: "Full Automation project from scratch", ar: "مشروع Automation كامل من الصفر", duration: "60 min" },
+      ],
+    },
+    {
+      titleEn: "AI Tools Mastery",
+      titleAr: "إتقان أدوات الذكاء الاصطناعي",
+      lessons: [
+        { en: "ChatGPT & Gemini — advanced use cases", ar: "ChatGPT وGemini — استخدامات متقدمة", duration: "50 min" },
+        { en: "Claude, Copilot, Perplexity & NotebookLM", ar: "Claude وCopilot وPerplexity وNotebookLM", duration: "55 min" },
+        { en: "Gamma & Google Apps Script — build & automate", ar: "Gamma وGoogle Apps Script — بناء وأتمتة", duration: "50 min" },
+      ],
+    },
+    {
+      titleEn: "From Idea to Real AI Solution",
+      titleAr: "من الفكرة لحل AI حقيقي",
+      lessons: [
+        { en: "Identifying real work problems AI can solve", ar: "تحديد مشاكل حقيقية في شغلك يحلها AI", duration: "40 min" },
+        { en: "Building your own AI Solution end-to-end", ar: "بناء AI Solution متكامل من البداية للنهاية", duration: "90 min" },
+        { en: "Final project presentation & review", ar: "عرض ومراجعة المشروع النهائي", duration: "50 min" },
+      ],
+    },
+  ],
   "excel-zero-to-hero": [
     {
       titleEn: "Excel Fundamentals",
@@ -504,6 +551,14 @@ const LEARN_OUTCOMES: Record<string, { en: string; ar: string }[]> = {
     { en: "Write professional English reports", ar: "كتابة تقارير إنجليزية احترافية" },
     { en: "Build a complete portfolio to land your dream job", ar: "بناء محفظة متكاملة للحصول على وظيفة أحلامك" },
   ],
+  "ai-for-business": [
+    { en: "Write professional AI prompts that get real results", ar: "كتابة Prompts احترافية تحصل على نتائج حقيقية" },
+    { en: "Build AI Agents that work for you automatically", ar: "بناء AI Agents تشتغل معك أوتوماتيكياً" },
+    { en: "Automate repetitive tasks with Make & n8n", ar: "أتمتة المهام المتكررة بـ Make وn8n" },
+    { en: "Master ChatGPT, Gemini, Claude, Copilot & more", ar: "إتقان ChatGPT وGemini وClaude وCopilot وأكتر" },
+    { en: "Turn a real work problem into a full AI solution", ar: "تحويل مشكلة حقيقية في شغلك لـ AI Solution متكامل" },
+    { en: "Apply AI across HR, Finance, Sales, Operations & more", ar: "تطبيق AI في HR والمالية والمبيعات والعمليات وغيرها" },
+  ],
 };
 
 function getDefaultOutcomes(titleEn: string) {
@@ -530,9 +585,20 @@ const COURSE_SCHEDULE: Record<string, { ar: string; en: string; startAr: string;
     startAr: "الراوند القادم: أغسطس 2026",
     startEn: "Next Round: August 2026",
   },
+  "ai-for-business": {
+    ar: "سيُعلَن قريباً",
+    en: "To be announced",
+    startAr: "راوند جديد — سجّل الآن",
+    startEn: "New Round — Register Now",
+  },
 };
 
 const COURSE_REQUIREMENTS: Record<string, { ar: string; en: string }[]> = {
+  "ai-for-business": [
+    { ar: "لا يشترط خلفية تقنية — الكورس مناسب لكل المجالات", en: "No technical background required — suitable for all business functions" },
+    { ar: "جهاز كمبيوتر أو لاب توب", en: "A computer or laptop" },
+    { ar: "حساب Gmail (لاستخدام Gemini وGoogle Apps Script)", en: "Gmail account (for Gemini & Google Apps Script)" },
+  ],
   "excel-powerbi-ai-freelance": [
     { ar: "خلفية أساسية عن Excel (شرط ضروري)", en: "Basic Excel background required" },
     { ar: "جهاز كمبيوتر (Windows أو Mac)", en: "A computer (Windows or Mac)" },
@@ -541,6 +607,44 @@ const COURSE_REQUIREMENTS: Record<string, { ar: string; en: string }[]> = {
 };
 
 const COURSE_FAQ: Record<string, { qAr: string; qEn: string; aAr: string; aEn: string }[]> = {
+  "ai-for-business": [
+    {
+      qAr: "مين الكورس ده مناسب له؟",
+      qEn: "Who is this course for?",
+      aAr: "الكورس مناسب لكل العاملين في الشركات بغض النظر عن مجالهم — HR، مالية، مبيعات، عمليات، IT، إدارة، خدمة عملاء، وغيرها. مش محتاج خلفية تقنية.",
+      aEn: "This course is for anyone working in a company regardless of their field — HR, Finance, Sales, Operations, IT, Management, Customer Service, and more. No technical background needed.",
+    },
+    {
+      qAr: "هل هحتاج أكتب كود؟",
+      qEn: "Will I need to write code?",
+      aAr: "لأ! الكورس مصمم للناس اللي مش عندهم خلفية برمجية. هنتعلم نستخدم أدوات AI وأتمتة بدون كتابة كود. ممكن نلمس Google Apps Script بشكل بسيط جداً بس مش شرط.",
+      aEn: "No! The course is designed for non-programmers. We learn to use AI tools and automation without coding. We may briefly touch Google Apps Script but it's not required.",
+    },
+    {
+      qAr: "إيه الأدوات اللي هنتعلمها؟",
+      qEn: "What tools will we learn?",
+      aAr: "ChatGPT، Gemini، Claude، Copilot، Perplexity، NotebookLM، Gamma، Google Apps Script، Make (Integromat)، وn8n.",
+      aEn: "ChatGPT, Gemini, Claude, Copilot, Perplexity, NotebookLM, Gamma, Google Apps Script, Make (Integromat), and n8n.",
+    },
+    {
+      qAr: "هل الكورس أونلاين؟",
+      qEn: "Is the course online?",
+      aAr: "أيوه! الكورس أونلاين لايف على Zoom. 8 محاضرات عملية × 3 ساعات. بتحضر مباشرة وبتقدر تسأل وتتفاعل.",
+      aEn: "Yes! The course is online live on Zoom. 8 practical lectures × 3 hours each. Attend live and interact in real time.",
+    },
+    {
+      qAr: "هل بحصل على تسجيلات؟",
+      qEn: "Do I get recordings?",
+      aAr: "أيوه! بعد كل محاضرة بتاخد التسجيل + وصول لمنصة التعلم الخاصة بينا.",
+      aEn: "Yes! After each lecture you receive the recording + access to our learning platform.",
+    },
+    {
+      qAr: "هل بحصل على شهادة؟",
+      qEn: "Do I get a certificate?",
+      aAr: "أيوه! عند إتمام الكورس بتحصل على شهادة معتمدة من Knowlytics Hub.",
+      aEn: "Yes! Upon completion you receive a verified certificate from Knowlytics Hub.",
+    },
+  ],
   "excel-powerbi-ai-freelance": [
     {
       qAr: "هل محتاج خبرة قبل الكورس؟",
@@ -589,6 +693,14 @@ const COURSE_FAQ: Record<string, { qAr: string; qEn: string; aAr: string; aEn: s
 
 // Course-specific highlights (unique selling points shown as feature cards)
 const COURSE_HIGHLIGHTS: Record<string, { icon: string; en: string; ar: string }[]> = {
+  "ai-for-business": [
+    { icon: "🤖", en: "Build Real AI Agents", ar: "بناء AI Agents حقيقية تشتغل معك" },
+    { icon: "⚙️", en: "Full Automation — Make & n8n", ar: "أتمتة كاملة بـ Make وn8n" },
+    { icon: "🧠", en: "Prompt Engineering Pro", ar: "Prompt Engineering على مستوى احترافي" },
+    { icon: "💼", en: "For All Business Functions", ar: "مناسب لكل المجالات والأقسام" },
+    { icon: "🛠️", en: "8 AI Tools Mastered", ar: "8+ أدوات AI تتقنها في الكورس" },
+    { icon: "🚀", en: "From Idea to Real AI Solution", ar: "من فكرة إلى حل AI حقيقي في شغلك" },
+  ],
   "excel-powerbi-ai-freelance": [
     { icon: "🤖", en: "AI Integration", ar: "استخدام الذكاء الاصطناعي في التحليل" },
     { icon: "💼", en: "Freelancing Skills", ar: "كيف تشتغل فريلانسر كمحلل بيانات" },

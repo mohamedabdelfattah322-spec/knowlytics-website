@@ -249,6 +249,34 @@
     "paymentOptions": ["whatsapp", "instapay", "vodafone_cash"]
   },
   {
+    "id": "11",
+    "slug": "ai-for-business",
+    "titleEn": "AI for Business",
+    "titleAr": "AI for Business — اعمل برنامجك باستخدام الذكاء الاصطناعي",
+    "descriptionEn": "Learn how to build real AI solutions for your business. Master AI Prompt Engineering, AI Agents, Automation with Make & n8n, and the most powerful AI tools. Practical, business-focused training for all departments.",
+    "descriptionAr": "تعلم إزاي تبني حلول AI حقيقية في شغلك. إتقن AI Prompt Engineering وبناء AI Agents وأتمتة المهام بـ Make وn8n وأقوى أدوات الذكاء الاصطناعي. تدريب عملي لكل المجالات.",
+    "duration": "24 hours",
+    "level": "Beginner",
+    "price": 0,
+    "originalPrice": 0,
+    "image": "/course-ai-for-business.png",
+    "category": "AI",
+    "featured": true,
+    "type": "live",
+    "comingSoon": false,
+    "enrollUrl": "https://wa.me/201226929392?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%20%D9%81%D9%8A%20%D9%83%D9%88%D8%B1%D8%B3%20AI%20for%20Business",
+    "format": "Online Live — Zoom",
+    "sessions": 8,
+    "curriculum": [
+      { "titleAr": "AI Prompt Engineering", "topicsAr": ["ما هو الـ Prompt؟", "كتابة Prompts احترافية", "الحصول على نتائج أفضل من أدوات AI"] },
+      { "titleAr": "AI Agents", "topicsAr": ["ما هو الـ AI Agent؟", "بناء AI Agents تعمل معك", "تنفيذ مهام حقيقية بالـ Agents"] },
+      { "titleAr": "Automation — Make & n8n", "topicsAr": ["ربط التطبيقات والخدمات", "أتمتة المهام المتكررة", "بناء Workflows أوتوماتيكية"] },
+      { "titleAr": "AI Tools المتقدمة", "topicsAr": ["ChatGPT", "Gemini", "Claude", "Copilot", "Perplexity", "NotebookLM", "Gamma", "Google Apps Script"] },
+      { "titleAr": "من الفكرة لحل AI حقيقي", "topicsAr": ["تحليل مشكلة في شغلك", "بناء AI Solution كامل", "تطبيق Automation عملي"] }
+    ],
+    "paymentOptions": ["whatsapp", "instapay", "vodafone_cash"]
+  },
+  {
     "id": "9",
     "slug": "full-data-analysis-bundle",
     "titleEn": "Full Data Analytics Bundle",
