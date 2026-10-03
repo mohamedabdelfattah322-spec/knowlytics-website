@@ -40,6 +40,7 @@ const navItems = [
   },
   { key: "projects", href: "/student-projects" },
   { key: "portfolio", href: "/portfolio" },
+  { key: "templates", href: "/templates" },
   { key: "blog", href: "/blog" },
   { key: "contact", href: "/contact" },
 ];

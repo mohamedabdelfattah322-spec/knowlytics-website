@@ -1,0 +1,496 @@
+"use client";
+
+import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check, FileSpreadsheet, BarChart2, Palette, MessageCircle, Wrench, Star, ChevronDown, ChevronUp } from "lucide-react";
+import templatesData from "@/data/templates.json";
+
+type Template = (typeof templatesData)[number];
+
+const CATEGORIES = [
+  { key: "all", labelAr: "الكل", labelEn: "All" },
+  { key: "hr", labelAr: "الموارد البشرية", labelEn: "HR" },
+  { key: "sales", labelAr: "المبيعات", labelEn: "Sales" },
+  { key: "finance", labelAr: "المالية", labelEn: "Finance" },
+  { key: "call-center", labelAr: "Call Center", labelEn: "Call Center" },
+  { key: "customer-service", labelAr: "خدمة العملاء", labelEn: "Customer Service" },
+  { key: "hospital", labelAr: "المستشفيات", labelEn: "Hospital" },
+  { key: "pharmacy", labelAr: "الصيدلية", labelEn: "Pharmacy" },
+  { key: "marketing", labelAr: "التسويق", labelEn: "Marketing" },
+  { key: "restaurant", labelAr: "المطاعم", labelEn: "Restaurant" },
+  { key: "real-estate", labelAr: "العقارات", labelEn: "Real Estate" },
+  { key: "operations", labelAr: "العمليات", labelEn: "Operations" },
+  { key: "executive", labelAr: "الإدارة العليا", labelEn: "Executive" },
+];
+
+const BAR_HEIGHTS = [55, 80, 45, 90, 65, 75];
+const METRIC_VALS = ["2,847", "94%", "↑12%"];
+
+function MiniDashboard({ primary, bars }: { primary: string; bars: string[] }) {
+  return (
+    <div
+      className="w-full h-full rounded-xl p-3 flex flex-col gap-2 relative overflow-hidden"
+      style={{ background: `linear-gradient(135deg, ${primary}18 0%, #0f172a 100%)` }}
+    >
+      <div
+        className="absolute inset-0 rounded-xl opacity-10"
+        style={{ background: `radial-gradient(circle at 30% 20%, ${primary}, transparent 60%)` }}
+      />
+      {/* metric cards */}
+      <div className="grid grid-cols-3 gap-1.5 z-10">
+        {METRIC_VALS.map((v, i) => (
+          <div
+            key={i}
+            className="rounded-lg p-1.5"
+            style={{ background: `${primary}1a`, border: `1px solid ${primary}33` }}
+          >
+            <div className="h-1 w-5 rounded mb-1 opacity-50" style={{ background: primary }} />
+            <div className="text-[9px] font-bold leading-none" style={{ color: primary }}>
+              {v}
+            </div>
+          </div>
+        ))}
+      </div>
+      {/* bars */}
+      <div className="flex items-end gap-1 flex-1 z-10 px-1">
+        {BAR_HEIGHTS.map((h, i) => (
+          <div
+            key={i}
+            className="flex-1 rounded-t-sm"
+            style={{ height: `${h}%`, background: bars[i] || primary, opacity: 0.85 }}
+          />
+        ))}
+      </div>
+      {/* progress line */}
+      <div className="flex items-center gap-1.5 z-10">
+        <div className="flex-1 h-1 rounded-full" style={{ background: `${primary}22` }}>
+          <div className="h-full w-3/5 rounded-full" style={{ background: primary }} />
+        </div>
+        <div className="text-[8px] opacity-50" style={{ color: primary }}>
+          68%
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TemplateCard({ template, isAr }: { template: Template; isAr: boolean }) {
+  const [selectedColor, setSelectedColor] = useState(0);
+  const [showFeatures, setShowFeatures] = useState(false);
+  const color = template.colors[selectedColor];
+  const features = isAr ? template.featuresAr : template.featuresEn;
+  const toolLabel = template.tool === "excel" ? "Excel" : "Power BI";
+  const toolColor =
+    template.tool === "excel"
+      ? "text-green-400 border-green-500/40 bg-green-500/10"
+      : "text-yellow-400 border-yellow-500/40 bg-yellow-500/10";
+
+  const discount = template.originalPrice > 0
+    ? Math.round((1 - template.price / template.originalPrice) * 100)
+    : 0;
+
+  const whatsappBuy = `https://wa.me/201226929392?text=${encodeURIComponent(
+    `مرحباً، أريد شراء قالب داشبورد:\n\n• القالب: ${template.titleAr}\n• الأداة: ${toolLabel}\n• اللون: ${isAr ? color.nameAr : color.nameEn}\n• السعر: ${template.price} جنيه`
+  )}`;
+  const whatsappCustom = `https://wa.me/201226929392?text=${encodeURIComponent(
+    `مرحباً، أريد تعديل على قالب:\n• القالب: ${template.titleAr}\n• اللون: ${isAr ? color.nameAr : color.nameEn}\n\nالتعديل المطلوب: `
+  )}`;
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.25 }}
+      className="relative rounded-2xl border flex flex-col overflow-hidden"
+      style={{ borderColor: `${color.primary}2a`, background: "rgba(15,23,42,0.95)" }}
+    >
+      {/* top accent line */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{
+          background: `linear-gradient(90deg, transparent, ${color.primary}88, transparent)`,
+        }}
+      />
+
+      {/* preview area */}
+      <div className="relative p-3 h-44">
+        <MiniDashboard primary={color.primary} bars={color.bars} />
+        <div className="absolute top-5 left-5 flex gap-1.5">
+          <span
+            className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold border ${toolColor}`}
+          >
+            {template.tool === "excel" ? (
+              <FileSpreadsheet className="w-3 h-3" />
+            ) : (
+              <BarChart2 className="w-3 h-3" />
+            )}
+            {toolLabel}
+          </span>
+        </div>
+        <div className="absolute top-5 right-5">
+          <span
+            className="text-[10px] px-2 py-0.5 rounded-full font-medium"
+            style={{
+              background: `${color.primary}18`,
+              color: color.primary,
+              border: `1px solid ${color.primary}33`,
+            }}
+          >
+            {template.pages} {isAr ? "صفحات" : "pages"}
+          </span>
+        </div>
+      </div>
+
+      {/* card body */}
+      <div className="flex flex-col flex-1 p-4 pt-2 gap-3">
+        {/* title + desc */}
+        <div>
+          <h3 className="font-bold text-white text-sm leading-snug mb-1">
+            {template.titleAr}
+          </h3>
+          <p className="text-slate-400 text-xs leading-relaxed line-clamp-2">
+            {isAr ? template.descriptionAr : template.descriptionEn}
+          </p>
+        </div>
+
+        {/* color picker */}
+        <div>
+          <div className="flex items-center gap-1.5 mb-2">
+            <Palette className="w-3 h-3 text-slate-500" />
+            <span className="text-[11px] text-slate-400">
+              {isAr ? "اللون:" : "Color:"}{" "}
+              <span className="font-semibold" style={{ color: color.primary }}>
+                {isAr ? color.nameAr : color.nameEn}
+              </span>
+            </span>
+          </div>
+          <div className="flex gap-2">
+            {template.colors.map((c, i) => (
+              <button
+                key={i}
+                onClick={() => setSelectedColor(i)}
+                title={isAr ? c.nameAr : c.nameEn}
+                className="relative w-6 h-6 rounded-full transition-transform hover:scale-110 flex-shrink-0"
+                style={{
+                  background: c.primary,
+                  boxShadow:
+                    selectedColor === i
+                      ? `0 0 0 2px #0f172a, 0 0 0 4px ${c.primary}`
+                      : "none",
+                }}
+              >
+                {selectedColor === i && (
+                  <span className="absolute inset-0 flex items-center justify-center">
+                    <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* features toggle */}
+        <div>
+          <button
+            onClick={() => setShowFeatures(!showFeatures)}
+            className="flex items-center gap-1.5 text-xs font-medium transition-colors"
+            style={{ color: color.primary }}
+          >
+            {showFeatures ? (
+              <ChevronUp className="w-3.5 h-3.5" />
+            ) : (
+              <ChevronDown className="w-3.5 h-3.5" />
+            )}
+            {isAr ? "ما يوجد في القالب" : "What's included"}
+          </button>
+          <AnimatePresence>
+            {showFeatures && (
+              <motion.ul
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden mt-2 space-y-1.5"
+              >
+                {features.map((f, i) => (
+                  <li key={i} className="flex items-start gap-1.5 text-xs text-slate-300">
+                    <span
+                      className="mt-0.5 w-3.5 h-3.5 rounded-full flex-shrink-0 flex items-center justify-center"
+                      style={{ background: `${color.primary}22` }}
+                    >
+                      <Check className="w-2 h-2" style={{ color: color.primary }} />
+                    </span>
+                    {f}
+                  </li>
+                ))}
+              </motion.ul>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* price row */}
+        <div className="flex items-baseline gap-2 mt-auto pt-3 border-t border-white/5">
+          <span className="text-xl font-bold text-white">
+            {template.price.toLocaleString()}{" "}
+            <span className="text-sm font-normal text-slate-400">جنيه</span>
+          </span>
+          {template.originalPrice > 0 && (
+            <span className="text-sm text-slate-500 line-through">
+              {template.originalPrice.toLocaleString()}
+            </span>
+          )}
+          {discount > 0 && (
+            <span
+              className="ms-auto text-[11px] font-bold px-2 py-0.5 rounded-full"
+              style={{ background: `${color.primary}18`, color: color.primary }}
+            >
+              -{discount}%
+            </span>
+          )}
+        </div>
+
+        {/* CTAs */}
+        <div className="grid grid-cols-2 gap-2">
+          <a
+            href={whatsappBuy}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold text-white transition-all hover:opacity-90 active:scale-95"
+            style={{
+              background: `linear-gradient(135deg, ${color.primary}ee, ${color.primary}88)`,
+            }}
+          >
+            <MessageCircle className="w-3.5 h-3.5" />
+            {isAr ? "اشتري دلوقتي" : "Buy Now"}
+          </a>
+          <a
+            href={whatsappCustom}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-semibold transition-all hover:bg-white/5 active:scale-95"
+            style={{ border: `1px solid ${color.primary}44`, color: color.primary }}
+          >
+            <Wrench className="w-3.5 h-3.5" />
+            {isAr ? "طلب تعديل" : "Customize"}
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+export default function TemplatesClient({ locale }: { locale: string }) {
+  const isAr = locale === "ar";
+  const [tool, setTool] = useState<"all" | "excel" | "powerbi">("all");
+  const [category, setCategory] = useState("all");
+
+  const toolTabs = [
+    { key: "all" as const, labelAr: "الكل", labelEn: "All", count: templatesData.length },
+    {
+      key: "excel" as const,
+      labelAr: "Excel",
+      labelEn: "Excel",
+      count: templatesData.filter((t) => t.tool === "excel").length,
+    },
+    {
+      key: "powerbi" as const,
+      labelAr: "Power BI",
+      labelEn: "Power BI",
+      count: templatesData.filter((t) => t.tool === "powerbi").length,
+    },
+  ];
+
+  const filtered = useMemo(() => {
+    return templatesData.filter((t) => {
+      const toolMatch = tool === "all" || t.tool === tool;
+      const catMatch = category === "all" || t.category === category;
+      return toolMatch && catMatch;
+    });
+  }, [tool, category]);
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-white" dir={isAr ? "rtl" : "ltr"}>
+      {/* ─── Hero ─────────────────────────────── */}
+      <section className="relative pt-32 pb-16 overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <div
+            className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-10"
+            style={{ background: "radial-gradient(circle, #3b82f6, transparent)" }}
+          />
+          <div
+            className="absolute top-10 right-1/4 w-72 h-72 rounded-full blur-3xl opacity-8"
+            style={{ background: "radial-gradient(circle, #8b5cf6, transparent)" }}
+          />
+        </div>
+        <div className="container mx-auto px-4 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-medium mb-6">
+            <Star className="w-4 h-4" />
+            {isAr ? "قوالب جاهزة وقابلة للتعديل" : "Ready-to-use & customizable templates"}
+          </div>
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+            {isAr ? (
+              <>
+                قوالب داشبوردات{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                  جاهزة
+                </span>
+              </>
+            ) : (
+              <>
+                Ready-Made{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                  Dashboard Templates
+                </span>
+              </>
+            )}
+          </h1>
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto mb-8">
+            {isAr
+              ? "اشتري القالب المناسب لمجالك — Excel أو Power BI — اختار اللون اللي يناسب شركتك، وابدأ تشتغل فوراً."
+              : "Buy the right template for your industry — Excel or Power BI — pick your brand color and start immediately."}
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
+            {[
+              isAr ? "البيانات قابلة للتعديل" : "Editable data",
+              isAr ? "4 ألوان لكل قالب" : "4 color themes",
+              isAr ? "تسليم فوري على واتساب" : "Instant WhatsApp delivery",
+              isAr ? "دعم فني بعد الشراء" : "Post-purchase support",
+            ].map((item) => (
+              <span key={item} className="flex items-center gap-1.5">
+                <Check className="w-4 h-4 text-green-400" />
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Filters ─────────────────────────── */}
+      <section className="sticky top-16 z-30 bg-slate-950/95 backdrop-blur-md border-b border-white/5 py-4">
+        <div className="container mx-auto px-4 flex flex-col sm:flex-row gap-3 items-start sm:items-center flex-wrap">
+          {/* Tool tabs */}
+          <div className="flex gap-1 p-1 rounded-xl bg-slate-900 border border-white/5 flex-shrink-0">
+            {toolTabs.map((t) => (
+              <button
+                key={t.key}
+                onClick={() => setTool(t.key)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                  tool === t.key
+                    ? "bg-blue-600 text-white shadow"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                {t.key === "excel" && <FileSpreadsheet className="w-3.5 h-3.5" />}
+                {t.key === "powerbi" && <BarChart2 className="w-3.5 h-3.5" />}
+                {isAr ? t.labelAr : t.labelEn}
+                <span
+                  className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                    tool === t.key ? "bg-white/20" : "bg-white/5"
+                  }`}
+                >
+                  {t.count}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {/* Category pills */}
+          <div className="flex flex-wrap gap-1.5">
+            {CATEGORIES.map((c) => {
+              const count =
+                c.key === "all"
+                  ? templatesData.length
+                  : templatesData.filter((t) => t.category === c.key).length;
+              if (count === 0) return null;
+              return (
+                <button
+                  key={c.key}
+                  onClick={() => setCategory(c.key)}
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-all border ${
+                    category === c.key
+                      ? "bg-blue-500/20 border-blue-500/50 text-blue-300"
+                      : "border-white/10 text-slate-400 hover:text-white hover:border-white/30"
+                  }`}
+                >
+                  {isAr ? c.labelAr : c.labelEn}
+                </button>
+              );
+            })}
+          </div>
+
+          <span className="text-xs text-slate-500 sm:ms-auto whitespace-nowrap">
+            {filtered.length} {isAr ? "قالب" : "templates"}
+          </span>
+        </div>
+      </section>
+
+      {/* ─── Grid ────────────────────────────── */}
+      <section className="container mx-auto px-4 py-12">
+        <AnimatePresence mode="popLayout">
+          {filtered.length === 0 ? (
+            <motion.div
+              key="empty"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-24 text-slate-500"
+            >
+              {isAr
+                ? "لا توجد قوالب بهذه المواصفات حالياً"
+                : "No templates match this filter yet"}
+            </motion.div>
+          ) : (
+            <motion.div
+              key="grid"
+              layout
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            >
+              {filtered.map((t) => (
+                <TemplateCard key={t.id} template={t} isAr={isAr} />
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </section>
+
+      {/* ─── Custom CTA ─────────────────────── */}
+      <section className="container mx-auto px-4 pb-20">
+        <div
+          className="relative rounded-2xl overflow-hidden border border-white/10 p-8 md:p-12 text-center"
+          style={{
+            background:
+              "linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #064e3b 100%)",
+          }}
+        >
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 0%, #6366f1, transparent 60%)",
+            }}
+          />
+          <h2 className="relative text-2xl md:text-3xl font-bold mb-3">
+            {isAr ? "مش لاقي القالب المناسب؟" : "Can't find the right template?"}
+          </h2>
+          <p className="relative text-slate-400 mb-6 max-w-lg mx-auto">
+            {isAr
+              ? "ابعت لنا على واتساب وهنعمل لك قالب مخصص لمجالك وبياناتك بالضبط."
+              : "Message us on WhatsApp and we'll build a custom dashboard tailored to your industry and data."}
+          </p>
+          <a
+            href={`https://wa.me/201226929392?text=${encodeURIComponent(
+              "مرحباً، أريد قالب داشبورد مخصص لمجال: "
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg shadow-blue-500/20"
+          >
+            <MessageCircle className="w-5 h-5" />
+            {isAr ? "اطلب قالب مخصص" : "Request Custom Template"}
+          </a>
+        </div>
+      </section>
+    </div>
+  );
+}

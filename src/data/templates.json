@@ -1,0 +1,296 @@
+[
+  {
+    "id": "1",
+    "slug": "hr-analytics-powerbi",
+    "titleAr": "HR Analytics Dashboard",
+    "titleEn": "HR Analytics Dashboard",
+    "descriptionAr": "لوحة بيانات شاملة للموارد البشرية — Headcount ومعدل الدوران والغياب وتوزيع الرواتب.",
+    "descriptionEn": "Comprehensive HR dashboard — Headcount, Turnover, Absence & Salary Distribution.",
+    "tool": "powerbi",
+    "category": "hr",
+    "price": 399,
+    "originalPrice": 899,
+    "pages": 5,
+    "featuresAr": ["Headcount & FTE تفاعلي", "معدل الدوران والاستبقاء", "تحليل الغياب الشهري", "توزيع الرواتب والدرجات", "8 KPIs جاهزة"],
+    "featuresEn": ["Interactive Headcount & FTE", "Turnover & Retention Rate", "Monthly Absence Analysis", "Salary & Grade Distribution", "8 Ready KPIs"],
+    "colors": [
+      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
+      { "nameAr": "بنفسجي", "nameEn": "Purple", "primary": "#8b5cf6", "bars": ["#8b5cf6","#a78bfa","#c4b5fd","#7c3aed","#6d28d9","#ddd6fe"] },
+      { "nameAr": "أخضر", "nameEn": "Emerald", "primary": "#10b981", "bars": ["#10b981","#34d399","#6ee7b7","#059669","#047857","#a7f3d0"] },
+      { "nameAr": "برتقالي", "nameEn": "Amber", "primary": "#f59e0b", "bars": ["#f59e0b","#fbbf24","#fcd34d","#d97706","#b45309","#fde68a"] }
+    ]
+  },
+  {
+    "id": "2",
+    "slug": "sales-kpi-powerbi",
+    "titleAr": "Sales KPI Dashboard",
+    "titleEn": "Sales KPI Dashboard",
+    "descriptionAr": "تحليل المبيعات والإيرادات وأداء المندوبين وتحقيق الأهداف الشهرية والسنوية.",
+    "descriptionEn": "Analyze revenue, sales rep performance, and monthly/annual target achievement.",
+    "tool": "powerbi",
+    "category": "sales",
+    "price": 399,
+    "originalPrice": 899,
+    "pages": 4,
+    "featuresAr": ["إجمالي الإيرادات vs الهدف", "أداء المناطق والمندوبين", "تحليل المنتجات الأعلى مبيعاً", "معدل التحويل والعملاء الجدد", "مقارنة شهرية وسنوية"],
+    "featuresEn": ["Revenue vs Target tracking", "Region & Rep performance", "Top-selling product analysis", "Conversion rate & new clients", "Monthly & YoY comparison"],
+    "colors": [
+      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
+      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] },
+      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
+      { "nameAr": "برتقالي", "nameEn": "Orange", "primary": "#f97316", "bars": ["#f97316","#fb923c","#fdba74","#ea580c","#c2410c","#fed7aa"] }
+    ]
+  },
+  {
+    "id": "3",
+    "slug": "finance-dashboard-excel",
+    "titleAr": "Finance Dashboard — Excel",
+    "titleEn": "Finance Dashboard — Excel",
+    "descriptionAr": "تحليل مالي شامل — P&L والميزانية والتدفقات النقدية ومؤشرات الأداء المالي.",
+    "descriptionEn": "Comprehensive financial analysis — P&L, Budget vs Actual, Cash Flow & Financial KPIs.",
+    "tool": "excel",
+    "category": "finance",
+    "price": 249,
+    "originalPrice": 599,
+    "pages": 6,
+    "featuresAr": ["قائمة الأرباح والخسائر (P&L)", "الميزانية الفعلية vs المخطط", "تحليل التدفقات النقدية", "نسب السيولة والربحية", "تنبؤ مالي (Forecast)"],
+    "featuresEn": ["Profit & Loss statement", "Budget vs Actual analysis", "Cash flow analysis", "Liquidity & profitability ratios", "Financial Forecast"],
+    "colors": [
+      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
+      { "nameAr": "ذهبي", "nameEn": "Gold", "primary": "#eab308", "bars": ["#eab308","#facc15","#fde047","#ca8a04","#a16207","#fef08a"] },
+      { "nameAr": "رمادي", "nameEn": "Slate", "primary": "#64748b", "bars": ["#64748b","#94a3b8","#cbd5e1","#475569","#334155","#e2e8f0"] },
+      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] }
+    ]
+  },
+  {
+    "id": "4",
+    "slug": "call-center-powerbi",
+    "titleAr": "Call Center Dashboard",
+    "titleEn": "Call Center Dashboard",
+    "descriptionAr": "أداء مركز الاتصالات — حجم المكالمات وزمن الانتظار ومعدل الإغلاق وأداء الوكلاء.",
+    "descriptionEn": "Call center performance — call volume, wait time, resolution rate & agent performance.",
+    "tool": "powerbi",
+    "category": "call-center",
+    "price": 399,
+    "originalPrice": 899,
+    "pages": 4,
+    "featuresAr": ["حجم المكالمات اليومي والشهري", "متوسط زمن الانتظار (AWT)", "معدل التخلي عن المكالمة", "مؤشر رضا العملاء (CSAT)", "أداء الوكلاء الفردي"],
+    "featuresEn": ["Daily & monthly call volume", "Average Wait Time (AWT)", "Call abandonment rate", "Customer Satisfaction (CSAT)", "Individual agent performance"],
+    "colors": [
+      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
+      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
+      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] },
+      { "nameAr": "وردي", "nameEn": "Pink", "primary": "#ec4899", "bars": ["#ec4899","#f472b6","#f9a8d4","#db2777","#be185d","#fce7f3"] }
+    ]
+  },
+  {
+    "id": "5",
+    "slug": "hospital-healthcare-powerbi",
+    "titleAr": "Hospital & Healthcare Dashboard",
+    "titleEn": "Hospital & Healthcare Dashboard",
+    "descriptionAr": "تحليل أداء المستشفى — المرضى والأسرة والأطباء والإيرادات ومدة الإقامة.",
+    "descriptionEn": "Hospital performance — patients, beds, doctors, revenue & length of stay.",
+    "tool": "powerbi",
+    "category": "hospital",
+    "price": 499,
+    "originalPrice": 1099,
+    "pages": 5,
+    "featuresAr": ["معدل إشغال الأسرة", "حركة المرضى (دخول / خروج)", "أداء الأطباء والأقسام", "تحليل الإيرادات والتكاليف", "مدة الإقامة المتوسطة (ALOS)"],
+    "featuresEn": ["Bed occupancy rate", "Patient flow (admission/discharge)", "Doctor & department performance", "Revenue & cost analysis", "Average Length of Stay (ALOS)"],
+    "colors": [
+      { "nameAr": "أخضر طبي", "nameEn": "Medical Green", "primary": "#10b981", "bars": ["#10b981","#34d399","#6ee7b7","#059669","#047857","#a7f3d0"] },
+      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
+      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
+      { "nameAr": "بنفسجي", "nameEn": "Purple", "primary": "#8b5cf6", "bars": ["#8b5cf6","#a78bfa","#c4b5fd","#7c3aed","#6d28d9","#ddd6fe"] }
+    ]
+  },
+  {
+    "id": "6",
+    "slug": "pharmacy-excel",
+    "titleAr": "Pharmacy Dashboard — Excel",
+    "titleEn": "Pharmacy Dashboard — Excel",
+    "descriptionAr": "إدارة الصيدلية — المبيعات والمخزون والأدوية الأعلى طلباً وتحليل الأرباح.",
+    "descriptionEn": "Pharmacy management — sales, inventory, top drugs & profit analysis.",
+    "tool": "excel",
+    "category": "pharmacy",
+    "price": 249,
+    "originalPrice": 599,
+    "pages": 4,
+    "featuresAr": ["المبيعات اليومية والشهرية", "الأدوية الأعلى مبيعاً", "مستويات المخزون والانتهاء", "تحليل الأرباح الصافية", "تنبيهات انتهاء الصلاحية"],
+    "featuresEn": ["Daily & monthly sales", "Top-selling medications", "Stock levels & expiry tracking", "Net profit analysis", "Expiry date alerts"],
+    "colors": [
+      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] },
+      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
+      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
+      { "nameAr": "برتقالي", "nameEn": "Orange", "primary": "#f97316", "bars": ["#f97316","#fb923c","#fdba74","#ea580c","#c2410c","#fed7aa"] }
+    ]
+  },
+  {
+    "id": "7",
+    "slug": "customer-service-powerbi",
+    "titleAr": "Customer Service Dashboard",
+    "titleEn": "Customer Service Dashboard",
+    "descriptionAr": "أداء خدمة العملاء — زمن الاستجابة ورضا العملاء وحجم التذاكر والإغلاق الأول.",
+    "descriptionEn": "Customer service performance — response time, satisfaction, ticket volume & first resolution.",
+    "tool": "powerbi",
+    "category": "customer-service",
+    "price": 399,
+    "originalPrice": 899,
+    "pages": 4,
+    "featuresAr": ["متوسط زمن الاستجابة (ART)", "مؤشر رضا العملاء (CSAT)", "حجم التذاكر اليومي والشهري", "معدل الإغلاق من أول اتصال (FCR)", "أداء الفريق والأفراد"],
+    "featuresEn": ["Average Response Time (ART)", "Customer Satisfaction (CSAT)", "Daily & monthly ticket volume", "First Contact Resolution (FCR)", "Team & individual performance"],
+    "colors": [
+      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
+      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
+      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] },
+      { "nameAr": "وردي", "nameEn": "Pink", "primary": "#ec4899", "bars": ["#ec4899","#f472b6","#f9a8d4","#db2777","#be185d","#fce7f3"] }
+    ]
+  },
+  {
+    "id": "8",
+    "slug": "marketing-analytics-excel",
+    "titleAr": "Marketing Analytics Dashboard",
+    "titleEn": "Marketing Analytics Dashboard",
+    "descriptionAr": "تحليل أداء الحملات الإعلانية — ROAS وCPA والعائد على الاستثمار وأداء القنوات.",
+    "descriptionEn": "Ad campaign performance — ROAS, CPA, ROI & channel performance analysis.",
+    "tool": "excel",
+    "category": "marketing",
+    "price": 249,
+    "originalPrice": 599,
+    "pages": 4,
+    "featuresAr": ["أداء الحملات الإعلانية", "ROAS وCPA لكل قناة", "تحليل العائد على الاستثمار", "مقارنة القنوات التسويقية", "تقرير شهري تلقائي"],
+    "featuresEn": ["Ad campaign performance tracking", "ROAS & CPA per channel", "ROI analysis", "Marketing channel comparison", "Auto monthly report"],
+    "colors": [
+      { "nameAr": "وردي", "nameEn": "Pink", "primary": "#ec4899", "bars": ["#ec4899","#f472b6","#f9a8d4","#db2777","#be185d","#fce7f3"] },
+      { "nameAr": "بنفسجي", "nameEn": "Purple", "primary": "#8b5cf6", "bars": ["#8b5cf6","#a78bfa","#c4b5fd","#7c3aed","#6d28d9","#ddd6fe"] },
+      { "nameAr": "برتقالي", "nameEn": "Orange", "primary": "#f97316", "bars": ["#f97316","#fb923c","#fdba74","#ea580c","#c2410c","#fed7aa"] },
+      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] }
+    ]
+  },
+  {
+    "id": "9",
+    "slug": "restaurant-fnb-excel",
+    "titleAr": "Restaurant & F&B Dashboard",
+    "titleEn": "Restaurant & F&B Dashboard",
+    "descriptionAr": "إدارة المطعم — المبيعات والأصناف الأعلى طلباً وتكاليف الخامات وهامش الربح.",
+    "descriptionEn": "Restaurant management — sales, top items, food cost & profit margin.",
+    "tool": "excel",
+    "category": "restaurant",
+    "price": 199,
+    "originalPrice": 499,
+    "pages": 3,
+    "featuresAr": ["المبيعات اليومية والشهرية", "الأصناف الأعلى طلباً", "تكلفة الخامات (Food Cost %)", "هامش الربح الصافي", "أداء الفروع والمناوبات"],
+    "featuresEn": ["Daily & monthly sales", "Top-selling menu items", "Food cost percentage", "Net profit margin", "Branch & shift performance"],
+    "colors": [
+      { "nameAr": "برتقالي", "nameEn": "Orange", "primary": "#f97316", "bars": ["#f97316","#fb923c","#fdba74","#ea580c","#c2410c","#fed7aa"] },
+      { "nameAr": "أحمر", "nameEn": "Red", "primary": "#ef4444", "bars": ["#ef4444","#f87171","#fca5a5","#dc2626","#b91c1c","#fecaca"] },
+      { "nameAr": "ذهبي", "nameEn": "Gold", "primary": "#eab308", "bars": ["#eab308","#facc15","#fde047","#ca8a04","#a16207","#fef08a"] },
+      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] }
+    ]
+  },
+  {
+    "id": "10",
+    "slug": "real-estate-powerbi",
+    "titleAr": "Real Estate Dashboard",
+    "titleEn": "Real Estate Dashboard",
+    "descriptionAr": "تحليل سوق العقارات — المبيعات والإيجارات وأداء المشاريع والعائد على الاستثمار.",
+    "descriptionEn": "Real estate market analysis — sales, rentals, project performance & ROI.",
+    "tool": "powerbi",
+    "category": "real-estate",
+    "price": 499,
+    "originalPrice": 1099,
+    "pages": 5,
+    "featuresAr": ["تحليل المبيعات والإيجارات", "أداء المشاريع والوحدات", "تقرير العملاء والمعاملات", "العائد على الاستثمار (ROI)", "مقارنة المناطق والمشاريع"],
+    "featuresEn": ["Sales & rental analysis", "Project & unit performance", "Client & transaction report", "Return on Investment (ROI)", "Region & project comparison"],
+    "colors": [
+      { "nameAr": "بنفسجي", "nameEn": "Purple", "primary": "#8b5cf6", "bars": ["#8b5cf6","#a78bfa","#c4b5fd","#7c3aed","#6d28d9","#ddd6fe"] },
+      { "nameAr": "ذهبي", "nameEn": "Gold", "primary": "#eab308", "bars": ["#eab308","#facc15","#fde047","#ca8a04","#a16207","#fef08a"] },
+      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
+      { "nameAr": "رمادي", "nameEn": "Slate", "primary": "#64748b", "bars": ["#64748b","#94a3b8","#cbd5e1","#475569","#334155","#e2e8f0"] }
+    ]
+  },
+  {
+    "id": "11",
+    "slug": "executive-kpi-powerbi",
+    "titleAr": "Executive KPI Dashboard",
+    "titleEn": "Executive KPI Dashboard",
+    "descriptionAr": "لوحة إدارية شاملة للمدير التنفيذي — ملخص أداء الشركة بالكامل في صفحة واحدة.",
+    "descriptionEn": "Executive overview — full company performance summary on a single page.",
+    "tool": "powerbi",
+    "category": "executive",
+    "price": 599,
+    "originalPrice": 1499,
+    "pages": 6,
+    "featuresAr": ["ملخص الأداء العام للشركة", "مؤشرات المبيعات والمالية والعمليات", "مقارنة الأهداف الاستراتيجية", "Scorecard تفاعلي", "تقرير جاهز للاجتماعات"],
+    "featuresEn": ["Overall company performance summary", "Sales, finance & operations KPIs", "Strategic goals comparison", "Interactive scorecard", "Meeting-ready presentation"],
+    "colors": [
+      { "nameAr": "داكن مميز", "nameEn": "Dark Premium", "primary": "#6366f1", "bars": ["#6366f1","#818cf8","#a5b4fc","#4f46e5","#4338ca","#c7d2fe"] },
+      { "nameAr": "أزرق ملكي", "nameEn": "Royal Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
+      { "nameAr": "رمادي فاخر", "nameEn": "Luxury Gray", "primary": "#64748b", "bars": ["#64748b","#94a3b8","#cbd5e1","#475569","#334155","#e2e8f0"] },
+      { "nameAr": "ذهبي فاخر", "nameEn": "Gold Premium", "primary": "#f59e0b", "bars": ["#f59e0b","#fbbf24","#fcd34d","#d97706","#92400e","#fde68a"] }
+    ]
+  },
+  {
+    "id": "12",
+    "slug": "operations-kpi-powerbi",
+    "titleAr": "Operations & Manufacturing Dashboard",
+    "titleEn": "Operations & Manufacturing Dashboard",
+    "descriptionAr": "مؤشرات الإنتاجية والكفاءة التشغيلية — OEE والجودة وأوقات التوقف والتسليم.",
+    "descriptionEn": "Productivity & operational efficiency — OEE, quality, downtime & delivery times.",
+    "tool": "powerbi",
+    "category": "operations",
+    "price": 399,
+    "originalPrice": 899,
+    "pages": 4,
+    "featuresAr": ["مؤشر OEE (الفعالية الكلية)", "تحليل أوقات التوقف", "معدل الجودة والعيوب", "أداء التسليم في الوقت المحدد", "تحليل الطاقة الإنتاجية"],
+    "featuresEn": ["OEE (Overall Equipment Effectiveness)", "Downtime analysis", "Quality & defect rate", "On-time delivery performance", "Capacity utilization analysis"],
+    "colors": [
+      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
+      { "nameAr": "أحمر", "nameEn": "Red", "primary": "#ef4444", "bars": ["#ef4444","#f87171","#fca5a5","#dc2626","#b91c1c","#fecaca"] },
+      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
+      { "nameAr": "بنفسجي", "nameEn": "Purple", "primary": "#8b5cf6", "bars": ["#8b5cf6","#a78bfa","#c4b5fd","#7c3aed","#6d28d9","#ddd6fe"] }
+    ]
+  },
+  {
+    "id": "13",
+    "slug": "supply-chain-excel",
+    "titleAr": "Supply Chain Dashboard",
+    "titleEn": "Supply Chain Dashboard",
+    "descriptionAr": "تتبع سلسلة الإمداد — أداء الموردين والتسليم والتكاليف اللوجستية.",
+    "descriptionEn": "Supply chain tracking — supplier performance, delivery & logistics costs.",
+    "tool": "excel",
+    "category": "operations",
+    "price": 249,
+    "originalPrice": 599,
+    "pages": 4,
+    "featuresAr": ["أداء الموردين وتقييمهم", "معدل الاستلام في الوقت المحدد", "تحليل التكاليف اللوجستية", "متابعة أوامر الشراء", "تحليل ABC للموردين"],
+    "featuresEn": ["Supplier performance & rating", "On-time receipt rate", "Logistics cost analysis", "Purchase order tracking", "ABC supplier analysis"],
+    "colors": [
+      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
+      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] },
+      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
+      { "nameAr": "برتقالي", "nameEn": "Orange", "primary": "#f97316", "bars": ["#f97316","#fb923c","#fdba74","#ea580c","#c2410c","#fed7aa"] }
+    ]
+  },
+  {
+    "id": "14",
+    "slug": "inventory-management-excel",
+    "titleAr": "Inventory Management Dashboard",
+    "titleEn": "Inventory Management Dashboard",
+    "descriptionAr": "إدارة المخزون — مستويات الستوك ونقطة إعادة الطلب والمنتجات البطيئة الحركة.",
+    "descriptionEn": "Inventory control — stock levels, reorder points & slow-moving products.",
+    "tool": "excel",
+    "category": "operations",
+    "price": 199,
+    "originalPrice": 499,
+    "pages": 3,
+    "featuresAr": ["مستويات المخزون الحالية", "نقطة إعادة الطلب (Reorder Point)", "تحليل المنتجات البطيئة الحركة", "دوران المخزون (Inventory Turnover)", "تنبيهات نقص الستوك"],
+    "featuresEn": ["Current stock levels", "Reorder point tracking", "Slow-moving product analysis", "Inventory turnover ratio", "Low stock alerts"],
+    "colors": [
+      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] },
+      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
+      { "nameAr": "برتقالي", "nameEn": "Orange", "primary": "#f97316", "bars": ["#f97316","#fb923c","#fdba74","#ea580c","#c2410c","#fed7aa"] },
+      { "nameAr": "رمادي", "nameEn": "Slate", "primary": "#64748b", "bars": ["#64748b","#94a3b8","#cbd5e1","#475569","#334155","#e2e8f0"] }
+    ]
+  }
+]
