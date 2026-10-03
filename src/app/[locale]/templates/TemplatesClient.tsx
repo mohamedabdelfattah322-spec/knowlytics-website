@@ -1,11 +1,15 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, FileSpreadsheet, BarChart2, Palette, MessageCircle, Wrench, Star, ChevronDown, ChevronUp } from "lucide-react";
+import { Check, FileSpreadsheet, BarChart2, Palette, MessageCircle, Wrench, Star, ChevronDown, ChevronUp, Maximize2, X } from "lucide-react";
 import templatesData from "@/data/templates.json";
 
 type Template = (typeof templatesData)[number];
+type Zoom = { src: string; title: string } | null;
+
+const previewSrc = (t: Template, colorIndex: number) => `/templates/${t.preview}-${colorIndex}.webp`;
 
 const CATEGORIES = [
   { key: "all", labelAr: "الكل", labelEn: "All" },
@@ -21,60 +25,53 @@ const CATEGORIES = [
   { key: "real-estate", labelAr: "العقارات", labelEn: "Real Estate" },
   { key: "operations", labelAr: "العمليات", labelEn: "Operations" },
   { key: "executive", labelAr: "الإدارة العليا", labelEn: "Executive" },
+  { key: "it", labelAr: "تكنولوجيا المعلومات", labelEn: "IT" },
+  { key: "education", labelAr: "المدارس", labelEn: "Schools" },
 ];
 
-const BAR_HEIGHTS = [55, 80, 45, 90, 65, 75];
-const METRIC_VALS = ["2,847", "94%", "↑12%"];
+function ZoomModal({ zoom, onClose, isAr }: { zoom: Zoom; onClose: () => void; isAr: boolean }) {
+  useEffect(() => {
+    if (!zoom) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [zoom, onClose]);
 
-function MiniDashboard({ primary, bars }: { primary: string; bars: string[] }) {
   return (
-    <div
-      className="w-full h-full rounded-xl p-3 flex flex-col gap-2 relative overflow-hidden"
-      style={{ background: `linear-gradient(135deg, ${primary}18 0%, #0f172a 100%)` }}
-    >
-      <div
-        className="absolute inset-0 rounded-xl opacity-10"
-        style={{ background: `radial-gradient(circle at 30% 20%, ${primary}, transparent 60%)` }}
-      />
-      {/* metric cards */}
-      <div className="grid grid-cols-3 gap-1.5 z-10">
-        {METRIC_VALS.map((v, i) => (
-          <div
-            key={i}
-            className="rounded-lg p-1.5"
-            style={{ background: `${primary}1a`, border: `1px solid ${primary}33` }}
+    <AnimatePresence>
+      {zoom && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[60] bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={onClose}
+          role="dialog"
+          aria-modal="true"
+          aria-label={zoom.title}
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-4 end-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center"
+            aria-label={isAr ? "إغلاق" : "Close"}
           >
-            <div className="h-1 w-5 rounded mb-1 opacity-50" style={{ background: primary }} />
-            <div className="text-[9px] font-bold leading-none" style={{ color: primary }}>
-              {v}
-            </div>
-          </div>
-        ))}
-      </div>
-      {/* bars */}
-      <div className="flex items-end gap-1 flex-1 z-10 px-1">
-        {BAR_HEIGHTS.map((h, i) => (
-          <div
-            key={i}
-            className="flex-1 rounded-t-sm"
-            style={{ height: `${h}%`, background: bars[i] || primary, opacity: 0.85 }}
+            <X className="w-5 h-5" />
+          </button>
+          <motion.img
+            initial={{ scale: 0.96 }}
+            animate={{ scale: 1 }}
+            src={zoom.src}
+            alt={zoom.title}
+            className="max-w-full max-h-[90vh] rounded-xl shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
           />
-        ))}
-      </div>
-      {/* progress line */}
-      <div className="flex items-center gap-1.5 z-10">
-        <div className="flex-1 h-1 rounded-full" style={{ background: `${primary}22` }}>
-          <div className="h-full w-3/5 rounded-full" style={{ background: primary }} />
-        </div>
-        <div className="text-[8px] opacity-50" style={{ color: primary }}>
-          68%
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
-function TemplateCard({ template, isAr }: { template: Template; isAr: boolean }) {
+function TemplateCard({ template, isAr, onZoom }: { template: Template; isAr: boolean; onZoom: (z: Zoom) => void }) {
   const [selectedColor, setSelectedColor] = useState(0);
   const [showFeatures, setShowFeatures] = useState(false);
   const color = template.colors[selectedColor];
@@ -115,8 +112,27 @@ function TemplateCard({ template, isAr }: { template: Template; isAr: boolean })
       />
 
       {/* preview area */}
-      <div className="relative p-3 h-44">
-        <MiniDashboard primary={color.primary} bars={color.bars} />
+      <div className="relative p-3">
+        <button
+          type="button"
+          onClick={() => onZoom({ src: previewSrc(template, selectedColor), title: template.titleEn })}
+          className="group relative block w-full aspect-[16/10] rounded-xl overflow-hidden bg-slate-800 ring-1 ring-white/5"
+          aria-label={isAr ? `تكبير معاينة ${template.titleEn}` : `Enlarge ${template.titleEn} preview`}
+        >
+          <Image
+            src={previewSrc(template, selectedColor)}
+            alt={`${template.titleEn} preview`}
+            fill
+            sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+          <span className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors">
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5 text-white text-xs font-semibold bg-black/60 px-3 py-1.5 rounded-full">
+              <Maximize2 className="w-3.5 h-3.5" />
+              {isAr ? "عرض بالحجم الكامل" : "View full size"}
+            </span>
+          </span>
+        </button>
         <div className="absolute top-5 left-5 flex gap-1.5">
           <span
             className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold border ${toolColor}`}
@@ -285,6 +301,7 @@ export default function TemplatesClient({ locale }: { locale: string }) {
   const isAr = locale === "ar";
   const [tool, setTool] = useState<"all" | "excel" | "powerbi">("all");
   const [category, setCategory] = useState("all");
+  const [zoom, setZoom] = useState<Zoom>(null);
 
   const toolTabs = [
     { key: "all" as const, labelAr: "الكل", labelEn: "All", count: templatesData.length },
@@ -447,12 +464,14 @@ export default function TemplatesClient({ locale }: { locale: string }) {
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
             >
               {filtered.map((t) => (
-                <TemplateCard key={t.id} template={t} isAr={isAr} />
+                <TemplateCard key={t.id} template={t} isAr={isAr} onZoom={setZoom} />
               ))}
             </motion.div>
           )}
         </AnimatePresence>
       </section>
+
+      <ZoomModal zoom={zoom} onClose={() => setZoom(null)} isAr={isAr} />
 
       {/* ─── Custom CTA ─────────────────────── */}
       <section className="container mx-auto px-4 pb-20">

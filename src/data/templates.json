@@ -11,14 +11,43 @@
     "price": 399,
     "originalPrice": 899,
     "pages": 5,
-    "featuresAr": ["Headcount & FTE تفاعلي", "معدل الدوران والاستبقاء", "تحليل الغياب الشهري", "توزيع الرواتب والدرجات", "8 KPIs جاهزة"],
-    "featuresEn": ["Interactive Headcount & FTE", "Turnover & Retention Rate", "Monthly Absence Analysis", "Salary & Grade Distribution", "8 Ready KPIs"],
+    "featuresAr": [
+      "Headcount & FTE تفاعلي",
+      "معدل الدوران والاستبقاء",
+      "تحليل الغياب الشهري",
+      "توزيع الرواتب والدرجات",
+      "8 KPIs جاهزة"
+    ],
+    "featuresEn": [
+      "Interactive Headcount & FTE",
+      "Turnover & Retention Rate",
+      "Monthly Absence Analysis",
+      "Salary & Grade Distribution",
+      "8 Ready KPIs"
+    ],
     "colors": [
-      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
-      { "nameAr": "بنفسجي", "nameEn": "Purple", "primary": "#8b5cf6", "bars": ["#8b5cf6","#a78bfa","#c4b5fd","#7c3aed","#6d28d9","#ddd6fe"] },
-      { "nameAr": "أخضر", "nameEn": "Emerald", "primary": "#10b981", "bars": ["#10b981","#34d399","#6ee7b7","#059669","#047857","#a7f3d0"] },
-      { "nameAr": "برتقالي", "nameEn": "Amber", "primary": "#f59e0b", "bars": ["#f59e0b","#fbbf24","#fcd34d","#d97706","#b45309","#fde68a"] }
-    ]
+      {
+        "nameAr": "تركواز",
+        "nameEn": "Teal",
+        "primary": "#14b8a6"
+      },
+      {
+        "nameAr": "أزرق",
+        "nameEn": "Blue",
+        "primary": "#3b82f6"
+      },
+      {
+        "nameAr": "بنفسجي",
+        "nameEn": "Purple",
+        "primary": "#8b5cf6"
+      },
+      {
+        "nameAr": "مرجاني",
+        "nameEn": "Coral",
+        "primary": "#f43f5e"
+      }
+    ],
+    "preview": "hr"
   },
   {
     "id": "2",
@@ -32,14 +61,43 @@
     "price": 399,
     "originalPrice": 899,
     "pages": 4,
-    "featuresAr": ["إجمالي الإيرادات vs الهدف", "أداء المناطق والمندوبين", "تحليل المنتجات الأعلى مبيعاً", "معدل التحويل والعملاء الجدد", "مقارنة شهرية وسنوية"],
-    "featuresEn": ["Revenue vs Target tracking", "Region & Rep performance", "Top-selling product analysis", "Conversion rate & new clients", "Monthly & YoY comparison"],
+    "featuresAr": [
+      "إجمالي الإيرادات vs الهدف",
+      "أداء المناطق والمندوبين",
+      "تحليل المنتجات الأعلى مبيعاً",
+      "معدل التحويل والعملاء الجدد",
+      "مقارنة شهرية وسنوية"
+    ],
+    "featuresEn": [
+      "Revenue vs Target tracking",
+      "Region & Rep performance",
+      "Top-selling product analysis",
+      "Conversion rate & new clients",
+      "Monthly & YoY comparison"
+    ],
     "colors": [
-      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
-      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] },
-      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
-      { "nameAr": "برتقالي", "nameEn": "Orange", "primary": "#f97316", "bars": ["#f97316","#fb923c","#fdba74","#ea580c","#c2410c","#fed7aa"] }
-    ]
+      {
+        "nameAr": "برتقالي",
+        "nameEn": "Orange",
+        "primary": "#f97316"
+      },
+      {
+        "nameAr": "أصفر",
+        "nameEn": "Yellow",
+        "primary": "#facc15"
+      },
+      {
+        "nameAr": "أخضر",
+        "nameEn": "Green",
+        "primary": "#22c55e"
+      },
+      {
+        "nameAr": "وردي",
+        "nameEn": "Pink",
+        "primary": "#ec4899"
+      }
+    ],
+    "preview": "sales"
   },
   {
     "id": "3",
@@ -53,14 +111,43 @@
     "price": 249,
     "originalPrice": 599,
     "pages": 6,
-    "featuresAr": ["قائمة الأرباح والخسائر (P&L)", "الميزانية الفعلية vs المخطط", "تحليل التدفقات النقدية", "نسب السيولة والربحية", "تنبؤ مالي (Forecast)"],
-    "featuresEn": ["Profit & Loss statement", "Budget vs Actual analysis", "Cash flow analysis", "Liquidity & profitability ratios", "Financial Forecast"],
+    "featuresAr": [
+      "قائمة الأرباح والخسائر (P&L)",
+      "الميزانية الفعلية vs المخطط",
+      "تحليل التدفقات النقدية",
+      "نسب السيولة والربحية",
+      "تنبؤ مالي (Forecast)"
+    ],
+    "featuresEn": [
+      "Profit & Loss statement",
+      "Budget vs Actual analysis",
+      "Cash flow analysis",
+      "Liquidity & profitability ratios",
+      "Financial Forecast"
+    ],
     "colors": [
-      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
-      { "nameAr": "ذهبي", "nameEn": "Gold", "primary": "#eab308", "bars": ["#eab308","#facc15","#fde047","#ca8a04","#a16207","#fef08a"] },
-      { "nameAr": "رمادي", "nameEn": "Slate", "primary": "#64748b", "bars": ["#64748b","#94a3b8","#cbd5e1","#475569","#334155","#e2e8f0"] },
-      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] }
-    ]
+      {
+        "nameAr": "ذهبي",
+        "nameEn": "Gold",
+        "primary": "#eab308"
+      },
+      {
+        "nameAr": "زمردي",
+        "nameEn": "Emerald",
+        "primary": "#10b981"
+      },
+      {
+        "nameAr": "سماوي",
+        "nameEn": "Sky",
+        "primary": "#38bdf8"
+      },
+      {
+        "nameAr": "أحمر",
+        "nameEn": "Red",
+        "primary": "#f43f5e"
+      }
+    ],
+    "preview": "fin"
   },
   {
     "id": "4",
@@ -74,14 +161,43 @@
     "price": 399,
     "originalPrice": 899,
     "pages": 4,
-    "featuresAr": ["حجم المكالمات اليومي والشهري", "متوسط زمن الانتظار (AWT)", "معدل التخلي عن المكالمة", "مؤشر رضا العملاء (CSAT)", "أداء الوكلاء الفردي"],
-    "featuresEn": ["Daily & monthly call volume", "Average Wait Time (AWT)", "Call abandonment rate", "Customer Satisfaction (CSAT)", "Individual agent performance"],
+    "featuresAr": [
+      "حجم المكالمات اليومي والشهري",
+      "متوسط زمن الانتظار (AWT)",
+      "معدل التخلي عن المكالمة",
+      "مؤشر رضا العملاء (CSAT)",
+      "أداء الوكلاء الفردي"
+    ],
+    "featuresEn": [
+      "Daily & monthly call volume",
+      "Average Wait Time (AWT)",
+      "Call abandonment rate",
+      "Customer Satisfaction (CSAT)",
+      "Individual agent performance"
+    ],
     "colors": [
-      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
-      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
-      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] },
-      { "nameAr": "وردي", "nameEn": "Pink", "primary": "#ec4899", "bars": ["#ec4899","#f472b6","#f9a8d4","#db2777","#be185d","#fce7f3"] }
-    ]
+      {
+        "nameAr": "تركواز",
+        "nameEn": "Teal",
+        "primary": "#0d9488"
+      },
+      {
+        "nameAr": "بنفسجي",
+        "nameEn": "Purple",
+        "primary": "#7c3aed"
+      },
+      {
+        "nameAr": "أزرق",
+        "nameEn": "Blue",
+        "primary": "#2563eb"
+      },
+      {
+        "nameAr": "أحمر",
+        "nameEn": "Red",
+        "primary": "#e11d48"
+      }
+    ],
+    "preview": "cc"
   },
   {
     "id": "5",
@@ -95,14 +211,43 @@
     "price": 499,
     "originalPrice": 1099,
     "pages": 5,
-    "featuresAr": ["معدل إشغال الأسرة", "حركة المرضى (دخول / خروج)", "أداء الأطباء والأقسام", "تحليل الإيرادات والتكاليف", "مدة الإقامة المتوسطة (ALOS)"],
-    "featuresEn": ["Bed occupancy rate", "Patient flow (admission/discharge)", "Doctor & department performance", "Revenue & cost analysis", "Average Length of Stay (ALOS)"],
+    "featuresAr": [
+      "معدل إشغال الأسرة",
+      "حركة المرضى (دخول / خروج)",
+      "أداء الأطباء والأقسام",
+      "تحليل الإيرادات والتكاليف",
+      "مدة الإقامة المتوسطة (ALOS)"
+    ],
+    "featuresEn": [
+      "Bed occupancy rate",
+      "Patient flow (admission/discharge)",
+      "Doctor & department performance",
+      "Revenue & cost analysis",
+      "Average Length of Stay (ALOS)"
+    ],
     "colors": [
-      { "nameAr": "أخضر طبي", "nameEn": "Medical Green", "primary": "#10b981", "bars": ["#10b981","#34d399","#6ee7b7","#059669","#047857","#a7f3d0"] },
-      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
-      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
-      { "nameAr": "بنفسجي", "nameEn": "Purple", "primary": "#8b5cf6", "bars": ["#8b5cf6","#a78bfa","#c4b5fd","#7c3aed","#6d28d9","#ddd6fe"] }
-    ]
+      {
+        "nameAr": "ليموني",
+        "nameEn": "Lime",
+        "primary": "#a3e635"
+      },
+      {
+        "nameAr": "سماوي",
+        "nameEn": "Sky",
+        "primary": "#7dd3fc"
+      },
+      {
+        "nameAr": "تركواز",
+        "nameEn": "Teal",
+        "primary": "#5eead4"
+      },
+      {
+        "nameAr": "أصفر",
+        "nameEn": "Yellow",
+        "primary": "#fcd34d"
+      }
+    ],
+    "preview": "hos"
   },
   {
     "id": "6",
@@ -116,14 +261,43 @@
     "price": 249,
     "originalPrice": 599,
     "pages": 4,
-    "featuresAr": ["المبيعات اليومية والشهرية", "الأدوية الأعلى مبيعاً", "مستويات المخزون والانتهاء", "تحليل الأرباح الصافية", "تنبيهات انتهاء الصلاحية"],
-    "featuresEn": ["Daily & monthly sales", "Top-selling medications", "Stock levels & expiry tracking", "Net profit analysis", "Expiry date alerts"],
+    "featuresAr": [
+      "المبيعات اليومية والشهرية",
+      "الأدوية الأعلى مبيعاً",
+      "مستويات المخزون والانتهاء",
+      "تحليل الأرباح الصافية",
+      "تنبيهات انتهاء الصلاحية"
+    ],
+    "featuresEn": [
+      "Daily & monthly sales",
+      "Top-selling medications",
+      "Stock levels & expiry tracking",
+      "Net profit analysis",
+      "Expiry date alerts"
+    ],
     "colors": [
-      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] },
-      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
-      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
-      { "nameAr": "برتقالي", "nameEn": "Orange", "primary": "#f97316", "bars": ["#f97316","#fb923c","#fdba74","#ea580c","#c2410c","#fed7aa"] }
-    ]
+      {
+        "nameAr": "أخضر",
+        "nameEn": "Green",
+        "primary": "#16a34a"
+      },
+      {
+        "nameAr": "تركواز",
+        "nameEn": "Teal",
+        "primary": "#0d9488"
+      },
+      {
+        "nameAr": "أزرق",
+        "nameEn": "Blue",
+        "primary": "#2563eb"
+      },
+      {
+        "nameAr": "بنفسجي",
+        "nameEn": "Purple",
+        "primary": "#9333ea"
+      }
+    ],
+    "preview": "ph"
   },
   {
     "id": "7",
@@ -137,14 +311,43 @@
     "price": 399,
     "originalPrice": 899,
     "pages": 4,
-    "featuresAr": ["متوسط زمن الاستجابة (ART)", "مؤشر رضا العملاء (CSAT)", "حجم التذاكر اليومي والشهري", "معدل الإغلاق من أول اتصال (FCR)", "أداء الفريق والأفراد"],
-    "featuresEn": ["Average Response Time (ART)", "Customer Satisfaction (CSAT)", "Daily & monthly ticket volume", "First Contact Resolution (FCR)", "Team & individual performance"],
+    "featuresAr": [
+      "متوسط زمن الاستجابة (ART)",
+      "مؤشر رضا العملاء (CSAT)",
+      "حجم التذاكر اليومي والشهري",
+      "معدل الإغلاق من أول اتصال (FCR)",
+      "أداء الفريق والأفراد"
+    ],
+    "featuresEn": [
+      "Average Response Time (ART)",
+      "Customer Satisfaction (CSAT)",
+      "Daily & monthly ticket volume",
+      "First Contact Resolution (FCR)",
+      "Team & individual performance"
+    ],
     "colors": [
-      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
-      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
-      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] },
-      { "nameAr": "وردي", "nameEn": "Pink", "primary": "#ec4899", "bars": ["#ec4899","#f472b6","#f9a8d4","#db2777","#be185d","#fce7f3"] }
-    ]
+      {
+        "nameAr": "بنفسجي",
+        "nameEn": "Purple",
+        "primary": "#6d28d9"
+      },
+      {
+        "nameAr": "نيلي",
+        "nameEn": "Indigo",
+        "primary": "#4338ca"
+      },
+      {
+        "nameAr": "تركواز",
+        "nameEn": "Teal",
+        "primary": "#0f766e"
+      },
+      {
+        "nameAr": "أحمر",
+        "nameEn": "Red",
+        "primary": "#be123c"
+      }
+    ],
+    "preview": "cs"
   },
   {
     "id": "8",
@@ -158,14 +361,43 @@
     "price": 249,
     "originalPrice": 599,
     "pages": 4,
-    "featuresAr": ["أداء الحملات الإعلانية", "ROAS وCPA لكل قناة", "تحليل العائد على الاستثمار", "مقارنة القنوات التسويقية", "تقرير شهري تلقائي"],
-    "featuresEn": ["Ad campaign performance tracking", "ROAS & CPA per channel", "ROI analysis", "Marketing channel comparison", "Auto monthly report"],
+    "featuresAr": [
+      "أداء الحملات الإعلانية",
+      "ROAS وCPA لكل قناة",
+      "تحليل العائد على الاستثمار",
+      "مقارنة القنوات التسويقية",
+      "تقرير شهري تلقائي"
+    ],
+    "featuresEn": [
+      "Ad campaign performance tracking",
+      "ROAS & CPA per channel",
+      "ROI analysis",
+      "Marketing channel comparison",
+      "Auto monthly report"
+    ],
     "colors": [
-      { "nameAr": "وردي", "nameEn": "Pink", "primary": "#ec4899", "bars": ["#ec4899","#f472b6","#f9a8d4","#db2777","#be185d","#fce7f3"] },
-      { "nameAr": "بنفسجي", "nameEn": "Purple", "primary": "#8b5cf6", "bars": ["#8b5cf6","#a78bfa","#c4b5fd","#7c3aed","#6d28d9","#ddd6fe"] },
-      { "nameAr": "برتقالي", "nameEn": "Orange", "primary": "#f97316", "bars": ["#f97316","#fb923c","#fdba74","#ea580c","#c2410c","#fed7aa"] },
-      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] }
-    ]
+      {
+        "nameAr": "بنفسجي وردي",
+        "nameEn": "Plum",
+        "primary": "#a2457f"
+      },
+      {
+        "nameAr": "نيلي",
+        "nameEn": "Indigo",
+        "primary": "#4f46e5"
+      },
+      {
+        "nameAr": "تركواز",
+        "nameEn": "Teal",
+        "primary": "#0f766e"
+      },
+      {
+        "nameAr": "برتقالي",
+        "nameEn": "Orange",
+        "primary": "#ea580c"
+      }
+    ],
+    "preview": "mk"
   },
   {
     "id": "9",
@@ -179,14 +411,43 @@
     "price": 199,
     "originalPrice": 499,
     "pages": 3,
-    "featuresAr": ["المبيعات اليومية والشهرية", "الأصناف الأعلى طلباً", "تكلفة الخامات (Food Cost %)", "هامش الربح الصافي", "أداء الفروع والمناوبات"],
-    "featuresEn": ["Daily & monthly sales", "Top-selling menu items", "Food cost percentage", "Net profit margin", "Branch & shift performance"],
+    "featuresAr": [
+      "المبيعات اليومية والشهرية",
+      "الأصناف الأعلى طلباً",
+      "تكلفة الخامات (Food Cost %)",
+      "هامش الربح الصافي",
+      "أداء الفروع والمناوبات"
+    ],
+    "featuresEn": [
+      "Daily & monthly sales",
+      "Top-selling menu items",
+      "Food cost percentage",
+      "Net profit margin",
+      "Branch & shift performance"
+    ],
     "colors": [
-      { "nameAr": "برتقالي", "nameEn": "Orange", "primary": "#f97316", "bars": ["#f97316","#fb923c","#fdba74","#ea580c","#c2410c","#fed7aa"] },
-      { "nameAr": "أحمر", "nameEn": "Red", "primary": "#ef4444", "bars": ["#ef4444","#f87171","#fca5a5","#dc2626","#b91c1c","#fecaca"] },
-      { "nameAr": "ذهبي", "nameEn": "Gold", "primary": "#eab308", "bars": ["#eab308","#facc15","#fde047","#ca8a04","#a16207","#fef08a"] },
-      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] }
-    ]
+      {
+        "nameAr": "برتقالي",
+        "nameEn": "Orange",
+        "primary": "#f97316"
+      },
+      {
+        "nameAr": "زيتي",
+        "nameEn": "Olive",
+        "primary": "#65a30d"
+      },
+      {
+        "nameAr": "أحمر",
+        "nameEn": "Red",
+        "primary": "#e11d48"
+      },
+      {
+        "nameAr": "تركواز",
+        "nameEn": "Teal",
+        "primary": "#0d9488"
+      }
+    ],
+    "preview": "rest"
   },
   {
     "id": "10",
@@ -200,14 +461,43 @@
     "price": 499,
     "originalPrice": 1099,
     "pages": 5,
-    "featuresAr": ["تحليل المبيعات والإيجارات", "أداء المشاريع والوحدات", "تقرير العملاء والمعاملات", "العائد على الاستثمار (ROI)", "مقارنة المناطق والمشاريع"],
-    "featuresEn": ["Sales & rental analysis", "Project & unit performance", "Client & transaction report", "Return on Investment (ROI)", "Region & project comparison"],
+    "featuresAr": [
+      "تحليل المبيعات والإيجارات",
+      "أداء المشاريع والوحدات",
+      "تقرير العملاء والمعاملات",
+      "العائد على الاستثمار (ROI)",
+      "مقارنة المناطق والمشاريع"
+    ],
+    "featuresEn": [
+      "Sales & rental analysis",
+      "Project & unit performance",
+      "Client & transaction report",
+      "Return on Investment (ROI)",
+      "Region & project comparison"
+    ],
     "colors": [
-      { "nameAr": "بنفسجي", "nameEn": "Purple", "primary": "#8b5cf6", "bars": ["#8b5cf6","#a78bfa","#c4b5fd","#7c3aed","#6d28d9","#ddd6fe"] },
-      { "nameAr": "ذهبي", "nameEn": "Gold", "primary": "#eab308", "bars": ["#eab308","#facc15","#fde047","#ca8a04","#a16207","#fef08a"] },
-      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
-      { "nameAr": "رمادي", "nameEn": "Slate", "primary": "#64748b", "bars": ["#64748b","#94a3b8","#cbd5e1","#475569","#334155","#e2e8f0"] }
-    ]
+      {
+        "nameAr": "ليموني",
+        "nameEn": "Lime",
+        "primary": "#a3e635"
+      },
+      {
+        "nameAr": "ذهبي",
+        "nameEn": "Gold",
+        "primary": "#fbbf24"
+      },
+      {
+        "nameAr": "سماوي",
+        "nameEn": "Sky",
+        "primary": "#22d3ee"
+      },
+      {
+        "nameAr": "وردي",
+        "nameEn": "Pink",
+        "primary": "#fb7185"
+      }
+    ],
+    "preview": "re"
   },
   {
     "id": "11",
@@ -221,14 +511,43 @@
     "price": 599,
     "originalPrice": 1499,
     "pages": 6,
-    "featuresAr": ["ملخص الأداء العام للشركة", "مؤشرات المبيعات والمالية والعمليات", "مقارنة الأهداف الاستراتيجية", "Scorecard تفاعلي", "تقرير جاهز للاجتماعات"],
-    "featuresEn": ["Overall company performance summary", "Sales, finance & operations KPIs", "Strategic goals comparison", "Interactive scorecard", "Meeting-ready presentation"],
+    "featuresAr": [
+      "ملخص الأداء العام للشركة",
+      "مؤشرات المبيعات والمالية والعمليات",
+      "مقارنة الأهداف الاستراتيجية",
+      "Scorecard تفاعلي",
+      "تقرير جاهز للاجتماعات"
+    ],
+    "featuresEn": [
+      "Overall company performance summary",
+      "Sales, finance & operations KPIs",
+      "Strategic goals comparison",
+      "Interactive scorecard",
+      "Meeting-ready presentation"
+    ],
     "colors": [
-      { "nameAr": "داكن مميز", "nameEn": "Dark Premium", "primary": "#6366f1", "bars": ["#6366f1","#818cf8","#a5b4fc","#4f46e5","#4338ca","#c7d2fe"] },
-      { "nameAr": "أزرق ملكي", "nameEn": "Royal Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
-      { "nameAr": "رمادي فاخر", "nameEn": "Luxury Gray", "primary": "#64748b", "bars": ["#64748b","#94a3b8","#cbd5e1","#475569","#334155","#e2e8f0"] },
-      { "nameAr": "ذهبي فاخر", "nameEn": "Gold Premium", "primary": "#f59e0b", "bars": ["#f59e0b","#fbbf24","#fcd34d","#d97706","#92400e","#fde68a"] }
-    ]
+      {
+        "nameAr": "بنفسجي",
+        "nameEn": "Purple",
+        "primary": "#8b5cf6"
+      },
+      {
+        "nameAr": "أزرق",
+        "nameEn": "Blue",
+        "primary": "#3b82f6"
+      },
+      {
+        "nameAr": "وردي",
+        "nameEn": "Pink",
+        "primary": "#ec4899"
+      },
+      {
+        "nameAr": "زمردي",
+        "nameEn": "Emerald",
+        "primary": "#10b981"
+      }
+    ],
+    "preview": "ex"
   },
   {
     "id": "12",
@@ -242,14 +561,43 @@
     "price": 399,
     "originalPrice": 899,
     "pages": 4,
-    "featuresAr": ["مؤشر OEE (الفعالية الكلية)", "تحليل أوقات التوقف", "معدل الجودة والعيوب", "أداء التسليم في الوقت المحدد", "تحليل الطاقة الإنتاجية"],
-    "featuresEn": ["OEE (Overall Equipment Effectiveness)", "Downtime analysis", "Quality & defect rate", "On-time delivery performance", "Capacity utilization analysis"],
+    "featuresAr": [
+      "مؤشر OEE (الفعالية الكلية)",
+      "تحليل أوقات التوقف",
+      "معدل الجودة والعيوب",
+      "أداء التسليم في الوقت المحدد",
+      "تحليل الطاقة الإنتاجية"
+    ],
+    "featuresEn": [
+      "OEE (Overall Equipment Effectiveness)",
+      "Downtime analysis",
+      "Quality & defect rate",
+      "On-time delivery performance",
+      "Capacity utilization analysis"
+    ],
     "colors": [
-      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
-      { "nameAr": "أحمر", "nameEn": "Red", "primary": "#ef4444", "bars": ["#ef4444","#f87171","#fca5a5","#dc2626","#b91c1c","#fecaca"] },
-      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
-      { "nameAr": "بنفسجي", "nameEn": "Purple", "primary": "#8b5cf6", "bars": ["#8b5cf6","#a78bfa","#c4b5fd","#7c3aed","#6d28d9","#ddd6fe"] }
-    ]
+      {
+        "nameAr": "سماوي",
+        "nameEn": "Sky",
+        "primary": "#06b6d4"
+      },
+      {
+        "nameAr": "أزرق",
+        "nameEn": "Blue",
+        "primary": "#2563eb"
+      },
+      {
+        "nameAr": "زمردي",
+        "nameEn": "Emerald",
+        "primary": "#059669"
+      },
+      {
+        "nameAr": "رمادي",
+        "nameEn": "Slate",
+        "primary": "#475569"
+      }
+    ],
+    "preview": "op"
   },
   {
     "id": "13",
@@ -263,14 +611,43 @@
     "price": 249,
     "originalPrice": 599,
     "pages": 4,
-    "featuresAr": ["أداء الموردين وتقييمهم", "معدل الاستلام في الوقت المحدد", "تحليل التكاليف اللوجستية", "متابعة أوامر الشراء", "تحليل ABC للموردين"],
-    "featuresEn": ["Supplier performance & rating", "On-time receipt rate", "Logistics cost analysis", "Purchase order tracking", "ABC supplier analysis"],
+    "featuresAr": [
+      "أداء الموردين وتقييمهم",
+      "معدل الاستلام في الوقت المحدد",
+      "تحليل التكاليف اللوجستية",
+      "متابعة أوامر الشراء",
+      "تحليل ABC للموردين"
+    ],
+    "featuresEn": [
+      "Supplier performance & rating",
+      "On-time receipt rate",
+      "Logistics cost analysis",
+      "Purchase order tracking",
+      "ABC supplier analysis"
+    ],
     "colors": [
-      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
-      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] },
-      { "nameAr": "سماوي", "nameEn": "Cyan", "primary": "#06b6d4", "bars": ["#06b6d4","#22d3ee","#67e8f9","#0891b2","#0e7490","#cffafe"] },
-      { "nameAr": "برتقالي", "nameEn": "Orange", "primary": "#f97316", "bars": ["#f97316","#fb923c","#fdba74","#ea580c","#c2410c","#fed7aa"] }
-    ]
+      {
+        "nameAr": "سماوي",
+        "nameEn": "Sky",
+        "primary": "#38bdf8"
+      },
+      {
+        "nameAr": "فوشيا",
+        "nameEn": "Fuchsia",
+        "primary": "#d946ef"
+      },
+      {
+        "nameAr": "كهرماني",
+        "nameEn": "Amber",
+        "primary": "#f59e0b"
+      },
+      {
+        "nameAr": "أخضر",
+        "nameEn": "Green",
+        "primary": "#4ade80"
+      }
+    ],
+    "preview": "sc"
   },
   {
     "id": "14",
@@ -284,13 +661,142 @@
     "price": 199,
     "originalPrice": 499,
     "pages": 3,
-    "featuresAr": ["مستويات المخزون الحالية", "نقطة إعادة الطلب (Reorder Point)", "تحليل المنتجات البطيئة الحركة", "دوران المخزون (Inventory Turnover)", "تنبيهات نقص الستوك"],
-    "featuresEn": ["Current stock levels", "Reorder point tracking", "Slow-moving product analysis", "Inventory turnover ratio", "Low stock alerts"],
+    "featuresAr": [
+      "مستويات المخزون الحالية",
+      "نقطة إعادة الطلب (Reorder Point)",
+      "تحليل المنتجات البطيئة الحركة",
+      "دوران المخزون (Inventory Turnover)",
+      "تنبيهات نقص الستوك"
+    ],
+    "featuresEn": [
+      "Current stock levels",
+      "Reorder point tracking",
+      "Slow-moving product analysis",
+      "Inventory turnover ratio",
+      "Low stock alerts"
+    ],
     "colors": [
-      { "nameAr": "أخضر", "nameEn": "Green", "primary": "#22c55e", "bars": ["#22c55e","#4ade80","#86efac","#16a34a","#15803d","#bbf7d0"] },
-      { "nameAr": "أزرق", "nameEn": "Blue", "primary": "#3b82f6", "bars": ["#3b82f6","#60a5fa","#93c5fd","#2563eb","#1d4ed8","#bfdbfe"] },
-      { "nameAr": "برتقالي", "nameEn": "Orange", "primary": "#f97316", "bars": ["#f97316","#fb923c","#fdba74","#ea580c","#c2410c","#fed7aa"] },
-      { "nameAr": "رمادي", "nameEn": "Slate", "primary": "#64748b", "bars": ["#64748b","#94a3b8","#cbd5e1","#475569","#334155","#e2e8f0"] }
+      {
+        "nameAr": "أصفر",
+        "nameEn": "Yellow",
+        "primary": "#facc15"
+      },
+      {
+        "nameAr": "برتقالي",
+        "nameEn": "Orange",
+        "primary": "#fb923c"
+      },
+      {
+        "nameAr": "سماوي",
+        "nameEn": "Sky",
+        "primary": "#7dd3fc"
+      },
+      {
+        "nameAr": "ليموني",
+        "nameEn": "Lime",
+        "primary": "#bef264"
+      }
+    ],
+    "preview": "inv"
+  },
+  {
+    "id": "15",
+    "slug": "it-operations-powerbi",
+    "titleAr": "IT Operations Dashboard",
+    "titleEn": "IT Operations Dashboard",
+    "descriptionAr": "متابعة أداء قسم تقنية المعلومات — التذاكر وجاهزية الأنظمة والالتزام بالـ SLA وأكثر المشكلات تكراراً.",
+    "descriptionEn": "IT department performance — tickets, system readiness, SLA compliance and top recurring issues.",
+    "tool": "powerbi",
+    "category": "it",
+    "price": 449,
+    "originalPrice": 999,
+    "pages": 4,
+    "featuresAr": [
+      "التذاكر الجديدة مقابل المحلولة",
+      "جاهزية السيرفرات والشبكة والنسخ الاحتياطي",
+      "نسبة الالتزام بالـ SLA",
+      "التذاكر حسب الإدارة واليوم",
+      "أكثر المشكلات تكراراً"
+    ],
+    "featuresEn": [
+      "New vs resolved tickets",
+      "Server, network & backup readiness",
+      "SLA compliance rate",
+      "Tickets by department & weekday",
+      "Top recurring issues"
+    ],
+    "preview": "it",
+    "colors": [
+      {
+        "nameAr": "سماوي",
+        "nameEn": "Sky",
+        "primary": "#22d3ee"
+      },
+      {
+        "nameAr": "أزرق",
+        "nameEn": "Blue",
+        "primary": "#60a5fa"
+      },
+      {
+        "nameAr": "بنفسجي",
+        "nameEn": "Purple",
+        "primary": "#a78bfa"
+      },
+      {
+        "nameAr": "أخضر",
+        "nameEn": "Green",
+        "primary": "#34d399"
+      }
+    ]
+  },
+  {
+    "id": "16",
+    "slug": "school-performance-excel",
+    "titleAr": "School Performance Dashboard",
+    "titleEn": "School Performance Dashboard",
+    "descriptionAr": "لوحة متابعة المدرسة — الحضور ومتوسط الدرجات ونسب النجاح وتحصيل المصروفات وتوزيع الطلاب.",
+    "descriptionEn": "School overview — attendance, grade averages, pass rates, fee collection and student distribution.",
+    "tool": "excel",
+    "category": "education",
+    "price": 249,
+    "originalPrice": 599,
+    "pages": 4,
+    "featuresAr": [
+      "نسبة الحضور اليومية",
+      "متوسط الدرجات ونسبة النجاح لكل صف",
+      "نسب النجاح في المواد",
+      "تحصيل المصروفات والمتبقي",
+      "توزيع الطلاب حسب المرحلة"
+    ],
+    "featuresEn": [
+      "Daily attendance rate",
+      "Average score & pass rate by grade",
+      "Pass rate by subject",
+      "Fee collection vs outstanding",
+      "Students by stage"
+    ],
+    "preview": "sch",
+    "colors": [
+      {
+        "nameAr": "بنفسجي",
+        "nameEn": "Purple",
+        "primary": "#6d5dfc"
+      },
+      {
+        "nameAr": "أزرق",
+        "nameEn": "Blue",
+        "primary": "#3b82f6"
+      },
+      {
+        "nameAr": "وردي",
+        "nameEn": "Pink",
+        "primary": "#db2777"
+      },
+      {
+        "nameAr": "تركواز",
+        "nameEn": "Teal",
+        "primary": "#0d9488"
+      }
     ]
   }
 ]
