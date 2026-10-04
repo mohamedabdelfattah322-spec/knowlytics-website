@@ -157,7 +157,9 @@ function TemplateCard({ template, isAr, onZoom, onBuy }: { template: Template; i
               border: `1px solid ${color.primary}33`,
             }}
           >
-            {template.pages} {isAr ? "صفحات" : "pages"}
+            {template.pages === 1
+              ? (isAr ? "صفحة واحدة" : "1 page")
+              : `${template.pages} ${isAr ? "صفحات" : "pages"}`}
           </span>
         </div>
       </div>

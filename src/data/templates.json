@@ -4,26 +4,28 @@
     "slug": "hr-analytics-powerbi",
     "titleAr": "HR Analytics Dashboard",
     "titleEn": "HR Analytics Dashboard",
-    "descriptionAr": "لوحة بيانات شاملة للموارد البشرية — Headcount ومعدل الدوران والغياب وتوزيع الرواتب.",
-    "descriptionEn": "Comprehensive HR dashboard — Headcount, Turnover, Absence & Salary Distribution.",
+    "descriptionAr": "داشبورد الموارد البشرية بنسختين Power BI و Excel — عدد الموظفين والتعيينات والخروج ومعدل الدوران والرواتب، بفلتر للسنة والقسم.",
+    "descriptionEn": "HR dashboard in both Power BI and Excel — headcount, hires, exits, turnover and salaries, filterable by year and department.",
     "tool": "powerbi",
     "category": "hr",
     "price": 399,
     "originalPrice": 899,
-    "pages": 5,
+    "pages": 1,
     "featuresAr": [
-      "Headcount & FTE تفاعلي",
-      "معدل الدوران والاستبقاء",
-      "تحليل الغياب الشهري",
-      "توزيع الرواتب والدرجات",
-      "8 KPIs جاهزة"
+      "نسختين: Power BI و Excel في نفس الملف",
+      "6 مؤشرات: الموظفين، التعيينات، الخروج، معدل الدوران، متوسط الراتب، سنوات الخدمة",
+      "التعيينات مقابل الخروج شهرياً",
+      "توزيع النوع والأعمار والأقسام وأسباب الخروج",
+      "جدول ملخص لكل قسم بالراتب والأداء",
+      "فلتر بالسنة والقسم + دليل استخدام بالعربي"
     ],
     "featuresEn": [
-      "Interactive Headcount & FTE",
-      "Turnover & Retention Rate",
-      "Monthly Absence Analysis",
-      "Salary & Grade Distribution",
-      "8 Ready KPIs"
+      "Both Power BI and Excel versions included",
+      "6 KPIs: headcount, hires, exits, turnover, avg. salary, tenure",
+      "Monthly hires vs exits",
+      "Gender, age, department and exit-reason breakdowns",
+      "Department summary with salary and performance",
+      "Year and department filters + Arabic user guide"
     ],
     "colors": [
       {
