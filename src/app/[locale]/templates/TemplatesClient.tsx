@@ -3,8 +3,10 @@
 import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, FileSpreadsheet, BarChart2, Palette, MessageCircle, Wrench, Star, ChevronDown, ChevronUp, Maximize2, X } from "lucide-react";
+import { Check, FileSpreadsheet, BarChart2, Palette, MessageCircle, Wrench, Star, ChevronDown, ChevronUp, Maximize2, X, Download } from "lucide-react";
 import templatesData from "@/data/templates.json";
+import templateFiles from "@/data/template-files.json";
+import CheckoutModal, { type CheckoutItem } from "./CheckoutModal";
 
 type Template = (typeof templatesData)[number];
 type Zoom = { src: string; title: string } | null;
@@ -71,7 +73,8 @@ function ZoomModal({ zoom, onClose, isAr }: { zoom: Zoom; onClose: () => void; i
   );
 }
 
-function TemplateCard({ template, isAr, onZoom }: { template: Template; isAr: boolean; onZoom: (z: Zoom) => void }) {
+function TemplateCard({ template, isAr, onZoom, onBuy }: { template: Template; isAr: boolean; onZoom: (z: Zoom) => void; onBuy: (i: CheckoutItem) => void }) {
+  const canCheckout = template.slug in templateFiles;
   const [selectedColor, setSelectedColor] = useState(0);
   const [showFeatures, setShowFeatures] = useState(false);
   const color = template.colors[selectedColor];
@@ -269,18 +272,28 @@ function TemplateCard({ template, isAr, onZoom }: { template: Template; isAr: bo
 
         {/* CTAs */}
         <div className="grid grid-cols-2 gap-2">
-          <a
-            href={whatsappBuy}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold text-white transition-all hover:opacity-90 active:scale-95"
-            style={{
-              background: `linear-gradient(135deg, ${color.primary}ee, ${color.primary}88)`,
-            }}
-          >
-            <MessageCircle className="w-3.5 h-3.5" />
-            {isAr ? "اشتري دلوقتي" : "Buy Now"}
-          </a>
+          {canCheckout ? (
+            <button
+              type="button"
+              onClick={() => onBuy({ slug: template.slug, colorIndex: selectedColor, title: template.titleEn, colorName: isAr ? color.nameAr : color.nameEn, colorHex: color.primary, price: template.price })}
+              className="flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold text-white transition-all hover:opacity-90 active:scale-95"
+              style={{ background: `linear-gradient(135deg, ${color.primary}ee, ${color.primary}88)` }}
+            >
+              <Download className="w-3.5 h-3.5" />
+              {isAr ? "اشتري وحمّل" : "Buy & Download"}
+            </button>
+          ) : (
+            <a
+              href={whatsappBuy}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-bold text-white transition-all hover:opacity-90 active:scale-95"
+              style={{ background: `linear-gradient(135deg, ${color.primary}ee, ${color.primary}88)` }}
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              {isAr ? "اطلب على واتساب" : "Order on WhatsApp"}
+            </a>
+          )}
           <a
             href={whatsappCustom}
             target="_blank"
@@ -302,6 +315,7 @@ export default function TemplatesClient({ locale }: { locale: string }) {
   const [tool, setTool] = useState<"all" | "excel" | "powerbi">("all");
   const [category, setCategory] = useState("all");
   const [zoom, setZoom] = useState<Zoom>(null);
+  const [checkout, setCheckout] = useState<CheckoutItem | null>(null);
 
   const toolTabs = [
     { key: "all" as const, labelAr: "الكل", labelEn: "All", count: templatesData.length },
@@ -464,7 +478,7 @@ export default function TemplatesClient({ locale }: { locale: string }) {
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
             >
               {filtered.map((t) => (
-                <TemplateCard key={t.id} template={t} isAr={isAr} onZoom={setZoom} />
+                <TemplateCard key={t.id} template={t} isAr={isAr} onZoom={setZoom} onBuy={setCheckout} />
               ))}
             </motion.div>
           )}
@@ -472,6 +486,7 @@ export default function TemplatesClient({ locale }: { locale: string }) {
       </section>
 
       <ZoomModal zoom={zoom} onClose={() => setZoom(null)} isAr={isAr} />
+      <CheckoutModal item={checkout} onClose={() => setCheckout(null)} />
 
       {/* ─── Custom CTA ─────────────────────── */}
       <section className="container mx-auto px-4 pb-20">

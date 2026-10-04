@@ -17,6 +17,9 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
   },
+  outputFileTracingIncludes: {
+    "/api/template-download": ["./private-files/**/*"],
+  },
 };
 
 export default withNextIntl(nextConfig);

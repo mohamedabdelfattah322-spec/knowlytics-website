@@ -22,6 +22,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# paid template deliverables — never commit (public repo)
+/products/
+
 # local env files
 .env
 .env.local
@@ -41,3 +44,5 @@ prisma/migrations/
 
 # Local Netlify folder
 .netlify
+
+.vercel

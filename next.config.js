@@ -13,6 +13,9 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
+    outputFileTracingIncludes: {
+      "/api/template-download": ["./private-files/**/*"],
+    },
   },
 };
 
