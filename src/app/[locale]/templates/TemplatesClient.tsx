@@ -280,7 +280,7 @@ function TemplateCard({ template, isAr, onZoom, onBuy }: { template: Template; i
               style={{ background: `linear-gradient(135deg, ${color.primary}ee, ${color.primary}88)` }}
             >
               <Download className="w-3.5 h-3.5" />
-              {isAr ? "اشتري وحمّل" : "Buy & Download"}
+              {isAr ? "اشتري وحمل الملفات" : "Buy & Download"}
             </button>
           ) : (
             <a
