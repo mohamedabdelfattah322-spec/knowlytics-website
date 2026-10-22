@@ -612,6 +612,10 @@ const COURSE_VIDEO: Record<string, string> = {
   "excel-powerbi-ai-freelance": "https://drive.google.com/file/d/19_3pwB3FqAba0Xf9pbR9QaM8XjgrmTzF/preview",
 };
 
+const COURSE_DASHBOARD_VIDEO: Record<string, string> = {
+  "excel-powerbi-ai-freelance": "https://drive.google.com/file/d/1DM8FF9J8Es9grdi_PPDdqD1r4fw4cjyJ/preview",
+};
+
 const COURSE_AUDIENCE: Record<string, { items: { qAr: string; qEn: string; aAr: string; aEn: string }[]; closingAr: string; closingEn: string }> = {
   "excel-powerbi-ai-freelance": {
     items: [
@@ -824,6 +828,7 @@ export default function CourseDetailPage() {
   const courseFaq = COURSE_FAQ[course.slug] || null;
   const hero = COURSE_HERO[course.slug] || null;
   const videoUrl = COURSE_VIDEO[course.slug] || null;
+  const dashboardVideoUrl = COURSE_DASHBOARD_VIDEO[course.slug] || null;
   const audience = COURSE_AUDIENCE[course.slug] || null;
   const reviews = ["/feedback/f1.jpeg", "/feedback/f2.jpeg", "/feedback/f3.jpeg", "/feedback/f4.jpeg", "/feedback/f5.png"];
   const groupPhotos = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `/groups/g${n}.jpeg`);
@@ -921,7 +926,15 @@ export default function CourseDetailPage() {
             </div>
 
             {/* Intro Video */}
-            {videoUrl && <CourseVideo url={videoUrl} isAr={isAr} title={title} />}
+            {videoUrl && (
+              <CourseVideo
+                url={videoUrl}
+                title={title}
+                poster="/groups/g1.jpeg"
+                label={isAr ? "شوف الفيديو التعريفي للكورس" : "Watch the course intro"}
+                playLabel={isAr ? "تشغيل الفيديو التعريفي" : "Play intro video"}
+              />
+            )}
 
             {/* Schedule Banner */}
             {schedule && (
@@ -1094,6 +1107,25 @@ export default function CourseDetailPage() {
                     </motion.div>
                   ))}
                 </div>
+              </div>
+            )}
+
+            {/* Dashboard examples video */}
+            {dashboardVideoUrl && (
+              <div className="glass rounded-2xl p-6 border border-blue-500/30">
+                <h2 className="text-xl font-bold text-white mb-2">
+                  {isAr ? "شوف أمثلة من الداشبوردات اللي هتتعلم تعملها" : "See examples of the dashboards you'll learn to build"}
+                </h2>
+                <p className="text-slate-300 text-sm mb-5">
+                  {isAr ? "داشبوردات حقيقية بـ Excel و Power BI — ده المستوى اللي هتوصله في آخر الكورس." : "Real Excel and Power BI dashboards — the level you'll reach by the end of the course."}
+                </p>
+                <CourseVideo
+                  url={dashboardVideoUrl}
+                  title={isAr ? "أمثلة داشبوردات" : "Dashboard examples"}
+                  poster="/templates/hr-pbi-0.webp"
+                  label={isAr ? "شوف الداشبوردات" : "Watch the dashboards"}
+                  playLabel={isAr ? "تشغيل فيديو الداشبوردات" : "Play dashboards video"}
+                />
               </div>
             )}
 
@@ -1480,7 +1512,7 @@ export default function CourseDetailPage() {
 }
 
 // ── Intro Video (loads the player only after the visitor taps play) ───────
-function CourseVideo({ url, isAr, title }: { url: string; isAr: boolean; title: string }) {
+function CourseVideo({ url, title, poster, label, playLabel }: { url: string; title: string; poster: string; label: string; playLabel: string }) {
   const [playing, setPlaying] = useState(false);
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-slate-700/50 bg-slate-900">
@@ -1497,16 +1529,16 @@ function CourseVideo({ url, isAr, title }: { url: string; isAr: boolean; title: 
           type="button"
           onClick={() => setPlaying(true)}
           className="group absolute inset-0 h-full w-full"
-          aria-label={isAr ? "تشغيل الفيديو التعريفي" : "Play intro video"}
+          aria-label={playLabel}
         >
-          <Image src="/groups/g1.jpeg" alt="" fill className="object-cover opacity-60 transition-opacity group-hover:opacity-70" sizes="(max-width: 1024px) 100vw, 800px" />
+          <Image src={poster} alt="" fill className="object-cover opacity-60 transition-opacity group-hover:opacity-70" sizes="(max-width: 1024px) 100vw, 800px" />
           <span className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
           <span className="absolute inset-0 flex flex-col items-center justify-center gap-3">
             <span className="flex h-20 w-20 items-center justify-center rounded-full bg-yellow-400 shadow-2xl transition-transform group-hover:scale-110">
               <svg viewBox="0 0 24 24" className="ms-1 h-9 w-9 fill-slate-900" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
             </span>
             <span className="rounded-full bg-black/50 px-4 py-1.5 text-sm font-semibold text-white">
-              {isAr ? "شوف الفيديو التعريفي للكورس" : "Watch the course intro"}
+              {label}
             </span>
           </span>
         </button>
