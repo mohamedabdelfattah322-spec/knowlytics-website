@@ -8,9 +8,11 @@ export const META_PIXEL_ID = "1687611866220606";
 
 type Fbq = (...args: unknown[]) => void;
 
-export function trackPixel(event: string, params?: Record<string, unknown>) {
+// Events fired before the base snippet runs (e.g. ViewContent on first load) retry briefly.
+export function trackPixel(event: string, params?: Record<string, unknown>, tries = 20) {
   const fbq = (window as unknown as { fbq?: Fbq }).fbq;
   if (fbq) fbq("track", event, params);
+  else if (tries > 0) setTimeout(() => trackPixel(event, params, tries - 1), 250);
 }
 
 // Pick the Meta standard event for a clicked link. Elements can opt in
