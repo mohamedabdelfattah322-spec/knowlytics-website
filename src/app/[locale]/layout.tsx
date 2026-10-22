@@ -8,6 +8,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/layout/FloatingWhatsApp";
 import ChatbotWidget from "@/components/layout/ChatbotWidget";
+import MetaPixel from "@/components/layout/MetaPixel";
 import { Toaster } from "sonner";
 import "@/app/globals.css";
 
@@ -199,6 +200,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
         />
       </head>
       <body className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 transition-colors duration-300">
+        <MetaPixel />
         <NextIntlClientProvider messages={messages} locale={locale}>
           <ThemeProvider
             attribute="class"

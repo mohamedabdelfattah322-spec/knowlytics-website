@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Copy, Check, ExternalLink, Loader2, CheckCircle2, MessageCircle } from "lucide-react";
+import { trackPixel } from "@/components/layout/MetaPixel";
 
 export type CheckoutItem = {
   slug: string;
@@ -52,7 +53,11 @@ export default function CheckoutModal({ item, onClose }: { item: CheckoutItem | 
           reference: f.get("reference"), website: f.get("website") || undefined,
         }),
       });
-      if (res.ok) { setStatus("done"); return; }
+      if (res.ok) {
+        trackPixel("Lead", { content_type: "template", content_ids: [item.slug], value: item.price, currency: "EGP" });
+        setStatus("done");
+        return;
+      }
       const data = await res.json().catch(() => ({}));
       setError(data.error === "invalid_fields"
         ? "راجع البيانات: الاسم، وإيميل صحيح، ورقم موبايل، ورقم العملية."

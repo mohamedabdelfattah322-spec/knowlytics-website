@@ -1290,6 +1290,7 @@ export default function CourseDetailPage() {
                   href={`https://wa.me/201226929392?text=${encodeURIComponent(isAr ? `دفعت لحجز كورس: ${title} — ده إيصال التحويل` : `I paid for the course: ${title} — here is my transfer receipt`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-pixel="Lead"
                   className="mt-3 flex w-full items-center justify-center rounded-xl bg-green-600 py-3 font-bold text-white hover:bg-green-500"
                 >
                   {isAr ? "دفعت — ابعت الإيصال على واتساب" : "I've paid — send receipt on WhatsApp"}
