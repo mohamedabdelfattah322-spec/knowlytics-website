@@ -701,8 +701,14 @@ const COURSE_FAQ: Record<string, { qAr: string; qEn: string; aAr: string; aEn: s
     {
       qAr: "هل محتاج خبرة قبل الكورس؟",
       qEn: "Do I need prior experience?",
-      aAr: "لازم يكون عندك خلفية أساسية عن Excel قبل الكورس. لو مش متأكد مستواك، تواصل معنا على واتساب وهنساعدك.",
-      aEn: "Basic Excel knowledge is required. Contact us on WhatsApp if you're unsure about your level.",
+      aAr: "لأ، مش شرط. الكورس بيبدأ بأساسيات Excel اللي محتاجها قبل التحليل، وبعدها بنطلع لـ Power BI والذكاء الاصطناعي. لو مش متأكد من مستواك، كلمنا على واتساب وهنساعدك.",
+      aEn: "No. The course starts with the Excel fundamentals you need before analysis, then moves on to Power BI and AI. If you're unsure about your level, message us on WhatsApp.",
+    },
+    {
+      qAr: "لو الكورس ماعجبنيش، أقدر أسترد فلوسي؟",
+      qEn: "Can I get a refund if the course isn't for me?",
+      aAr: "أيوه، فيه ضمان استرداد خلال 7 أيام. ابعتلنا على واتساب 00201226929392 خلال المدة دي وهنرجعلك المبلغ.",
+      aEn: "Yes — there is a 7-day money-back guarantee. Message us on WhatsApp +20 122 692 9392 within that period and we'll refund you.",
     },
     {
       qAr: "إيه الفرق بين الكورس ده وكورس Excel العادي؟",
@@ -880,7 +886,7 @@ export default function CourseDetailPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="w-4 h-4 text-blue-400" />
-                  <span>1,240+ {isAr ? "طالب" : "students"}</span>
+                  <span>7,000+ {isAr ? "متدرب في كل كورساتنا" : "trainees across all our courses"}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-purple-400" />
