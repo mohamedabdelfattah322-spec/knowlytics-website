@@ -23,6 +23,10 @@ import {
   ArrowLeft,
   ArrowRight,
   Lock,
+  X,
+  CreditCard,
+  Send,
+  BadgeCheck,
 } from "lucide-react";
 import coursesData from "@/data/courses.json";
 import { useState } from "react";
@@ -593,6 +597,54 @@ const COURSE_SCHEDULE: Record<string, { ar: string; en: string; startAr: string;
   },
 };
 
+const COURSE_HERO: Record<string, { headlineAr: string; headlineEn: string; subAr: string; subEn: string; ctaAr: string; ctaEn: string }> = {
+  "excel-powerbi-ai-freelance": {
+    headlineAr: "سواء عايز تبدأ كارير في تحليل البيانات، أو تطوّر شغلك وتبهر مديرك بتقاريرك… الكورس ده معمول ليك!",
+    headlineEn: "Whether you want to start a career in data analysis or level up your work and impress your manager with your reports — this course is for you!",
+    subAr: "اتعلم Excel وPower BI والذكاء الاصطناعي من خلال تدريب عملي، وحوّل البيانات لتقارير وداشبوردات احترافية تبرز مهاراتك وتساعدك تاخد قرارات أفضل.",
+    subEn: "Learn Excel, Power BI and AI through hands-on training, and turn data into professional reports and dashboards that showcase your skills and help you make better decisions.",
+    ctaAr: "احجز مكانك وابدأ تطوّر مستقبلك المهني",
+    ctaEn: "Book your seat and start growing your career",
+  },
+};
+
+const COURSE_VIDEO: Record<string, string> = {
+  "excel-powerbi-ai-freelance": "https://drive.google.com/file/d/19_3pwB3FqAba0Xf9pbR9QaM8XjgrmTzF/preview",
+};
+
+const COURSE_AUDIENCE: Record<string, { items: { qAr: string; qEn: string; aAr: string; aEn: string }[]; closingAr: string; closingEn: string }> = {
+  "excel-powerbi-ai-freelance": {
+    items: [
+      {
+        qAr: "عايز تبدأ كارير في تحليل البيانات؟",
+        qEn: "Want to start a career in data analysis?",
+        aAr: "اتعلم الأدوات الأساسية اللي تساعدك تبدأ طريقك في مجال Data Analysis، من Excel إلى Power BI وتحليل البيانات بالذكاء الاصطناعي، مع تطبيقات ومشاريع عملية.",
+        aEn: "Learn the core tools to start your path in data analysis — from Excel to Power BI and AI-powered analysis — with hands-on practice and projects.",
+      },
+      {
+        qAr: "موظف وعايز تتميز في شغلك؟",
+        qEn: "An employee who wants to stand out?",
+        aAr: "بدل ما تضيع ساعات في تجهيز التقارير، اتعلم إزاي تحلل بيانات شغلك، وتبني داشبوردات احترافية، وتعرض نتائجك بطريقة تخلي مديرك يشوف قيمة شغلك الحقيقية.",
+        aEn: "Instead of spending hours on reports, learn to analyze your work data, build professional dashboards, and present results that show your real value.",
+      },
+      {
+        qAr: "بتشتغل في Finance أو HR أو Sales أو Operations؟",
+        qEn: "Working in Finance, HR, Sales or Operations?",
+        aAr: "اتعلم إزاي تستخدم البيانات في متابعة الأداء، وتحليل النتائج، واستخراج مؤشرات تساعدك في اتخاذ قرارات أفضل.",
+        aEn: "Learn to use data to track performance, analyze results, and build KPIs that support better decisions.",
+      },
+      {
+        qAr: "عايز تبدأ شغل Freelance؟",
+        qEn: "Want to start freelancing?",
+        aAr: "اتعرف على أساسيات تقديم خدمات تحليل البيانات، وبناء معرض أعمال بمشاريع عملية تساعدك تبدأ تعرض مهاراتك للعملاء.",
+        aEn: "Learn the basics of offering data analysis services and build a portfolio of real projects to show clients.",
+      },
+    ],
+    closingAr: "مش مجرد كورس بتتعلم فيه أدوات… ده تدريب يساعدك تحوّل اللي بتتعلمه لمهارات تقدر تستخدمها في شغلك.",
+    closingEn: "Not just a course about tools — it's training that turns what you learn into skills you can use at work.",
+  },
+};
+
 const COURSE_REQUIREMENTS: Record<string, { ar: string; en: string }[]> = {
   "ai-for-business": [
     { ar: "لا يشترط خلفية تقنية — الكورس مناسب لكل المجالات", en: "No technical background required — suitable for all business functions" },
@@ -600,7 +652,7 @@ const COURSE_REQUIREMENTS: Record<string, { ar: string; en: string }[]> = {
     { ar: "حساب Gmail (لاستخدام Gemini وGoogle Apps Script)", en: "Gmail account (for Gemini & Google Apps Script)" },
   ],
   "excel-powerbi-ai-freelance": [
-    { ar: "خلفية أساسية عن Excel (شرط ضروري)", en: "Basic Excel background required" },
+    { ar: "مش شرط تكون اشتغلت على Excel قبل كده — الكورس بيبدأ بأساسيات Excel قبل التحليل", en: "No prior Excel experience required — the course starts with Excel fundamentals" },
     { ar: "جهاز كمبيوتر (Windows أو Mac)", en: "A computer (Windows or Mac)" },
     { ar: "الرغبة في التعلم والتطبيق العملي", en: "Willingness to learn and practice" },
   ],
@@ -724,6 +776,9 @@ export default function CourseDetailPage() {
 
   const course = coursesData.find((c) => c.slug === slug);
   const [openSection, setOpenSection] = useState<number | null>(0);
+  const [showAllPhotos, setShowAllPhotos] = useState(false);
+  const [showAllReviews, setShowAllReviews] = useState(false);
+  const [zoomSrc, setZoomSrc] = useState<string | null>(null);
 
   const BackIcon = isAr ? ArrowRight : ArrowLeft;
 
@@ -761,11 +816,16 @@ export default function CourseDetailPage() {
   const schedule = COURSE_SCHEDULE[course.slug] || null;
   const courseRequirements = COURSE_REQUIREMENTS[course.slug] || null;
   const courseFaq = COURSE_FAQ[course.slug] || null;
+  const hero = COURSE_HERO[course.slug] || null;
+  const videoUrl = COURSE_VIDEO[course.slug] || null;
+  const audience = COURSE_AUDIENCE[course.slug] || null;
+  const reviews = ["/feedback/f1.jpeg", "/feedback/f2.jpeg", "/feedback/f3.jpeg", "/feedback/f4.jpeg", "/feedback/f5.png"];
+  const groupPhotos = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `/groups/g${n}.jpeg`);
 
   const relatedCourses = coursesData.filter((c) => c.slug !== course.slug && c.category === course.category).slice(0, 3);
 
   return (
-    <main className="min-h-screen bg-slate-950 pt-20">
+    <main className={`min-h-screen bg-slate-950 pt-20 ${isFree ? "" : "pb-24 lg:pb-0"}`}>
       {/* Page Layout — single unified grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Breadcrumb */}
@@ -801,14 +861,17 @@ export default function CourseDetailPage() {
                   </span>
                 )}
               </div>
+              {hero && (
+                <p className="text-yellow-400 font-bold text-sm tracking-wide mb-2">{title}</p>
+              )}
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight"
+                className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight text-balance"
               >
-                {title}
+                {hero ? (isAr ? hero.headlineAr : hero.headlineEn) : title}
               </motion.h1>
-              <p className="text-lg text-slate-300 mb-5 leading-relaxed">{description}</p>
+              <p className="text-lg text-slate-200 mb-5 leading-relaxed">{hero ? (isAr ? hero.subAr : hero.subEn) : description}</p>
               <div className="flex flex-wrap gap-5 text-sm text-slate-300 mb-5">
                 <div className="flex items-center gap-2">
                   <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
@@ -837,11 +900,22 @@ export default function CourseDetailPage() {
                   MA
                 </div>
                 <div>
-                  <p className="text-xs text-slate-400">{isAr ? "المدرب" : "Instructor"}</p>
+                  <p className="text-xs text-slate-300">{isAr ? "المدرب" : "Instructor"}</p>
                   <p className="text-white font-medium text-sm">Mohamed Abdelfattah</p>
                 </div>
               </div>
+              {hero && (
+                <a
+                  href="#booking"
+                  className="mt-6 flex w-full items-center justify-center rounded-xl bg-yellow-400 py-3.5 text-base font-bold text-slate-900 hover:bg-yellow-300 transition-colors"
+                >
+                  {isAr ? hero.ctaAr : hero.ctaEn}
+                </a>
+              )}
             </div>
+
+            {/* Intro Video */}
+            {videoUrl && <CourseVideo url={videoUrl} isAr={isAr} title={title} />}
 
             {/* Schedule Banner */}
             {schedule && (
@@ -874,6 +948,97 @@ export default function CourseDetailPage() {
                 locale={locale}
               />
             </div>
+
+            {/* Who is this course for */}
+            {audience && (
+              <div className="glass rounded-2xl p-6 border border-yellow-500/30">
+                <h2 className="text-xl font-bold text-white mb-5">
+                  {isAr ? "الكورس ده معمول ليك لو…" : "This course is for you if…"}
+                </h2>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {audience.items.map((a, i) => (
+                    <div key={i} className="rounded-xl bg-white/5 border border-white/10 p-4">
+                      <h3 className="text-white font-bold mb-2">{isAr ? a.qAr : a.qEn}</h3>
+                      <p className="text-slate-200 text-sm leading-relaxed">{isAr ? a.aAr : a.aEn}</p>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-5 text-yellow-300 font-semibold">{isAr ? audience.closingAr : audience.closingEn}</p>
+              </div>
+            )}
+
+            {/* Trained Companies */}
+            {course.slug === "excel-powerbi-ai-freelance" && (
+              <div className="glass rounded-2xl p-6 border border-slate-700/50">
+                <h2 className="text-xl font-bold text-white mb-2">
+                  {isAr ? "شركات تم تدريبها" : "Companies We've Trained"}
+                </h2>
+                <p className="text-slate-300 text-sm mb-6">
+                  {isAr
+                    ? "من أبرز الشركات اللي استفادت من برامج تدريبنا"
+                    : "Some of the top companies that benefited from our training programs"}
+                </p>
+                <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+                  {[
+                    { name: "Saint-Gobain", logo: "/company-logo/Saint-Gobain.png", dark: false },
+                    { name: "AFRAS KSA", logo: "/company-logo/AFRAS KSA.jpg", dark: false },
+                    { name: "Alyoum", logo: "/company-logo/Alyoum.png", dark: false },
+                    { name: "Cinnabon", logo: "/company-logo/Cinnabon.png", dark: false },
+                    { name: "EFS", logo: "/company-logo/EFS.jpg", dark: false },
+                    { name: "Asfour Crystal", logo: "/company-logo/ASFOUR.png", dark: false },
+                    { name: "Apleona", logo: "/company-logo/Apleona.png", dark: false },
+                    { name: "Symphony Development", logo: "/company-logo/Symphony Development.webp", dark: true },
+                    { name: "Elsewedy Watanya", logo: "/company-logo/Elsewedy Watanya.png", dark: false },
+                  ].map((company, i) => (
+                    <div
+                      key={i}
+                      className="flex flex-col items-center gap-2 border border-white/10 rounded-xl p-3 bg-slate-800/50"
+                    >
+                      <div className={`w-full h-14 relative rounded-lg p-1.5 ${company.dark ? "bg-slate-700" : "bg-white"}`}>
+                        <Image src={company.logo} alt={company.name} fill className="object-contain p-1" sizes="120px" />
+                      </div>
+                      <p className="text-xs text-slate-300 text-center leading-tight">{company.name}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Group Training Photos — 6 strongest first, rest on demand */}
+            {course.slug === "excel-powerbi-ai-freelance" && (
+              <div className="glass rounded-2xl p-6 border border-slate-700/50">
+                <h2 className="text-xl font-bold text-white mb-2">
+                  {isAr ? "من جروباتنا السابقة" : "Our Previous Training Groups"}
+                </h2>
+                <p className="text-slate-300 text-sm mb-5">
+                  {isAr ? "صور حقيقية من جروبات اتدربت على الكورس ده — دوس على أي صورة لتكبيرها" : "Real photos from groups who took this course — tap any photo to enlarge"}
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {(showAllPhotos ? groupPhotos : groupPhotos.slice(0, 6)).map((src, i) => (
+                    <button
+                      key={src}
+                      type="button"
+                      onClick={() => setZoomSrc(src)}
+                      className="relative aspect-[4/3] rounded-xl overflow-hidden group"
+                      aria-label={isAr ? `تكبير صورة ${i + 1}` : `Enlarge photo ${i + 1}`}
+                    >
+                      <Image src={src} alt={`Training group ${i + 1}`} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 640px) 50vw, 33vw" />
+                    </button>
+                  ))}
+                </div>
+                {groupPhotos.length > 6 && (
+                  <button
+                    type="button"
+                    onClick={() => setShowAllPhotos(!showAllPhotos)}
+                    className="mt-4 text-sm font-semibold text-blue-300 hover:text-blue-200"
+                  >
+                    {showAllPhotos
+                      ? (isAr ? "عرض أقل" : "Show less")
+                      : (isAr ? `شوف كل الصور (${groupPhotos.length})` : `See all photos (${groupPhotos.length})`)}
+                  </button>
+                )}
+              </div>
+            )}
 
             {/* What You'll Learn */}
             <div className="glass rounded-2xl p-6 border border-slate-700/50">
@@ -925,6 +1090,40 @@ export default function CourseDetailPage() {
                 </div>
               </div>
             )}
+
+            {/* Trainee Reviews — 3 first, rest on demand */}
+            <div className="glass rounded-2xl p-6 border border-yellow-500/20">
+              <h2 className="text-xl font-bold text-white mb-2">
+                {isAr ? "آراء المتدربين" : "Trainee Reviews"}
+              </h2>
+              <p className="text-slate-300 text-sm mb-5">
+                {isAr ? "رسايل حقيقية من متدربين — دوس على أي تقييم لتكبيره" : "Real messages from trainees — tap any review to enlarge"}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {(showAllReviews ? reviews : reviews.slice(0, 3)).map((src, i) => (
+                  <button
+                    key={src}
+                    type="button"
+                    onClick={() => setZoomSrc(src)}
+                    className="relative rounded-xl overflow-hidden border border-slate-700/50 bg-white"
+                    aria-label={isAr ? `تكبير التقييم ${i + 1}` : `Enlarge review ${i + 1}`}
+                  >
+                    <Image src={src} alt={`Trainee review ${i + 1}`} width={400} height={300} className="w-full h-auto object-contain" sizes="(max-width: 640px) 100vw, 33vw" />
+                  </button>
+                ))}
+              </div>
+              {reviews.length > 3 && (
+                <button
+                  type="button"
+                  onClick={() => setShowAllReviews(!showAllReviews)}
+                  className="mt-4 text-sm font-semibold text-yellow-300 hover:text-yellow-200"
+                >
+                  {showAllReviews
+                    ? (isAr ? "عرض أقل" : "Show less")
+                    : (isAr ? `شوف باقي التقييمات (+${reviews.length - 3})` : `See more reviews (+${reviews.length - 3})`)}
+                </button>
+              )}
+            </div>
 
             {/* Course Curriculum */}
             <div>
@@ -1019,6 +1218,47 @@ export default function CourseDetailPage() {
               </div>
             </div>
 
+            {/* How to book */}
+            {!isFree && (
+              <div id="booking" className="glass rounded-2xl p-6 border border-green-500/30 scroll-mt-28">
+                <h2 className="text-xl font-bold text-white mb-2">
+                  {isAr ? "إزاي تحجز مكانك؟" : "How to book your seat"}
+                </h2>
+                <p className="text-slate-300 text-sm mb-5">
+                  {isAr ? "4 خطوات بسيطة، وتأكيد الحجز بيوصلك على واتساب." : "Four simple steps — your confirmation arrives on WhatsApp."}
+                </p>
+                <ol className="grid sm:grid-cols-2 gap-3">
+                  {[
+                    { icon: CreditCard, ar: `ادفع ${course.price.toLocaleString()} جنيه بـ InstaPay أو فودافون كاش أو EasyKash`, en: `Pay EGP ${course.price.toLocaleString()} via InstaPay, Vodafone Cash or EasyKash` },
+                    { icon: Send, ar: "ابعت صورة التحويل على واتساب 00201226929392", en: "Send the transfer screenshot on WhatsApp +20 122 692 9392" },
+                    { icon: BadgeCheck, ar: "بنأكد حجزك ونضيفك لجروب الكورس", en: "We confirm your seat and add you to the course group" },
+                    { icon: PlayCircle, ar: `بيوصلك لينك Zoom وأول محاضرة ${schedule ? (isAr ? schedule.startAr.replace("يبدأ ", "") : "") : ""}`.trim(), en: `You get the Zoom link${schedule ? ` — ${schedule.startEn.replace("Starts ", "first session ")}` : ""}` },
+                  ].map((s, i) => (
+                    <li key={i} className="flex items-start gap-3 rounded-xl bg-white/5 border border-white/10 p-4">
+                      <span className="flex-shrink-0 w-8 h-8 rounded-full bg-green-500/20 text-green-300 font-bold flex items-center justify-center">{i + 1}</span>
+                      <span className="text-sm text-slate-100 leading-relaxed flex items-start gap-2">
+                        <s.icon className="w-4 h-4 mt-0.5 text-green-300 flex-shrink-0" />
+                        {isAr ? s.ar : s.en}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+                <div className="mt-5 grid sm:grid-cols-3 gap-2 text-sm">
+                  <a href="https://ipn.eg/S/msara/instapay/9Z2HJW" target="_blank" rel="noopener noreferrer" className="rounded-lg bg-purple-600/20 border border-purple-500/40 text-purple-200 px-3 py-2.5 text-center font-semibold hover:bg-purple-600/30">InstaPay</a>
+                  <div className="rounded-lg bg-red-600/15 border border-red-500/30 text-red-200 px-3 py-2.5 text-center font-semibold">Vodafone Cash <span dir="ltr" className="font-mono">01020945719</span></div>
+                  <a href="https://www.easykash.net/Knowlytics%20Hub%20/pay" target="_blank" rel="noopener noreferrer" className="rounded-lg bg-blue-600/20 border border-blue-500/40 text-blue-200 px-3 py-2.5 text-center font-semibold hover:bg-blue-600/30">EasyKash</a>
+                </div>
+                <a
+                  href={`https://wa.me/201226929392?text=${encodeURIComponent(isAr ? `دفعت لحجز كورس: ${title} — ده إيصال التحويل` : `I paid for the course: ${title} — here is my transfer receipt`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 flex w-full items-center justify-center rounded-xl bg-green-600 py-3 font-bold text-white hover:bg-green-500"
+                >
+                  {isAr ? "دفعت — ابعت الإيصال على واتساب" : "I've paid — send receipt on WhatsApp"}
+                </a>
+              </div>
+            )}
+
             {/* Instructor */}
             <div className="glass rounded-2xl p-6 border border-slate-700/50">
               <h2 className="text-xl font-bold text-white mb-5">
@@ -1043,135 +1283,25 @@ export default function CourseDetailPage() {
                     <span className="flex items-center gap-1"><PlayCircle className="w-3.5 h-3.5 text-purple-400" /> 9 {isAr ? "دورات" : "Courses"}</span>
                     <span className="flex items-center gap-1"><Award className="w-3.5 h-3.5 text-yellow-400" /> 17+ {isAr ? "سنة خبرة" : "Years Exp."}</span>
                   </div>
-                  <p className="text-slate-300 text-sm leading-relaxed mb-3">
+                  <p className="text-slate-200 text-sm leading-relaxed mb-3">
                     {isAr
-                      ? "خبير تحليل بيانات بخبرة أكثر من 17 سنة مع شركات مالتي ناشيونال كبرى. بيدرّب من 2016 ودرّب أكتر من 8 شركات في مجالات مختلفة. مؤسس Knowlytics Hub وبيساعد المتدربين يدخلوا مجال تحليل البيانات باحتراف."
-                      : "Data analytics expert with 17+ years of experience at multinational companies. Training since 2016, trained 8+ companies across various industries. Founder of Knowlytics Hub, helping trainees break into data analytics professionally."}
+                      ? "خبير تحليل بيانات بخبرة أكثر من 17 سنة، ودرّب أكتر من 7,000 متدرب أفراد وشركات. اشتغل مدرب تحليل بيانات في الأكاديمية العربية للعلوم والتكنولوجيا والنقل البحري، ودرّب أكتر من 8 شركات في مجالات مختلفة. مؤسس Knowlytics Hub وبيساعد المتدربين يدخلوا مجال تحليل البيانات باحتراف."
+                      : "Data analytics expert with 17+ years of experience who has trained 7,000+ individuals and corporate teams. Worked as a data analysis trainer at the Arab Academy for Science, Technology & Maritime Transport and has trained 8+ companies across industries. Founder of Knowlytics Hub, helping trainees break into data analytics professionally."}
                   </p>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
                     {[
-                      { num: "17+", labelAr: "سنة خبرة", labelEn: "Years Exp." },
-                      { num: "8+", labelAr: "شركة دربها", labelEn: "Companies" },
-                      { num: "2016", labelAr: "بداية التدريب", labelEn: "Training Since" },
-                      { num: "7,000+", labelAr: "متدرب", labelEn: "Students" },
+                      { num: "17+", labelAr: "سنة خبرة", labelEn: "Years of experience" },
+                      { num: "7,000+", labelAr: "متدرب أفراد وشركات", labelEn: "Trainees" },
+                      { num: "8+", labelAr: "شركة دربها", labelEn: "Companies trained" },
+                      { num: "AASTMT", labelAr: "مدرب بالأكاديمية البحرية", labelEn: "Arab Academy trainer" },
                     ].map((s, i) => (
                       <div key={i} className="bg-white/5 rounded-xl p-2.5">
                         <p className="text-white font-bold text-lg">{s.num}</p>
-                        <p className="text-slate-400 text-xs">{isAr ? s.labelAr : s.labelEn}</p>
+                        <p className="text-slate-300 text-xs">{isAr ? s.labelAr : s.labelEn}</p>
                       </div>
                     ))}
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Trained Companies */}
-            {course.slug === "excel-powerbi-ai-freelance" && (
-              <div className="glass rounded-2xl p-6 border border-slate-700/50">
-                <h2 className="text-xl font-bold text-white mb-2">
-                  {isAr ? "شركات تم تدريبها" : "Companies We've Trained"}
-                </h2>
-                <p className="text-slate-400 text-sm mb-6">
-                  {isAr
-                    ? "من أبرز الشركات اللي استفادت من برامج تدريبنا"
-                    : "Some of the top companies that benefited from our training programs"}
-                </p>
-                <div className="grid grid-cols-4 gap-4">
-                  {[
-                    { name: "Saint-Gobain", logo: "/company-logo/Saint-Gobain.png", dark: false },
-                    { name: "AFRAS KSA", logo: "/company-logo/AFRAS KSA.jpg", dark: false },
-                    { name: "Alyoum", logo: "/company-logo/Alyoum.png", dark: false },
-                    { name: "Cinnabon", logo: "/company-logo/Cinnabon.png", dark: false },
-                    { name: "EFS", logo: "/company-logo/EFS.jpg", dark: false },
-                    { name: "Asfour Crystal", logo: "/company-logo/ASFOUR.png", dark: false },
-                    { name: "Apleona", logo: "/company-logo/Apleona.png", dark: false },
-                    { name: "Symphony Development", logo: "/company-logo/Symphony Development.webp", dark: true },
-                    { name: "Elsewedy Watanya", logo: "/company-logo/Elsewedy Watanya.png", dark: false },
-                  ].map((company, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.06 }}
-                      className="flex flex-col items-center gap-2 border border-white/10 rounded-xl p-3 transition-colors hover:border-white/20 bg-slate-800/50"
-                    >
-                      <div className={`w-full h-14 relative rounded-lg p-1.5 ${company.dark ? "bg-slate-700" : "bg-white"}`}>
-                        <Image
-                          src={company.logo}
-                          alt={company.name}
-                          fill
-                          className="object-contain p-1"
-                          sizes="120px"
-                        />
-                      </div>
-                      <p className="text-xs text-slate-400 text-center leading-tight">{company.name}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Group Training Photos */}
-            {course.slug === "excel-powerbi-ai-freelance" && (
-              <div className="glass rounded-2xl p-6 border border-slate-700/50">
-                <h2 className="text-xl font-bold text-white mb-2">
-                  {isAr ? "من جروباتنا السابقة" : "Our Previous Training Groups"}
-                </h2>
-                <p className="text-slate-400 text-sm mb-5">
-                  {isAr ? "صور من الجروبات اللي اتدربت على هذا الكورس" : "Photos from groups who completed this course"}
-                </p>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {[1,2,3,4,5,6,7,8].map((n) => (
-                    <motion.div
-                      key={n}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: n * 0.06 }}
-                      className="relative aspect-square rounded-xl overflow-hidden"
-                    >
-                      <Image
-                        src={`/groups/g${n}.jpeg`}
-                        alt={`Training group ${n}`}
-                        fill
-                        className="object-cover hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 640px) 50vw, 25vw"
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Trainee Reviews */}
-            <div className="glass rounded-2xl p-6 border border-yellow-500/20">
-              <h2 className="text-xl font-bold text-white mb-2">
-                {isAr ? "آراء المتدربين" : "Trainee Reviews"}
-              </h2>
-              <p className="text-slate-400 text-sm mb-5">
-                {isAr ? "شوف إيه اللي بيقوله المتدربين عن الكورس" : "See what our students say about this course"}
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {["/feedback/f1.jpeg", "/feedback/f2.jpeg", "/feedback/f3.jpeg", "/feedback/f4.jpeg", "/feedback/f5.png"].map((src, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="relative rounded-xl overflow-hidden border border-slate-700/50"
-                  >
-                    <Image
-                      src={src}
-                      alt={`Trainee review ${i + 1}`}
-                      width={400}
-                      height={300}
-                      className="w-full h-auto object-contain bg-white"
-                      sizes="(max-width: 640px) 100vw, 33vw"
-                    />
-                  </motion.div>
-                ))}
               </div>
             </div>
 
@@ -1303,7 +1433,79 @@ export default function CourseDetailPage() {
           </Link>
         </div>
       </section>
+
+      {/* Sticky mobile booking bar — leaves the end corner free for the floating WhatsApp button */}
+      {!isFree && (
+        <div className="lg:hidden fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-slate-950/95 backdrop-blur px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
+          <div className="flex items-center gap-3 pe-20">
+            <div className="flex-shrink-0">
+              <p className="text-white font-bold leading-tight">{course.price.toLocaleString()} {isAr ? "ج.م" : "EGP"}</p>
+              {schedule && <p className="text-[11px] text-slate-300">{isAr ? schedule.startAr : schedule.startEn}</p>}
+            </div>
+            <a href="#booking" className="flex-1 text-center rounded-xl bg-yellow-400 py-3 text-sm font-bold text-slate-900 hover:bg-yellow-300">
+              {isAr ? "احجز مكانك" : "Book your seat"}
+            </a>
+          </div>
+        </div>
+      )}
+
+      {/* Image viewer for group photos and reviews */}
+      {zoomSrc && (
+        <div
+          className="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setZoomSrc(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <button
+            type="button"
+            onClick={() => setZoomSrc(null)}
+            className="absolute top-4 end-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center"
+            aria-label={isAr ? "إغلاق" : "Close"}
+          >
+            <X className="w-5 h-5" />
+          </button>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={zoomSrc} alt="" className="max-w-full max-h-[88vh] rounded-xl" onClick={(e) => e.stopPropagation()} />
+        </div>
+      )}
     </main>
+  );
+}
+
+// ── Intro Video (loads the player only after the visitor taps play) ───────
+function CourseVideo({ url, isAr, title }: { url: string; isAr: boolean; title: string }) {
+  const [playing, setPlaying] = useState(false);
+  return (
+    <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-slate-700/50 bg-slate-900">
+      {playing ? (
+        <iframe
+          src={url}
+          title={title}
+          allow="autoplay; fullscreen"
+          allowFullScreen
+          className="absolute inset-0 h-full w-full"
+        />
+      ) : (
+        <button
+          type="button"
+          onClick={() => setPlaying(true)}
+          className="group absolute inset-0 h-full w-full"
+          aria-label={isAr ? "تشغيل الفيديو التعريفي" : "Play intro video"}
+        >
+          <Image src="/groups/g1.jpeg" alt="" fill className="object-cover opacity-60 transition-opacity group-hover:opacity-70" sizes="(max-width: 1024px) 100vw, 800px" />
+          <span className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+          <span className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+            <span className="flex h-20 w-20 items-center justify-center rounded-full bg-yellow-400 shadow-2xl transition-transform group-hover:scale-110">
+              <svg viewBox="0 0 24 24" className="ms-1 h-9 w-9 fill-slate-900" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+            </span>
+            <span className="rounded-full bg-black/50 px-4 py-1.5 text-sm font-semibold text-white">
+              {isAr ? "شوف الفيديو التعريفي للكورس" : "Watch the course intro"}
+            </span>
+          </span>
+        </button>
+      )}
+    </div>
   );
 }
 
@@ -1387,12 +1589,12 @@ function EnrollmentCard({
           </p>
         )}
 
-        <Link
-          href={`/${locale}/contact`}
+        <a
+          href="#booking"
           className="block w-full text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3.5 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg shadow-blue-900/40 mb-3"
         >
-          {isAr ? "سجّل الآن" : "Enroll Now"}
-        </Link>
+          {isAr ? "احجز مكانك الآن" : "Book Your Seat"}
+        </a>
 
         <a
           href={`https://wa.me/201226929392?text=${encodeURIComponent(isAr ? `أريد التسجيل في دورة: ${title}` : `I want to enroll in: ${title}`)}`}
@@ -1406,7 +1608,7 @@ function EnrollmentCard({
         {/* Payment Methods */}
         <div className="mt-4 p-4 rounded-xl bg-slate-800/60 border border-slate-700/50">
           <p className="text-xs font-semibold text-slate-300 mb-3 text-center">
-            {isAr ? "&#128179; طرق الدفع المتاحة" : "&#128179; Payment Methods"}
+            {isAr ? "💳 طرق الدفع المتاحة" : "💳 Payment Methods"}
           </p>
           <div className="space-y-2">
             <a
@@ -1456,7 +1658,7 @@ function EnrollmentCard({
           </div>
         </div>
 
-        <p className="text-xs text-center text-slate-500 mt-3">
+        <p className="text-xs text-center text-slate-300 mt-3">
           {isAr ? "ضمان استرداد المال خلال 7 أيام" : "7-day money-back guarantee"}
         </p>
 
