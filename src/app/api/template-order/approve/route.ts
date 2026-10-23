@@ -5,6 +5,7 @@ import { escapeHtml, signToken, verifyToken } from "@/lib/signedToken";
 import {
   ApproveToken, DOWNLOAD_DAYS, FROM, SITE_URL, customerDownloadHtml, findProduct, orderRows, page, resend,
 } from "@/lib/templateOrders";
+import { purchaseEventId, sendPurchase } from "@/lib/metaCapi";
 
 function load(token: string | null) {
   const o = verifyToken<ApproveToken>(token, "approve");
@@ -44,6 +45,12 @@ export async function POST(req: NextRequest) {
     console.error("approve email failed", e);
     return page("حصل خطأ", `<h1>ماقدرناش نبعت الإيميل</h1><p class="muted">جرّب تاني بعد دقيقة. لو المشكلة استمرت ابعت للعميل اللينك ده يدوياً:</p><p style="direction:ltr;word-break:break-all;font-size:12px">${escapeHtml(url)}</p>`, 502);
   }
+  const capi = await sendPurchase({
+    eventId: purchaseEventId("template", o.slug, String(o.c), o.email, String(o.at)),
+    value: o.price, contentType: "template", contentId: o.slug, contentName: p.tpl.titleEn,
+    email: o.email, phone: o.phone, name: o.name, sourceUrl: `${SITE_URL}/ar/templates`,
+  });
+  if (!capi.ok) console.error("meta purchase not sent", capi.reason);
   return page("تم التأكيد", `<h1>✅ تم تأكيد الدفع</h1>
     <p>اتبعت لينك التحميل لـ <b>${escapeHtml(o.email)}</b>، وصالح لمدة ${DOWNLOAD_DAYS} أيام.</p>
     <p class="muted">لو العميل ماوصلهوش الإيميل (يشوف الـ Spam الأول)، ابعتله اللينك ده على واتساب:</p>
