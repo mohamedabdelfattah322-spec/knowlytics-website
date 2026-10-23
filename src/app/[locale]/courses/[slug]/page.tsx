@@ -612,6 +612,11 @@ const COURSE_VIDEO: Record<string, string> = {
   "excel-powerbi-ai-freelance": "https://drive.google.com/file/d/19_3pwB3FqAba0Xf9pbR9QaM8XjgrmTzF/preview",
 };
 
+// Courses that can be booked with 50% up front; the rest is due within the first N lectures.
+const COURSE_DEPOSIT: Record<string, { lectures: number }> = {
+  "excel-powerbi-ai-freelance": { lectures: 4 },
+};
+
 const COURSE_DASHBOARD_VIDEO: Record<string, string> = {
   "excel-powerbi-ai-freelance": "https://drive.google.com/file/d/1DM8FF9J8Es9grdi_PPDdqD1r4fw4cjyJ/preview",
 };
@@ -713,6 +718,12 @@ const COURSE_FAQ: Record<string, { qAr: string; qEn: string; aAr: string; aEn: s
       qEn: "Can I get a refund if the course isn't for me?",
       aAr: "أيوه، فيه ضمان استرداد خلال 7 أيام. ابعتلنا على واتساب 00201226929392 خلال المدة دي وهنرجعلك المبلغ.",
       aEn: "Yes — there is a 7-day money-back guarantee. Message us on WhatsApp +20 122 692 9392 within that period and we'll refund you.",
+    },
+    {
+      qAr: "ينفع أدفع على دفعتين؟",
+      qEn: "Can I pay in two installments?",
+      aAr: "أيوه. تقدر تحجز مكانك بـ 50% من سعر الكورس (1,500 جنيه)، وتدفع الباقي (1,500 جنيه) خلال أول 4 محاضرات.",
+      aEn: "Yes. Book your seat with 50% of the price (EGP 1,500) and pay the remaining EGP 1,500 within the first 4 lectures.",
     },
     {
       qAr: "إيه الفرق بين الكورس ده وكورس Excel العادي؟",
@@ -829,6 +840,9 @@ export default function CourseDetailPage() {
   const hero = COURSE_HERO[course.slug] || null;
   const videoUrl = COURSE_VIDEO[course.slug] || null;
   const dashboardVideoUrl = COURSE_DASHBOARD_VIDEO[course.slug] || null;
+  const deposit = !isFree && COURSE_DEPOSIT[course.slug]
+    ? { amount: Math.round(course.price / 2), lectures: COURSE_DEPOSIT[course.slug].lectures }
+    : null;
   const audience = COURSE_AUDIENCE[course.slug] || null;
   const reviews = ["/feedback/f1.jpeg", "/feedback/f2.jpeg", "/feedback/f3.jpeg", "/feedback/f4.jpeg", "/feedback/f5.png"];
   const groupPhotos = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `/groups/g${n}.jpeg`);
@@ -1265,9 +1279,29 @@ export default function CourseDetailPage() {
                 <p className="text-slate-300 text-sm mb-5">
                   {isAr ? "4 خطوات بسيطة، وتأكيد الحجز بيوصلك على واتساب." : "Four simple steps — your confirmation arrives on WhatsApp."}
                 </p>
+                {deposit && (
+                  <div className="mb-5 grid sm:grid-cols-2 gap-3">
+                    <div className="rounded-xl border-2 border-yellow-400/60 bg-yellow-400/10 p-4">
+                      <p className="text-xs font-bold text-yellow-300 mb-1">{isAr ? "احجز بنص المبلغ" : "Book with half"}</p>
+                      <p className="text-2xl font-bold text-white">{deposit.amount.toLocaleString()} <span className="text-sm">{isAr ? "جنيه" : "EGP"}</span></p>
+                      <p className="text-sm text-slate-200 mt-1">
+                        {isAr
+                          ? `ادفع 50% دلوقتي، والباقي (${(course.price - deposit.amount).toLocaleString()} جنيه) خلال أول ${deposit.lectures} محاضرات.`
+                          : `Pay 50% now and the remaining EGP ${(course.price - deposit.amount).toLocaleString()} within the first ${deposit.lectures} lectures.`}
+                      </p>
+                    </div>
+                    <div className="rounded-xl border border-white/15 bg-white/5 p-4">
+                      <p className="text-xs font-bold text-slate-300 mb-1">{isAr ? "أو ادفع مرة واحدة" : "Or pay in full"}</p>
+                      <p className="text-2xl font-bold text-white">{course.price.toLocaleString()} <span className="text-sm">{isAr ? "جنيه" : "EGP"}</span></p>
+                      <p className="text-sm text-slate-300 mt-1">{isAr ? "وتخلص من الدفع خالص." : "And you're done with payments."}</p>
+                    </div>
+                  </div>
+                )}
                 <ol className="grid sm:grid-cols-2 gap-3">
                   {[
-                    { icon: CreditCard, ar: `ادفع ${course.price.toLocaleString()} جنيه بـ InstaPay أو فودافون كاش أو EasyKash`, en: `Pay EGP ${course.price.toLocaleString()} via InstaPay, Vodafone Cash or EasyKash` },
+                    deposit
+                      ? { icon: CreditCard, ar: `ادفع ${deposit.amount.toLocaleString()} جنيه (50%) أو ${course.price.toLocaleString()} كاملين بـ InstaPay أو فودافون كاش أو EasyKash`, en: `Pay EGP ${deposit.amount.toLocaleString()} (50%) or the full EGP ${course.price.toLocaleString()} via InstaPay, Vodafone Cash or EasyKash` }
+                      : { icon: CreditCard, ar: `ادفع ${course.price.toLocaleString()} جنيه بـ InstaPay أو فودافون كاش أو EasyKash`, en: `Pay EGP ${course.price.toLocaleString()} via InstaPay, Vodafone Cash or EasyKash` },
                     { icon: Send, ar: "ابعت صورة التحويل على واتساب 00201226929392", en: "Send the transfer screenshot on WhatsApp +20 122 692 9392" },
                     { icon: BadgeCheck, ar: "بنأكد حجزك ونضيفك لجروب الكورس", en: "We confirm your seat and add you to the course group" },
                     { icon: PlayCircle, ar: `بيوصلك لينك Zoom وأول محاضرة ${schedule ? (isAr ? schedule.startAr.replace("يبدأ ", "") : "") : ""}`.trim(), en: `You get the Zoom link${schedule ? ` — ${schedule.startEn.replace("Starts ", "first session ")}` : ""}` },
@@ -1479,7 +1513,9 @@ export default function CourseDetailPage() {
           <div className="flex items-center gap-3 pe-20">
             <div className="flex-shrink-0">
               <p className="text-white font-bold leading-tight">{course.price.toLocaleString()} {isAr ? "ج.م" : "EGP"}</p>
-              {schedule && <p className="text-[11px] text-slate-300">{isAr ? schedule.startAr : schedule.startEn}</p>}
+              {deposit
+                ? <p className="text-[11px] text-yellow-300">{isAr ? `أو احجز بـ ${deposit.amount.toLocaleString()} (50%)` : `or book with ${deposit.amount.toLocaleString()} (50%)`}</p>
+                : schedule && <p className="text-[11px] text-slate-300">{isAr ? schedule.startAr : schedule.startEn}</p>}
             </div>
             <a href="#booking" className="flex-1 text-center rounded-xl bg-yellow-400 py-3 text-sm font-bold text-slate-900 hover:bg-yellow-300">
               {isAr ? "احجز مكانك" : "Book your seat"}
@@ -1625,6 +1661,13 @@ function EnrollmentCard({
         {discount > 0 && (
           <p className="text-green-400 text-sm mb-4">
             {isAr ? `وفّر ${discount}% - عرض محدود!` : `Save ${discount}% — Limited offer!`}
+          </p>
+        )}
+        {!isFree && COURSE_DEPOSIT[course.slug] && (
+          <p className="text-yellow-300 text-sm font-semibold mb-4 -mt-2">
+            {isAr
+              ? `أو احجز بـ ${Math.round(course.price / 2).toLocaleString()} جنيه (50%) والباقي خلال أول ${COURSE_DEPOSIT[course.slug].lectures} محاضرات`
+              : `Or book with EGP ${Math.round(course.price / 2).toLocaleString()} (50%) — the rest within the first ${COURSE_DEPOSIT[course.slug].lectures} lectures`}
           </p>
         )}
 

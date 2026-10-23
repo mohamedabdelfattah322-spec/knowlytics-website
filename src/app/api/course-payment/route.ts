@@ -31,7 +31,7 @@ function form(msg = "", values: Record<string, string> = {}) {
     <form method="post">
       <label>كلمة سر الأدمن</label><input name="key" type="password" autocomplete="current-password" required style="${input}">
       <label>الكورس</label><select name="slug" id="slug" required style="${input}">${options}</select>
-      <label>المبلغ المدفوع (جنيه)</label><input name="value" id="value" type="number" min="1" required value="${v("value") || COURSES[0]?.price || ""}" style="${input}">
+      <label>قيمة الحجز (جنيه) <span class="muted">— لو دفع 50% بس، سيبها سعر الكورس كامل، وماتسجّلش الباقي لما يدفعه</span></label><input name="value" id="value" type="number" min="1" required value="${v("value") || COURSES[0]?.price || ""}" style="${input}">
       <label>موبايل المتدرب (الرقم اللي بعت منه على واتساب)</label><input name="phone" type="tel" required value="${v("phone")}" style="${input}">
       <label>اسم المتدرب <span class="muted">(اختياري)</span></label><input name="name" value="${v("name")}" style="${input}">
       <label>إيميل المتدرب <span class="muted">(اختياري — بيحسّن الربط بالإعلان)</span></label><input name="email" type="email" value="${v("email")}" style="${input}">
