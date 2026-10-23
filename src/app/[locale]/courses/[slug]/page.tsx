@@ -29,7 +29,7 @@ import {
   BadgeCheck,
 } from "lucide-react";
 import coursesData from "@/data/courses.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CourseLeadForm from "./CourseLeadForm";
 
 // Static curriculum data keyed by slug
@@ -801,6 +801,23 @@ export default function CourseDetailPage() {
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [showAllReviews, setShowAllReviews] = useState(false);
   const [zoomSrc, setZoomSrc] = useState<string | null>(null);
+
+  // Ad links like "#booking?utm_source=…" or "?go=booking" don't match the element id, so scroll ourselves.
+  useEffect(() => {
+    const wantsBooking = window.location.hash.startsWith("#booking") || new URLSearchParams(window.location.search).get("go") === "booking";
+    if (!wantsBooking) return;
+    // Lazy images above the section load after the jump and push it down, so keep re-aligning
+    // while the page is still growing (up to 6s) unless the visitor starts scrolling.
+    const go = () => document.getElementById("booking")?.scrollIntoView({ block: "start" });
+    const first = setTimeout(go, 300);
+    const resize = new ResizeObserver(go);
+    const watch = setTimeout(() => resize.observe(document.body), 350);
+    const stop = () => { clearTimeout(first); clearTimeout(watch); clearTimeout(end); resize.disconnect(); };
+    const end = setTimeout(stop, 6000);
+    const events = ["wheel", "touchstart", "keydown"] as const;
+    events.forEach((e) => window.addEventListener(e, stop, { once: true }));
+    return () => { stop(); events.forEach((e) => window.removeEventListener(e, stop)); };
+  }, []);
 
   const BackIcon = isAr ? ArrowRight : ArrowLeft;
 

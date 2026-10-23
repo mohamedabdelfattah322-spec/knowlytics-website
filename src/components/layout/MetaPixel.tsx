@@ -35,7 +35,9 @@ export type Attribution = { source?: string; medium?: string; campaign?: string;
 
 function captureAttribution() {
   try {
-    const q = new URLSearchParams(window.location.search);
+    // Ads that link to ".../page#booking" get their tags appended after the hash ("#booking?utm_source=…").
+    const hash = window.location.hash;
+    const q = new URLSearchParams(window.location.search || (hash.includes("?") ? hash.slice(hash.indexOf("?")) : ""));
     const utm = { source: q.get("utm_source"), medium: q.get("utm_medium"), campaign: q.get("utm_campaign"), content: q.get("utm_content") };
     let next: Attribution | null = null;
     if (utm.source) next = { ...Object.fromEntries(Object.entries(utm).filter(([, v]) => v)) };
