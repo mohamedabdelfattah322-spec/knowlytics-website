@@ -18,24 +18,26 @@ function form(msg = "", values: Record<string, string> = {}) {
   const options = COURSES.map((c) =>
     `<option value="${c.slug}" data-price="${c.price}"${values.slug === c.slug ? " selected" : ""}>${escapeHtml(c.titleAr)} — ${c.price} جنيه</option>`).join("");
   const input = "width:100%;box-sizing:border-box;padding:10px;border-radius:8px;border:1px solid #334155;background:#0f1a30;color:#e2e8f0;margin:4px 0 12px;font-size:15px";
-  const deposit = values.type === "deposit";
+  const type = values.type || "full";
+  const opt = (v: string, label: string) => `<option value="${v}"${type === v ? " selected" : ""}>${label}</option>`;
   return `<h1>تسجيل دفع كورس</h1>
     <p class="muted">بعد ما تتأكد إن فلوس الحجز وصلت، سجّلها هنا عشان فيسبوك يعرف إن الإعلان جاب حجز حقيقي. <a href="/api/leads" style="color:#5eead4">لوحة المهتمين</a></p>
     ${msg}
     <form method="post">
       <label>كلمة سر الأدمن</label><input name="key" type="password" autocomplete="current-password" required style="${input}">
       <label>الكورس</label><select name="slug" id="slug" required style="${input}">${options}</select>
-      <label>نوع الدفعة</label><select name="type" style="${input}">
-        <option value="full"${deposit ? "" : " selected"}>دفع كامل</option>
-        <option value="deposit"${deposit ? " selected" : ""}>دفع مقدم (50%)</option></select>
-      <label>قيمة الحجز (جنيه) <span class="muted">— لو دفع 50% بس، سيبها سعر الكورس كامل، وماتسجّلش الباقي لما يدفعه</span></label><input name="value" id="value" type="number" min="1" required value="${v("value") || COURSES[0]?.price || ""}" style="${input}">
+      <label>نوع الدفعة</label><select name="type" id="type" style="${input}">
+        ${opt("full", "دفع كامل")}${opt("deposit", "دفع مقدم (50%)")}${opt("remainder", "باقي المبلغ (بعد المقدم)")}</select>
+      <label>المبلغ اللي اتدفع فعلاً (جنيه)</label><input name="value" id="value" type="number" min="1" required value="${v("value") || COURSES[0]?.price || ""}" style="${input}">
       <label>موبايل المتدرب (الرقم اللي بعت منه على واتساب)</label><input name="phone" type="tel" required value="${v("phone")}" style="${input}">
       <label>اسم المتدرب <span class="muted">(اختياري)</span></label><input name="name" value="${v("name")}" style="${input}">
       <label>إيميل المتدرب <span class="muted">(اختياري — بيحسّن الربط بالإعلان)</span></label><input name="email" type="email" value="${v("email")}" style="${input}">
       <label>Test code <span class="muted">(للتجربة بس — سيبه فاضي في الدفع الحقيقي)</span></label><input name="test" value="${v("test")}" dir="ltr" style="${input}">
       <p style="text-align:center;margin-top:8px"><button type="submit">تسجيل الدفع</button></p>
     </form>
-    <script>document.getElementById('slug').addEventListener('change',function(e){var o=e.target.selectedOptions[0];document.getElementById('value').value=o.dataset.price})</script>`;
+    <script>(function(){var s=document.getElementById('slug'),t=document.getElementById('type'),v=document.getElementById('value');
+      function fill(){var p=+s.selectedOptions[0].dataset.price;v.value=t.value==='full'?p:t.value==='deposit'?Math.round(p/2):p-Math.round(p/2)}
+      s.addEventListener('change',fill);t.addEventListener('change',fill)})()</script>`;
 }
 
 export async function GET() {
@@ -54,29 +56,36 @@ export async function POST(req: NextRequest) {
   if (!Number.isFinite(value) || value <= 0) return err("اكتب المبلغ المدفوع.");
   if (values.phone.replace(/\D/g, "").length < 10) return err("اكتب رقم موبايل صحيح.");
 
-  const day = new Date().toISOString().slice(0, 10);
-  const res = await sendPurchase({
-    eventId: purchaseEventId("course", course.slug, values.phone.replace(/\D/g, ""), day),
-    value, contentType: "course", contentId: course.slug, contentName: course.titleAr,
-    phone: values.phone, name: values.name || undefined, email: values.email || undefined,
-    sourceUrl: `${SITE_URL}/ar/courses/${course.slug}`,
-    testEventCode: values.test || undefined,
-  });
-  if (!res.ok) return err(`ماتبعتش لفيسبوك: ${escapeHtml(res.reason)}`, 502);
+  const type = (["full", "deposit", "remainder"] as const).find((t) => t === values.type) || "full";
 
-  if (values.test) return page("تجربة", `<h1>🧪 اتبعت حدث تجربة</h1>
-    <p>افتح Events Manager ← Knowlytics Hub ← Test events، هتلاقي Purchase بـ ${value} جنيه. ده مش هيتحسب في أرقام الإعلانات.</p>
-    <p style="text-align:center"><a href="/api/course-payment" style="color:#5eead4">رجوع</a></p>`);
+  // One booking = one Purchase worth the course price, sent with the first payment (full or deposit).
+  // The remainder is cash only: it updates the dashboard but never creates a second booking in Meta.
+  let metaNote = "";
+  if (type !== "remainder") {
+    const res = await sendPurchase({
+      eventId: purchaseEventId("course", course.slug, values.phone.replace(/\D/g, "")),
+      value: course.price, contentType: "course", contentId: course.slug, contentName: course.titleAr,
+      phone: values.phone, name: values.name || undefined, email: values.email || undefined,
+      sourceUrl: `${SITE_URL}/ar/courses/${course.slug}`,
+      testEventCode: values.test || undefined,
+    });
+    if (!res.ok) return err(`ماتبعتش لفيسبوك: ${escapeHtml(res.reason)}`, 502);
+    metaNote = values.test
+      ? `اتبعت لفيسبوك Purchase <b>تجريبي</b> (Test events بس) بقيمة الحجز ${course.price} جنيه.`
+      : `اتبعت لفيسبوك Purchase واحد بقيمة الحجز <b>${course.price} جنيه</b>.`;
+  } else {
+    metaNote = "ده باقي مبلغ، فمااتبعتش حجز جديد لفيسبوك.";
+  }
 
-  let leadNote = "واتحدثت حالته في لوحة المهتمين.";
+  let leadNote = "";
   try {
-    await recordPaymentOnLead({ phone: values.phone, name: values.name, course: course.titleAr, value, deposit: values.type === "deposit" });
+    const lead = await recordPaymentOnLead({ phone: values.phone, name: values.name, course: course.titleAr, amount: value, type });
+    leadNote = `المحصّل من المتدرب ده لحد دلوقتي: <b>${lead.paid} جنيه</b> — الحالة: <b>${lead.status}</b>.`;
   } catch (e) {
     console.error("lead status not updated", e);
     leadNote = "بس ماتحدثتش لوحة المهتمين (افتحها واتأكد إن جدول Course Leads موجود).";
   }
-  return page("تم التسجيل", `<h1>✅ اتسجّل الدفع</h1>
-    <p>اتبعت لفيسبوك Purchase بمبلغ <b>${value} جنيه</b> لكورس <b>${escapeHtml(course.titleAr)}</b>، ${leadNote}</p>
-    <p class="muted">لو سجّلت نفس المتدرب لنفس الكورس مرتين في نفس اليوم، فيسبوك هيحسبها مرة واحدة.</p>
+  return page("تم التسجيل", `<h1>✅ اتسجّل الدفع (${value} جنيه)</h1>
+    <p>${metaNote}</p><p>${leadNote}</p>
     <p style="text-align:center"><a href="/api/course-payment" style="color:#5eead4">تسجيل دفع تاني</a> · <a href="/api/leads" style="color:#5eead4">لوحة المهتمين</a></p>`);
 }

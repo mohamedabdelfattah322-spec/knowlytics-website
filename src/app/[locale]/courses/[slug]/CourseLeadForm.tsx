@@ -31,7 +31,7 @@ export default function CourseLeadForm({ slug, title, isAr }: { slug: string; ti
         }),
       });
       if (!res.ok) throw new Error(String(res.status));
-      trackPixel("CompleteRegistration", { content_type: "course", content_ids: [slug] });
+      trackPixel("Lead", { content_type: "course", content_ids: [slug], lead_type: "course_form" });
       setStatus("done");
     } catch {
       setStatus("error");

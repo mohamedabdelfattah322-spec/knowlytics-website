@@ -57,12 +57,13 @@ function dashboard(key: string, leads: Lead[], flash = "") {
 
   return page("متابعة المهتمين", wide(`<h1>لوحة متابعة المهتمين</h1>${flash}
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0">
-      ${card("المهتمين", String(leads.length))}${card("دفعوا", String(paid.length))}
-      ${card("نسبة التحويل", `${leads.length ? Math.round((paid.length / leads.length) * 100) : 0}%`)}${card("قيمة الحجوزات (جنيه)", revenue.toLocaleString())}
+      ${card("المهتمين", String(leads.length))}${card("حجوزات (دفعوا)", String(paid.length))}
+      ${card("منهم دفع مقدم بس", String(leads.filter((l) => l.status === "دفع مقدم").length))}
+      ${card("نسبة التحويل", `${leads.length ? Math.round((paid.length / leads.length) * 100) : 0}%`)}${card("المحصّل فعلاً (جنيه)", revenue.toLocaleString())}
     </div>
     <p class="muted">${statusCounts}</p>
     <h2 style="font-size:17px;margin-top:22px">حسب المصدر / الحملة</h2>
-    <div style="overflow-x:auto"><table><tr><td>المصدر</td><td>مهتمين</td><td>دفعوا</td><td>تحويل</td><td>جنيه</td></tr>${sourceRows || '<tr><td colspan="5">لسه مفيش بيانات</td></tr>'}</table></div>
+    <div style="overflow-x:auto"><table><tr><td>المصدر</td><td>مهتمين</td><td>دفعوا</td><td>تحويل</td><td>المحصّل</td></tr>${sourceRows || '<tr><td colspan="5">لسه مفيش بيانات</td></tr>'}</table></div>
     <h2 style="font-size:17px;margin-top:22px">كل المهتمين (الأحدث الأول)</h2>
     <div style="overflow-x:auto"><table style="font-size:13px"><tr><td>التاريخ</td><td>الاسم</td><td>واتساب</td><td>الكورس</td><td>المصدر</td><td>الحالة</td></tr>${leadRows || '<tr><td colspan="6">لسه مفيش مهتمين</td></tr>'}</table></div>
     <form method="post" style="text-align:center;margin-top:16px"><input type="hidden" name="key" value="${k}"><input type="hidden" name="action" value="view"><button type="submit">تحديث</button></form>`));

@@ -105,16 +105,20 @@ export async function createLeadsTable(): Promise<{ ok: true } | { ok: false; re
   return { ok: false, reason: data?.error?.message || data?.error?.type || `HTTP ${res.status}` };
 }
 
-// After a confirmed payment: move the matching lead forward, or add the payer if they never filled the form.
-export async function recordPaymentOnLead(p: { phone: string; name?: string; course: string; value: number; deposit: boolean }) {
-  const status: LeadStatus = p.deposit ? "دفع مقدم" : "دفع كامل";
+// After a confirmed payment: add the cash to the matching lead (one row per person, so a deposit
+// followed by the remainder stays one booking), or add the payer if they never filled the form.
+export async function recordPaymentOnLead(p: { phone: string; name?: string; course: string; amount: number; type: "full" | "deposit" | "remainder" }) {
+  const status: LeadStatus = p.type === "deposit" ? "دفع مقدم" : "دفع كامل";
   const existing = await findLeadByPhone(p.phone);
   if (existing) {
-    await updateLead(existing.id, { Status: status, Paid: p.value, Course: existing.course || p.course });
-    return;
+    // A remainder adds to what was already collected; a fresh full/deposit payment replaces it.
+    const paid = p.type === "remainder" ? existing.paid + p.amount : p.amount;
+    await updateLead(existing.id, { Status: status, Paid: paid, Course: existing.course || p.course });
+    return { paid, status };
   }
   await createLead({
     Name: p.name || "—", Phone: p.phone, PhoneKey: phoneKey(p.phone), Course: p.course, Status: status,
-    Paid: p.value, Source: "مباشر / واتساب", Date: cairoNow(),
+    Paid: p.amount, Source: "مباشر / واتساب", Date: cairoNow(),
   });
+  return { paid: p.amount, status };
 }

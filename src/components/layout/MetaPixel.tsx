@@ -13,7 +13,8 @@ type Fn = (...args: unknown[]) => void;
 // Meta standard events -> GA4 recommended events.
 const GA_EVENTS: Record<string, string> = {
   ViewContent: "view_item", InitiateCheckout: "begin_checkout", AddPaymentInfo: "add_payment_info",
-  Lead: "generate_lead", CompleteRegistration: "generate_lead", Contact: "contact",
+  // Lead = a submitted form (course interest or template order); SubmitApplication = the "I paid, send receipt" click.
+  Lead: "generate_lead", SubmitApplication: "receipt_click", Contact: "contact",
 };
 
 // Events fired before the base snippet runs (e.g. ViewContent on first load) retry briefly.
