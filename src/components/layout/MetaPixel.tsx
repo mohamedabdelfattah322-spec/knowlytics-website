@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 export const META_PIXEL_ID = "1687611866220606";
-// Set NEXT_PUBLIC_GA_ID (G-XXXXXXXXXX) on Vercel to turn on Google Analytics 4.
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+// GA4 property "Knowlytics Hub Website" (stream: knowlyticshub.com).
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-EQZVH0Z7H2";
 
 type Fn = (...args: unknown[]) => void;
 
