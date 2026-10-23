@@ -49,7 +49,8 @@ async function airtable(url: string, init?: RequestInit) {
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
     const type = data?.error?.type || data?.error || "";
-    if (res.status === 404 || type === "TABLE_NOT_FOUND" || type === "NOT_FOUND") throw new LeadsTableMissing(String(type));
+    // Airtable answers a missing table with 403 INVALID_PERMISSIONS_OR_MODEL_NOT_FOUND.
+    if (res.status === 404 || ["TABLE_NOT_FOUND", "NOT_FOUND", "INVALID_PERMISSIONS_OR_MODEL_NOT_FOUND"].includes(type)) throw new LeadsTableMissing(String(type));
     throw new Error(`Airtable ${res.status}: ${data?.error?.message || type}`);
   }
   return data;
