@@ -14,7 +14,8 @@ type Fn = (...args: unknown[]) => void;
 const GA_EVENTS: Record<string, string> = {
   ViewContent: "view_item", InitiateCheckout: "begin_checkout", AddPaymentInfo: "add_payment_info",
   // Lead = a submitted form (course interest or template order); SubmitApplication = the "I paid, send receipt" click.
-  Lead: "generate_lead", SubmitApplication: "receipt_click", Contact: "contact",
+  // WhatsApp clicks are sent by trackWhatsApp() below, not through this map.
+  Lead: "generate_lead", SubmitApplication: "receipt_click",
 };
 
 // Events fired before the base snippet runs (e.g. ViewContent on first load) retry briefly.
@@ -64,8 +65,38 @@ function eventForClick(target: Element): { event: string; params?: Record<string
   if (href.endsWith("#booking")) return { event: "InitiateCheckout" };
   if (href.includes("easykash.net")) return { event: "AddPaymentInfo", params: { payment_method: "EasyKash" } };
   if (href.includes("ipn.eg")) return { event: "AddPaymentInfo", params: { payment_method: "InstaPay" } };
-  if (href.includes("wa.me")) return { event: "Contact" };
   return null;
+}
+
+// A WhatsApp button click is interest only (not a lead, purchase or booking). It is reported exactly once:
+// Meta "Contact" + GA4 "whatsapp_click" + one beacon for the admin dashboard. No phone numbers or names.
+const lastWaClick = new WeakMap<Element, number>();
+
+function trackWhatsApp(link: HTMLAnchorElement) {
+  const now = Date.now();
+  if (now - (lastWaClick.get(link) || 0) < 1500) return; // double-tap on the same button
+  lastWaClick.set(link, now);
+  const a = getAttribution();
+  const params = {
+    course_name: link.dataset.waCourse || "",
+    page_path: window.location.pathname,
+    button_location: link.dataset.waLocation || "other",
+    utm_source: a.source || "direct",
+    utm_medium: a.medium || "",
+    utm_campaign: a.campaign || "",
+    utm_content: a.content || "",
+  };
+  const w = window as unknown as { fbq?: Fn; gtag?: Fn };
+  w.fbq?.("track", "Contact", params);
+  w.gtag?.("event", "whatsapp_click", params);
+  try {
+    navigator.sendBeacon("/api/wa-click", new Blob([JSON.stringify(params)], { type: "application/json" }));
+  } catch { /* dashboard count is best-effort */ }
+}
+
+function isWhatsAppLink(link: HTMLAnchorElement | null): link is HTMLAnchorElement {
+  const href = link?.getAttribute("href") || "";
+  return /(^|\/\/)(wa\.me|api\.whatsapp\.com|web\.whatsapp\.com)\//.test(href) && !link?.closest("[data-pixel]");
 }
 
 export default function MetaPixel() {
@@ -87,6 +118,8 @@ export default function MetaPixel() {
     captureAttribution();
     const onClick = (e: MouseEvent) => {
       if (!(e.target instanceof Element)) return;
+      const link = e.target.closest("a");
+      if (isWhatsAppLink(link)) { trackWhatsApp(link); return; }
       const hit = eventForClick(e.target);
       if (hit) trackPixel(hit.event, { page: window.location.pathname, ...hit.params });
     };

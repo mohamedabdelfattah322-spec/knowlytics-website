@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CheckCircle2, Loader2, MessageCircle } from "lucide-react";
 import { getAttribution, trackPixel } from "@/components/layout/MetaPixel";
+import { WA_COURSE, waCourseUrl } from "@/lib/whatsapp";
 
 const LEVELS = [
   { ar: "مبتدئ", en: "Beginner" },
@@ -38,7 +39,8 @@ export default function CourseLeadForm({ slug, title, isAr }: { slug: string; ti
     }
   }
 
-  const wa = `https://wa.me/201226929392?text=${encodeURIComponent(isAr ? `سيبت بياناتي على الموقع بخصوص كورس: ${title}` : `I left my details on the website about: ${title}`)}`;
+  const isWaCourse = slug === WA_COURSE.slug;
+  const wa = isWaCourse ? waCourseUrl() : `https://wa.me/201226929392?text=${encodeURIComponent(isAr ? `سيبت بياناتي على الموقع بخصوص كورس: ${title}` : `I left my details on the website about: ${title}`)}`;
   const field = "w-full rounded-xl bg-slate-900/60 border border-white/15 px-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-teal-400";
 
   return (
@@ -55,7 +57,7 @@ export default function CourseLeadForm({ slug, title, isAr }: { slug: string; ti
           <CheckCircle2 className="w-12 h-12 text-teal-400 mx-auto mb-3" />
           <p className="text-white font-bold mb-1">{isAr ? "وصلتنا بياناتك 👌" : "We got your details 👌"}</p>
           <p className="text-slate-300 text-sm mb-4">{isAr ? "هنكلمك على واتساب قريب. لو مستعجل كلمنا دلوقتي:" : "We'll message you on WhatsApp soon. In a hurry? Message us now:"}</p>
-          <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-green-600 px-5 py-3 font-bold text-white hover:bg-green-500">
+          <a href={wa} target="_blank" rel="noopener noreferrer" data-wa-location="lead_form_thanks" data-wa-course={isWaCourse ? WA_COURSE.name : title} className="inline-flex items-center gap-2 rounded-xl bg-green-600 px-5 py-3 font-bold text-white hover:bg-green-500">
             <MessageCircle className="w-5 h-5" /> {isAr ? "كلمنا على واتساب" : "WhatsApp us"}
           </a>
         </div>

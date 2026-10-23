@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { WA_COURSE, waCourseUrl } from "@/lib/whatsapp";
 import { ChevronLeft, ChevronRight, Gift, Star, Users, Briefcase, MessageCircle, Phone, Mail, CheckCircle, ArrowRight } from "lucide-react";
 
 interface HeroSliderProps {
@@ -11,7 +12,7 @@ interface HeroSliderProps {
 
 // ─── Slide 1: Featured Course ────────────────────────────────────────────
 function CourseSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
-  const whatsappUrl = "https://wa.me/201226929392?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%AA%D8%B3%D8%AC%D9%8A%D9%84%20%D9%81%D9%8A%20%D9%83%D9%88%D8%B1%D8%B3%20Excel%20%2B%20Power%20BI%20%2B%20AI%20%2B%20Freelance";
+  const whatsappUrl = waCourseUrl();
   return (
     <div className="relative min-h-fit lg:min-h-screen flex items-start lg:items-center overflow-hidden bg-gradient-to-br from-blue-950 via-slate-900 to-indigo-950">
       <div className="absolute inset-0 opacity-10"
@@ -83,6 +84,8 @@ function CourseSlide({ isAr, locale }: { isAr: boolean; locale: string }) {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-wa-location="home_hero"
+                data-wa-course={WA_COURSE.name}
                 className="flex items-center gap-2 px-5 py-3 text-base lg:px-7 lg:py-3.5 lg:text-lg rounded-2xl bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold hover:from-green-500 hover:to-emerald-500 transition-all shadow-xl shadow-green-500/30 hover:-translate-y-1"
               >
                 <MessageCircle className="w-5 h-5" />

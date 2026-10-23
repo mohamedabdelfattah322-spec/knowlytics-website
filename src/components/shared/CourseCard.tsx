@@ -7,6 +7,7 @@ import { Clock, BarChart, Star } from "lucide-react";
 import { Course } from "@/types";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
+import { WA_COURSE, waCourseUrl } from "@/lib/whatsapp";
 
 interface CourseCardProps {
   course: Course;
@@ -33,9 +34,11 @@ export default function CourseCard({ course, locale, index = 0 }: CourseCardProp
       : null;
 
   const detailUrl = `/${locale}/courses/${course.slug}`;
-  const enrollUrl = `https://wa.me/201226929392?text=${encodeURIComponent(
+  const isWaCourse = course.slug === WA_COURSE.slug;
+  const enrollUrl = isWaCourse ? waCourseUrl() : `https://wa.me/201226929392?text=${encodeURIComponent(
     isAr ? `أريد التسجيل في: ${course.titleAr}` : `I want to enroll in: ${course.titleEn}`
   )}`;
+  const waCourse = isWaCourse ? WA_COURSE.name : course.titleEn;
 
   return (
     <motion.div
@@ -163,6 +166,8 @@ export default function CourseCard({ course, locale, index = 0 }: CourseCardProp
               href={enrollUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-wa-location="course_card_pay"
+              data-wa-course={waCourse}
               className="text-xs bg-green-600/20 text-green-400 border border-green-500/30 px-2 py-0.5 rounded-full hover:bg-green-600/30 transition-colors"
             >
               WhatsApp
@@ -187,6 +192,8 @@ export default function CourseCard({ course, locale, index = 0 }: CourseCardProp
               href={enrollUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-wa-location="course_card_enroll"
+              data-wa-course={waCourse}
               className="flex-1 text-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-semibold hover:from-blue-500 hover:to-purple-500 transition-all duration-300 shadow hover:shadow-blue-500/30"
             >
               {isAr ? "سجّل الآن" : "Enroll Now"}

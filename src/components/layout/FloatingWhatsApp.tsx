@@ -2,7 +2,9 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
+import { WA_COURSE, waCourseUrl } from "@/lib/whatsapp";
 
 interface FloatingWhatsAppProps {
   phoneNumber: string;
@@ -10,6 +12,8 @@ interface FloatingWhatsAppProps {
 
 export default function FloatingWhatsApp({ phoneNumber }: FloatingWhatsAppProps) {
   const [showTooltip, setShowTooltip] = useState(false);
+  // On the Excel + Power BI course page the floating button opens the course enquiry message.
+  const onWaCourse = usePathname().endsWith(`/courses/${WA_COURSE.slug}`);
 
   return (
     <div className="fixed bottom-6 end-6 z-50 flex flex-col items-end gap-3">
@@ -36,9 +40,11 @@ export default function FloatingWhatsApp({ phoneNumber }: FloatingWhatsAppProps)
       </AnimatePresence>
 
       <motion.a
-        href={`https://wa.me/${phoneNumber.replace(/\D/g, "")}`}
+        href={onWaCourse ? waCourseUrl() : `https://wa.me/${phoneNumber.replace(/\D/g, "")}`}
         target="_blank"
         rel="noopener noreferrer"
+        data-wa-location="floating_button"
+        data-wa-course={onWaCourse ? WA_COURSE.name : ""}
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 1, type: "spring" }}
