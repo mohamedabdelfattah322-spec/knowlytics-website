@@ -25,6 +25,8 @@ export type PurchaseInput = {
   phone?: string;
   name?: string;
   sourceUrl: string;
+  // From Events Manager > Test events: the event shows there only, not in ad reporting.
+  testEventCode?: string;
 };
 
 export type CapiResult = { ok: true } | { ok: false; reason: string };
@@ -56,7 +58,7 @@ export async function sendPurchase(p: PurchaseInput): Promise<CapiResult> {
         content_type: p.contentType, content_ids: [p.contentId], content_name: p.contentName,
       },
     }],
-    ...(process.env.META_TEST_EVENT_CODE ? { test_event_code: process.env.META_TEST_EVENT_CODE } : {}),
+    ...(p.testEventCode ? { test_event_code: p.testEventCode } : {}),
   };
 
   try {

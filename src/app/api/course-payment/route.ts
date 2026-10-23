@@ -35,6 +35,7 @@ function form(msg = "", values: Record<string, string> = {}) {
       <label>موبايل المتدرب (الرقم اللي بعت منه على واتساب)</label><input name="phone" type="tel" required value="${v("phone")}" style="${input}">
       <label>اسم المتدرب <span class="muted">(اختياري)</span></label><input name="name" value="${v("name")}" style="${input}">
       <label>إيميل المتدرب <span class="muted">(اختياري — بيحسّن الربط بالإعلان)</span></label><input name="email" type="email" value="${v("email")}" style="${input}">
+      <label>Test code <span class="muted">(للتجربة بس — سيبه فاضي في الدفع الحقيقي)</span></label><input name="test" value="${v("test")}" dir="ltr" style="${input}">
       <p style="text-align:center;margin-top:8px"><button type="submit">تسجيل الدفع</button></p>
     </form>
     <script>document.getElementById('slug').addEventListener('change',function(e){var o=e.target.selectedOptions[0];document.getElementById('value').value=o.dataset.price})</script>`;
@@ -46,7 +47,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const f = await req.formData();
-  const values = Object.fromEntries(["slug", "value", "phone", "name", "email"].map((k) => [k, String(f.get(k) || "").trim()]));
+  const values = Object.fromEntries(["slug", "value", "phone", "name", "email", "test"].map((k) => [k, String(f.get(k) || "").trim()]));
   const err = (m: string, status = 400) => page("تسجيل دفع كورس", form(`<p style="color:#fca5a5;font-weight:bold">${m}</p>`, values), status);
 
   if (!keyOk(String(f.get("key") || ""))) return err("كلمة السر غلط.", 401);
@@ -62,9 +63,13 @@ export async function POST(req: NextRequest) {
     value, contentType: "course", contentId: course.slug, contentName: course.titleAr,
     phone: values.phone, name: values.name || undefined, email: values.email || undefined,
     sourceUrl: `${SITE_URL}/ar/courses/${course.slug}`,
+    testEventCode: values.test || undefined,
   });
   if (!res.ok) return err(`ماتبعتش لفيسبوك: ${escapeHtml(res.reason)}`, 502);
 
+  if (values.test) return page("تجربة", `<h1>🧪 اتبعت حدث تجربة</h1>
+    <p>افتح Events Manager ← Knowlytics Hub ← Test events، هتلاقي Purchase بـ ${value} جنيه. ده مش هيتحسب في أرقام الإعلانات.</p>
+    <p style="text-align:center"><a href="/api/course-payment" style="color:#5eead4">رجوع</a></p>`);
   return page("تم التسجيل", `<h1>✅ اتسجّل الدفع</h1>
     <p>اتبعت لفيسبوك Purchase بمبلغ <b>${value} جنيه</b> لكورس <b>${escapeHtml(course.titleAr)}</b>.</p>
     <p class="muted">لو سجّلت نفس المتدرب لنفس الكورس مرتين في نفس اليوم، فيسبوك هيحسبها مرة واحدة.</p>
