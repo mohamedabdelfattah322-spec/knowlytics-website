@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import coursesData from "@/data/courses.json";
 import { useState } from "react";
+import CourseLeadForm from "./CourseLeadForm";
 
 // Static curriculum data keyed by slug
 const CURRICULA: Record<
@@ -1142,6 +1143,8 @@ export default function CourseDetailPage() {
                 />
               </div>
             )}
+
+            <CourseLeadForm slug={course.slug} title={title} isAr={isAr} />
 
             {/* Trainee Reviews — 3 first, rest on demand */}
             <div className="glass rounded-2xl p-6 border border-yellow-500/20">

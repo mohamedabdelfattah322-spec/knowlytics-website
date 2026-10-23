@@ -5,14 +5,50 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 export const META_PIXEL_ID = "1687611866220606";
+// Set NEXT_PUBLIC_GA_ID (G-XXXXXXXXXX) on Vercel to turn on Google Analytics 4.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
-type Fbq = (...args: unknown[]) => void;
+type Fn = (...args: unknown[]) => void;
+
+// Meta standard events -> GA4 recommended events.
+const GA_EVENTS: Record<string, string> = {
+  ViewContent: "view_item", InitiateCheckout: "begin_checkout", AddPaymentInfo: "add_payment_info",
+  Lead: "generate_lead", CompleteRegistration: "generate_lead", Contact: "contact",
+};
 
 // Events fired before the base snippet runs (e.g. ViewContent on first load) retry briefly.
 export function trackPixel(event: string, params?: Record<string, unknown>, tries = 20) {
-  const fbq = (window as unknown as { fbq?: Fbq }).fbq;
-  if (fbq) fbq("track", event, params);
+  const w = window as unknown as { fbq?: Fn; gtag?: Fn };
+  if (w.fbq) sendEvent(w, event, params);
   else if (tries > 0) setTimeout(() => trackPixel(event, params, tries - 1), 250);
+}
+
+function sendEvent(w: { fbq?: Fn; gtag?: Fn }, event: string, params?: Record<string, unknown>) {
+  w.fbq?.("track", event, params);
+  const ga = GA_EVENTS[event];
+  if (ga && w.gtag) w.gtag("event", ga, { ...params, meta_event: event });
+}
+
+// Where the visitor came from (UTM tags from ads, or the referrer), kept for the lead form.
+const ATTR_KEY = "kh_attribution";
+export type Attribution = { source?: string; medium?: string; campaign?: string; content?: string; landing?: string };
+
+function captureAttribution() {
+  try {
+    const q = new URLSearchParams(window.location.search);
+    const utm = { source: q.get("utm_source"), medium: q.get("utm_medium"), campaign: q.get("utm_campaign"), content: q.get("utm_content") };
+    let next: Attribution | null = null;
+    if (utm.source) next = { ...Object.fromEntries(Object.entries(utm).filter(([, v]) => v)) };
+    else if (q.get("fbclid")) next = { source: "facebook", medium: "paid" };
+    else if (!localStorage.getItem(ATTR_KEY) && document.referrer && !document.referrer.includes(window.location.host)) {
+      next = { source: new URL(document.referrer).hostname.replace(/^www\./, ""), medium: "referral" };
+    }
+    if (next) localStorage.setItem(ATTR_KEY, JSON.stringify({ ...next, landing: window.location.pathname }));
+  } catch { /* storage blocked: lead just shows as direct */ }
+}
+
+export function getAttribution(): Attribution {
+  try { return JSON.parse(localStorage.getItem(ATTR_KEY) || "{}"); } catch { return {}; }
 }
 
 // Pick the Meta standard event for a clicked link. Elements can opt in
@@ -45,6 +81,7 @@ export default function MetaPixel() {
   }, [pathname]);
 
   useEffect(() => {
+    captureAttribution();
     const onClick = (e: MouseEvent) => {
       if (!(e.target instanceof Element)) return;
       const hit = eventForClick(e.target);
@@ -69,6 +106,14 @@ fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`}
         <img height="1" width="1" style={{ display: "none" }} alt=""
           src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`} />
       </noscript>
+      {GA_ID && (
+        <>
+          <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+          <Script id="ga4" strategy="afterInteractive">
+            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${GA_ID}');`}
+          </Script>
+        </>
+      )}
     </>
   );
 }
