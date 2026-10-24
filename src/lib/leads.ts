@@ -105,20 +105,42 @@ export async function createLeadsTable(): Promise<{ ok: true } | { ok: false; re
   return { ok: false, reason: data?.error?.message || data?.error?.type || `HTTP ${res.status}` };
 }
 
+// Every confirmed payment is logged in the lead's Notes as one line "PAY|<cairo time>|<amount>|<type>|<payment id>",
+// so the dashboard can count money on the day it arrived and a payment id is never applied twice.
+export type PaymentType = "full" | "deposit" | "remainder";
+export type Payment = { date: string; amount: number; type: PaymentType; id: string };
+
+export function paymentsOf(l: Lead): Payment[] {
+  const logged = l.notes.split("\n").filter((x) => x.startsWith("PAY|")).map((x) => {
+    const [, date, amount, type, id] = x.split("|");
+    return { date, amount: Number(amount) || 0, type: type as PaymentType, id };
+  });
+  // Rows paid before the log existed: one payment dated on the row itself.
+  if (!logged.length && l.paid > 0 && (l.status === "دفع مقدم" || l.status === "دفع كامل")) {
+    return [{ date: l.date, amount: l.paid, type: l.status === "دفع مقدم" ? "deposit" : "full", id: "legacy" }];
+  }
+  return logged;
+}
+
+export const hasPayment = (l: Lead | null, id: string) => !!l && l.notes.split("\n").some((x) => x.startsWith("PAY|") && x.endsWith(`|${id}`));
+
 // After a confirmed payment: add the cash to the matching lead (one row per person, so a deposit
 // followed by the remainder stays one booking), or add the payer if they never filled the form.
-export async function recordPaymentOnLead(p: { phone: string; name?: string; course: string; amount: number; type: "full" | "deposit" | "remainder" }) {
+export async function recordPaymentOnLead(p: { phone: string; name?: string; course: string; amount: number; type: PaymentType; id: string }) {
   const status: LeadStatus = p.type === "deposit" ? "دفع مقدم" : "دفع كامل";
+  const line = `PAY|${cairoNow()}|${p.amount}|${p.type}|${p.id}`;
   const existing = await findLeadByPhone(p.phone);
   if (existing) {
+    if (hasPayment(existing, p.id)) return { paid: existing.paid, status: existing.status, duplicate: true };
     // A remainder adds to what was already collected; a fresh full/deposit payment replaces it.
     const paid = p.type === "remainder" ? existing.paid + p.amount : p.amount;
-    await updateLead(existing.id, { Status: status, Paid: paid, Course: existing.course || p.course });
-    return { paid, status };
+    const notes = [existing.notes, line].filter(Boolean).join("\n");
+    await updateLead(existing.id, { Status: status, Paid: paid, Course: existing.course || p.course, Notes: notes });
+    return { paid, status, duplicate: false };
   }
   await createLead({
     Name: p.name || "—", Phone: p.phone, PhoneKey: phoneKey(p.phone), Course: p.course, Status: status,
-    Paid: p.amount, Source: "مباشر / واتساب", Date: cairoNow(),
+    Paid: p.amount, Source: "مباشر / واتساب", Date: cairoNow(), Notes: line,
   });
-  return { paid: p.amount, status };
+  return { paid: p.amount, status, duplicate: false };
 }

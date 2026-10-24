@@ -5,7 +5,7 @@ import { escapeHtml } from "@/lib/signedToken";
 import { page } from "@/lib/templateOrders";
 import { adminKeyOk } from "@/lib/adminKey";
 import { WaClick, WaTableMissing, createWaTable, listWaClicks } from "@/lib/waClicks";
-import { LEAD_STATUSES, Lead, LeadsTableMissing, createLeadsTable, listLeads, phoneKey, updateLead } from "@/lib/leads";
+import { LEAD_STATUSES, Lead, LeadsTableMissing, createLeadsTable, listLeads, paymentsOf, phoneKey, updateLead } from "@/lib/leads";
 
 // Admin dashboard for course leads: who is interested, where they came from, and who paid.
 const input = "padding:8px;border-radius:8px;border:1px solid #334155;background:#0f1a30;color:#e2e8f0;font-size:14px";
@@ -31,16 +31,25 @@ const inPeriod = (date: string, v: View) => { const d = date.slice(0, 10); retur
 // Hidden fields so every button on the page keeps the same login, period and test toggle.
 const keep = (v: View) => `<input type="hidden" name="key" value="${escapeHtml(v.key)}"><input type="hidden" name="from" value="${escapeHtml(v.from)}"><input type="hidden" name="to" value="${escapeHtml(v.to)}">${v.showTests ? '<input type="hidden" name="tests" value="1">' : ""}`;
 
-function countBy(leads: Lead[], key: (l: Lead) => string) {
-  const m = new Map<string, { leads: number; paid: number; revenue: number }>();
+// Period rules: new leads count by sign-up date, a booking counts on the day of its first payment,
+// and cash counts on the day each payment arrived — so a lead from last week who pays today shows in today's cash.
+type Tally = { leads: number; paid: number; revenue: number };
+const bookedIn = (l: Lead, v: View) => { const first = paymentsOf(l)[0]; return !!first && PAID.has(l.status) && inPeriod(first.date, v); };
+const cashIn = (l: Lead, v: View) => paymentsOf(l).filter((p) => inPeriod(p.date, v)).reduce((sum, p) => sum + p.amount, 0);
+
+function countBy(leads: Lead[], v: View, key: (l: Lead) => string) {
+  const m = new Map<string, Tally>();
   for (const l of leads) {
+    const signed = inPeriod(l.date, v), booked = bookedIn(l, v), cash = cashIn(l, v);
+    if (!signed && !booked && !cash) continue;
     const k = key(l) || "—";
     const e = m.get(k) || { leads: 0, paid: 0, revenue: 0 };
-    e.leads++;
-    if (PAID.has(l.status)) { e.paid++; e.revenue += l.paid; }
+    if (signed) e.leads++;
+    if (booked) e.paid++;
+    e.revenue += cash;
     m.set(k, e);
   }
-  return Array.from(m.entries()).sort((a, b) => b[1].leads - a[1].leads);
+  return Array.from(m.entries()).sort((a, b) => b[1].leads + b[1].paid - (a[1].leads + a[1].paid));
 }
 
 const LOCATION_LABELS: Record<string, string> = {
@@ -74,20 +83,21 @@ function waSection(v: View, clicks: WaClick[] | "missing") {
 }
 
 function dashboard(v: View, allLeads: Lead[], flash = "", allClicks: WaClick[] | "missing" = []) {
-  const leads = allLeads.filter((l) => inPeriod(l.date, v) && (v.showTests || !isTestLead(l)));
+  const real = allLeads.filter((l) => v.showTests || !isTestLead(l));
+  const leads = real.filter((l) => inPeriod(l.date, v));
   const hiddenTests = v.showTests ? 0 : allLeads.filter((l) => inPeriod(l.date, v) && isTestLead(l)).length;
   const clicks = allClicks === "missing" ? allClicks : allClicks.filter((c) => inPeriod(c.date, v) && (v.showTests || !isTestClick(c)));
   const hiddenTestClicks = allClicks === "missing" || v.showTests ? 0 : allClicks.filter((c) => inPeriod(c.date, v) && isTestClick(c)).length;
-  const paid = leads.filter((l) => PAID.has(l.status));
-  const revenue = paid.reduce((s, l) => s + l.paid, 0);
+  const paid = real.filter((l) => bookedIn(l, v));
+  const revenue = real.reduce((s, l) => s + cashIn(l, v), 0);
   const card = (label: string, value: string) =>
     `<div style="flex:1;min-width:130px;background:#0f1a30;border:1px solid #1e293b;border-radius:12px;padding:12px"><div class="muted">${label}</div><div style="font-size:24px;font-weight:bold">${value}</div></div>`;
   const statusCounts = LEAD_STATUSES.map((s) => `${s}: <b>${leads.filter((l) => l.status === s).length}</b>`).join(" · ");
 
-  const sourceRows = countBy(leads, (l) => [l.source, l.campaign].filter(Boolean).join(" / ")).map(([src, e]) =>
+  const sourceRows = countBy(real, v, (l) => [l.source, l.campaign].filter(Boolean).join(" / ")).map(([src, e]) =>
     `<tr><td>${escapeHtml(src)}</td><td>${e.leads}</td><td>${e.paid}</td><td>${e.leads ? Math.round((e.paid / e.leads) * 100) : 0}%</td><td>${e.revenue.toLocaleString()}</td></tr>`).join("");
 
-  const campaigns = countBy(leads, (l) => l.campaign || (l.source && l.source !== "مباشر" ? l.source : "بدون حملة"));
+  const campaigns = countBy(real, v, (l) => l.campaign || (l.source && l.source !== "مباشر" ? l.source : "بدون حملة"));
   const spendRows = campaigns.map(([name, e]) =>
     `<tr data-leads="${e.leads}" data-paid="${e.paid}" data-rev="${e.revenue}"><td>${escapeHtml(name)}</td><td>${e.leads}</td><td>${e.paid}</td><td>${e.revenue.toLocaleString()}</td>
       <td><input type="number" min="0" step="1" class="spend" data-camp="${escapeHtml(name)}" placeholder="الصرف" style="${input};width:110px"></td>
@@ -114,12 +124,12 @@ function dashboard(v: View, allLeads: Lead[], flash = "", allClicks: WaClick[] |
       <label><input type="checkbox" name="tests" value="1"${v.showTests ? " checked" : ""}> اعرض بيانات الاختبار</label>
       <button type="submit" style="padding:8px 16px;font-size:14px">عرض</button></form>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0">
-      ${card("المهتمين", String(leads.length))}${card("حجوزات (دفعوا)", String(paid.length))}
-      ${card("منهم دفع مقدم بس", String(leads.filter((l) => l.status === "دفع مقدم").length))}
-      ${card("نسبة التحويل", `${leads.length ? Math.round((paid.length / leads.length) * 100) : 0}%`)}${card("المحصّل فعلاً (جنيه)", revenue.toLocaleString())}
+      ${card("مهتمين جدد", String(leads.length))}${card("حجوزات (أول دفعة في الفترة)", String(paid.length))}
+      ${card("منهم لسه عليهم باقي", String(paid.filter((l) => l.status === "دفع مقدم").length))}
+      ${card("نسبة التحويل", `${leads.length ? Math.round((paid.length / leads.length) * 100) : 0}%`)}${card("المحصّل في الفترة (جنيه)", revenue.toLocaleString())}
     </div>
     <p class="muted">${statusCounts}</p>
-    <p class="muted">${hiddenTests || hiddenTestClicks ? `مستبعد من الأرقام: ${hiddenTests} سجل اختبار و${hiddenTestClicks} ضغطة اختبار. ` : ""}المقدّم وباقي المبلغ لنفس الطالب = حجز واحد. المحصّل = الفلوس اللي وصلت فعلاً.</p>
+    <p class="muted">${hiddenTests || hiddenTestClicks ? `مستبعد من الأرقام: ${hiddenTests} سجل اختبار و${hiddenTestClicks} ضغطة اختبار. ` : ""}الفترة: المهتمين بيوم تسجيلهم، الحجز بيوم أول دفعة، والمحصّل بيوم وصول كل دفعة. المقدّم وباقي المبلغ لنفس الطالب = حجز واحد.</p>
     <h2 style="font-size:17px;margin-top:22px">الصرف وتكلفة الحجز</h2>
     <p class="muted">اكتب صرف كل حملة من Ads Manager لنفس الفترة. تكلفة الحجز = الصرف ÷ الحجوزات المدفوعة. العائد = المحصّل ÷ الصرف (مش صافي ربح).</p>
     <div style="overflow-x:auto"><table id="spend"><tr><td>الحملة</td><td>مهتمين</td><td>حجوزات</td><td>المحصّل</td><td>الصرف (جنيه)</td><td>تكلفة المهتم</td><td>تكلفة الحجز</td><td>العائد</td></tr>${spendRows || '<tr><td colspan="8">لسه مفيش بيانات</td></tr>'}</table></div>

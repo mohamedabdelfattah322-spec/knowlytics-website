@@ -1,12 +1,13 @@
 export const dynamic = "force-dynamic";
 
 import { NextRequest } from "next/server";
+import { randomUUID } from "crypto";
 import coursesData from "@/data/courses.json";
 import { escapeHtml } from "@/lib/signedToken";
 import { SITE_URL, page } from "@/lib/templateOrders";
 import { purchaseEventId, sendPurchase } from "@/lib/metaCapi";
 import { adminKeyOk } from "@/lib/adminKey";
-import { findLeadByPhone, recordPaymentOnLead } from "@/lib/leads";
+import { findLeadByPhone, hasPayment, recordPaymentOnLead } from "@/lib/leads";
 
 // Admin-only page: after checking a course payment receipt on WhatsApp, record it here so
 // Meta gets a real Purchase (the browser pixel only sees the "I paid" click) and the lead moves to "paid".
@@ -24,6 +25,7 @@ function form(msg = "", values: Record<string, string> = {}) {
     <p class="muted">بعد ما تتأكد إن فلوس الحجز وصلت، سجّلها هنا عشان فيسبوك يعرف إن الإعلان جاب حجز حقيقي. <a href="/api/leads" style="color:#5eead4">لوحة المهتمين</a></p>
     ${msg}
     <form method="post" onsubmit="this.querySelector('button').disabled=true">
+      <input type="hidden" name="pid" value="${escapeHtml(values.pid || randomUUID())}">
       <label>كلمة سر الأدمن</label><input name="key" type="password" autocomplete="current-password" required style="${input}">
       <label>الكورس</label><select name="slug" id="slug" required style="${input}">${options}</select>
       <label>نوع الدفعة</label><select name="type" id="type" style="${input}">
@@ -46,7 +48,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const f = await req.formData();
-  const values = Object.fromEntries(["slug", "type", "value", "phone", "name", "email", "test"].map((k) => [k, String(f.get(k) || "").trim()]));
+  const values = Object.fromEntries(["slug", "type", "value", "phone", "name", "email", "test", "pid"].map((k) => [k, String(f.get(k) || "").trim()]));
   const err = (m: string, status = 400) => page("تسجيل دفع كورس", form(`<p style="color:#fca5a5;font-weight:bold">${m}</p>`, values), status);
 
   if (!adminKeyOk(String(f.get("key") || ""))) return err("كلمة السر غلط.", 401);
@@ -57,6 +59,8 @@ export async function POST(req: NextRequest) {
   if (values.phone.replace(/\D/g, "").length < 10) return err("اكتب رقم موبايل صحيح.");
 
   const type = (["full", "deposit", "remainder"] as const).find((t) => t === values.type) || "full";
+  // One id per payment, created when the form is shown: a resubmitted or retried form carries the same id.
+  if (!/^[0-9a-f-]{36}$/.test(values.pid)) return err("الصفحة قديمة، افتحها من جديد وسجّل تاني.");
 
   // Guard against recording the same money twice (re-submitting the form, or a wrong payment type).
   // Test mode never touches records, so it skips this check.
@@ -68,6 +72,9 @@ export async function POST(req: NextRequest) {
       console.error("lead lookup failed", e);
       return err("ماقدرتش أوصل لسجل المتدرب في Airtable، فمااتسجّلش حاجة. جرّب تاني بعد دقيقة.", 502);
     }
+    if (hasPayment(existing, values.pid)) return page("اتسجّلت قبل كده", `<h1>✅ الدفعة دي اتسجّلت قبل كده</h1>
+      <p>مفيش حاجة اتكررت: لا فلوس اتضافت تاني ولا حجز جديد اتبعت لفيسبوك. المحصّل من المتدرب ده: <b>${existing?.paid} جنيه</b>.</p>
+      <p style="text-align:center"><a href="/api/course-payment" style="color:#5eead4">تسجيل دفع تاني</a> · <a href="/api/leads" style="color:#5eead4">لوحة المهتمين</a></p>`);
     const paid = existing?.paid || 0;
     const nothing = " مااتسجّلش أي حاجة.";
     if (existing?.status === "دفع كامل") return err(`المتدرب ده مسجّل دفع كامل قبل كده (${paid} جنيه).${nothing}`, 409);
@@ -79,13 +86,13 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // One booking = one Purchase worth the course price, sent with the first payment (full or deposit).
+  // One booking = one Purchase, sent with the first payment (full or deposit) at the amount actually received.
   // The remainder is cash only: it updates the dashboard but never creates a second booking in Meta.
   let metaNote = "";
   if (type !== "remainder") {
     const res = await sendPurchase({
       eventId: purchaseEventId("course", course.slug, values.phone.replace(/\D/g, "")),
-      value: course.price, contentType: "course", contentId: course.slug, contentName: course.titleAr,
+      value, contentType: "course", contentId: course.slug, contentName: course.titleAr,
       phone: values.phone, name: values.name || undefined, email: values.email || undefined,
       sourceUrl: `${SITE_URL}/ar/courses/${course.slug}`,
       testEventCode: values.test || undefined,
@@ -93,8 +100,8 @@ export async function POST(req: NextRequest) {
     });
     if (!res.ok) return err(`ماتبعتش لفيسبوك: ${escapeHtml(res.reason)}`, 502);
     metaNote = values.test
-      ? `اتبعت لفيسبوك Purchase <b>تجريبي</b> (Test events بس) بقيمة الحجز ${course.price} جنيه.<br><span class="muted" dir="ltr">Meta: ${escapeHtml(res.meta)}</span>`
-      : `اتبعت لفيسبوك Purchase واحد بقيمة الحجز <b>${course.price} جنيه</b>.`;
+      ? `اتبعت لفيسبوك Purchase <b>تجريبي</b> (Test events بس) بقيمة ${value} جنيه.<br><span class="muted" dir="ltr">Meta: ${escapeHtml(res.meta)}</span>`
+      : `اتبعت لفيسبوك Purchase واحد بقيمة المدفوع <b>${value} جنيه</b> (أول دفعة للحجز).`;
   } else {
     metaNote = "ده باقي مبلغ، فمااتبعتش حجز جديد لفيسبوك.";
   }
@@ -106,7 +113,7 @@ export async function POST(req: NextRequest) {
 
   let leadNote = "";
   try {
-    const lead = await recordPaymentOnLead({ phone: values.phone, name: values.name, course: course.titleAr, amount: value, type });
+    const lead = await recordPaymentOnLead({ phone: values.phone, name: values.name, course: course.titleAr, amount: value, type, id: values.pid });
     leadNote = `المحصّل من المتدرب ده لحد دلوقتي: <b>${lead.paid} جنيه</b> — الحالة: <b>${lead.status}</b>.`;
   } catch (e) {
     console.error("lead status not updated", e);
