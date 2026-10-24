@@ -27,6 +27,9 @@ export type PurchaseInput = {
   sourceUrl: string;
   // From Events Manager > Test events: the event shows there only, not in ad reporting.
   testEventCode?: string;
+  // Where the sale was closed: course payments are confirmed over WhatsApp ("chat"),
+  // template orders by the admin after a manual transfer ("other").
+  actionSource: "chat" | "other";
 };
 
 // `meta` is Meta's own reply (events_received, fbtrace_id, messages) so a test run can show what Meta accepted.
@@ -51,7 +54,7 @@ export async function sendPurchase(p: PurchaseInput): Promise<CapiResult> {
       event_name: "Purchase",
       event_time: Math.floor(Date.now() / 1000),
       event_id: p.eventId,
-      action_source: "system_generated",
+      action_source: p.actionSource,
       event_source_url: p.sourceUrl,
       user_data,
       custom_data: {

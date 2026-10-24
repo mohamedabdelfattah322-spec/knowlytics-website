@@ -49,6 +49,7 @@ export async function POST(req: NextRequest) {
     eventId: purchaseEventId("template", o.slug, String(o.c), o.email, String(o.at)),
     value: o.price, contentType: "template", contentId: o.slug, contentName: p.tpl.titleEn,
     email: o.email, phone: o.phone, name: o.name, sourceUrl: `${SITE_URL}/ar/templates`,
+    actionSource: "other",
   });
   if (!capi.ok) console.error("meta purchase not sent", capi.reason);
   return page("تم التأكيد", `<h1>✅ تم تأكيد الدفع</h1>

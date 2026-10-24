@@ -68,6 +68,7 @@ export async function POST(req: NextRequest) {
       phone: values.phone, name: values.name || undefined, email: values.email || undefined,
       sourceUrl: `${SITE_URL}/ar/courses/${course.slug}`,
       testEventCode: values.test || undefined,
+      actionSource: "chat",
     });
     if (!res.ok) return err(`ماتبعتش لفيسبوك: ${escapeHtml(res.reason)}`, 502);
     metaNote = values.test
