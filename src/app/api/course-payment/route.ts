@@ -6,7 +6,7 @@ import { escapeHtml } from "@/lib/signedToken";
 import { SITE_URL, page } from "@/lib/templateOrders";
 import { purchaseEventId, sendPurchase } from "@/lib/metaCapi";
 import { adminKeyOk } from "@/lib/adminKey";
-import { recordPaymentOnLead } from "@/lib/leads";
+import { findLeadByPhone, recordPaymentOnLead } from "@/lib/leads";
 
 // Admin-only page: after checking a course payment receipt on WhatsApp, record it here so
 // Meta gets a real Purchase (the browser pixel only sees the "I paid" click) and the lead moves to "paid".
@@ -23,7 +23,7 @@ function form(msg = "", values: Record<string, string> = {}) {
   return `<h1>تسجيل دفع كورس</h1>
     <p class="muted">بعد ما تتأكد إن فلوس الحجز وصلت، سجّلها هنا عشان فيسبوك يعرف إن الإعلان جاب حجز حقيقي. <a href="/api/leads" style="color:#5eead4">لوحة المهتمين</a></p>
     ${msg}
-    <form method="post">
+    <form method="post" onsubmit="this.querySelector('button').disabled=true">
       <label>كلمة سر الأدمن</label><input name="key" type="password" autocomplete="current-password" required style="${input}">
       <label>الكورس</label><select name="slug" id="slug" required style="${input}">${options}</select>
       <label>نوع الدفعة</label><select name="type" id="type" style="${input}">
@@ -57,6 +57,27 @@ export async function POST(req: NextRequest) {
   if (values.phone.replace(/\D/g, "").length < 10) return err("اكتب رقم موبايل صحيح.");
 
   const type = (["full", "deposit", "remainder"] as const).find((t) => t === values.type) || "full";
+
+  // Guard against recording the same money twice (re-submitting the form, or a wrong payment type).
+  // Test mode never touches records, so it skips this check.
+  if (!values.test) {
+    let existing: Awaited<ReturnType<typeof findLeadByPhone>>;
+    try {
+      existing = await findLeadByPhone(values.phone);
+    } catch (e) {
+      console.error("lead lookup failed", e);
+      return err("ماقدرتش أوصل لسجل المتدرب في Airtable، فمااتسجّلش حاجة. جرّب تاني بعد دقيقة.", 502);
+    }
+    const paid = existing?.paid || 0;
+    const nothing = " مااتسجّلش أي حاجة.";
+    if (existing?.status === "دفع كامل") return err(`المتدرب ده مسجّل دفع كامل قبل كده (${paid} جنيه).${nothing}`, 409);
+    if (existing?.status === "دفع مقدم") {
+      if (type !== "remainder") return err(`المتدرب ده دافع مقدم ${paid} جنيه قبل كده. لو دفع الباقي اختار «باقي المبلغ».${nothing}`, 409);
+      if (paid + value > course.price) return err(`كده المحصّل هيبقى ${paid + value} جنيه، أكتر من سعر الكورس (${course.price}). راجع المبلغ.${nothing}`, 409);
+    } else if (type === "remainder") {
+      return err(`مفيش دفع مقدم مسجّل للرقم ده، فمينفعش «باقي المبلغ». اختار «دفع مقدم» أو «دفع كامل».${nothing}`, 409);
+    }
+  }
 
   // One booking = one Purchase worth the course price, sent with the first payment (full or deposit).
   // The remainder is cash only: it updates the dashboard but never creates a second booking in Meta.
