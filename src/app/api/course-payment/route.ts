@@ -77,6 +77,11 @@ export async function POST(req: NextRequest) {
     metaNote = "ده باقي مبلغ، فمااتبعتش حجز جديد لفيسبوك.";
   }
 
+  // Test mode only exercises the Meta path; real records (leads, cash collected) stay untouched.
+  if (values.test) return page("تجربة", `<h1>🧪 تجربة — مااتسجّلش أي دفع</h1>
+    <p>${metaNote}</p><p class="muted">افتح Events Manager ← Knowlytics Hub ← Test events. لوحة المهتمين ماتغيرتش.</p>
+    <p style="text-align:center"><a href="/api/course-payment" style="color:#5eead4">رجوع</a></p>`);
+
   let leadNote = "";
   try {
     const lead = await recordPaymentOnLead({ phone: values.phone, name: values.name, course: course.titleAr, amount: value, type });
