@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
     });
     if (!res.ok) return err(`ماتبعتش لفيسبوك: ${escapeHtml(res.reason)}`, 502);
     metaNote = values.test
-      ? `اتبعت لفيسبوك Purchase <b>تجريبي</b> (Test events بس) بقيمة الحجز ${course.price} جنيه.`
+      ? `اتبعت لفيسبوك Purchase <b>تجريبي</b> (Test events بس) بقيمة الحجز ${course.price} جنيه.<br><span class="muted" dir="ltr">Meta: ${escapeHtml(res.meta)}</span>`
       : `اتبعت لفيسبوك Purchase واحد بقيمة الحجز <b>${course.price} جنيه</b>.`;
   } else {
     metaNote = "ده باقي مبلغ، فمااتبعتش حجز جديد لفيسبوك.";

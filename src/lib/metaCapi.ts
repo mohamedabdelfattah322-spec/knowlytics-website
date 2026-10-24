@@ -29,7 +29,8 @@ export type PurchaseInput = {
   testEventCode?: string;
 };
 
-export type CapiResult = { ok: true } | { ok: false; reason: string };
+// `meta` is Meta's own reply (events_received, fbtrace_id, messages) so a test run can show what Meta accepted.
+export type CapiResult = { ok: true; meta: string } | { ok: false; reason: string };
 
 export async function sendPurchase(p: PurchaseInput): Promise<CapiResult> {
   const token = process.env.META_CAPI_TOKEN;
@@ -65,7 +66,7 @@ export async function sendPurchase(p: PurchaseInput): Promise<CapiResult> {
     const res = await fetch(`${GRAPH}/${PIXEL_ID}/events?access_token=${encodeURIComponent(token)}`, {
       method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body),
     });
-    if (res.ok) return { ok: true };
+    if (res.ok) return { ok: true, meta: JSON.stringify(await res.json().catch(() => ({}))) };
     const err = await res.json().catch(() => ({}));
     return { ok: false, reason: err?.error?.message || `HTTP ${res.status}` };
   } catch (e) {
