@@ -56,26 +56,28 @@
     "slug": "sales-kpi-powerbi",
     "titleAr": "Sales KPI Dashboard",
     "titleEn": "Sales KPI Dashboard",
-    "descriptionAr": "تحليل المبيعات والإيرادات وأداء المندوبين وتحقيق الأهداف الشهرية والسنوية.",
-    "descriptionEn": "Analyze revenue, sales rep performance, and monthly/annual target achievement.",
+    "descriptionAr": "داشبورد المبيعات بنسختين Power BI و Excel — الإيرادات وتحقيق التارجت وأداء المناطق والمنتجات والمندوبين، مع مقارنة بنفس الفترة من السنة اللي فاتت.",
+    "descriptionEn": "Sales dashboard in both Power BI and Excel — revenue, target achievement, regions, products and reps, compared with the same period last year.",
     "tool": "powerbi",
     "category": "sales",
     "price": 399,
     "originalPrice": 899,
-    "pages": 4,
+    "pages": 2,
     "featuresAr": [
-      "إجمالي الإيرادات vs الهدف",
-      "أداء المناطق والمندوبين",
-      "تحليل المنتجات الأعلى مبيعاً",
-      "معدل التحويل والعملاء الجدد",
-      "مقارنة شهرية وسنوية"
+      "نسختين: Power BI و Excel في نفس الملف",
+      "الإيرادات والأوردرات والعملاء ومتوسط الأوردر مقارنة بنفس الفترة السنة اللي فاتت",
+      "تحقيق التارجت بعداد واضح + الإيراد شهرياً مقابل السنة اللي فاتت",
+      "المناطق والمنتجات والقنوات مع تمييز الأعلى تلقائياً",
+      "صفحة المندوبين: نسبة الفوز والصفقات والفرص المفتوحة والعملاء الجدد",
+      "كارت Key insights بيكتب أهم الملاحظات لوحده + دليل استخدام بالعربي"
     ],
     "featuresEn": [
-      "Revenue vs Target tracking",
-      "Region & Rep performance",
-      "Top-selling product analysis",
-      "Conversion rate & new clients",
-      "Monthly & YoY comparison"
+      "Both Power BI and Excel versions included",
+      "Revenue, orders, customers and order value vs the same period last year",
+      "Target achievement gauge + monthly revenue vs last year",
+      "Regions, products and channels with the leader highlighted",
+      "Reps page: win rate, deals won, open pipeline and new customers",
+      "Auto-written Key insights card + Arabic user guide"
     ],
     "colors": [
       {
@@ -86,7 +88,7 @@
       {
         "nameAr": "أصفر",
         "nameEn": "Yellow",
-        "primary": "#facc15"
+        "primary": "#eab308"
       },
       {
         "nameAr": "أخضر",
@@ -99,7 +101,7 @@
         "primary": "#ec4899"
       }
     ],
-    "preview": "sales"
+    "preview": "sales-v2"
   },
   {
     "id": "3",
@@ -156,50 +158,52 @@
     "slug": "call-center-powerbi",
     "titleAr": "Call Center Dashboard",
     "titleEn": "Call Center Dashboard",
-    "descriptionAr": "أداء مركز الاتصالات — حجم المكالمات وزمن الانتظار ومعدل الإغلاق وأداء الوكلاء.",
-    "descriptionEn": "Call center performance — call volume, wait time, resolution rate & agent performance.",
+    "descriptionAr": "داشبورد الكول سنتر بنسختين Power BI و Excel — المكالمات ومستوى الخدمة ومعدل التخلي ووقت الانتظار ورضا العملاء وأداء كل موظف.",
+    "descriptionEn": "Call center dashboard in both Power BI and Excel — call volume, service level, abandonment, wait time, satisfaction and agent performance.",
     "tool": "powerbi",
     "category": "call-center",
     "price": 399,
     "originalPrice": 899,
-    "pages": 4,
+    "pages": 2,
     "featuresAr": [
-      "حجم المكالمات اليومي والشهري",
-      "متوسط زمن الانتظار (AWT)",
-      "معدل التخلي عن المكالمة",
-      "مؤشر رضا العملاء (CSAT)",
-      "أداء الوكلاء الفردي"
+      "نسختين: Power BI و Excel في نفس الملف",
+      "المكالمات، مستوى الخدمة (الرد خلال 20 ثانية)، معدل التخلي، وقت الانتظار، ورضا العملاء",
+      "المكالمات شهرياً وبساعات اليوم مع تحديد ساعة الذروة",
+      "أداء كل Queue: التخلي والانتظار ومدة المكالمة والحل من أول مكالمة",
+      "صفحة الموظفين: AHT و FCR والتحويلات والرضا لكل موظف",
+      "كارت Key insights تلقائي + فلاتر بالسنة والشهر والـ Queue والتيم + دليل بالعربي"
     ],
     "featuresEn": [
-      "Daily & monthly call volume",
-      "Average Wait Time (AWT)",
-      "Call abandonment rate",
-      "Customer Satisfaction (CSAT)",
-      "Individual agent performance"
+      "Both Power BI and Excel versions included",
+      "Calls, service level (answered in 20s), abandonment, wait time and satisfaction",
+      "Calls by month and by hour with the peak hour highlighted",
+      "Queue performance: abandonment, wait, handle time and first-call resolution",
+      "Agents page: AHT, FCR, transfers and satisfaction per agent",
+      "Auto-written Key insights + year, month, queue and team filters + Arabic guide"
     ],
     "colors": [
       {
         "nameAr": "تركواز",
         "nameEn": "Teal",
-        "primary": "#0d9488"
+        "primary": "#14b8a6"
       },
       {
         "nameAr": "بنفسجي",
         "nameEn": "Purple",
-        "primary": "#7c3aed"
+        "primary": "#8b5cf6"
       },
       {
         "nameAr": "أزرق",
         "nameEn": "Blue",
-        "primary": "#2563eb"
+        "primary": "#3b82f6"
       },
       {
         "nameAr": "أحمر",
         "nameEn": "Red",
-        "primary": "#e11d48"
+        "primary": "#f43f5e"
       }
     ],
-    "preview": "cc"
+    "preview": "cc-v2"
   },
   {
     "id": "5",
@@ -306,50 +310,52 @@
     "slug": "customer-service-powerbi",
     "titleAr": "Customer Service Dashboard",
     "titleEn": "Customer Service Dashboard",
-    "descriptionAr": "أداء خدمة العملاء — زمن الاستجابة ورضا العملاء وحجم التذاكر والإغلاق الأول.",
-    "descriptionEn": "Customer service performance — response time, satisfaction, ticket volume & first resolution.",
+    "descriptionAr": "داشبورد خدمة العملاء بنسختين Power BI و Excel — التذاكر وسرعة أول رد ووقت الحل والالتزام بالـ SLA ورضا العملاء وأداء كل موظف.",
+    "descriptionEn": "Customer service dashboard in both Power BI and Excel — tickets, first response, resolution time, SLA, satisfaction and agent performance.",
     "tool": "powerbi",
     "category": "customer-service",
     "price": 399,
     "originalPrice": 899,
-    "pages": 4,
+    "pages": 2,
     "featuresAr": [
-      "متوسط زمن الاستجابة (ART)",
-      "مؤشر رضا العملاء (CSAT)",
-      "حجم التذاكر اليومي والشهري",
-      "معدل الإغلاق من أول اتصال (FCR)",
-      "أداء الفريق والأفراد"
+      "نسختين: Power BI و Excel في نفس الملف",
+      "التذاكر، سرعة أول رد، وقت الحل، الالتزام بالـ SLA، ورضا العملاء",
+      "التذاكر المستلمة مقابل المقفولة شهرياً + القنوات والفئات",
+      "أداء كل أولوية (Urgent ← Low) مع نسبة الـ SLA",
+      "صفحة الموظفين: الحل من أول تواصل والرضا وحجم الشغل لكل موظف",
+      "كارت Key insights تلقائي + فلاتر بالسنة والقناة والأولوية والتيم + دليل بالعربي"
     ],
     "featuresEn": [
-      "Average Response Time (ART)",
-      "Customer Satisfaction (CSAT)",
-      "Daily & monthly ticket volume",
-      "First Contact Resolution (FCR)",
-      "Team & individual performance"
+      "Both Power BI and Excel versions included",
+      "Tickets, first response, resolution time, SLA compliance and satisfaction",
+      "Tickets received vs resolved by month + channels and categories",
+      "Performance by priority (Urgent to Low) with SLA rate",
+      "Agents page: first-contact resolution, satisfaction and workload per agent",
+      "Auto-written Key insights + year, channel, priority and team filters + Arabic guide"
     ],
     "colors": [
       {
         "nameAr": "بنفسجي",
         "nameEn": "Purple",
-        "primary": "#6d28d9"
+        "primary": "#8b5cf6"
       },
       {
         "nameAr": "نيلي",
         "nameEn": "Indigo",
-        "primary": "#4338ca"
+        "primary": "#6366f1"
       },
       {
         "nameAr": "تركواز",
         "nameEn": "Teal",
-        "primary": "#0f766e"
+        "primary": "#14b8a6"
       },
       {
         "nameAr": "أحمر",
         "nameEn": "Red",
-        "primary": "#be123c"
+        "primary": "#f43f5e"
       }
     ],
-    "preview": "cs"
+    "preview": "cs-v2"
   },
   {
     "id": "8",

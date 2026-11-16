@@ -1,6 +1,38 @@
 {
   "hr-analytics-powerbi": {
     "dir": "hr-analytics",
-    "files": ["HR_Analytics_Teal.zip", "HR_Analytics_Blue.zip", "HR_Analytics_Purple.zip", "HR_Analytics_Coral.zip"]
+    "files": [
+      "HR_Analytics_Teal.zip",
+      "HR_Analytics_Blue.zip",
+      "HR_Analytics_Purple.zip",
+      "HR_Analytics_Coral.zip"
+    ]
+  },
+  "sales-kpi-powerbi": {
+    "dir": "sales-kpi",
+    "files": [
+      "Sales_Orange.zip",
+      "Sales_Yellow.zip",
+      "Sales_Green.zip",
+      "Sales_Pink.zip"
+    ]
+  },
+  "call-center-powerbi": {
+    "dir": "call-center",
+    "files": [
+      "CallCenter_Teal.zip",
+      "CallCenter_Purple.zip",
+      "CallCenter_Blue.zip",
+      "CallCenter_Red.zip"
+    ]
+  },
+  "customer-service-powerbi": {
+    "dir": "customer-service",
+    "files": [
+      "CustomerService_Purple.zip",
+      "CustomerService_Indigo.zip",
+      "CustomerService_Teal.zip",
+      "CustomerService_Red.zip"
+    ]
   }
 }

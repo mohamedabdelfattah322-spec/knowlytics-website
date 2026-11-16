@@ -33,7 +33,16 @@ export async function GET(req: NextRequest) {
     console.error("product decrypt failed", p.path, e);
     return page("غير متاح", `<h1>حصلت مشكلة في تجهيز الملف</h1><p>كلمنا على واتساب وهنبعتهولك فوراً.</p>`, 500);
   }
-  return new Response(new Uint8Array(file), {
+  // Streamed in chunks: a buffered function response is capped at 4.5 MB on Vercel, streamed responses are not
+  // (some template zips are ~7.5 MB).
+  const CHUNK = 256 * 1024;
+  const body = new ReadableStream<Uint8Array>({
+    start(controller) {
+      for (let i = 0; i < file.length; i += CHUNK) controller.enqueue(new Uint8Array(file.subarray(i, i + CHUNK)));
+      controller.close();
+    },
+  });
+  return new Response(body, {
     headers: {
       "Content-Type": "application/zip",
       "Content-Length": String(file.length),
