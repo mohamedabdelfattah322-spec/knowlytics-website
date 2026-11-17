@@ -106,52 +106,54 @@
   {
     "id": "3",
     "slug": "finance-dashboard-excel",
-    "titleAr": "Finance Dashboard — Excel",
-    "titleEn": "Finance Dashboard — Excel",
-    "descriptionAr": "تحليل مالي شامل — P&L والميزانية والتدفقات النقدية ومؤشرات الأداء المالي.",
-    "descriptionEn": "Comprehensive financial analysis — P&L, Budget vs Actual, Cash Flow & Financial KPIs.",
-    "tool": "excel",
+    "titleAr": "Finance Dashboard",
+    "titleEn": "Finance Dashboard",
+    "descriptionAr": "داشبورد مالي بنسختين Power BI و Excel — قائمة الأرباح والخسائر، الفعلي مقابل الميزانية، توقع آخر السنة، الكاش والتدفقات النقدية، ونسب السيولة والربحية.",
+    "descriptionEn": "Finance dashboard in both Power BI and Excel — P&L statement, budget vs actual, full-year forecast, cash flow and liquidity & profitability ratios.",
+    "tool": "powerbi",
     "category": "finance",
     "price": 249,
     "originalPrice": 599,
-    "pages": 6,
+    "pages": 3,
     "featuresAr": [
-      "قائمة الأرباح والخسائر (P&L)",
-      "الميزانية الفعلية vs المخطط",
-      "تحليل التدفقات النقدية",
-      "نسب السيولة والربحية",
-      "تنبؤ مالي (Forecast)"
+      "نسختين: Power BI و Excel في نفس الملف",
+      "قائمة أرباح وخسائر كاملة: فعلي، ميزانية، الفرق، ونفس الفترة السنة اللي فاتت",
+      "جسر الربح من الإيراد لصافي الربح + هوامش الربح شهرياً",
+      "الفعلي مقابل الميزانية لكل قسم وكل حساب + توقع آخر السنة",
+      "الكاش والتدفقات النقدية + نسب السيولة (Current، Quick، DSO، DPO)",
+      "فلتر لكل شركة/فرع + كارت Key insights تلقائي + دليل استخدام بالعربي"
     ],
     "featuresEn": [
-      "Profit & Loss statement",
-      "Budget vs Actual analysis",
-      "Cash flow analysis",
-      "Liquidity & profitability ratios",
-      "Financial Forecast"
+      "Both Power BI and Excel versions included",
+      "Full P&L statement: actual, budget, variance and same period last year",
+      "Profit bridge from revenue to net profit + monthly margins",
+      "Budget vs actual by department and account + full-year forecast",
+      "Cash position and cash flow + liquidity ratios (current, quick, DSO, DPO)",
+      "Entity filter, auto-written Key insights + Arabic user guide"
     ],
     "colors": [
       {
         "nameAr": "ذهبي",
         "nameEn": "Gold",
-        "primary": "#eab308"
+        "primary": "#ca8a04"
       },
       {
         "nameAr": "زمردي",
         "nameEn": "Emerald",
-        "primary": "#10b981"
+        "primary": "#059669"
       },
       {
         "nameAr": "سماوي",
         "nameEn": "Sky",
-        "primary": "#38bdf8"
+        "primary": "#0284c7"
       },
       {
         "nameAr": "أحمر",
         "nameEn": "Red",
-        "primary": "#f43f5e"
+        "primary": "#e11d48"
       }
     ],
-    "preview": "fin"
+    "preview": "fin-v2"
   },
   {
     "id": "4",

@@ -34,5 +34,14 @@
       "CustomerService_Teal.zip",
       "CustomerService_Red.zip"
     ]
+  },
+  "finance-dashboard-excel": {
+    "dir": "finance",
+    "files": [
+      "Finance_Gold.zip",
+      "Finance_Emerald.zip",
+      "Finance_Sky.zip",
+      "Finance_Red.zip"
+    ]
   }
 }
