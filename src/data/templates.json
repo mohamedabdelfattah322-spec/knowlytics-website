@@ -9,7 +9,7 @@
     "tool": "powerbi",
     "category": "hr",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 1,
     "featuresAr": [
       "نسختين: Power BI و Excel في نفس الملف",
@@ -61,7 +61,7 @@
     "tool": "powerbi",
     "category": "sales",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 2,
     "featuresAr": [
       "نسختين: Power BI و Excel في نفس الملف",
@@ -113,7 +113,7 @@
     "tool": "powerbi",
     "category": "finance",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 3,
     "featuresAr": [
       "نسختين: Power BI و Excel في نفس الملف",
@@ -165,7 +165,7 @@
     "tool": "powerbi",
     "category": "call-center",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 2,
     "featuresAr": [
       "نسختين: Power BI و Excel في نفس الملف",
@@ -217,7 +217,7 @@
     "tool": "powerbi",
     "category": "hospital",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 5,
     "featuresAr": [
       "معدل إشغال الأسرة",
@@ -267,7 +267,7 @@
     "tool": "excel",
     "category": "pharmacy",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 4,
     "featuresAr": [
       "المبيعات اليومية والشهرية",
@@ -317,7 +317,7 @@
     "tool": "powerbi",
     "category": "customer-service",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 2,
     "featuresAr": [
       "نسختين: Power BI و Excel في نفس الملف",
@@ -369,7 +369,7 @@
     "tool": "excel",
     "category": "marketing",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 4,
     "featuresAr": [
       "أداء الحملات الإعلانية",
@@ -419,7 +419,7 @@
     "tool": "excel",
     "category": "restaurant",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 3,
     "featuresAr": [
       "المبيعات اليومية والشهرية",
@@ -469,7 +469,7 @@
     "tool": "powerbi",
     "category": "real-estate",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 5,
     "featuresAr": [
       "تحليل المبيعات والإيجارات",
@@ -519,7 +519,7 @@
     "tool": "powerbi",
     "category": "executive",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 6,
     "featuresAr": [
       "ملخص الأداء العام للشركة",
@@ -569,7 +569,7 @@
     "tool": "powerbi",
     "category": "operations",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 4,
     "featuresAr": [
       "مؤشر OEE (الفعالية الكلية)",
@@ -619,7 +619,7 @@
     "tool": "excel",
     "category": "operations",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 4,
     "featuresAr": [
       "أداء الموردين وتقييمهم",
@@ -669,7 +669,7 @@
     "tool": "excel",
     "category": "operations",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 3,
     "featuresAr": [
       "مستويات المخزون الحالية",
@@ -719,7 +719,7 @@
     "tool": "powerbi",
     "category": "it",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 4,
     "featuresAr": [
       "التذاكر الجديدة مقابل المحلولة",
@@ -769,7 +769,7 @@
     "tool": "excel",
     "category": "education",
     "price": 2000,
-    "originalPrice": 0,
+    "originalPrice": 2500,
     "pages": 4,
     "featuresAr": [
       "نسبة الحضور اليومية",
