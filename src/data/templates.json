@@ -614,50 +614,52 @@
     "slug": "supply-chain-excel",
     "titleAr": "Supply Chain Dashboard",
     "titleEn": "Supply Chain Dashboard",
-    "descriptionAr": "تتبع سلسلة الإمداد — أداء الموردين والتسليم والتكاليف اللوجستية.",
-    "descriptionEn": "Supply chain tracking — supplier performance, delivery & logistics costs.",
-    "tool": "excel",
+    "descriptionAr": "داشبورد سلسلة الإمداد بنسختين Power BI و Excel — المشتريات، OTIF والتسليم في الميعاد، مدة التوريد، تقييم الموردين، الشحنات المتأخرة، المخزون وأيام التغطية وسعة المخازن.",
+    "descriptionEn": "Supply chain dashboard in both Power BI and Excel — spend, OTIF and on-time delivery, lead times, supplier scorecard, late shipments, inventory, days of supply and warehouse capacity.",
+    "tool": "powerbi",
     "category": "operations",
     "price": 2000,
     "originalPrice": 2500,
-    "pages": 4,
+    "pages": 3,
     "featuresAr": [
-      "أداء الموردين وتقييمهم",
-      "معدل الاستلام في الوقت المحدد",
-      "تحليل التكاليف اللوجستية",
-      "متابعة أوامر الشراء",
-      "تحليل ABC للموردين"
+      "نسختين: Power BI و Excel في نفس الملف",
+      "تصميم عصري: كروت زجاجية، شريط أيقونات، ولوحة متابعة داكنة",
+      "OTIF والتسليم في الميعاد ومدة التوريد مقارنة بالسنة اللي فاتت",
+      "تقييم كل مورد + الموردين الأكثر خطورة + نسبة العيوب",
+      "المخزون، Fill rate، أيام التغطية، وسعة المخازن",
+      "فلتر بالسنة والمنطقة والفئة + دليل استخدام بالعربي"
     ],
     "featuresEn": [
-      "Supplier performance & rating",
-      "On-time receipt rate",
-      "Logistics cost analysis",
-      "Purchase order tracking",
-      "ABC supplier analysis"
+      "Both Power BI and Excel versions included",
+      "Modern look: glass cards, icon rail and a dark monitoring panel",
+      "OTIF, on-time delivery and lead time vs last year",
+      "Supplier scorecard, suppliers at risk and defect rate",
+      "Inventory value, fill rate, days of supply and warehouse capacity",
+      "Year, region and category filters + Arabic user guide"
     ],
     "colors": [
       {
-        "nameAr": "سماوي",
-        "nameEn": "Sky",
-        "primary": "#38bdf8"
+        "nameAr": "نيلي",
+        "nameEn": "Indigo",
+        "primary": "#4f46e5"
       },
       {
-        "nameAr": "فوشيا",
-        "nameEn": "Fuchsia",
-        "primary": "#d946ef"
+        "nameAr": "بنفسجي",
+        "nameEn": "Violet",
+        "primary": "#7c3aed"
       },
       {
-        "nameAr": "كهرماني",
-        "nameEn": "Amber",
-        "primary": "#f59e0b"
+        "nameAr": "أزرق",
+        "nameEn": "Ocean",
+        "primary": "#0284c7"
       },
       {
-        "nameAr": "أخضر",
-        "nameEn": "Green",
-        "primary": "#4ade80"
+        "nameAr": "تيل",
+        "nameEn": "Teal",
+        "primary": "#0d9488"
       }
     ],
-    "preview": "sc"
+    "preview": "scm-v2"
   },
   {
     "id": "14",

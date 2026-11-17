@@ -43,5 +43,14 @@
       "Finance_Sky.zip",
       "Finance_Red.zip"
     ]
+  },
+  "supply-chain-excel": {
+    "dir": "supply-chain",
+    "files": [
+      "SupplyChain_Indigo.zip",
+      "SupplyChain_Violet.zip",
+      "SupplyChain_Ocean.zip",
+      "SupplyChain_Teal.zip"
+    ]
   }
 }
