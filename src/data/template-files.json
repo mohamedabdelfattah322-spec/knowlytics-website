@@ -70,5 +70,14 @@
       "Hospital_Teal.zip",
       "Hospital_Yellow.zip"
     ]
+  },
+  "pharmacy-excel": {
+    "dir": "pharmacy",
+    "files": [
+      "Pharmacy_Green.zip",
+      "Pharmacy_Teal.zip",
+      "Pharmacy_Blue.zip",
+      "Pharmacy_Purple.zip"
+    ]
   }
 }

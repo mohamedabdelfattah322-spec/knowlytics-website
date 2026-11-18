@@ -262,28 +262,30 @@
   {
     "id": "6",
     "slug": "pharmacy-excel",
-    "titleAr": "Pharmacy Dashboard — Excel",
-    "titleEn": "Pharmacy Dashboard — Excel",
-    "descriptionAr": "إدارة الصيدلية — المبيعات والمخزون والأدوية الأعلى طلباً وتحليل الأرباح.",
-    "descriptionEn": "Pharmacy management — sales, inventory, top drugs & profit analysis.",
-    "tool": "excel",
+    "titleAr": "Pharmacy Dashboard",
+    "titleEn": "Pharmacy Dashboard",
+    "descriptionAr": "داشبورد صيدلية بنسختين Power BI و Excel — المبيعات والأرباح، المشتريات والموردين، المخزون وتنبيهات النقص والصلاحية، العملاء والروشتات، وأكتر الأدوية مبيعاً.",
+    "descriptionEn": "Pharmacy dashboard in both Power BI and Excel — sales and profit, purchases and suppliers, stock with low-stock and expiry alerts, customers and prescriptions, and top-selling medicines.",
+    "tool": "powerbi",
     "category": "pharmacy",
     "price": 2000,
     "originalPrice": 2500,
-    "pages": 4,
+    "pages": 3,
     "featuresAr": [
-      "المبيعات اليومية والشهرية",
-      "الأدوية الأعلى مبيعاً",
-      "مستويات المخزون والانتهاء",
-      "تحليل الأرباح الصافية",
-      "تنبيهات انتهاء الصلاحية"
+      "نسختين: Power BI و Excel في نفس الملف",
+      "تصميم نظيف بأيقونات ملوّنة وقائمة جانبية",
+      "ملخص المبيعات والمشتريات في كروت",
+      "تنبيهات: أصناف قليلة، ناقصة، وقريبة من الانتهاء",
+      "أكتر الأدوية مبيعاً + المبيعات لكل فرع وفئة",
+      "فلتر بالسنة والفرع والفئة + دليل استخدام بالعربي"
     ],
     "featuresEn": [
-      "Daily & monthly sales",
-      "Top-selling medications",
-      "Stock levels & expiry tracking",
-      "Net profit analysis",
-      "Expiry date alerts"
+      "Both Power BI and Excel versions included",
+      "Clean design with colour icon chips and a sidebar",
+      "Sales and purchase overview cards",
+      "Alerts: low stock, out of stock and near-expiry items",
+      "Top-selling medicines + sales by branch and category",
+      "Year, branch and category filters + Arabic user guide"
     ],
     "colors": [
       {
@@ -307,7 +309,7 @@
         "primary": "#9333ea"
       }
     ],
-    "preview": "ph"
+    "preview": "ph-v2"
   },
   {
     "id": "7",
