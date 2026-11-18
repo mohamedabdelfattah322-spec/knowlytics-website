@@ -52,5 +52,14 @@
       "SupplyChain_Ocean.zip",
       "SupplyChain_Teal.zip"
     ]
+  },
+  "real-estate-powerbi": {
+    "dir": "real-estate",
+    "files": [
+      "RealEstate_Lime.zip",
+      "RealEstate_Gold.zip",
+      "RealEstate_Sky.zip",
+      "RealEstate_Pink.zip"
+    ]
   }
 }

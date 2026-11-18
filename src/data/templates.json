@@ -464,26 +464,28 @@
     "slug": "real-estate-powerbi",
     "titleAr": "Real Estate Dashboard",
     "titleEn": "Real Estate Dashboard",
-    "descriptionAr": "تحليل سوق العقارات — المبيعات والإيجارات وأداء المشاريع والعائد على الاستثمار.",
-    "descriptionEn": "Real estate market analysis — sales, rentals, project performance & ROI.",
+    "descriptionAr": "داشبورد عقارات بنسختين Power BI و Excel — المبيعات وسعر المتر، الوحدات المباعة والمتاحة لكل مشروع، الإيجارات والإشغال والتحصيل والمتأخرات، وأداء البروكرز.",
+    "descriptionEn": "Real estate dashboard in both Power BI and Excel — sales and price per m², units sold and left per project, rent, occupancy, collections, overdue rent and broker performance.",
     "tool": "powerbi",
     "category": "real-estate",
     "price": 2000,
     "originalPrice": 2500,
-    "pages": 5,
+    "pages": 3,
     "featuresAr": [
-      "تحليل المبيعات والإيجارات",
-      "أداء المشاريع والوحدات",
-      "تقرير العملاء والمعاملات",
-      "العائد على الاستثمار (ROI)",
-      "مقارنة المناطق والمشاريع"
+      "نسختين: Power BI و Excel في نفس الملف",
+      "تصميم داكن عصري بتابات وكروت ومؤشرات ملوّنة",
+      "المبيعات شهرياً حسب القطاع + الوحدات حسب النوع",
+      "نسبة البيع لكل مشروع + المخزون المتبقي وقيمته",
+      "الإيجارات: الإشغال والتحصيل والمتأخرات حسب عمرها",
+      "آخر الصفقات وأكبر البروكرز + دليل استخدام بالعربي"
     ],
     "featuresEn": [
-      "Sales & rental analysis",
-      "Project & unit performance",
-      "Client & transaction report",
-      "Return on Investment (ROI)",
-      "Region & project comparison"
+      "Both Power BI and Excel versions included",
+      "Modern dark design with tabs, cards and colour badges",
+      "Monthly sales by segment + units by property type",
+      "Sell-through per project + unsold stock and its value",
+      "Leasing: occupancy, collections and overdue rent by age",
+      "Recent deals and top brokers + Arabic user guide"
     ],
     "colors": [
       {
@@ -507,7 +509,7 @@
         "primary": "#fb7185"
       }
     ],
-    "preview": "re"
+    "preview": "re-v2"
   },
   {
     "id": "11",
