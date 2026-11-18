@@ -672,26 +672,28 @@
     "slug": "inventory-management-excel",
     "titleAr": "Inventory Management Dashboard",
     "titleEn": "Inventory Management Dashboard",
-    "descriptionAr": "إدارة المخزون — مستويات الستوك ونقطة إعادة الطلب والمنتجات البطيئة الحركة.",
-    "descriptionEn": "Inventory control — stock levels, reorder points & slow-moving products.",
-    "tool": "excel",
+    "descriptionAr": "داشبورد مخازن بنسختين Power BI و Excel — قيمة المخزون ودورانه، الاستلامات مقابل الشحن، تنبيهات النقص وحد إعادة الطلب، الأصناف البطيئة الحركة، وأداء الطلبات والتسليم في الميعاد.",
+    "descriptionEn": "Inventory & warehouse dashboard in both Power BI and Excel — stock value and turnover, receipts vs shipments, low-stock and reorder-point alerts, slow-moving items, and order and on-time delivery performance.",
+    "tool": "powerbi",
     "category": "operations",
     "price": 2000,
     "originalPrice": 2500,
     "pages": 3,
     "featuresAr": [
-      "مستويات المخزون الحالية",
-      "نقطة إعادة الطلب (Reorder Point)",
-      "تحليل المنتجات البطيئة الحركة",
-      "دوران المخزون (Inventory Turnover)",
-      "تنبيهات نقص الستوك"
+      "نسختين: Power BI و Excel في نفس الملف",
+      "قيمة المخزون آخر الشهر + الأصناف السريعة والبطيئة",
+      "دوران المخزون (Inventory Turnover) وأيام المخزون",
+      "تنبيهات: أصناف تحت حد إعادة الطلب ونواقص",
+      "الاستلامات مقابل الشحن + آخر الطلبات بحالتها",
+      "فلتر بالسنة والمخزن والفئة + دليل استخدام بالعربي"
     ],
     "featuresEn": [
-      "Current stock levels",
-      "Reorder point tracking",
-      "Slow-moving product analysis",
-      "Inventory turnover ratio",
-      "Low stock alerts"
+      "Both Power BI and Excel versions included",
+      "Month-end stock value + fast vs slow-moving split",
+      "Inventory turnover and days of inventory",
+      "Alerts: lines below reorder point and stock-outs",
+      "Receipts vs shipments + recent orders with status",
+      "Year, warehouse and category filters + Arabic user guide"
     ],
     "colors": [
       {
@@ -707,15 +709,15 @@
       {
         "nameAr": "سماوي",
         "nameEn": "Sky",
-        "primary": "#7dd3fc"
+        "primary": "#38bdf8"
       },
       {
         "nameAr": "ليموني",
         "nameEn": "Lime",
-        "primary": "#bef264"
+        "primary": "#a3e635"
       }
     ],
-    "preview": "inv"
+    "preview": "inv-v2"
   },
   {
     "id": "15",

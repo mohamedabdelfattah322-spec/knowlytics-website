@@ -79,5 +79,14 @@
       "Pharmacy_Blue.zip",
       "Pharmacy_Purple.zip"
     ]
+  },
+  "inventory-management-excel": {
+    "dir": "inventory-management",
+    "files": [
+      "Inventory_Yellow.zip",
+      "Inventory_Orange.zip",
+      "Inventory_Sky.zip",
+      "Inventory_Lime.zip"
+    ]
   }
 }
