@@ -61,5 +61,14 @@
       "RealEstate_Sky.zip",
       "RealEstate_Pink.zip"
     ]
+  },
+  "hospital-healthcare-powerbi": {
+    "dir": "hospital",
+    "files": [
+      "Hospital_Lime.zip",
+      "Hospital_Sky.zip",
+      "Hospital_Teal.zip",
+      "Hospital_Yellow.zip"
+    ]
   }
 }

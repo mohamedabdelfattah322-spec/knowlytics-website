@@ -212,26 +212,28 @@
     "slug": "hospital-healthcare-powerbi",
     "titleAr": "Hospital & Healthcare Dashboard",
     "titleEn": "Hospital & Healthcare Dashboard",
-    "descriptionAr": "تحليل أداء المستشفى — المرضى والأسرة والأطباء والإيرادات ومدة الإقامة.",
-    "descriptionEn": "Hospital performance — patients, beds, doctors, revenue & length of stay.",
+    "descriptionAr": "داشبورد مستشفى بنسختين Power BI و Excel — إشغال الأسرّة، الدخول والخروج ومدة الإقامة، إعادة الدخول، الإيرادات حسب القسم وجهة الدفع، وتقييم الأطباء.",
+    "descriptionEn": "Hospital dashboard in both Power BI and Excel — bed occupancy, admissions, discharges and length of stay, readmissions, revenue by department and payer, and a doctor scorecard.",
     "tool": "powerbi",
     "category": "hospital",
     "price": 2000,
     "originalPrice": 2500,
-    "pages": 5,
+    "pages": 3,
     "featuresAr": [
-      "معدل إشغال الأسرة",
-      "حركة المرضى (دخول / خروج)",
-      "أداء الأطباء والأقسام",
-      "تحليل الإيرادات والتكاليف",
-      "مدة الإقامة المتوسطة (ALOS)"
+      "نسختين: Power BI و Excel في نفس الملف",
+      "تصميم نظيف بقائمة جانبية وكارت إشغال الأسرّة",
+      "حركة المرضى: الدخول مقابل الخروج شهرياً",
+      "الإيرادات حسب القسم وجهة الدفع + الإيراد لكل حالة",
+      "إعادة الدخول خلال 30 يوم + الإشغال لكل قسم",
+      "آخر حالات الدخول وتقييم الأطباء + دليل استخدام بالعربي"
     ],
     "featuresEn": [
-      "Bed occupancy rate",
-      "Patient flow (admission/discharge)",
-      "Doctor & department performance",
-      "Revenue & cost analysis",
-      "Average Length of Stay (ALOS)"
+      "Both Power BI and Excel versions included",
+      "Clean design with a sidebar and a bed-occupancy hero card",
+      "Patient flow: admissions vs discharges by month",
+      "Revenue by department and payer + revenue per admission",
+      "30-day readmissions + occupancy by department",
+      "Recent admissions and doctor scorecard + Arabic user guide"
     ],
     "colors": [
       {
@@ -255,7 +257,7 @@
         "primary": "#fcd34d"
       }
     ],
-    "preview": "hos"
+    "preview": "hos-v2"
   },
   {
     "id": "6",
