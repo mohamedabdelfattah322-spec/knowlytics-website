@@ -572,26 +572,28 @@
     "slug": "operations-kpi-powerbi",
     "titleAr": "Operations & Manufacturing Dashboard",
     "titleEn": "Operations & Manufacturing Dashboard",
-    "descriptionAr": "مؤشرات الإنتاجية والكفاءة التشغيلية — OEE والجودة وأوقات التوقف والتسليم.",
-    "descriptionEn": "Productivity & operational efficiency — OEE, quality, downtime & delivery times.",
+    "descriptionAr": "داشبورد عمليات وتصنيع بنسختين Power BI و Excel — OEE ومكوناته، الإنتاج لكل خط ووردية، التوقفات لكل ماكينة وسبب، الهالك والجودة، التسليم في الميعاد، والخامات تحت حد إعادة الطلب.",
+    "descriptionEn": "Operations & manufacturing dashboard in both Power BI and Excel — OEE and its components, output by line and shift, downtime by machine and reason, scrap and quality, on-time delivery and materials below reorder point.",
     "tool": "powerbi",
     "category": "operations",
     "price": 2000,
     "originalPrice": 2500,
-    "pages": 4,
+    "pages": 3,
     "featuresAr": [
-      "مؤشر OEE (الفعالية الكلية)",
-      "تحليل أوقات التوقف",
-      "معدل الجودة والعيوب",
-      "أداء التسليم في الوقت المحدد",
-      "تحليل الطاقة الإنتاجية"
+      "نسختين: Power BI و Excel في نفس الملف",
+      "مؤشر OEE (الإتاحة × الأداء × الجودة) مقابل الهدف",
+      "الإنتاج لكل خط ووردية + الإنتاج اليومي",
+      "تحليل التوقفات لكل ماكينة وسبب ومتوسط الإصلاح",
+      "الهالك والجودة والتسليم في الميعاد",
+      "الخامات: حد إعادة الطلب ومخزون الأمان + دليل بالعربي"
     ],
     "featuresEn": [
-      "OEE (Overall Equipment Effectiveness)",
-      "Downtime analysis",
-      "Quality & defect rate",
-      "On-time delivery performance",
-      "Capacity utilization analysis"
+      "Both Power BI and Excel versions included",
+      "OEE (availability x performance x quality) vs target",
+      "Output by line and shift + daily output",
+      "Downtime by machine and reason, mean repair time",
+      "Scrap, quality and on-time delivery",
+      "Materials: reorder point vs safety stock + Arabic guide"
     ],
     "colors": [
       {
@@ -615,7 +617,7 @@
         "primary": "#475569"
       }
     ],
-    "preview": "op"
+    "preview": "op-v2"
   },
   {
     "id": "13",

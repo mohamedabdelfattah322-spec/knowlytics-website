@@ -97,5 +97,14 @@
       "Marketing_Teal.zip",
       "Marketing_Orange.zip"
     ]
+  },
+  "operations-kpi-powerbi": {
+    "dir": "operations-kpi",
+    "files": [
+      "Operations_Sky.zip",
+      "Operations_Blue.zip",
+      "Operations_Emerald.zip",
+      "Operations_Slate.zip"
+    ]
   }
 }
