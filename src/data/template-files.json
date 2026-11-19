@@ -106,5 +106,14 @@
       "Operations_Emerald.zip",
       "Operations_Slate.zip"
     ]
+  },
+  "production-dashboard-powerbi": {
+    "dir": "production",
+    "files": [
+      "Production_Amber.zip",
+      "Production_Cyan.zip",
+      "Production_Lime.zip",
+      "Production_Coral.zip"
+    ]
   }
 }

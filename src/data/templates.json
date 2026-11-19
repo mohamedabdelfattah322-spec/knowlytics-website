@@ -822,5 +822,57 @@
         "primary": "#0d9488"
       }
     ]
+  },
+  {
+    "id": "17",
+    "slug": "production-dashboard-powerbi",
+    "titleAr": "Production Dashboard",
+    "titleEn": "Production Dashboard",
+    "descriptionAr": "داشبورد إنتاج كامل لمصنع بنسختين Power BI و Excel — الخطة مقابل الفعلي، OEE لكل خط، الجودة والعيوب والهالك، التوقفات وأسبابها، أوامر الشغل المفتوحة، وتكلفة الكرتونة والطاقة والعمالة.",
+    "descriptionEn": "Full factory production dashboard in both Power BI and Excel — plan vs actual, OEE by line, quality, defects and scrap, downtime and its causes, open work orders, and cost per case, energy and labor.",
+    "tool": "powerbi",
+    "category": "operations",
+    "price": 2000,
+    "originalPrice": 2500,
+    "pages": 4,
+    "featuresAr": [
+      "نسختين: Power BI و Excel في نفس الملف",
+      "الخطة مقابل الفعلي + أوامر الشغل المفتوحة بنسبة التقدم",
+      "OEE والإتاحة والأداء لكل خط مقابل الهدف",
+      "الجودة: FPY والهالك وإعادة التشغيل والعيوب حسب النوع",
+      "التوقفات حسب السبب ومتوسط الإصلاح وتغيير المنتج",
+      "تكلفة الكرتونة والطاقة والعمالة + فلاتر ودليل بالعربي"
+    ],
+    "featuresEn": [
+      "Both Power BI and Excel versions included",
+      "Plan vs actual + open work orders with progress",
+      "OEE, availability and performance by line vs target",
+      "Quality: first pass yield, scrap, rework and defects by type",
+      "Downtime by reason, mean repair time and changeovers",
+      "Cost per case, energy and labor + filters and Arabic guide"
+    ],
+    "colors": [
+      {
+        "nameAr": "كهرماني",
+        "nameEn": "Amber",
+        "primary": "#f59e0b"
+      },
+      {
+        "nameAr": "سماوي",
+        "nameEn": "Cyan",
+        "primary": "#06b6d4"
+      },
+      {
+        "nameAr": "ليموني",
+        "nameEn": "Lime",
+        "primary": "#84cc16"
+      },
+      {
+        "nameAr": "مرجاني",
+        "nameEn": "Coral",
+        "primary": "#f97362"
+      }
+    ],
+    "preview": "prod-v1"
   }
 ]
