@@ -88,5 +88,14 @@
       "Inventory_Sky.zip",
       "Inventory_Lime.zip"
     ]
+  },
+  "marketing-analytics-excel": {
+    "dir": "marketing-analytics",
+    "files": [
+      "Marketing_Plum.zip",
+      "Marketing_Indigo.zip",
+      "Marketing_Teal.zip",
+      "Marketing_Orange.zip"
+    ]
   }
 }

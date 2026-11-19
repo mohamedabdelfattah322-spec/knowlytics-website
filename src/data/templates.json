@@ -368,26 +368,28 @@
     "slug": "marketing-analytics-excel",
     "titleAr": "Marketing Analytics Dashboard",
     "titleEn": "Marketing Analytics Dashboard",
-    "descriptionAr": "تحليل أداء الحملات الإعلانية — ROAS وCPA والعائد على الاستثمار وأداء القنوات.",
-    "descriptionEn": "Ad campaign performance — ROAS, CPA, ROI & channel performance analysis.",
-    "tool": "excel",
+    "descriptionAr": "داشبورد تسويق بنسختين Power BI و Excel — الصرف والإيراد و ROAS وتكلفة التحويل لكل قناة وحملة ومنطقة، مراحل القمع، وخريطة حرارية لأداء الحملات أسبوع بأسبوع.",
+    "descriptionEn": "Marketing dashboard in both Power BI and Excel — spend, revenue, ROAS and CPA by channel, campaign and region, funnel stage split, and a week-by-week campaign ROAS heatmap.",
+    "tool": "powerbi",
     "category": "marketing",
     "price": 2000,
     "originalPrice": 2500,
-    "pages": 4,
+    "pages": 3,
     "featuresAr": [
-      "أداء الحملات الإعلانية",
-      "ROAS وCPA لكل قناة",
-      "تحليل العائد على الاستثمار",
-      "مقارنة القنوات التسويقية",
-      "تقرير شهري تلقائي"
+      "نسختين: Power BI و Excel في نفس الملف",
+      "ROAS و CPA و CTR مقارنة بالسنة اللي فاتت",
+      "مقارنة القنوات: Meta و Google و TikTok و LinkedIn",
+      "خريطة حرارية لـ ROAS كل حملة أسبوعياً",
+      "الإيراد لكل منطقة وخط منتجات",
+      "فلتر بالسنة والشهر والقناة والمنطقة والحملة + دليل بالعربي"
     ],
     "featuresEn": [
-      "Ad campaign performance tracking",
-      "ROAS & CPA per channel",
-      "ROI analysis",
-      "Marketing channel comparison",
-      "Auto monthly report"
+      "Both Power BI and Excel versions included",
+      "ROAS, CPA and CTR vs last year",
+      "Channel comparison: Meta, Google, TikTok, LinkedIn",
+      "Weekly ROAS heatmap by campaign",
+      "Revenue by region and product line",
+      "Year, month, channel, region and campaign filters + Arabic guide"
     ],
     "colors": [
       {
@@ -411,7 +413,7 @@
         "primary": "#ea580c"
       }
     ],
-    "preview": "mk"
+    "preview": "mk-v2"
   },
   {
     "id": "9",
