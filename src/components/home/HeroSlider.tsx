@@ -747,8 +747,72 @@ function AIForBusinessSlide({ isAr, locale }: { isAr: boolean; locale: string })
   );
 }
 
+// ─── Slide 0: Black Friday (recorded courses on the platform) — hidden automatically after Nov 30 ──────────
+const BF_END = new Date("2026-12-01T00:00:00+02:00");
+const BF_URL = "https://learn.knowlyticshub.com/black-friday";
+
+function BlackFridaySlide({ isAr }: { isAr: boolean }) {
+  const offers = [
+    { pct: "20%", ar: "على أي كورس مسجّل", en: "on any recorded course" },
+    { pct: "25%", ar: "على أي باقة (Bundle)", en: "on any bundle" },
+  ];
+  return (
+    <div className="relative min-h-fit lg:min-h-screen flex items-start lg:items-center overflow-hidden bg-gradient-to-br from-black via-zinc-950 to-neutral-900">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(250,204,21,0.18),transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(245,158,11,0.10),transparent_50%)]" />
+
+      <div className="relative container mx-auto px-4 lg:px-8 pt-16 pb-20 lg:pt-28 lg:pb-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <motion.div initial={{ opacity: 0, x: isAr ? 60 : -60 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+            <span className="inline-block px-3 py-1 mb-4 rounded-full text-xs font-bold bg-yellow-400 text-black">
+              ⚡ {isAr ? "خصم إضافي لفترة محدودة — لحد 30 نوفمبر" : "Extra discount, limited time — until Nov 30"}
+            </span>
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black mb-3 leading-tight" dir="ltr">
+              <span className="text-transparent bg-clip-text bg-gradient-to-b from-yellow-100 via-yellow-400 to-amber-500">Black Friday</span>
+            </h1>
+            <p className="text-slate-300 text-base lg:text-lg mb-6 max-w-lg leading-relaxed">
+              {isAr
+                ? "خصم إضافي فوق الخصومات الأساسية على الكورسات المسجّلة على منصة Knowlytics Hub — اتعلّم بالسرعة اللي تناسبك."
+                : "An extra discount on top of our regular prices for recorded courses on the Knowlytics Hub platform — learn at your own pace."}
+            </p>
+            <div className="flex flex-wrap gap-3 mb-7">
+              {offers.map((o) => (
+                <div key={o.pct} className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/5 border border-yellow-400/40">
+                  <span className="text-3xl lg:text-4xl font-black text-yellow-400" dir="ltr">-{o.pct}</span>
+                  <span className="text-white font-semibold text-sm lg:text-base">{isAr ? o.ar : o.en}</span>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <a href={BF_URL} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 py-3 text-base lg:px-7 lg:py-3.5 lg:text-lg rounded-2xl bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-black hover:from-yellow-300 hover:to-amber-400 transition-all shadow-xl shadow-yellow-500/25 hover:-translate-y-1">
+                <Gift className="w-5 h-5" />
+                {isAr ? "شوف العروض" : "See the offers"}
+              </a>
+              <a href="https://learn.knowlyticshub.com/courses" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 py-3 text-base lg:px-7 lg:py-3.5 lg:text-lg rounded-2xl border-2 border-white/25 text-white font-semibold hover:bg-white/10 transition-all">
+                {isAr ? "تصفّح الكورسات" : "Browse courses"}
+                <ArrowRight className={`w-5 h-5 ${isAr ? "rotate-180" : ""}`} />
+              </a>
+            </div>
+          </motion.div>
+
+          <motion.a href={BF_URL} target="_blank" rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}
+            className="block rounded-2xl overflow-hidden border border-yellow-400/25 shadow-2xl shadow-yellow-500/10">
+            <img src="/black-friday-2026.webp" alt={isAr ? "عروض البلاك فرايداي: 20% على أي كورس و25% على أي باقة" : "Black Friday: 20% off any course, 25% off any bundle"}
+              className="w-full h-auto" width={1600} height={1000} />
+          </motion.a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Slider ─────────────────────────────────────────────────────────────────────────────
-const SLIDES = ["course", "groups", "services", "hr", "consultation", "ai-business"] as const;
+const SHOW_BF = Date.now() < BF_END.getTime();
+const SLIDES = [...(SHOW_BF ? ["black-friday"] : []), "course", "groups", "services", "hr", "consultation", "ai-business"] as const;
+const OFF = SHOW_BF ? 1 : 0;  // index shift of the regular slides while the Black Friday slide is shown
 
 export default function HeroSlider({ locale }: HeroSliderProps) {
   const [current, setCurrent] = useState(0);
@@ -777,8 +841,8 @@ export default function HeroSlider({ locale }: HeroSliderProps) {
   const next = () => goTo(current + 1);
 
   const labels = {
-    ar: ["كورس مميز", "تدريب الجروبات", "خدماتنا", "HR Data Analysis", "استشارتك", "AI for Business"],
-    en: ["Featured Course", "Group Training", "Our Services", "HR Data Analysis", "Consultation", "AI for Business"],
+    ar: [...(SHOW_BF ? ["🔥 عروض البلاك فرايداي"] : []), "كورس مميز", "تدريب الجروبات", "خدماتنا", "HR Data Analysis", "استشارتك", "AI for Business"],
+    en: [...(SHOW_BF ? ["🔥 Black Friday"] : []), "Featured Course", "Group Training", "Our Services", "HR Data Analysis", "Consultation", "AI for Business"],
   };
 
   return (
@@ -791,12 +855,13 @@ export default function HeroSlider({ locale }: HeroSliderProps) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {current === 0 && <CourseSlide isAr={isAr} locale={locale} />}
-          {current === 1 && <GroupsSlide isAr={isAr} />}
-          {current === 2 && <ServicesSlide isAr={isAr} locale={locale} />}
-          {current === 3 && <HRCourseSlide isAr={isAr} />}
-          {current === 4 && <ConsultationSlide isAr={isAr} onFormFocus={pauseSlider} onFormBlur={resumeSlider} />}
-          {current === 5 && <AIForBusinessSlide isAr={isAr} locale={locale} />}
+          {SHOW_BF && current === 0 && <BlackFridaySlide isAr={isAr} />}
+          {current === OFF + 0 && <CourseSlide isAr={isAr} locale={locale} />}
+          {current === OFF + 1 && <GroupsSlide isAr={isAr} />}
+          {current === OFF + 2 && <ServicesSlide isAr={isAr} locale={locale} />}
+          {current === OFF + 3 && <HRCourseSlide isAr={isAr} />}
+          {current === OFF + 4 && <ConsultationSlide isAr={isAr} onFormFocus={pauseSlider} onFormBlur={resumeSlider} />}
+          {current === OFF + 5 && <AIForBusinessSlide isAr={isAr} locale={locale} />}
         </motion.div>
       </AnimatePresence>
 
