@@ -724,7 +724,7 @@ function AIForBusinessSlide({ isAr, locale }: { isAr: boolean; locale: string })
             className="hidden lg:flex flex-col gap-4">
             {/* Course image */}
             <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-              <img src="/course-ai-for-business.png" alt="AI for Business"
+              <img src="/course-ai-for-business.webp" alt="AI for Business"
                 className="w-full object-contain"
                 onError={(e) => { e.currentTarget.style.display = "none"; }} />
             </div>

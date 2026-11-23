@@ -120,6 +120,7 @@ export default function Header({ locale }: HeaderProps) {
                   ) : (
                     <Link
                       href={getHref(item.href)}
+                      prefetch={false}
                       className={cn(
                         "nav-link flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200",
                         isActive(item.href)
@@ -149,6 +150,7 @@ export default function Header({ locale }: HeaderProps) {
                             <Link
                               key={child.key}
                               href={getHref(child.href)}
+                              prefetch={false}
                               className="block px-4 py-2.5 text-sm text-slate-300 hover:text-white hover:bg-blue-500/20 transition-all duration-150"
                               onClick={() => setActiveDropdown(null)}
                             >
@@ -238,6 +240,7 @@ export default function Header({ locale }: HeaderProps) {
                           <Link
                             key={child.key}
                             href={getHref(child.href)}
+                            prefetch={false}
                             onClick={() => setMobileOpen(false)}
                             className="flex items-center px-3 py-2 ps-6 text-sm text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-150"
                           >
@@ -248,6 +251,7 @@ export default function Header({ locale }: HeaderProps) {
                     ) : (
                       <Link
                         href={getHref(item.href)}
+                        prefetch={false}
                         onClick={() => setMobileOpen(false)}
                         className={cn(
                           "flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-150",

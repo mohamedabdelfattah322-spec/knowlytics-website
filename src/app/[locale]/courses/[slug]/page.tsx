@@ -863,7 +863,7 @@ export default function CourseDetailPage() {
     ? { amount: Math.round(course.price / 2), lectures: COURSE_DEPOSIT[course.slug].lectures }
     : null;
   const audience = COURSE_AUDIENCE[course.slug] || null;
-  const reviews = ["/feedback/f1.jpeg", "/feedback/f2.jpeg", "/feedback/f3.jpeg", "/feedback/f4.jpeg", "/feedback/f5.png"];
+  const reviews = ["/feedback/f1.jpeg", "/feedback/f2.jpeg", "/feedback/f3.jpeg", "/feedback/f4.jpeg", "/feedback/f5.webp"];
   const groupPhotos = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => `/groups/g${n}.jpeg`);
 
   const relatedCourses = coursesData.filter((c) => c.slug !== course.slug && c.category === course.category).slice(0, 3);
