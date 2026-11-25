@@ -115,5 +115,14 @@
       "Production_Lime.zip",
       "Production_Coral.zip"
     ]
+  },
+  "school-performance-excel": {
+    "dir": "school-performance",
+    "files": [
+      "School_Purple.zip",
+      "School_Blue.zip",
+      "School_Pink.zip",
+      "School_Teal.zip"
+    ]
   }
 }

@@ -778,28 +778,30 @@
     "slug": "school-performance-excel",
     "titleAr": "School Performance Dashboard",
     "titleEn": "School Performance Dashboard",
-    "descriptionAr": "لوحة متابعة المدرسة — الحضور ومتوسط الدرجات ونسب النجاح وتحصيل المصروفات وتوزيع الطلاب.",
-    "descriptionEn": "School overview — attendance, grade averages, pass rates, fee collection and student distribution.",
-    "tool": "excel",
+    "descriptionAr": "داشبورد مدرسة بنسختين Power BI و Excel — الدرجات ونسب النجاح لكل صف ومادة، أوائل الطلبة، الحضور اليومي والشهري، تحصيل المصروفات والأقساط المتأخرة، وتوزيع الطلبة على المراحل.",
+    "descriptionEn": "School dashboard in both Power BI and Excel — scores and pass rates by grade and subject, top students, daily and monthly attendance, fee collection and overdue instalments, and students by stage.",
+    "tool": "powerbi",
     "category": "education",
     "price": 2000,
     "originalPrice": 2500,
     "pages": 4,
     "featuresAr": [
-      "نسبة الحضور اليومية",
-      "متوسط الدرجات ونسبة النجاح لكل صف",
-      "نسب النجاح في المواد",
-      "تحصيل المصروفات والمتبقي",
-      "توزيع الطلاب حسب المرحلة"
+      "نسختين: Power BI و Excel في نفس الملف",
+      "متوسط الدرجات ونسبة النجاح لكل صف ومادة + أوائل الطلبة",
+      "الحضور النهارده وشهرياً ولكل صف ويوم",
+      "تحصيل المصروفات والأقساط المتأخرة لكل صف",
+      "مقارنة بنفس الفترة من السنة الدراسية اللي فاتت",
+      "فلتر بالسنة الدراسية والمرحلة والصف + دليل بالعربي"
     ],
     "featuresEn": [
-      "Daily attendance rate",
-      "Average score & pass rate by grade",
-      "Pass rate by subject",
-      "Fee collection vs outstanding",
-      "Students by stage"
+      "Both Power BI and Excel versions included",
+      "Average score and pass rate by grade and subject + top students",
+      "Attendance today, by month, grade and weekday",
+      "Fee collection and overdue instalments by grade",
+      "Compared with the same point of last academic year",
+      "Academic year, stage and grade filters + Arabic guide"
     ],
-    "preview": "sch",
+    "preview": "sch-v2",
     "colors": [
       {
         "nameAr": "بنفسجي",
