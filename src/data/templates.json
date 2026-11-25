@@ -4,52 +4,52 @@
     "slug": "hr-analytics-powerbi",
     "titleAr": "HR Analytics Dashboard",
     "titleEn": "HR Analytics Dashboard",
-    "descriptionAr": "داشبورد الموارد البشرية بنسختين Power BI و Excel — عدد الموظفين والتعيينات والخروج ومعدل الدوران والرواتب، بفلتر للسنة والقسم.",
-    "descriptionEn": "HR dashboard in both Power BI and Excel — headcount, hires, exits, turnover and salaries, filterable by year and department.",
+    "descriptionAr": "نظام داشبورد موارد بشرية كامل بنسختين Power BI و Excel — 8 داشبوردات: نظرة عامة، القوى العاملة، التوظيف، الدوران، المرتبات، الحضور والانصراف، الإجازات، والأداء والتدريب. بتصميم داكن وفاتح، والعملة بتتغير من خانة واحدة.",
+    "descriptionEn": "A complete HR dashboard system in both Power BI and Excel — 8 dashboards: overview, workforce, recruitment, turnover, payroll, attendance, leave, and performance & training. Dark and light designs, currency set from one cell.",
     "tool": "powerbi",
     "category": "hr",
     "price": 2000,
     "originalPrice": 2500,
-    "pages": 1,
+    "pages": 8,
     "featuresAr": [
-      "نسختين: Power BI و Excel في نفس الملف",
-      "6 مؤشرات: الموظفين، التعيينات، الخروج، معدل الدوران، متوسط الراتب، سنوات الخدمة",
-      "التعيينات مقابل الخروج شهرياً",
-      "توزيع النوع والأعمار والأقسام وأسباب الخروج",
-      "جدول ملخص لكل قسم بالراتب والأداء",
-      "فلتر بالسنة والقسم + دليل استخدام بالعربي"
+      "نسختين: Power BI و Excel — 8 داشبوردات بقايمة جانبية",
+      "المرتبات: التكلفة والصافي ومكونات المرتب وفجوة الأجور",
+      "الحضور والانصراف: Heat map والغياب والتأخير والأوفر تايم",
+      "الإجازات: الأنواع والرصيد المتبقي والطلبات المعلقة",
+      "الأداء: التقييمات و 9-Box والترقيات والتدريب + التوظيف والدوران",
+      "مقارنة بنفس الشهور من السنة اللي فاتت + العملة تتغير (EGP / SAR / AED) + دليل بالعربي"
     ],
     "featuresEn": [
-      "Both Power BI and Excel versions included",
-      "6 KPIs: headcount, hires, exits, turnover, avg. salary, tenure",
-      "Monthly hires vs exits",
-      "Gender, age, department and exit-reason breakdowns",
-      "Department summary with salary and performance",
-      "Year and department filters + Arabic user guide"
+      "Both Power BI and Excel — 8 dashboards with a side menu",
+      "Payroll: cost, net pay, pay mix and gender pay gap",
+      "Attendance: heat map, absences, late arrivals and overtime",
+      "Leave: types, remaining balance and pending requests",
+      "Performance: ratings, 9-box, promotions and training + recruitment and turnover",
+      "Same months last year comparison + any currency (EGP / SAR / AED) + Arabic guide"
     ],
     "colors": [
       {
-        "nameAr": "تركواز",
-        "nameEn": "Teal",
-        "primary": "#14b8a6"
-      },
-      {
-        "nameAr": "أزرق",
-        "nameEn": "Blue",
-        "primary": "#3b82f6"
-      },
-      {
-        "nameAr": "بنفسجي",
-        "nameEn": "Purple",
+        "nameAr": "بنفسجي داكن",
+        "nameEn": "Violet",
         "primary": "#8b5cf6"
       },
       {
-        "nameAr": "مرجاني",
-        "nameEn": "Coral",
-        "primary": "#f43f5e"
+        "nameAr": "أزرق فاتح",
+        "nameEn": "Blue",
+        "primary": "#2563eb"
+      },
+      {
+        "nameAr": "زمردي داكن",
+        "nameEn": "Emerald",
+        "primary": "#34d399"
+      },
+      {
+        "nameAr": "برتقالي فاتح",
+        "nameEn": "Orange",
+        "primary": "#ea580c"
       }
     ],
-    "preview": "hr-pbi"
+    "preview": "hr-v2"
   },
   {
     "id": "2",
